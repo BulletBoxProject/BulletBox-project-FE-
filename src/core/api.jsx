@@ -1,9 +1,9 @@
 import axios from "axios";
-import { REACT_APP_BACKAPI } from ".";
+export const BACK_API = process.env.REACT_APP_BACKAPI;
 
 // 헤더 없이 사용하는 경우( API 추가 )
 export const instanceApiV1 = axios.create({
-  baseURL: REACT_APP_BACKAPI,
+  baseURL: BACK_API,
   headers: {
     "Access-Control-Allow-Origin": "*",
   },
@@ -11,7 +11,7 @@ export const instanceApiV1 = axios.create({
 
 // 헤더 토큰 값이 들어가야 하는 경우( API 추가 )
 export const baseURLApiV1 = axios.create({
-  baseURL: REACT_APP_BACKAPI,
+  baseURL: BACK_API,
   headers: {
     "Access-Control-Allow-Origin": "*",
   },
