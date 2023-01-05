@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
@@ -81,37 +80,35 @@ export default LogInInput;
 
 const StForm = styled.form`
   display: flex;
-  flex-direction: column;
-  padding: 100px 100px 130px 100px;
-  border: 2px solid var(--color3);
-  border-radius: 10px;
-`;
-const StTitle = styled.div`
-  font-size: 10px;
-  margin: 30px 50px 20px 50px;
-  padding: 50px 50px 20px 50px;
-  display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 25px;
+`;
+const StTitle = styled.div`
+  font-size: 15px;
+  width: 50px;
+  margin-bottom: 20px;
   color: black;
 `;
 
 const Stlabel = styled.label`
   margin: 15px 0 10px 0;
-  color: white;
+  color: black;
 `;
 
 const StInput = styled.input`
-  margin: 10px 10px 10px 0px;
-  padding: 5px 0px 5px 0px;
+  width: 100%;
+  padding: 5px;
 `;
 
 const StSignupBtn = styled.button`
-  height: 40px;
-  width: 90px;
-  margin: 5px 0 0 10px;
-  flex-direction: row;
+  width: 70px;
+  height: 30px;
+  margin-right: 5px;
 `;
 const StButtonBox = styled.div`
-  margin: 20px 0px 0 60px;
+  margin-top: 10px;
 `;

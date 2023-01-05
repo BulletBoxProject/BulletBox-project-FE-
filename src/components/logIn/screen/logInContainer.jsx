@@ -19,4 +19,3 @@ const StcontainerBox = styled.div`
   align-items: center;
   height: 700px;
 `;
-
