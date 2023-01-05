@@ -11,7 +11,7 @@ const LogInInput = () => {
   const postLogin = async (post) => {
     try {
       const data = await axios.post("/api/members/login", post);
-      if (data.data.statusCode === 200) {
+      if (data.httpStatusCode === 200) {
         return data;
       } else {
         alert("아이디, 비밀번호를 잘못입력하셨습니다.");

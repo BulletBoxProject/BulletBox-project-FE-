@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
 import axios from "axios";
@@ -79,6 +79,35 @@ const SignUpInput = () => {
     }
   };
 
+  const postSignup = async (post) => {
+    try {
+      const data = await axios.post("/api/members/signup", post);
+      if (data.httpStatusCode === 201) {
+        alert(data.msg);
+        return data;
+      } else {
+        alert("회원가입에 실패하셨습니다.");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const onSubmitBtn = (e) => {
+    e.preventDefault();
+    postSignup({
+      email,
+      nickName,
+      password,
+    }).then((res) => {
+      if (res === undefined) {
+        navigate(`/signup`);
+      } else {
+        navigate(`/login`);
+      }
+    });
+  };
+
   return (
     <StForm>
       <StTitle>회원가입</StTitle>
@@ -109,6 +138,7 @@ const SignUpInput = () => {
         <StSignupBtn
           type="submit"
           disabled={!(isEmail && isNickName && isPassword && isPasswordConfirm)}
+          onClick={onSubmitBtn}
         >
           확인
         </StSignupBtn>
