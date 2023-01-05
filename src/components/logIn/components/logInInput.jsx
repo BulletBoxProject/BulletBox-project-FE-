@@ -43,8 +43,9 @@ const LogInInput = () => {
   return (
     <StForm>
       <StTitle>로그인</StTitle>
-      <Stlabel>아이디</Stlabel>
+
       <StInput
+        placeholder="ID"
         name="userid"
         type="email"
         onChange={(e) => {
@@ -52,8 +53,8 @@ const LogInInput = () => {
           setUserId(value);
         }}
       ></StInput>
-      <Stlabel>비밀번호</Stlabel>
       <StInput
+        placeholder="PASSWORD"
         type="password"
         name="password"
         onChange={(e) => {
@@ -61,6 +62,7 @@ const LogInInput = () => {
           setPassword(value);
         }}
       ></StInput>
+
       <br />
       <StButtonBox>
         <StSignupBtn
@@ -94,14 +96,10 @@ const StTitle = styled.div`
   color: black;
 `;
 
-const Stlabel = styled.label`
-  margin: 15px 0 10px 0;
-  color: black;
-`;
-
 const StInput = styled.input`
   width: 100%;
   padding: 5px;
+  margin-top: 10px;
 `;
 
 const StSignupBtn = styled.button`
