@@ -1,23 +1,56 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import axios from "axios";
 
 const SignUpInput = () => {
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [emailMessage, setEmailMessage] = useState("");
+  const [isEmail, setIsEmail] = useState(false);
+  const emailRegex =
+    /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+
+  const onChangeEmail = (e) => {
+    const value = e.target.value;
+    setEmail(value);
+
+    if (!emailRegex.test(value)) {
+      setEmailMessage("올바른 이메일 형식이 아닙니다.");
+      setIsEmail(false);
+    } else {
+      setEmailMessage("올바른 이메일 형식입니다.");
+      setIsEmail(true);
+    }
+  };
+
   return (
     <StForm>
       <StTitle>회원가입</StTitle>
       <div>
-        <StInputEmail placeholder="E-mail"></StInputEmail>
+        <StInputEmail
+          placeholder="E-mail"
+          onChange={onChangeEmail}
+        ></StInputEmail>
         <button>이메일인증</button>
       </div>
+      {email.length > 0 && <span>{emailMessage}</span>}
+
       <StInput placeholder="NickName"></StInput>
-      <StInput placeholder="PASSWORD"></StInput>
-      <StInput placeholder="RE_PASSWORD"></StInput>
+      <StInput placeholder="Password"></StInput>
+      <StInput placeholder="Re_Password"></StInput>
       <StButtonBox>
-        <StSignupBtn>확인</StSignupBtn>
-        <StSignupBtn>취소</StSignupBtn>
+        <StSignupBtn type="submit" disabled={!isEmail}>
+          확인
+        </StSignupBtn>
+        <StSignupBtn
+          onClick={() => {
+            navigate("/login");
+          }}
+        >
+          취소
+        </StSignupBtn>
       </StButtonBox>
     </StForm>
   );

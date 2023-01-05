@@ -45,7 +45,7 @@ const LogInInput = () => {
       <StTitle>로그인</StTitle>
 
       <StInput
-        placeholder="ID"
+        placeholder="Email"
         name="userid"
         type="email"
         onChange={(e) => {
@@ -54,7 +54,7 @@ const LogInInput = () => {
         }}
       ></StInput>
       <StInput
-        placeholder="PASSWORD"
+        placeholder="Password"
         type="password"
         name="password"
         onChange={(e) => {
@@ -72,7 +72,13 @@ const LogInInput = () => {
         >
           로그인
         </StSignupBtn>
-        <StSignupBtn>회원가입</StSignupBtn>
+        <StSignupBtn
+          onClick={() => {
+            navigate("/signup");
+          }}
+        >
+          회원가입
+        </StSignupBtn>
       </StButtonBox>
     </StForm>
   );
