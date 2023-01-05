@@ -4,9 +4,8 @@ const GlobalStyle = createGlobalStyle`
 
 :root{
   --color-black: #111111;
-  --color-gray: #aaa;
-  --color-light-gray : #e1e1e1;
 }
+
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @font-face {
@@ -19,18 +18,12 @@ body{
   padding: 0;
   margin: 0;
   font-family: 'Montserrat', sans-serif;
-  font-size: 12px;
-  height: 100vh;
+  font-size: 10px;
 }
 
 button {
   cursor: pointer;
   outline: none;
-}
-
-input {
-  outline: none;
-  padding-left: 1rem;
 }
 
 a{
