@@ -1,4 +1,5 @@
 import React from "react";
+
 import styled from "styled-components";
 import LogInInput from "../components/LogInInput";
 
@@ -18,3 +19,4 @@ const StcontainerBox = styled.div`
   align-items: center;
   height: 700px;
 `;
+
