@@ -16,5 +16,5 @@ const StcontainerBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 600px;
+  height: 70vh;
 `;
