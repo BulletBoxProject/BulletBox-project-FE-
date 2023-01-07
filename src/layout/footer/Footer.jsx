@@ -11,7 +11,7 @@ const Footer = () => {
   };
 
   return (
-    <div>
+    <FooterDiv>
       <Button onClick={onClickButton}>
         <Question_Icon />
       </Button>
@@ -24,13 +24,20 @@ const Footer = () => {
           }}
         />
       )}
-    </div>
+    </FooterDiv>
   );
 };
 
 export default Footer;
+const FooterDiv = styled.div`
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin-bottom: 5%;
+  margin-right: 4%;
+`;
+
 const Button = styled.button`
-  margin-left: 90%;
   border-radius: 60%;
   background-color: transparent;
   border: white;

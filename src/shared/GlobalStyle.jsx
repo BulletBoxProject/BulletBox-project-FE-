@@ -19,6 +19,7 @@ body{
   margin: 0;
   font-family: 'Montserrat', sans-serif;
   font-size: 10px;
+
 }
 
 button {
