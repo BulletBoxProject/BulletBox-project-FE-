@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import useDetectClose from "./usDetectClose";
+import useDetectClose from "./useDetectClose";
 import { ReactComponent as icon } from "../../../img/Menu_Icon.svg";
 
 const DropdownMenu = () => {
@@ -15,23 +15,23 @@ const DropdownMenu = () => {
         <Menu isDropped={myPageIsOpen}>
           <Ul>
             <Li>
-              <LinkWrapper href="#1-1">공지사항</LinkWrapper>
+              <LinkWrapper href="">공지사항</LinkWrapper>
             </Li>
             <Li>
-              <LinkWrapper href="#1-3">마이페이지</LinkWrapper>
+              <LinkWrapper href="">마이페이지</LinkWrapper>
             </Li>
 
             <Li>
-              <LinkWrapper href="#1-2">카테고리</LinkWrapper>
+              <LinkWrapper href="">카테고리</LinkWrapper>
             </Li>
             <Li>
-              <LinkWrapper href="#1-3">자주쓰는할일</LinkWrapper>
+              <LinkWrapper href="">자주쓰는할일</LinkWrapper>
             </Li>
             <Li>
-              <LinkWrapper href="#1-3">도움말</LinkWrapper>
+              <LinkWrapper href="">도움말</LinkWrapper>
             </Li>
             <Li>
-              <LinkWrapper href="#1-3">로그아웃</LinkWrapper>
+              <LinkWrapper href="">로그아웃</LinkWrapper>
             </Li>
           </Ul>
         </Menu>
@@ -63,9 +63,6 @@ const IconImg = styled(icon)`
   align-content: center;
   background-size: cover;
   width: 40px;
-  & path {
-    fill: var(--color3);
-  }
 `;
 
 const Menu = styled.div`
@@ -73,7 +70,7 @@ const Menu = styled.div`
   position: absolute;
   top: 52px;
   left: 50%;
-  width: 100px;
+  width: 80px;
   text-align: center;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
   border-radius: 3px;
