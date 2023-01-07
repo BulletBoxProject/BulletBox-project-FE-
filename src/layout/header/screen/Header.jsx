@@ -1,10 +1,10 @@
 import React from "react";
 import { BsBell } from "react-icons/bs";
-import { BiMenu } from "react-icons/bi";
 import { MdArrowBackIosNew } from "react-icons/md";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { getCookies } from "../core/cookieControler";
+import { getCookies } from "../../../core/cookieControler";
+import DropdownMenu from "../components/DropdownMenu";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -31,10 +31,10 @@ const Header = () => {
       >
         BulletBox
       </HeaderBtn>
-      <HeaderLeftDib>
+      <HeaderLeftDiv>
         <BsBell size={20} />
-        <BiMenu size={25} />
-      </HeaderLeftDib>
+        <DropdownMenu />
+      </HeaderLeftDiv>
     </HeaderDiv>
   );
 };
@@ -52,4 +52,7 @@ const HeaderBtn = styled.button`
   border: none;
 `;
 
-const HeaderLeftDib = styled.div``;
+const HeaderLeftDiv = styled.div`
+  display: flex;
+  align-items: center;
+`;

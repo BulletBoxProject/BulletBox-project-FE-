@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Outlet } from "react-router-dom";
-import Header from "./Header";
+import Header from "./header/screen/Header";
 import Footer from "./Footer";
 // import useScrollPosition from "../hooks/useScrollPosition";
 
