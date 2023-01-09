@@ -43,7 +43,8 @@ export default Header;
 const HeaderDiv = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 0 30px;
   margin-top: 3vh;
 `;
 
@@ -55,4 +56,5 @@ const HeaderBtn = styled.button`
 const HeaderLeftDiv = styled.div`
   display: flex;
   align-items: center;
+  width: 18%;
 `;
