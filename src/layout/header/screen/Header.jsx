@@ -8,6 +8,9 @@ import DropdownMenu from "../components/DropdownMenu";
 
 const Header = () => {
   const navigate = useNavigate();
+  const handleGoBack = () => {
+    navigate(-1);
+  };
   const token = getCookies("Authorization");
 
   const onClickHandler = () => {
@@ -21,7 +24,11 @@ const Header = () => {
   return (
     <HeaderDiv>
       <HeaderBtn>
-        <MdArrowBackIosNew />
+        <MdArrowBackIosNew
+          onClick={() => {
+            handleGoBack();
+          }}
+        />
       </HeaderBtn>
 
       <HeaderBtn
