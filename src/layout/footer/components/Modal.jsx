@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
+import useOutSideClick from "../../../hooks/useOutSideClick";
 
 function Modal({ onClose }) {
-  const handleClose = () => {
+  const modalRef = useRef(null);
+  const CloseHandle = () => {
     onClose?.();
   };
+
+  useOutSideClick(modalRef, CloseHandle);
+
   return (
     <Overlay>
-      <ModalWrap>
-        <CloseButton onClick={handleClose}>
+      <ModalWrap ref={modalRef}>
+        <CloseButton onClick={CloseHandle}>
           <i className="fa-solid fa-xmark"></i>
         </CloseButton>
         <h1>사용메뉴얼(도움말)</h1>
@@ -21,7 +26,7 @@ function Modal({ onClose }) {
             불렛을 통해 데일리 로그에 오늘 할일 뿐 아니라 다양한 내용들을 담을
             수 있습니다.
           </h5>
-          <Button onClick={handleClose}>Close</Button>
+          <Button onClick={CloseHandle}>Close</Button>
         </Contents>
       </ModalWrap>
     </Overlay>
