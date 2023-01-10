@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
+import useOutSideClick from "../../../hooks/useOutSideClick";
 
 function Modal({ onClose }) {
+  const modalRef = useRef(null);
   const CloseHandle = () => {
     onClose?.();
   };
+
+  useOutSideClick(modalRef, CloseHandle);
+
   return (
     <Overlay>
-      <ModalWrap>
+      <ModalWrap ref={modalRef}>
         <CloseButton onClick={CloseHandle}>
           <i className="fa-solid fa-xmark"></i>
         </CloseButton>

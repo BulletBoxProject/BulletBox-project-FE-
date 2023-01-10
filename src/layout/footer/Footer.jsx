@@ -29,6 +29,7 @@ const Footer = () => {
 };
 
 export default Footer;
+
 const FooterDiv = styled.div`
   position: fixed;
   bottom: 0;
