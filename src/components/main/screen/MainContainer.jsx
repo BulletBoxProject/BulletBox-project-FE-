@@ -4,27 +4,24 @@ import { useSelector } from "react-redux";
 import uuid from "react-uuid";
 
 import NavigationMenu from "../../common/NavigationMenu";
-import DateButton from "../../common/Button";
+
 import SelectCategory from "../../common/SelectCategory";
+import BulletCalendar from "../../calendar/Calendar";
 import MainInputCard from "../components/MainInputCard";
 import MainEditCard from "../components/MainEditCard";
 
 const MainContainer = () => {
   const bulletList = useSelector((state) => state.bullet_main.bulletList);
   console.log("리듀서 상태 저장 값", bulletList);
-  const day = ["일", "월", "화", "수", "목", "금", "토"];
-  const today = `${new Date().getFullYear()}년 ${
-    new Date().getMonth() + 1
-  }월 ${new Date().getDate()}일 ${day[new Date().getDay()]}요일`;
+
   return (
     <Container>
       <NavigationMenu />
-      <DateAndSelectDiv>
-        <DateButton width={"50%"}>{today}</DateButton>
+      <SelectDiv>
         <SelectCategory style={{ padding: "10px" }} />
-      </DateAndSelectDiv>
+      </SelectDiv>
       <CalendarDiv>
-        <h1>Calendar</h1>
+        <BulletCalendar />
       </CalendarDiv>
       <TodoDiv>
         <BulletDiv>
@@ -53,15 +50,15 @@ const Container = styled.div`
   justify-content: center;
   padding: 10px 30px;
 `;
-const DateAndSelectDiv = styled.div`
+const SelectDiv = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 10px 0;
 `;
 const CalendarDiv = styled.div`
   border: 1px solid black;
-  height: 40vh;
+  height: 43vh;
   margin-bottom: 10px;
   display: flex;
   justify-content: center;
@@ -77,14 +74,14 @@ const BulletDiv = styled.div`
   flex-direction: column;
   padding: 0 10px;
   width: 20%;
-  height: 25vh;
+  height: 22vh;
   border: 1px solid gray;
   border-radius: 5px;
   gap: 5px;
 `;
 const InputDiv = styled.div`
   width: 62%;
-  height: 25vh;
+  height: 22vh;
   border: 1px solid gray;
   border-radius: 5px;
   padding: 0 10px;
