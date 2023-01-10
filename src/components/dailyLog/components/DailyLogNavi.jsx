@@ -10,22 +10,31 @@ const DailyLogNavi = () => {
   return (
     <Container>
       <ButtonGroup>
-        <Button width={"30%"} height={"10vh"} onClick={() => navigate("/")}>
+        <Button
+          width={"30%"}
+          height={"10vh"}
+          borderRadius={"10px"}
+          onClick={() => navigate("/")}
+        >
           Home
         </Button>
         <Button
           width={"30%"}
           height={"10vh"}
+          borderRadius={"10px"}
           onClick={() => navigate("/dailys")}
         >
-          Daily Log
+          Daily <br />
+          Log
         </Button>
         <Button
           width={"30%"}
           height={"10vh"}
+          borderRadius={"10px"}
           onClick={() => navigate("/monthlys")}
         >
-          Monthly Log
+          Monthly <br />
+          Log
         </Button>
       </ButtonGroup>
     </Container>
