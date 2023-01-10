@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-import Button from "../../common/Button";
+import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 
-const DailyLogNavi = () => {
+const NavigationMenu = () => {
   const navigate = useNavigate();
 
   return (
@@ -41,7 +41,7 @@ const DailyLogNavi = () => {
   );
 };
 
-export default DailyLogNavi;
+export default NavigationMenu;
 
 const Container = styled.div`
   width: 100%;

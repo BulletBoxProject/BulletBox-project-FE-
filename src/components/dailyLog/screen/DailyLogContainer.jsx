@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
-import DailyLogNavi from "../components/DailyLogNavi";
+import NavigationMenu from "../../common/NavigationMenu";
 import SelectGroup from "../components/SelectGroup";
 
 const DailyLogContainer = () => {
   return (
     <Container>
       <SelectGroup />
-      <DailyLogNavi />
+      <NavigationMenu />
     </Container>
   );
 };
