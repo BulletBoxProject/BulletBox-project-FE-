@@ -7,19 +7,18 @@ const GlobalStyle = createGlobalStyle`
 }
 
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
-@font-face {
-  font-family:'korean';
-  src: url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+@import url('https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&display=swap');
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+
+*{
+  font-family: 'NanumSquare', cursive;
 }
 
-body{
+body, div, button{
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: 'Montserrat', sans-serif;
   font-size: 10px;
-
 }
 
 button {
