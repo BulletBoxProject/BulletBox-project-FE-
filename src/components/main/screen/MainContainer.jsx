@@ -20,9 +20,7 @@ const MainContainer = () => {
       <SelectDiv>
         <SelectCategory style={{ padding: "10px" }} />
       </SelectDiv>
-      <CalendarDiv>
-        <BulletCalendar />
-      </CalendarDiv>
+      <CalendarDiv></CalendarDiv>
       <TodoDiv>
         <BulletDiv>
           <h3>불렛 목록</h3>
@@ -48,7 +46,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 10px 30px;
+  padding: 32px 14px;
 `;
 const SelectDiv = styled.div`
   display: flex;
@@ -58,7 +56,7 @@ const SelectDiv = styled.div`
 `;
 const CalendarDiv = styled.div`
   border: 1px solid black;
-  height: 43vh;
+  height: 260px;
   margin-bottom: 10px;
   display: flex;
   justify-content: center;
@@ -73,15 +71,17 @@ const BulletDiv = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 10px;
-  width: 20%;
-  height: 22vh;
+  width: 30%;
+  height: 216px;
+  margin-top: 26px;
   border: 1px solid gray;
   border-radius: 5px;
   gap: 5px;
 `;
 const InputDiv = styled.div`
   width: 62%;
-  height: 22vh;
+  height: 216px;
+  margin-top: 26px;
   border: 1px solid gray;
   border-radius: 5px;
   padding: 0 10px;

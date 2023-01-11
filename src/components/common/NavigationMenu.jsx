@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 
 const NavigationMenu = () => {
@@ -10,32 +9,9 @@ const NavigationMenu = () => {
   return (
     <Container>
       <ButtonGroup>
-        <Button
-          width={"30%"}
-          height={"10vh"}
-          borderRadius={"10px"}
-          onClick={() => navigate("/")}
-        >
-          Home
-        </Button>
-        <Button
-          width={"30%"}
-          height={"10vh"}
-          borderRadius={"10px"}
-          onClick={() => navigate("/dailys")}
-        >
-          Daily <br />
-          Log
-        </Button>
-        <Button
-          width={"30%"}
-          height={"10vh"}
-          borderRadius={"10px"}
-          onClick={() => navigate("/monthlys")}
-        >
-          Monthly <br />
-          Log
-        </Button>
+        <Button onClick={() => navigate("/")}>Home</Button>
+        <Button onClick={() => navigate("/dailys")}>DailyLog</Button>
+        <Button onClick={() => navigate("/monthlys")}>MonthlyLog</Button>
       </ButtonGroup>
     </Container>
   );
@@ -50,4 +26,15 @@ const ButtonGroup = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  height: 50px;
+`;
+const Button = styled.button`
+  width: 30%;
+  height: 100%;
+  border: 1px solid var(--color-light-gray);
+  border-radius: 10px;
+  background-color: var(--color-light-gray);
+  & > :hover {
+    background-color: var(--color-main);
+  }
 `;
