@@ -31,14 +31,17 @@ const Footer = () => {
 export default Footer;
 
 const FooterDiv = styled.div`
-  position: fixed;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
   bottom: 0;
   right: 0;
   margin-bottom: 5%;
-  margin-right: 4%;
+  margin-right: 7%;
 `;
 
 const Button = styled.button`
+  position: absolute;
   border-radius: 60%;
   background-color: transparent;
   border: white;
@@ -49,5 +52,5 @@ const Button = styled.button`
 `;
 
 const Question_Icon = styled(icon)`
-  width: 20px;
+  width: 24px;
 `;

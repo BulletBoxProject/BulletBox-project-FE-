@@ -7,11 +7,11 @@ import Footer from "./footer/Footer";
 
 const Layout = (props) => {
   return (
-    <>
+    <Container>
       <Header />
       <Outlet>{props.children}</Outlet>
       <Footer />
-    </>
+    </Container>
   );
 };
 
@@ -29,3 +29,10 @@ const Layout = (props) => {
 // };
 
 export default Layout;
+
+const Container = styled.div`
+  width: 100%;
+  /* min-height: 740px; */
+  height: 100vh;
+  border: 1px solid black;
+`;
