@@ -45,8 +45,9 @@ export default MainContainer;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 32px 14px;
+  justify-content: flex-start;
+  padding: 4.05vh 3.9%;
+  background-color: var(--color-main);
 `;
 const SelectDiv = styled.div`
   display: flex;
@@ -70,9 +71,11 @@ const TodoDiv = styled.div`
 const BulletDiv = styled.div`
   display: flex;
   flex-direction: column;
+  background-color: var(--color-main);
+  color: white;
   padding: 0 10px;
   width: 30%;
-  height: 216px;
+  height: 210px;
   margin-top: 26px;
   border: 1px solid gray;
   border-radius: 5px;
@@ -80,7 +83,7 @@ const BulletDiv = styled.div`
 `;
 const InputDiv = styled.div`
   width: 62%;
-  height: 216px;
+  height: 210px;
   margin-top: 26px;
   border: 1px solid gray;
   border-radius: 5px;
