@@ -140,6 +140,9 @@ const StSignupBtn = styled.button`
   height: 36px;
   left: 84px;
   top: 474px;
+  font-size: 16px;
+  font-weight: 800;
+  color: white;
   border: white;
   background: var(--color-main);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
