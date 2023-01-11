@@ -41,56 +41,50 @@ const LogInInput = () => {
   };
 
   return (
-    <StDiv>
-      <StForm>
-        <StTitle>Login</StTitle>
+    <StForm>
+      <StTitle>Login</StTitle>
 
-        <StInput
-          placeholder="ID"
-          name="userid"
-          type="email"
-          onChange={(e) => {
-            const { value } = e.target;
-            setUserId(value);
-          }}
-        ></StInput>
-        <StInput
-          placeholder="PASSWORD"
-          type="password"
-          name="password"
-          onChange={(e) => {
-            const { value } = e.target;
-            setPassword(value);
-          }}
-        ></StInput>
+      <StInput
+        placeholder="ID"
+        name="userid"
+        type="email"
+        onChange={(e) => {
+          const { value } = e.target;
+          setUserId(value);
+        }}
+      ></StInput>
+      <StInput
+        placeholder="PASSWORD"
+        type="password"
+        name="password"
+        onChange={(e) => {
+          const { value } = e.target;
+          setPassword(value);
+        }}
+      ></StInput>
 
-        <br />
-        <StButtonBox>
-          <StSignupBtn
-            onClick={() => {
-              navigate("/signup");
-            }}
-          >
-            회원가입
-          </StSignupBtn>
-          <StLoginBtn
-            onClick={() => {
-              onSubmitBtn();
-            }}
-          >
-            로그인
-          </StLoginBtn>
-        </StButtonBox>
-      </StForm>
-    </StDiv>
+      <br />
+      <StButtonBox>
+        <StSignupBtn
+          onClick={() => {
+            navigate("/signup");
+          }}
+        >
+          회원가입
+        </StSignupBtn>
+        <StLoginBtn
+          onClick={() => {
+            onSubmitBtn();
+          }}
+        >
+          로그인
+        </StLoginBtn>
+      </StButtonBox>
+    </StForm>
   );
 };
 
 export default LogInInput;
-const StDiv = styled.div`
-  background: #f0a13b;
-`;
-
 const StForm = styled.form`
   display: flex;
   align-items: center;
@@ -103,7 +97,6 @@ const StForm = styled.form`
   top: 232px;
   background: white;
   border-radius: 8px;
-  border: 1px solid black;
 `;
 const StTitle = styled.div`
   font-size: 15px;
@@ -139,6 +132,7 @@ const StButtonBox = styled.div`
   justify-content: space-between;
   width: 200px;
   margin-top: 10px;
+  font-size: 16px;
 `;
 
 const StSignupBtn = styled.button`
@@ -147,7 +141,7 @@ const StSignupBtn = styled.button`
   left: 84px;
   top: 474px;
   border: white;
-  background: #f0a13b;
+  background: var(--color-main);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
 `;

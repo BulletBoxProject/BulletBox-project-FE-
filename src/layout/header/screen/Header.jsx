@@ -3,22 +3,17 @@ import { BsBell } from "react-icons/bs";
 import { MdArrowBackIosNew } from "react-icons/md";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { getCookies } from "../../../core/cookieControler";
 import DropdownMenu from "../components/DropdownMenu";
+import { ReactComponent as logoIcon } from "../../../img/logo/logo-type-bold.svg";
 
 const Header = () => {
   const navigate = useNavigate();
   const handleGoBack = () => {
     navigate(-1);
   };
-  const token = getCookies("Authorization");
 
   const onClickHandler = () => {
-    if (token) {
-      navigate("/");
-    } else {
-      navigate("/login");
-    }
+    navigate("/");
   };
 
   return (
@@ -35,9 +30,7 @@ const Header = () => {
         onClick={() => {
           onClickHandler();
         }}
-      >
-        BulletBox
-      </HeaderBtn>
+      ></HeaderBtn>
       <HeaderLeftDiv>
         <BsBell size={20} />
         <DropdownMenu />

@@ -18,5 +18,6 @@ const StcontainerBox = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 70vh;
+  height: 100vh;
+  background-color: var(--color-main);
 `;
