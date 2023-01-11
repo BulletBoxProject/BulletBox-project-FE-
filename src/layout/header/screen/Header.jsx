@@ -1,10 +1,10 @@
 import React from "react";
-import { BsBell } from "react-icons/bs";
-import { MdArrowBackIosNew } from "react-icons/md";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import DropdownMenu from "../components/DropdownMenu";
 import { ReactComponent as logoIcon } from "../../../img/logo/logo-type-bold.svg";
+import { ReactComponent as backIcon } from "../../../img/navi/back.svg";
+import { ReactComponent as bellX } from "../../../img/navi/bell-x.svg";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ const Header = () => {
   return (
     <HeaderDiv>
       <HeaderBtn>
-        <MdArrowBackIosNew
+        <Back
           onClick={() => {
             handleGoBack();
           }}
@@ -30,9 +30,11 @@ const Header = () => {
         onClick={() => {
           onClickHandler();
         }}
-      ></HeaderBtn>
+      >
+        <Logo />
+      </HeaderBtn>
       <HeaderLeftDiv>
-        <BsBell size={20} />
+        <Bell />
         <DropdownMenu />
       </HeaderLeftDiv>
     </HeaderDiv>
@@ -45,16 +47,31 @@ const HeaderDiv = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0 30px;
-  margin-top: 3vh;
 `;
 
 const HeaderBtn = styled.button`
   background-color: transparent;
   border: none;
 `;
+const Logo = styled(logoIcon)`
+  margin-left: 10%;
+  width: 30%;
+`;
 
 const HeaderLeftDiv = styled.div`
   display: flex;
   align-items: center;
-  width: 18%;
+  width: 28%;
+`;
+
+const Back = styled(backIcon)`
+  width: 98%;
+  height: 3.3vh;
+  color: var(--color-main);
+`;
+
+const Bell = styled(bellX)`
+  width: 88%;
+  height: 2.5vh;
+  color: var(--color-main);
 `;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import useDetectClose from "./useDetectClose";
-import { ReactComponent as icon } from "../../../img/Menu_Icon.svg";
+import { ReactComponent as menu } from "../../../img/navi/menu.svg";
 
 const DropdownMenu = () => {
   const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
@@ -59,10 +59,10 @@ const DropdownContainer = styled.div`
 const DropdownButton = styled.div`
   cursor: pointer;
 `;
-const IconImg = styled(icon)`
-  align-content: center;
-  background-size: cover;
-  width: 40px;
+const IconImg = styled(menu)`
+  width: 160%;
+  height: 3.5vh;
+  color: var(--color-main);
 `;
 
 const Menu = styled.div`
