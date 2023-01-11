@@ -90,7 +90,7 @@ const StForm = styled.form`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  position: absolute;
+  /* position: absolute; */
   width: 272px;
   height: 328px;
   left: 44px;
@@ -118,7 +118,7 @@ const StInput = styled.input`
   ::placeholder {
     font-family: "Oleo Script";
     font-style: normal;
-    font-weight: 400;
+    font-weight: 800;
     font-size: 16px;
     line-height: 22px;
     text-align: center;
@@ -154,6 +154,9 @@ const StLoginBtn = styled.button`
   height: 36px;
   left: 188px;
   top: 474px;
+  font-size: 16px;
+  font-weight: 800;
+  color: #7c7c7c;
   border: white;
   background: #d9d9d9;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
