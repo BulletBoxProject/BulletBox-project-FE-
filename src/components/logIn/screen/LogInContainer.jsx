@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import BulletCalendar from "../../calendar/Calendar";
 import LogInInput from "../components/LogInInput";
 
 const LogInContainer = () => {
