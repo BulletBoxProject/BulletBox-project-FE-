@@ -12,10 +12,11 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/login" element={<LogIn />} />
+        <Route path="signup" element={<SignUp />} />
         <Route element={<Layout />}>
           <Route path="/" element={<Main />} />
-          <Route path="/login" element={<LogIn />} />
-          <Route path="signup" element={<SignUp />} />
+
           <Route path="/dailys" element={<DailyLog />} />
           <Route path="/monthlys" element={<MonthlyLog />} />
         </Route>

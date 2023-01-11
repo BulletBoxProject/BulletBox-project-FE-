@@ -41,59 +41,69 @@ const LogInInput = () => {
   };
 
   return (
-    <StForm>
-      <StTitle>로그인</StTitle>
+    <StDiv>
+      <StForm>
+        <StTitle>Login</StTitle>
 
-      <StInput
-        placeholder="Email"
-        name="userid"
-        type="email"
-        onChange={(e) => {
-          const { value } = e.target;
-          setUserId(value);
-        }}
-      ></StInput>
-      <StInput
-        placeholder="Password"
-        type="password"
-        name="password"
-        onChange={(e) => {
-          const { value } = e.target;
-          setPassword(value);
-        }}
-      ></StInput>
+        <StInput
+          placeholder="ID"
+          name="userid"
+          type="email"
+          onChange={(e) => {
+            const { value } = e.target;
+            setUserId(value);
+          }}
+        ></StInput>
+        <StInput
+          placeholder="PASSWORD"
+          type="password"
+          name="password"
+          onChange={(e) => {
+            const { value } = e.target;
+            setPassword(value);
+          }}
+        ></StInput>
 
-      <br />
-      <StButtonBox>
-        <StSignupBtn
-          onClick={() => {
-            onSubmitBtn();
-          }}
-        >
-          로그인
-        </StSignupBtn>
-        <StSignupBtn
-          onClick={() => {
-            navigate("/signup");
-          }}
-        >
-          회원가입
-        </StSignupBtn>
-      </StButtonBox>
-    </StForm>
+        <br />
+        <StButtonBox>
+          <StSignupBtn
+            onClick={() => {
+              navigate("/signup");
+            }}
+          >
+            회원가입
+          </StSignupBtn>
+          <StLoginBtn
+            onClick={() => {
+              onSubmitBtn();
+            }}
+          >
+            로그인
+          </StLoginBtn>
+        </StButtonBox>
+      </StForm>
+    </StDiv>
   );
 };
 
 export default LogInInput;
+const StDiv = styled.div`
+  background: #f0a13b;
+`;
 
 const StForm = styled.form`
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  position: absolute;
+  width: 272px;
+  height: 328px;
+  left: 44px;
+  top: 232px;
+  background: white;
+  border-radius: 8px;
   border: 1px solid black;
-  border-radius: 10px;
-  padding: 25px;
 `;
 const StTitle = styled.div`
   font-size: 15px;
@@ -103,16 +113,52 @@ const StTitle = styled.div`
 `;
 
 const StInput = styled.input`
-  width: 100%;
-  padding: 5px;
+  width: 200px;
+  height: 48px;
+  left: 80px;
+  top: 322px;
+  margin-top: 10px;
+  border: white;
+
+  background: #d9d9d9;
+  border-radius: 8px;
+  ::placeholder {
+    font-family: "Oleo Script";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    color: #7c7c7c;
+  }
+`;
+
+const StButtonBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 200px;
   margin-top: 10px;
 `;
 
 const StSignupBtn = styled.button`
-  width: 70px;
-  height: 30px;
-  margin-right: 5px;
+  width: 46%;
+  height: 36px;
+  left: 84px;
+  top: 474px;
+  border: white;
+  background: #f0a13b;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
 `;
-const StButtonBox = styled.div`
-  margin-top: 10px;
+
+const StLoginBtn = styled.button`
+  width: 46%;
+  height: 36px;
+  left: 188px;
+  top: 474px;
+  border: white;
+  background: #d9d9d9;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
 `;

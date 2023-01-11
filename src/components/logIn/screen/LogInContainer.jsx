@@ -7,7 +7,6 @@ const LogInContainer = () => {
   return (
     <StcontainerBox>
       <LogInInput />
-      <BulletCalendar />
     </StcontainerBox>
   );
 };
