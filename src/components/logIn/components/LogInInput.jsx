@@ -1,35 +1,34 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { baseURLApiV1 } from "../../../core/api";
 
 const LogInInput = () => {
   const navigate = useNavigate();
-  const [userid, setUserId] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const postLogin = async (post) => {
     try {
-      const data = await axios.post("/api/members/login", post);
-      if (data.httpStatusCode === 200) {
+      console.log(post);
+      const data = await baseURLApiV1.post("api/members/login", post);
+      console.log(data, "2");
+      if (data.data.httpStatusCode === 200) {
         return data;
-      } else {
-        alert("아이디, 비밀번호를 잘못입력하셨습니다.");
       }
     } catch (error) {
       console.log(error);
+      alert("아이디, 비밀번호를 잘못입력하셨습니다.");
     }
   };
 
-  const onSubmitBtn = (e) => {
-    e.preventDefault();
-    if (userid === "" || password === "") {
+  const loginHandler = () => {
+    if (email === "" || password === "") {
       alert("아이디, 비밀번호를 확인해주세요.");
       return;
-    } else {
     }
     postLogin({
-      userid,
+      email,
       password,
     }).then((res) => {
       if (res === undefined) {
@@ -50,7 +49,7 @@ const LogInInput = () => {
         type="email"
         onChange={(e) => {
           const { value } = e.target;
-          setUserId(value);
+          setEmail(value);
         }}
       ></StInput>
       <StInput
@@ -73,8 +72,9 @@ const LogInInput = () => {
           회원가입
         </StSignupBtn>
         <StLoginBtn
+          type="button"
           onClick={() => {
-            onSubmitBtn();
+            loginHandler();
           }}
         >
           로그인

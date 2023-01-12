@@ -82,11 +82,12 @@ const SignUpInput = () => {
   const postSignup = async (post) => {
     try {
       const data = await instanceApiV1.post("api/members/signup", post);
-      if (data.httpStatusCode === 201) {
-        alert(data.msg);
+      console.log(data, "1");
+      if (data.data.httpStatusCode === 201) {
+        alert(data.data.msg);
         return data;
       } else {
-        alert("회원가입에 실패하셨습니다.");
+        alert("회원가입에 실패했습니다.");
       }
     } catch (error) {
       console.log(error);
