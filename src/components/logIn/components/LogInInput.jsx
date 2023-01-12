@@ -90,28 +90,28 @@ const StForm = styled.form`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  /* position: absolute; */
-  width: 272px;
-  height: 328px;
-  left: 44px;
-  top: 232px;
+  width: 76%;
+  height: 45vh;
   background: white;
   border-radius: 8px;
 `;
 const StTitle = styled.div`
-  font-size: 15px;
-  width: 50px;
-  margin-bottom: 20px;
-  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  width: 50%;
+  color: var(--color-main);
 `;
 
 const StInput = styled.input`
-  width: 200px;
-  height: 48px;
+  width: 74%;
+  height: 6.6vh;
   left: 80px;
   top: 322px;
-  margin-top: 10px;
+  margin-top: 7%;
   border: white;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 
   background: #d9d9d9;
   border-radius: 8px;
@@ -130,8 +130,8 @@ const StButtonBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 200px;
-  margin-top: 10px;
+  width: 74%;
+  margin-top: 6%;
   font-size: 16px;
 `;
 

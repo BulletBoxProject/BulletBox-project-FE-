@@ -111,13 +111,13 @@ const SignUpInput = () => {
   return (
     <StForm>
       <StTitle>Sign up</StTitle>
-      <div>
+      <EmailDiv>
         <StInputEmail
           placeholder="E-mail"
           onChange={onChangeEmail}
         ></StInputEmail>
-        <button>인증</button>
-      </div>
+        <EmailBtn>인증</EmailBtn>
+      </EmailDiv>
       {email.length > 0 && <span>{emailMessage}</span>}
 
       <StInput placeholder="NickName" onChange={onChangeNickName}></StInput>
@@ -142,13 +142,13 @@ const SignUpInput = () => {
         >
           회원가입
         </StSignupBtn>
-        <StSignupBtn
+        <CancelBtn
           onClick={() => {
             navigate("/login");
           }}
         >
           취소
-        </StSignupBtn>
+        </CancelBtn>
       </StButtonBox>
     </StForm>
   );
@@ -162,24 +162,25 @@ const StForm = styled.form`
   flex-direction: column;
   background-color: white;
   border-radius: 10px;
-  padding: 25px;
-  height: 300px;
+  height: 53vh;
+  width: 76%;
 `;
 const StTitle = styled.div`
-  font-size: 15px;
-  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  width: 30%;
   margin-bottom: 20px;
   color: var(--color-main);
 `;
 
 const StInput = styled.input`
-  width: 200px;
-  height: 48px;
-  left: 80px;
-  top: 322px;
-  margin-top: 10px;
+  width: 74%;
+  height: 6.6vh;
+  margin-top: 5%;
   border: white;
-
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   background: #d9d9d9;
   border-radius: 8px;
   ::placeholder {
@@ -191,16 +192,23 @@ const StInput = styled.input`
     text-align: center;
     color: #7c7c7c;
   }
+`;
+
+const EmailDiv = styled.div`
+  width: 74%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const StInputEmail = styled.input`
-  width: 150px;
-  height: 48px;
+  width: 74%;
+  height: 6.6vh;
   left: 80px;
   top: 322px;
-  margin-top: 10px;
-  border: white;
 
+  border: white;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   background: #d9d9d9;
   border-radius: 8px;
   ::placeholder {
@@ -214,11 +222,51 @@ const StInputEmail = styled.input`
   }
 `;
 
-const StSignupBtn = styled.button`
-  width: 70px;
-  height: 30px;
-  margin-right: 5px;
-`;
 const StButtonBox = styled.div`
-  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 5%;
+  width: 74%;
+`;
+
+const EmailBtn = styled.button`
+  margin-left: 0.5rem;
+  width: 11vw;
+  height: 6.8vh;
+  background-color: var(--color-main);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+`;
+
+const StSignupBtn = styled.button`
+  width: 46%;
+  height: 36px;
+  left: 84px;
+  top: 474px;
+  font-size: 16px;
+  font-weight: 800;
+  color: white;
+  border: white;
+  background: var(--color-main);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+`;
+
+const CancelBtn = styled.button`
+  width: 46%;
+  height: 36px;
+  left: 188px;
+  top: 474px;
+  font-size: 16px;
+  font-weight: 800;
+  color: #7c7c7c;
+  border: white;
+  background: #d9d9d9;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
 `;
