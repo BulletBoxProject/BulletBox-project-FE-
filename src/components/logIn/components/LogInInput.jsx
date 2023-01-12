@@ -97,6 +97,7 @@ const StForm = styled.form`
   height: 45vh;
   background: white;
   border-radius: 8px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 `;
 const StTitle = styled.div`
   display: flex;

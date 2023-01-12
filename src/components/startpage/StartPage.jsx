@@ -52,4 +52,5 @@ const StartBtn = styled.button`
   height: 6.7vh;
   border: none;
   border-radius: 8px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 `;

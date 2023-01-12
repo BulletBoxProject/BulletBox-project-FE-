@@ -11,6 +11,8 @@ const SignUpInput = () => {
   const [nickname, setNickName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [emailConfirm, setemailConfirm] = useState("");
+  const [emailConfirmCheck, setemailConfirmCheck] = useState("");
 
   const [emailMessage, setEmailMessage] = useState("");
   const [nickNameMessage, setNickNameMessage] = useState("");
@@ -112,8 +114,49 @@ const SignUpInput = () => {
     });
   };
 
-  const confirmHendler = () => {
+  const postconfirm = async (post) => {
     setIsConfirmEamail(!isConfirmEmail);
+    try {
+      console.log(post.email, "1");
+      const data = await instanceApiV1.post(
+        `api/members/signup/email-validate?email=${post.email}`
+      );
+
+      if (data.data.httpStatusCode === 200) {
+        alert(data.data.msg);
+        setemailConfirmCheck(data.data.data);
+        console.log(data.data.data);
+        return data;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const confirmHendler = () => {
+    postconfirm({
+      email,
+    });
+    // .then((res) => {
+    //   if (res === undefined) {
+    //     alert("인증번호가 전송되었습니다.");
+    //   } else {
+    //     alert("사용 불가능한 이메일입니다.");
+    //   }
+    // });
+  };
+  const onChangeEmailConfirm = (e) => {
+    setemailConfirm(e.target.value);
+  };
+
+  const emailConfirmHandler = () => {
+    console.log(emailConfirm);
+    console.log(emailConfirmCheck);
+    if (emailConfirm === emailConfirmCheck) {
+      alert("인증성공 하셨습니다.");
+    } else {
+      alert("인증실패 하셨습니다.");
+    }
   };
 
   return (
@@ -137,8 +180,20 @@ const SignUpInput = () => {
 
       {isConfirmEmail && (
         <ComfirmDiv>
-          <StEmailConfirm placeholder="인증번호"></StEmailConfirm>
-          <EmailConfrimBtn type="button">확인</EmailConfrimBtn>
+          <StEmailConfirm
+            placeholder="인증번호"
+            onChange={(e) => {
+              onChangeEmailConfirm(e);
+            }}
+          ></StEmailConfirm>
+          <EmailConfrimBtn
+            type="button"
+            onClick={() => {
+              emailConfirmHandler();
+            }}
+          >
+            확인
+          </EmailConfrimBtn>
         </ComfirmDiv>
       )}
 
@@ -187,6 +242,7 @@ const StForm = styled.form`
   border-radius: 8px;
   height: 63vh;
   width: 76%;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 `;
 const StTitle = styled.div`
   display: flex;
@@ -203,6 +259,7 @@ const StInput = styled.input`
   width: 74%;
   height: 6.6vh;
   margin-top: 5%;
+  font-size: 1rem;
   border: white;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   background: #d9d9d9;
@@ -228,6 +285,7 @@ const EmailDiv = styled.div`
 const StInputEmail = styled.input`
   width: 74%;
   height: 6.6vh;
+  font-size: 1rem;
   font-family: "Oleo Script";
   border: white;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
@@ -255,6 +313,7 @@ const EmailBtn = styled.button`
   margin-left: 0.5rem;
   width: 11vw;
   height: 6.8vh;
+  font-size: 1rem;
   background-color: var(--color-main);
   border: none;
   border-radius: 8px;
@@ -325,4 +384,5 @@ const ComfirmDiv = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 5%;
+  font-size: 1rem;
 `;
