@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { baseURLApiV1 } from "../../../core/api";
+import { encrypt } from "../../../core/encrypt";
 
 const LogInInput = () => {
   const navigate = useNavigate();
@@ -10,6 +11,9 @@ const LogInInput = () => {
 
   const postLogin = async (post) => {
     try {
+      // const password = encrypt(post.password);
+      // const userInfo = { email, password };
+      // console.log(password);
       const data = await baseURLApiV1.post("api/members/login", post);
       if (data.data.httpStatusCode === 200) {
         return data;
