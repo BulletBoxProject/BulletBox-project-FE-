@@ -53,4 +53,5 @@ const Button = styled.button`
 
 const Question_Icon = styled(icon)`
   width: 24px;
+  fill: var(--color-main);
 `;

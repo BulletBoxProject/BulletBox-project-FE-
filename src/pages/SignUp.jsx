@@ -1,12 +1,18 @@
 import React from "react";
+import styled from "styled-components";
+
 import SignUpContainer from "../components/signup/screen/SignUpContainer";
 
 const SignUp = () => {
   return (
-    <div>
+    <Container>
       <SignUpContainer />
-    </div>
+    </Container>
   );
 };
 
 export default SignUp;
+
+const Container = styled.div`
+  height: 85vh;
+`;
