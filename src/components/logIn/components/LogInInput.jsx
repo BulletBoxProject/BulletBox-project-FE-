@@ -10,9 +10,7 @@ const LogInInput = () => {
 
   const postLogin = async (post) => {
     try {
-      console.log(post);
       const data = await baseURLApiV1.post("api/members/login", post);
-      console.log(data, "2");
       if (data.data.httpStatusCode === 200) {
         return data;
       }
@@ -107,20 +105,17 @@ const StTitle = styled.div`
 const StInput = styled.input`
   width: 74%;
   height: 6.6vh;
-  left: 80px;
-  top: 322px;
   margin-top: 7%;
   border: white;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-
+  font-family: "Oleo Script";
   background: #d9d9d9;
   border-radius: 8px;
   ::placeholder {
     font-family: "Oleo Script";
     font-style: normal;
     font-weight: 800;
-    font-size: 16px;
-    line-height: 22px;
+    font-size: 1rem;
     text-align: center;
     color: #7c7c7c;
   }

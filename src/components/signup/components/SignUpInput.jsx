@@ -125,13 +125,13 @@ const SignUpInput = () => {
       {nickname.length > 0 && <span>{nickNameMessage}</span>}
       <StInput
         placeholder="Password"
-        // type="password"
+        type="password"
         onChange={onChangePassword}
       ></StInput>
       {password.length > 0 && <span>{passwordMessage}</span>}
       <StInput
         placeholder="Re_Password"
-        // type="password"
+        type="password"
         onChange={onChangePasswordConfirm}
       ></StInput>
       {passwordConfirm.length > 0 && <span>{passwordConfirmMessage}</span>}
@@ -184,12 +184,12 @@ const StInput = styled.input`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   background: #d9d9d9;
   border-radius: 8px;
+  font-family: "Oleo Script";
   ::placeholder {
     font-family: "Oleo Script";
     font-style: normal;
     font-weight: 800;
-    font-size: 16px;
-    line-height: 22px;
+    font-size: 1rem;
     text-align: center;
     color: #7c7c7c;
   }
