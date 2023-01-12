@@ -33,6 +33,7 @@ const StartContainer = styled.div`
   height: 100vh;
   font-size: 1.5rem;
   color: white;
+  font-family: "HeirofLightBold";
 `;
 
 const MainLogo = styled(Logo)`
@@ -44,6 +45,7 @@ const MainLogo = styled(Logo)`
 const StartBtn = styled.button`
   margin-top: 15%;
   font-size: 1.5rem;
+  font-family: "HeirofLightBold";
   background-color: white;
   color: var(--color-main);
   width: 55%;

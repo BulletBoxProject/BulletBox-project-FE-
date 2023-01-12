@@ -34,5 +34,7 @@ const BulletBold = styled.div`
   align-items: center;
   color: white;
   font-size: 20px;
-  margin: 20px 0;
+  font-family: "HeirofLightBold";
+  margin-top: 1vh;
+  margin-bottom: 3vh;
 `;

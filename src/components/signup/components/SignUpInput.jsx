@@ -20,6 +20,7 @@ const SignUpInput = () => {
   const [isNickName, setIsNickName] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
   const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
+  const [isConfirmEmail, setIsConfirmEamail] = useState(false);
 
   const onChangeEmail = (e) => {
     const emailRegex =
@@ -56,9 +57,7 @@ const SignUpInput = () => {
     setPassword(value);
 
     if (!passwordRegex.test(value)) {
-      setPasswordMessage(
-        "숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!"
-      );
+      setPasswordMessage("영문자+숫자+특수문자 조합으로 8자리이상");
       setIsPassword(false);
     } else {
       setPasswordMessage("안전한 비밀번호입니다.");
@@ -82,7 +81,6 @@ const SignUpInput = () => {
   const postSignup = async (post) => {
     try {
       const data = await instanceApiV1.post("api/members/signup", post);
-      console.log(data, "1");
       if (data.data.httpStatusCode === 201) {
         alert(data.data.msg);
         return data;
@@ -109,6 +107,10 @@ const SignUpInput = () => {
     });
   };
 
+  const confirmHendler = () => {
+    setIsConfirmEamail(!isConfirmEmail);
+  };
+
   return (
     <StForm>
       <StTitle>Sign up</StTitle>
@@ -117,9 +119,23 @@ const SignUpInput = () => {
           placeholder="E-mail"
           onChange={onChangeEmail}
         ></StInputEmail>
-        <EmailBtn>인증</EmailBtn>
+        <EmailBtn
+          type="button"
+          onClick={() => {
+            confirmHendler();
+          }}
+        >
+          인증
+        </EmailBtn>
       </EmailDiv>
-      {email.length > 0 && <span>{emailMessage}</span>}
+      {/* {email.length > 0 && <span>{emailMessage}</span>} */}
+
+      {isConfirmEmail && (
+        <ComfirmDiv>
+          <StEmailConfirm placeholder="인증번호"></StEmailConfirm>
+          <EmailConfrimBtn type="button">확인</EmailConfrimBtn>
+        </ComfirmDiv>
+      )}
 
       <StInput placeholder="NickName" onChange={onChangeNickName}></StInput>
       {nickname.length > 0 && <span>{nickNameMessage}</span>}
@@ -144,6 +160,7 @@ const SignUpInput = () => {
           회원가입
         </StSignupBtn>
         <CancelBtn
+          type="button"
           onClick={() => {
             navigate("/login");
           }}
@@ -162,8 +179,8 @@ const StForm = styled.form`
   justify-content: center;
   flex-direction: column;
   background-color: white;
-  border-radius: 10px;
-  height: 53vh;
+  border-radius: 8px;
+  height: 63vh;
   width: 76%;
 `;
 const StTitle = styled.div`
@@ -174,6 +191,7 @@ const StTitle = styled.div`
   width: 30%;
   margin-bottom: 20px;
   color: var(--color-main);
+  font-family: "HeirofLightBold";
 `;
 
 const StInput = styled.input`
@@ -205,9 +223,7 @@ const EmailDiv = styled.div`
 const StInputEmail = styled.input`
   width: 74%;
   height: 6.6vh;
-  left: 80px;
-  top: 322px;
-
+  font-family: "Oleo Script";
   border: white;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   background: #d9d9d9;
@@ -216,8 +232,7 @@ const StInputEmail = styled.input`
     font-family: "Oleo Script";
     font-style: normal;
     font-weight: 800;
-    font-size: 16px;
-    line-height: 22px;
+    font-size: 1rem;
     text-align: center;
     color: #7c7c7c;
   }
@@ -246,10 +261,8 @@ const EmailBtn = styled.button`
 
 const StSignupBtn = styled.button`
   width: 46%;
-  height: 36px;
-  left: 84px;
-  top: 474px;
-  font-size: 16px;
+  height: 5vh;
+  font-size: 1rem;
   font-weight: 800;
   color: white;
   border: white;
@@ -260,14 +273,51 @@ const StSignupBtn = styled.button`
 
 const CancelBtn = styled.button`
   width: 46%;
-  height: 36px;
-  left: 188px;
-  top: 474px;
-  font-size: 16px;
+  height: 5vh;
+  font-size: 1rem;
   font-weight: 800;
   color: #7c7c7c;
   border: white;
   background: #d9d9d9;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
+`;
+
+const StEmailConfirm = styled.input`
+  width: 74%;
+  height: 4.6vh;
+  font-family: "Oleo Script";
+  border: white;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  background: #d9d9d9;
+  border-radius: 8px;
+  ::placeholder {
+    font-family: "Oleo Script";
+    font-style: normal;
+    font-weight: 800;
+    font-size: 1rem;
+    text-align: center;
+    color: #7c7c7c;
+  }
+`;
+
+const EmailConfrimBtn = styled.button`
+  margin-left: 0.5rem;
+  width: 11vw;
+  height: 4.8vh;
+  background-color: var(--color-main);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+`;
+
+const ComfirmDiv = styled.div`
+  width: 74%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 5%;
 `;

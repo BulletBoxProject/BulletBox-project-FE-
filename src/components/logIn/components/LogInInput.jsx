@@ -63,6 +63,7 @@ const LogInInput = () => {
       <br />
       <StButtonBox>
         <StSignupBtn
+          type="button"
           onClick={() => {
             navigate("/signup");
           }}
@@ -86,7 +87,7 @@ export default LogInInput;
 const StForm = styled.form`
   display: flex;
   align-items: center;
-  justify-content: center;
+  padding-top: 10%;
   flex-direction: column;
   width: 76%;
   height: 45vh;
@@ -100,6 +101,7 @@ const StTitle = styled.div`
   font-size: 1.2rem;
   width: 50%;
   color: var(--color-main);
+  font-family: "HeirofLightBold";
 `;
 
 const StInput = styled.input`
