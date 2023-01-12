@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
-import axios from "axios";
+import { instanceApiV1 } from "../../../core/api";
 
 const SignUpInput = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
-  const [nickName, setNickName] = useState("");
+  const [nickname, setNickName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
@@ -81,7 +81,7 @@ const SignUpInput = () => {
 
   const postSignup = async (post) => {
     try {
-      const data = await axios.post("/api/members/signup", post);
+      const data = await instanceApiV1.post("api/members/signup", post);
       if (data.httpStatusCode === 201) {
         alert(data.msg);
         return data;
@@ -97,7 +97,7 @@ const SignUpInput = () => {
     e.preventDefault();
     postSignup({
       email,
-      nickName,
+      nickname,
       password,
     }).then((res) => {
       if (res === undefined) {
@@ -110,27 +110,27 @@ const SignUpInput = () => {
 
   return (
     <StForm>
-      <StTitle>회원가입</StTitle>
+      <StTitle>Sign up</StTitle>
       <div>
         <StInputEmail
           placeholder="E-mail"
           onChange={onChangeEmail}
         ></StInputEmail>
-        <button>이메일인증</button>
+        <button>인증</button>
       </div>
       {email.length > 0 && <span>{emailMessage}</span>}
 
       <StInput placeholder="NickName" onChange={onChangeNickName}></StInput>
-      {nickName.length > 0 && <span>{nickNameMessage}</span>}
+      {nickname.length > 0 && <span>{nickNameMessage}</span>}
       <StInput
         placeholder="Password"
-        type="password"
+        // type="password"
         onChange={onChangePassword}
       ></StInput>
       {password.length > 0 && <span>{passwordMessage}</span>}
       <StInput
         placeholder="Re_Password"
-        type="password"
+        // type="password"
         onChange={onChangePasswordConfirm}
       ></StInput>
       {passwordConfirm.length > 0 && <span>{passwordConfirmMessage}</span>}
@@ -140,7 +140,7 @@ const SignUpInput = () => {
           disabled={!(isEmail && isNickName && isPassword && isPasswordConfirm)}
           onClick={onSubmitBtn}
         >
-          확인
+          회원가입
         </StSignupBtn>
         <StSignupBtn
           onClick={() => {
@@ -160,7 +160,7 @@ const StForm = styled.form`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  border: 1px solid black;
+  background-color: white;
   border-radius: 10px;
   padding: 25px;
   height: 300px;
@@ -169,19 +169,49 @@ const StTitle = styled.div`
   font-size: 15px;
   width: 60px;
   margin-bottom: 20px;
-  color: black;
+  color: var(--color-main);
 `;
 
 const StInput = styled.input`
-  width: 88%;
-  padding: 5px;
-  margin: 10px 0;
+  width: 200px;
+  height: 48px;
+  left: 80px;
+  top: 322px;
+  margin-top: 10px;
+  border: white;
+
+  background: #d9d9d9;
+  border-radius: 8px;
+  ::placeholder {
+    font-family: "Oleo Script";
+    font-style: normal;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    color: #7c7c7c;
+  }
 `;
 
 const StInputEmail = styled.input`
-  width: 50%;
-  padding: 5px;
-  margin: 10px;
+  width: 150px;
+  height: 48px;
+  left: 80px;
+  top: 322px;
+  margin-top: 10px;
+  border: white;
+
+  background: #d9d9d9;
+  border-radius: 8px;
+  ::placeholder {
+    font-family: "Oleo Script";
+    font-style: normal;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    color: #7c7c7c;
+  }
 `;
 
 const StSignupBtn = styled.button`
