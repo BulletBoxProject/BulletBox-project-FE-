@@ -69,7 +69,7 @@ const HomeMenuBtn = styled(homeMenuIcon)`
   height: 24px;
 `;
 const ButtonTitle = styled.span`
-  font-family: "Oleo Script", fantasy;
+  font-family: "Oleo Script";
   font-size: 10px;
 `;
 const Dailylog = styled(dailyLogIcon)`

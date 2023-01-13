@@ -22,12 +22,15 @@ const ToggleDiv = styled.div`
   font-size: 12px;
   width: 3em;
   height: 1.5em;
-  background-color: ${({ toggleState }) => (toggleState ? "green" : "red")};
+  /* background-color: ${({ toggleState }) =>
+    toggleState ? "green" : "red"}; */
+  background-color: var(--color-dark-gray);
   border: 1px solid #eeeeee;
   border-radius: 10px;
   display: flex;
   justify-content: ${({ toggleState }) =>
     toggleState ? "flex-end" : "flex-start"};
+  align-items: center;
 `;
 const ToggleButton = styled.button`
   width: 1.3em;
