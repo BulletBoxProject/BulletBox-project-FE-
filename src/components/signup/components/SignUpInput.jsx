@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
-import axios from "axios";
+import { instanceApiV1 } from "../../../core/api";
+import { encrypt } from "../../../core/encrypt";
 
 const SignUpInput = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
-  const [nickName, setNickName] = useState("");
+  const [nickname, setNickName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [emailConfirm, setemailConfirm] = useState("");
+  const [emailConfirmCheck, setemailConfirmCheck] = useState("");
 
   const [emailMessage, setEmailMessage] = useState("");
   const [nickNameMessage, setNickNameMessage] = useState("");
@@ -20,6 +23,7 @@ const SignUpInput = () => {
   const [isNickName, setIsNickName] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
   const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
+  const [isConfirmEmail, setIsConfirmEamail] = useState(false);
 
   const onChangeEmail = (e) => {
     const emailRegex =
@@ -56,9 +60,7 @@ const SignUpInput = () => {
     setPassword(value);
 
     if (!passwordRegex.test(value)) {
-      setPasswordMessage(
-        "숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!"
-      );
+      setPasswordMessage("영문자+숫자+특수문자 조합으로 8자리이상");
       setIsPassword(false);
     } else {
       setPasswordMessage("안전한 비밀번호입니다.");
@@ -81,12 +83,16 @@ const SignUpInput = () => {
 
   const postSignup = async (post) => {
     try {
-      const data = await axios.post("/api/members/signup", post);
-      if (data.httpStatusCode === 201) {
-        alert(data.msg);
+      // console.log(post, "1");
+      // const password = encrypt(post.password);
+      // const userInfo = { email, password };
+      // console.log(password);
+      const data = await instanceApiV1.post("api/members/signup", post);
+      if (data.data.httpStatusCode === 201) {
+        alert(data.data.msg);
         return data;
       } else {
-        alert("회원가입에 실패하셨습니다.");
+        alert("회원가입에 실패했습니다.");
       }
     } catch (error) {
       console.log(error);
@@ -97,7 +103,7 @@ const SignUpInput = () => {
     e.preventDefault();
     postSignup({
       email,
-      nickName,
+      nickname,
       password,
     }).then((res) => {
       if (res === undefined) {
@@ -108,20 +114,91 @@ const SignUpInput = () => {
     });
   };
 
+  const postconfirm = async (post) => {
+    setIsConfirmEamail(!isConfirmEmail);
+    try {
+      console.log(post.email, "1");
+      const data = await instanceApiV1.post(
+        `api/members/signup/email-validate?email=${post.email}`
+      );
+
+      if (data.data.httpStatusCode === 200) {
+        alert(data.data.msg);
+        setemailConfirmCheck(data.data.data);
+        console.log(data.data.data);
+        return data;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const confirmHendler = () => {
+    postconfirm({
+      email,
+    });
+    // .then((res) => {
+    //   if (res === undefined) {
+    //     alert("인증번호가 전송되었습니다.");
+    //   } else {
+    //     alert("사용 불가능한 이메일입니다.");
+    //   }
+    // });
+  };
+  const onChangeEmailConfirm = (e) => {
+    setemailConfirm(e.target.value);
+  };
+
+  const emailConfirmHandler = () => {
+    console.log(emailConfirm);
+    console.log(emailConfirmCheck);
+    if (emailConfirm === emailConfirmCheck) {
+      alert("인증성공 하셨습니다.");
+    } else {
+      alert("인증실패 하셨습니다.");
+    }
+  };
+
   return (
     <StForm>
-      <StTitle>회원가입</StTitle>
-      <div>
+      <StTitle>Sign up</StTitle>
+      <EmailDiv>
         <StInputEmail
           placeholder="E-mail"
           onChange={onChangeEmail}
         ></StInputEmail>
-        <button>이메일인증</button>
-      </div>
-      {email.length > 0 && <span>{emailMessage}</span>}
+        <EmailBtn
+          type="button"
+          onClick={() => {
+            confirmHendler();
+          }}
+        >
+          인증
+        </EmailBtn>
+      </EmailDiv>
+      {/* {email.length > 0 && <span>{emailMessage}</span>} */}
+
+      {isConfirmEmail && (
+        <ComfirmDiv>
+          <StEmailConfirm
+            placeholder="인증번호"
+            onChange={(e) => {
+              onChangeEmailConfirm(e);
+            }}
+          ></StEmailConfirm>
+          <EmailConfrimBtn
+            type="button"
+            onClick={() => {
+              emailConfirmHandler();
+            }}
+          >
+            확인
+          </EmailConfrimBtn>
+        </ComfirmDiv>
+      )}
 
       <StInput placeholder="NickName" onChange={onChangeNickName}></StInput>
-      {nickName.length > 0 && <span>{nickNameMessage}</span>}
+      {nickname.length > 0 && <span>{nickNameMessage}</span>}
       <StInput
         placeholder="Password"
         type="password"
@@ -140,15 +217,16 @@ const SignUpInput = () => {
           disabled={!(isEmail && isNickName && isPassword && isPasswordConfirm)}
           onClick={onSubmitBtn}
         >
-          확인
+          회원가입
         </StSignupBtn>
-        <StSignupBtn
+        <CancelBtn
+          type="button"
           onClick={() => {
             navigate("/login");
           }}
         >
           취소
-        </StSignupBtn>
+        </CancelBtn>
       </StButtonBox>
     </StForm>
   );
@@ -160,35 +238,151 @@ const StForm = styled.form`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  border: 1px solid black;
-  border-radius: 10px;
-  padding: 25px;
-  height: 300px;
+  background-color: white;
+  border-radius: 8px;
+  height: 63vh;
+  width: 76%;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 `;
 const StTitle = styled.div`
-  font-size: 15px;
-  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  width: 30%;
   margin-bottom: 20px;
-  color: black;
+  color: var(--color-main);
+  font-family: "HeirofLightBold";
 `;
 
 const StInput = styled.input`
-  width: 88%;
-  padding: 5px;
-  margin: 10px 0;
+  width: 74%;
+  height: 6.6vh;
+  margin-top: 5%;
+  font-size: 1rem;
+  border: white;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  background: #d9d9d9;
+  border-radius: 8px;
+  font-family: "Oleo Script";
+  ::placeholder {
+    font-family: "Oleo Script";
+    font-style: normal;
+    font-weight: 800;
+    font-size: 1rem;
+    text-align: center;
+    color: #7c7c7c;
+  }
+`;
+
+const EmailDiv = styled.div`
+  width: 74%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const StInputEmail = styled.input`
-  width: 50%;
-  padding: 5px;
-  margin: 10px;
+  width: 74%;
+  height: 6.6vh;
+  font-size: 1rem;
+  font-family: "Oleo Script";
+  border: white;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  background: #d9d9d9;
+  border-radius: 8px;
+  ::placeholder {
+    font-family: "Oleo Script";
+    font-style: normal;
+    font-weight: 800;
+    font-size: 1rem;
+    text-align: center;
+    color: #7c7c7c;
+  }
+`;
+
+const StButtonBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 5%;
+  width: 74%;
+`;
+
+const EmailBtn = styled.button`
+  margin-left: 0.5rem;
+  width: 11vw;
+  height: 6.8vh;
+  font-size: 1rem;
+  background-color: var(--color-main);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 `;
 
 const StSignupBtn = styled.button`
-  width: 70px;
-  height: 30px;
-  margin-right: 5px;
+  width: 46%;
+  height: 5vh;
+  font-size: 1rem;
+  font-weight: 800;
+  color: white;
+  border: white;
+  background: var(--color-main);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
 `;
-const StButtonBox = styled.div`
-  margin-top: 10px;
+
+const CancelBtn = styled.button`
+  width: 46%;
+  height: 5vh;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #7c7c7c;
+  border: white;
+  background: #d9d9d9;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+`;
+
+const StEmailConfirm = styled.input`
+  width: 74%;
+  height: 4.6vh;
+  font-family: "Oleo Script";
+  border: white;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  background: #d9d9d9;
+  border-radius: 8px;
+  ::placeholder {
+    font-family: "Oleo Script";
+    font-style: normal;
+    font-weight: 800;
+    font-size: 1rem;
+    text-align: center;
+    color: #7c7c7c;
+  }
+`;
+
+const EmailConfrimBtn = styled.button`
+  margin-left: 0.5rem;
+  width: 11vw;
+  height: 4.8vh;
+  background-color: var(--color-main);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+`;
+
+const ComfirmDiv = styled.div`
+  width: 74%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 5%;
+  font-size: 1rem;
 `;

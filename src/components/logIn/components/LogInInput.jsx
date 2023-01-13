@@ -1,35 +1,36 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { baseURLApiV1 } from "../../../core/api";
+import { encrypt } from "../../../core/encrypt";
 
 const LogInInput = () => {
   const navigate = useNavigate();
-  const [userid, setUserId] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const postLogin = async (post) => {
     try {
-      const data = await axios.post("/api/members/login", post);
-      if (data.httpStatusCode === 200) {
+      // const password = encrypt(post.password);
+      // const userInfo = { email, password };
+      // console.log(password);
+      const data = await baseURLApiV1.post("api/members/login", post);
+      if (data.data.httpStatusCode === 200) {
         return data;
-      } else {
-        alert("아이디, 비밀번호를 잘못입력하셨습니다.");
       }
     } catch (error) {
       console.log(error);
+      alert("아이디, 비밀번호를 잘못입력하셨습니다.");
     }
   };
 
-  const onSubmitBtn = (e) => {
-    e.preventDefault();
-    if (userid === "" || password === "") {
+  const loginHandler = () => {
+    if (email === "" || password === "") {
       alert("아이디, 비밀번호를 확인해주세요.");
       return;
-    } else {
     }
     postLogin({
-      userid,
+      email,
       password,
     }).then((res) => {
       if (res === undefined) {
@@ -50,7 +51,7 @@ const LogInInput = () => {
         type="email"
         onChange={(e) => {
           const { value } = e.target;
-          setUserId(value);
+          setEmail(value);
         }}
       ></StInput>
       <StInput
@@ -66,6 +67,7 @@ const LogInInput = () => {
       <br />
       <StButtonBox>
         <StSignupBtn
+          type="button"
           onClick={() => {
             navigate("/signup");
           }}
@@ -73,8 +75,9 @@ const LogInInput = () => {
           회원가입
         </StSignupBtn>
         <StLoginBtn
+          type="button"
           onClick={() => {
-            onSubmitBtn();
+            loginHandler();
           }}
         >
           로그인
@@ -88,39 +91,38 @@ export default LogInInput;
 const StForm = styled.form`
   display: flex;
   align-items: center;
-  justify-content: center;
+  padding-top: 10%;
   flex-direction: column;
-  position: absolute;
-  width: 272px;
-  height: 328px;
-  left: 44px;
-  top: 232px;
+  width: 76%;
+  height: 45vh;
   background: white;
   border-radius: 8px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 `;
 const StTitle = styled.div`
-  font-size: 15px;
-  width: 50px;
-  margin-bottom: 20px;
-  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  width: 50%;
+  color: var(--color-main);
+  font-family: "HeirofLightBold";
 `;
 
 const StInput = styled.input`
-  width: 200px;
-  height: 48px;
-  left: 80px;
-  top: 322px;
-  margin-top: 10px;
+  width: 74%;
+  height: 6.6vh;
+  margin-top: 7%;
   border: white;
-
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  font-family: "Oleo Script";
   background: #d9d9d9;
   border-radius: 8px;
   ::placeholder {
     font-family: "Oleo Script";
     font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 22px;
+    font-weight: 800;
+    font-size: 1rem;
     text-align: center;
     color: #7c7c7c;
   }
@@ -130,8 +132,8 @@ const StButtonBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 200px;
-  margin-top: 10px;
+  width: 74%;
+  margin-top: 6%;
   font-size: 16px;
 `;
 
@@ -154,6 +156,9 @@ const StLoginBtn = styled.button`
   height: 36px;
   left: 188px;
   top: 474px;
+  font-size: 16px;
+  font-weight: 800;
+  color: #7c7c7c;
   border: white;
   background: #d9d9d9;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);

@@ -7,16 +7,17 @@ import Main from "../pages/Main";
 import SignUp from "../pages/SignUp";
 import DailyLog from "../pages/DailyLog";
 import MonthlyLog from "../pages/MonthlyLog";
+import Start from "../pages/Start";
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<LogIn />} />
-        <Route path="signup" element={<SignUp />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/start" element={<Start />} />
         <Route element={<Layout />}>
           <Route path="/" element={<Main />} />
-
           <Route path="/dailys" element={<DailyLog />} />
           <Route path="/monthlys" element={<MonthlyLog />} />
         </Route>

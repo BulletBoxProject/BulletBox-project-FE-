@@ -13,9 +13,9 @@ function Modal({ onClose }) {
   return (
     <Overlay>
       <ModalWrap ref={modalRef}>
-        <CloseButton onClick={CloseHandle}> 
+        <CloseButton onClick={CloseHandle}>
           <i className="fa-solid fa-xmark"></i>
-        </CloseButton> 
+        </CloseButton>
         <h1>사용메뉴얼(도움말)</h1>
         <Contents>
           <h5>
