@@ -1,13 +1,18 @@
 import React from "react";
+import styled from "styled-components";
 
 import DailyLogContainer from "../components/dailyLog/screen/DailyLogContainer";
 
 const DailyLog = () => {
   return (
-    <div>
+    <Container>
       <DailyLogContainer />
-    </div>
+    </Container>
   );
 };
 
 export default DailyLog;
+
+const Container = styled.div`
+  height: 85vh;
+`;

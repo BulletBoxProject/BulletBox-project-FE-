@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+import { RxTriangleDown } from "react-icons/rx";
+
 const SelectCategory = () => {
   const [showCategory, setShowCategory] = useState(false);
   const categoryShowHandler = () => {
@@ -10,7 +12,7 @@ const SelectCategory = () => {
     <div>
       <SelectCategoryDiv>
         <CategoryButton type="button" onClick={categoryShowHandler}>
-          전체
+          전체 <RxTriangleDown />
         </CategoryButton>
         {showCategory ? (
           <CategoryList>
@@ -30,18 +32,18 @@ const SelectCategoryDiv = styled.div`
   position: relative;
 `;
 const CategoryButton = styled.button`
-  width: 3.5em;
-  height: 1.8em;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 4em;
+  height: 2em;
   border-radius: 5px;
-  border: 1px solid #bbbbbb;
+  border: 0;
   background-color: white;
-  &:hover {
-    background-color: #efefef;
-  }
 `;
 const CategoryList = styled.div`
   position: absolute;
-  left: -19.5px;
+  left: -21px;
   border: 1px solid gray;
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.85);

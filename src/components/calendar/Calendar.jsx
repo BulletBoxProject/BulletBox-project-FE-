@@ -23,6 +23,41 @@ const Calendarcontainer = styled.div`
     line-height: 1.125em;
     margin-left: 3%;
   }
+  .react-calendar__navigation {
+    display: flex;
+    width: 80%;
+    margin: 12px !important;
+  }
+  .react-calendar__navigation__label > span {
+    width: 100px !important;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .react-calendar__month-view__weekdays {
+    height: 30px !important;
+  }
+  .react-calendar__month-view__weekdays__weekday {
+    background-color: white !important;
+    border-top: 1px solid rgba(240, 161, 59, 0.5);
+    border-left: 1px solid rgba(240, 161, 59, 0.5);
+    box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.1);
+    padding: 5px 4px !important;
+    font-size: 14px;
+  }
+  .react-calendar__month-view__days {
+    margin-top: 5px !important;
+    & > :active,
+    & > :hover {
+      border: 0 !important;
+      background-color: rgba(240, 161, 59, 0.2);
+    }
+  }
+  .react-calendar__month-view__days__day {
+    display: flex !important;
+    align-items: flex-start !important;
+    height: 48px !important;
+    padding-top: 10px;
+  }
   .react-calendar--doubleView {
     width: 700px;
   }
