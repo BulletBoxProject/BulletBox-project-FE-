@@ -6,6 +6,7 @@ import LogIn from "../pages/LogIn";
 import Main from "../pages/Main";
 import SignUp from "../pages/SignUp";
 import DailyLog from "../pages/DailyLog";
+import AddDailyLog from "../pages/AddDailyLog";
 import MonthlyLog from "../pages/MonthlyLog";
 import Start from "../pages/Start";
 
@@ -19,6 +20,7 @@ const Router = () => {
         <Route element={<Layout />}>
           <Route path="/" element={<Main />} />
           <Route path="/dailys" element={<DailyLog />} />
+          <Route path="/dailys/add" element={<AddDailyLog />} />
           <Route path="/monthlys" element={<MonthlyLog />} />
         </Route>
       </Routes>

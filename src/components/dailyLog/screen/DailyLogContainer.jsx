@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import NavigationMenu from "../../common/NavigationMenu";
 
@@ -7,6 +8,7 @@ import SelectCategory from "../../common/SelectCategory";
 import ToggleSwitch from "../../common/ToggleSwitch";
 
 import { ReactComponent as moreIcon } from "../../../img/navi/more.svg";
+import { BsFillPlusCircleFill } from "react-icons/bs";
 
 import { ReactComponent as todoBullet } from "../../../img/bullet/todo-1.svg";
 import { ReactComponent as checkBullet } from "../../../img/bullet/check-2.svg";
@@ -17,6 +19,7 @@ import { ReactComponent as importantBullet } from "../../../img/bullet/asterisk-
 import { ReactComponent as favoriteBullet } from "../../../img/bullet/star-7.svg";
 
 const DailyLogContainer = () => {
+  const navigate = useNavigate();
   const day = ["일", "월", "화", "수", "목", "금", "토"];
   const today = `${new Date().getFullYear()} / ${
     new Date().getMonth() + 1
@@ -45,6 +48,14 @@ const DailyLogContainer = () => {
             </OptionButton>
           </MainBulletTodo>
         </BulletTodoCard>
+        <AddButtonDiv>
+          <AddButtonButton
+            type="button"
+            onClick={() => navigate("/dailys/add")}
+          >
+            <AddTodoIcon />
+          </AddButtonButton>
+        </AddButtonDiv>
       </TodoBulletDiv>
     </Container>
   );
@@ -82,7 +93,7 @@ const TodoBulletDiv = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 70vh;
+  min-height: 71vh;
   gap: 10px;
 `;
 const BulletTodoCard = styled.div`
@@ -108,6 +119,24 @@ const OptionButton = styled.button`
   border: 0;
 `;
 const MoreIcon = styled(moreIcon)`
+  width: 24px;
+  height: 24px;
+`;
+const AddButtonDiv = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+const AddButtonButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  background-color: transparent;
+`;
+const AddTodoIcon = styled(BsFillPlusCircleFill)`
+  fill: var(--color-main);
   width: 24px;
   height: 24px;
 `;

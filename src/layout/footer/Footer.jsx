@@ -44,7 +44,7 @@ const FooterDiv = styled.div`
 const Button = styled.button`
   position: absolute;
   border-radius: 60%;
-  background-color: transparent;
+  background-color: white;
   border: white;
   -webkit-tap-highlight-color: transparent !important;
   :focus {

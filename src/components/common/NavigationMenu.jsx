@@ -50,6 +50,7 @@ const ButtonGroup = styled.div`
 const Button = styled.button`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   color: var(--color-dark-gray);
   padding: 3px 0;
