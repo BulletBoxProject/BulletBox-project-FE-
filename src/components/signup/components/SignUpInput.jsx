@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
 import { instanceApiV1 } from "../../../core/api";
@@ -26,57 +26,61 @@ const SignUpInput = () => {
   // const [readonly, setReadOnly] = useState(false);
   // const [confirmReadOnly, setConfirmReadOnly] = useState(false);
 
-  const onChangeEmail = (e) => {
+  const onChangeEmail = useCallback((e) => {
     const emailRegex =
       /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-    const value = e.target.value;
-    setEmail(value);
-    if (!emailRegex.test(value)) {
+    const email = e.target.value;
+    setEmail(email);
+    if (!emailRegex.test(email)) {
       setEmailMessage("올바른 이메일 형식이 아닙니다.");
       setIsEmail(false);
     } else {
       setEmailMessage("올바른 이메일 형식입니다.");
       setIsEmail(true);
     }
-  };
-  const onChangeNickName = (e) => {
+  }, []);
+
+  const onChangeNickName = useCallback((e) => {
     const nickNameRegex = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$/;
-    const value = e.target.value;
-    setNickName(value);
-    if (!nickNameRegex.test(value)) {
+    const nickname = e.target.value;
+    setNickName(nickname);
+    if (!nickNameRegex.test(nickname)) {
       setNickNameMessage(`올바른 닉네임 형식이 아닙니다.`);
       setIsNickName(false);
     } else {
       setNickNameMessage(`올바른 닉네임 형식입니다.`);
       setIsNickName(true);
     }
-  };
+  }, []);
 
-  const onChangePassword = (e) => {
+  const onChangePassword = useCallback((e) => {
     const passwordRegex =
       /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
-    const value = e.target.value;
-    setPassword(value);
-    if (!passwordRegex.test(value)) {
+    const password = e.target.value;
+    setPassword(password);
+    if (!passwordRegex.test(password)) {
       setPasswordMessage("영문자+숫자+특수문자 조합으로 8자리이상");
       setIsPassword(false);
     } else {
       setPasswordMessage("안전한 비밀번호입니다.");
       setIsPassword(true);
     }
-  };
+  }, []);
 
-  const onChangePasswordConfirm = (e) => {
-    const value = e.target.value;
-    setPasswordConfirm(value);
-    if (password === value) {
-      setPasswordConfirmMessage("비밀번호가 일치합니다.");
-      setIsPasswordConfirm(true);
-    } else {
-      setPasswordConfirmMessage("비밀번호가 틀려요. 다시 확인해주세요!");
-      setIsPasswordConfirm(false);
-    }
-  };
+  const onChangePasswordConfirm = useCallback(
+    (e) => {
+      const passwordcheck = e.target.value;
+      setPasswordConfirm(passwordcheck);
+      if (password === passwordcheck) {
+        setPasswordConfirmMessage("비밀번호가 일치합니다.");
+        setIsPasswordConfirm(true);
+      } else {
+        setPasswordConfirmMessage("비밀번호가 틀려요. 다시 확인해주세요!");
+        setIsPasswordConfirm(false);
+      }
+    },
+    [password]
+  );
 
   const postSignup = async (post) => {
     try {
@@ -189,7 +193,7 @@ const SignUpInput = () => {
           onChange={onChangeEmail}
           // readOnly={readonly}
         ></StInputEmail>
-        <EmailBtn
+        {/* <EmailBtn
           type="button"
           // onClick={() => {
           //   confirmHendler();
@@ -197,9 +201,9 @@ const SignUpInput = () => {
           // disabled={readonly}
         >
           인증
-        </EmailBtn>
+        </EmailBtn> */}
       </EmailDiv>
-      {/* {email.length > 0 && <span>{emailMessage}</span>} */}
+      {email.length > 0 && <span>{emailMessage}</span>}
 
       {/* {isConfirmEmail && (
       <ComfirmDiv>
