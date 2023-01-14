@@ -34,6 +34,7 @@ const StartContainer = styled.div`
   font-size: 1.5rem;
   color: white;
   font-family: "HeirofLightBold";
+
 `;
 
 const MainLogo = styled(Logo)`

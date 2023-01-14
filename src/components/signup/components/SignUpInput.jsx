@@ -24,6 +24,7 @@ const SignUpInput = () => {
   const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
   const [isConfirmEmail, setIsConfirmEamail] = useState(false);
   const [readonly, setReadOnly] = useState(false);
+  const [confirmReadOnly, setConfirmReadOnly] = useState(false);
 
   const onChangeEmail = (e) => {
     const emailRegex =
@@ -47,7 +48,6 @@ const SignUpInput = () => {
       setIsNickName(false);
     } else {
       setNickNameMessage(`올바른 닉네임 형식입니다.`);
-      setIsNickName(true);
     }
   };
 
@@ -129,11 +129,13 @@ const SignUpInput = () => {
   };
 
   const confirmHendler = () => {
+    setReadOnly(true);
     postconfirm({
       email,
     }).then((res) => {
       if (res === undefined) {
-        alert("요청실패 했습니다.");
+        alert("인증요청실패 했습니다.");
+        setReadOnly(false);
       } else {
         setReadOnly(true);
       }
@@ -159,14 +161,22 @@ const SignUpInput = () => {
         return data;
       }
     } catch (error) {
-      alert("인증실패 하셨습니다.");
       console.log("error");
     }
   };
 
   const emailConfirmHandler = () => {
+    setConfirmReadOnly(true);
     emailconfirm({
       verifyCode,
+    }).then((res) => {
+      if (res === undefined) {
+        alert("인증실패 했습니다.");
+        setConfirmReadOnly(false);
+      } else {
+        setConfirmReadOnly(true);
+        setIsEmail(true);
+      }
     });
   };
 
@@ -184,6 +194,7 @@ const SignUpInput = () => {
           onClick={() => {
             confirmHendler();
           }}
+          disabled={readonly}
         >
           인증
         </EmailBtn>
@@ -193,12 +204,14 @@ const SignUpInput = () => {
       {isConfirmEmail && (
         <ComfirmDiv>
           <StEmailConfirm
+            readOnly={confirmReadOnly}
             placeholder="인증번호"
             onChange={(e) => {
               onChangeEmailConfirm(e);
             }}
           ></StEmailConfirm>
           <EmailConfrimBtn
+            disabled={confirmReadOnly}
             type="button"
             onClick={() => {
               emailConfirmHandler();
