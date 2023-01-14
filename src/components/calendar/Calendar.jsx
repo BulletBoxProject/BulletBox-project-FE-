@@ -3,11 +3,15 @@ import Calendar from "react-calendar";
 import styled from "styled-components";
 
 const BulletCalendar = () => {
-  const [value, onChange] = useState(new Date());
+  // const [value, onChange] = useState(new Date());
+
+  const dateChangeHandler = (e) => {
+    console.log(e);
+  };
 
   return (
     <Calendarcontainer>
-      <Calendar calendarType="US" onChange={onChange} value={value} />
+      <Calendar calendarType="US" onChange={dateChangeHandler} />
     </Calendarcontainer>
   );
 };

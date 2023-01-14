@@ -38,12 +38,13 @@ const FooterDiv = styled.div`
   right: 0;
   margin-bottom: 5%;
   margin-right: 7%;
+  background-color: white;
 `;
 
 const Button = styled.button`
   position: absolute;
   border-radius: 60%;
-  background-color: transparent;
+  background-color: white;
   border: white;
   -webkit-tap-highlight-color: transparent !important;
   :focus {

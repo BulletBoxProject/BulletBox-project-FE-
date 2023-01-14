@@ -50,6 +50,7 @@ const ButtonGroup = styled.div`
 const Button = styled.button`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   color: var(--color-dark-gray);
   padding: 3px 0;
@@ -69,7 +70,7 @@ const HomeMenuBtn = styled(homeMenuIcon)`
   height: 24px;
 `;
 const ButtonTitle = styled.span`
-  font-family: "Oleo Script", fantasy;
+  font-family: "Oleo Script";
   font-size: 10px;
 `;
 const Dailylog = styled(dailyLogIcon)`

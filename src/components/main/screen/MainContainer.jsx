@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import uuid from "react-uuid";
+
+import { instanceApiV1 } from "../../../core/api";
 
 import NavigationMenu from "../../common/NavigationMenu";
 
@@ -12,9 +14,17 @@ import BulletCalendar from "../../calendar/Calendar";
 import MainInputCard from "../components/MainInputCard";
 import MainEditCard from "../components/MainEditCard";
 
+export const BACK_API = process.env.REACT_APP_BACKAPI;
+
 const MainContainer = () => {
+  console.log(BACK_API);
+  const [date, setDate] = useState(new Date());
   const bulletList = useSelector((state) => state.bullet_main.bulletList);
   console.log("리듀서 상태 저장 값", bulletList);
+
+  useEffect(() => {
+    instanceApiV1.get("/main");
+  }, []);
 
   return (
     <Container>
