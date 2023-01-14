@@ -11,8 +11,7 @@ const SignUpInput = () => {
   const [nickname, setNickName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [emailConfirm, setemailConfirm] = useState("");
-  const [emailConfirmCheck, setemailConfirmCheck] = useState("");
+  const [verifyCode, setVerifyCode] = useState("");
 
   const [emailMessage, setEmailMessage] = useState("");
   const [nickNameMessage, setNickNameMessage] = useState("");
@@ -24,13 +23,14 @@ const SignUpInput = () => {
   const [isPassword, setIsPassword] = useState(false);
   const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
   const [isConfirmEmail, setIsConfirmEamail] = useState(false);
+  const [readonly, setReadOnly] = useState(false);
+  const [confirmReadOnly, setConfirmReadOnly] = useState(false);
 
   const onChangeEmail = (e) => {
     const emailRegex =
       /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
     const value = e.target.value;
     setEmail(value);
-
     if (!emailRegex.test(value)) {
       setEmailMessage("올바른 이메일 형식이 아닙니다.");
       setIsEmail(false);
@@ -43,13 +43,11 @@ const SignUpInput = () => {
     const nickNameRegex = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$/;
     const value = e.target.value;
     setNickName(value);
-
     if (!nickNameRegex.test(value)) {
       setNickNameMessage(`올바른 닉네임 형식이 아닙니다.`);
       setIsNickName(false);
     } else {
       setNickNameMessage(`올바른 닉네임 형식입니다.`);
-      setIsNickName(true);
     }
   };
 
@@ -58,7 +56,6 @@ const SignUpInput = () => {
       /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
     const value = e.target.value;
     setPassword(value);
-
     if (!passwordRegex.test(value)) {
       setPasswordMessage("영문자+숫자+특수문자 조합으로 8자리이상");
       setIsPassword(false);
@@ -71,7 +68,6 @@ const SignUpInput = () => {
   const onChangePasswordConfirm = (e) => {
     const value = e.target.value;
     setPasswordConfirm(value);
-
     if (password === value) {
       setPasswordConfirmMessage("비밀번호가 일치합니다.");
       setIsPasswordConfirm(true);
@@ -115,17 +111,16 @@ const SignUpInput = () => {
   };
 
   const postconfirm = async (post) => {
-    setIsConfirmEamail(!isConfirmEmail);
     try {
-      console.log(post.email, "1");
       const data = await instanceApiV1.post(
-        `api/members/signup/email-validate?email=${post.email}`
+        `api/members/signup/email-validate`,
+        post
       );
 
       if (data.data.httpStatusCode === 200) {
         alert(data.data.msg);
-        setemailConfirmCheck(data.data.data);
-        console.log(data.data.data);
+        setVerifyCode(data.data.data);
+        setIsConfirmEamail(true);
         return data;
       }
     } catch (error) {
@@ -134,29 +129,55 @@ const SignUpInput = () => {
   };
 
   const confirmHendler = () => {
+    setReadOnly(true);
     postconfirm({
       email,
+    }).then((res) => {
+      if (res === undefined) {
+        alert("인증요청실패 했습니다.");
+        setReadOnly(false);
+      } else {
+        setReadOnly(true);
+      }
     });
-    // .then((res) => {
-    //   if (res === undefined) {
-    //     alert("인증번호가 전송되었습니다.");
-    //   } else {
-    //     alert("사용 불가능한 이메일입니다.");
-    //   }
-    // });
   };
+
   const onChangeEmailConfirm = (e) => {
-    setemailConfirm(e.target.value);
+    setVerifyCode(e.target.value);
+  };
+
+  const emailconfirm = async (post) => {
+    try {
+      console.log(post);
+      const data = await instanceApiV1.post(
+        `api/members/signup/verifycode`,
+        post
+      );
+
+      if (data.data.httpStatusCode === 200) {
+        alert(data.data.msg);
+        setVerifyCode(data.data.data);
+        console.log(data.data.data);
+        return data;
+      }
+    } catch (error) {
+      console.log("error");
+    }
   };
 
   const emailConfirmHandler = () => {
-    console.log(emailConfirm);
-    console.log(emailConfirmCheck);
-    if (emailConfirm === emailConfirmCheck) {
-      alert("인증성공 하셨습니다.");
-    } else {
-      alert("인증실패 하셨습니다.");
-    }
+    setConfirmReadOnly(true);
+    emailconfirm({
+      verifyCode,
+    }).then((res) => {
+      if (res === undefined) {
+        alert("인증실패 했습니다.");
+        setConfirmReadOnly(false);
+      } else {
+        setConfirmReadOnly(true);
+        setIsEmail(true);
+      }
+    });
   };
 
   return (
@@ -166,12 +187,14 @@ const SignUpInput = () => {
         <StInputEmail
           placeholder="E-mail"
           onChange={onChangeEmail}
+          readOnly={readonly}
         ></StInputEmail>
         <EmailBtn
           type="button"
           onClick={() => {
             confirmHendler();
           }}
+          disabled={readonly}
         >
           인증
         </EmailBtn>
@@ -181,12 +204,14 @@ const SignUpInput = () => {
       {isConfirmEmail && (
         <ComfirmDiv>
           <StEmailConfirm
+            readOnly={confirmReadOnly}
             placeholder="인증번호"
             onChange={(e) => {
               onChangeEmailConfirm(e);
             }}
           ></StEmailConfirm>
           <EmailConfrimBtn
+            disabled={confirmReadOnly}
             type="button"
             onClick={() => {
               emailConfirmHandler();
