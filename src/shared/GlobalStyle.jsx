@@ -24,8 +24,8 @@ body, div, button{
   padding: 0;
   margin: 0;
   font-size: 10px;
-  max-width: 500px;
-  max-height: 1100px;
+  max-width: 400px;
+  max-height: 900px;
 }
 
 button {

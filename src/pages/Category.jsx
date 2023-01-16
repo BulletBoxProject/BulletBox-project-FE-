@@ -1,16 +1,16 @@
 import React from "react";
-import StartPage from "../components/startpage/StartPage";
 import styled from "styled-components";
+import CategoryContainer from "../components/category/screen/CategoryContainer";
 
-const Start = () => {
+const Category = () => {
   return (
     <Container>
-      <StartPage />
+      <CategoryContainer />
     </Container>
   );
 };
 
-export default Start;
+export default Category;
 
 const Container = styled.div`
   height: 85vh;

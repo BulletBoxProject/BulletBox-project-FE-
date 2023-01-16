@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
 import { instanceApiV1 } from "../../../core/api";
-import { encrypt } from "../../../core/encrypt";
+// import { encrypt } from "../../../core/encrypt";
 
 const SignUpInput = () => {
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ const SignUpInput = () => {
   const [nickname, setNickName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [verifyCode, setVerifyCode] = useState("");
+  // const [verifyCode, setVerifyCode] = useState("");
 
   const [emailMessage, setEmailMessage] = useState("");
   const [nickNameMessage, setNickNameMessage] = useState("");
@@ -22,60 +22,65 @@ const SignUpInput = () => {
   const [isNickName, setIsNickName] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
   const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
-  const [isConfirmEmail, setIsConfirmEamail] = useState(false);
-  const [readonly, setReadOnly] = useState(false);
-  const [confirmReadOnly, setConfirmReadOnly] = useState(false);
+  // const [isConfirmEmail, setIsConfirmEamail] = useState(false);
+  // const [readonly, setReadOnly] = useState(false);
+  // const [confirmReadOnly, setConfirmReadOnly] = useState(false);
 
-  const onChangeEmail = (e) => {
+  const onChangeEmail = useCallback((e) => {
     const emailRegex =
       /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-    const value = e.target.value;
-    setEmail(value);
-    if (!emailRegex.test(value)) {
+    const email = e.target.value;
+    setEmail(email);
+    if (!emailRegex.test(email)) {
       setEmailMessage("올바른 이메일 형식이 아닙니다.");
       setIsEmail(false);
     } else {
       setEmailMessage("올바른 이메일 형식입니다.");
       setIsEmail(true);
     }
-  };
-  const onChangeNickName = (e) => {
+  }, []);
+
+  const onChangeNickName = useCallback((e) => {
     const nickNameRegex = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$/;
-    const value = e.target.value;
-    setNickName(value);
-    if (!nickNameRegex.test(value)) {
+    const nickname = e.target.value;
+    setNickName(nickname);
+    if (!nickNameRegex.test(nickname)) {
       setNickNameMessage(`올바른 닉네임 형식이 아닙니다.`);
       setIsNickName(false);
     } else {
       setNickNameMessage(`올바른 닉네임 형식입니다.`);
+      setIsNickName(true);
     }
-  };
+  }, []);
 
-  const onChangePassword = (e) => {
+  const onChangePassword = useCallback((e) => {
     const passwordRegex =
       /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
-    const value = e.target.value;
-    setPassword(value);
-    if (!passwordRegex.test(value)) {
+    const password = e.target.value;
+    setPassword(password);
+    if (!passwordRegex.test(password)) {
       setPasswordMessage("영문자+숫자+특수문자 조합으로 8자리이상");
       setIsPassword(false);
     } else {
       setPasswordMessage("안전한 비밀번호입니다.");
       setIsPassword(true);
     }
-  };
+  }, []);
 
-  const onChangePasswordConfirm = (e) => {
-    const value = e.target.value;
-    setPasswordConfirm(value);
-    if (password === value) {
-      setPasswordConfirmMessage("비밀번호가 일치합니다.");
-      setIsPasswordConfirm(true);
-    } else {
-      setPasswordConfirmMessage("비밀번호가 틀려요. 다시 확인해주세요!");
-      setIsPasswordConfirm(false);
-    }
-  };
+  const onChangePasswordConfirm = useCallback(
+    (e) => {
+      const passwordcheck = e.target.value;
+      setPasswordConfirm(passwordcheck);
+      if (password === passwordcheck) {
+        setPasswordConfirmMessage("비밀번호가 일치합니다.");
+        setIsPasswordConfirm(true);
+      } else {
+        setPasswordConfirmMessage("비밀번호가 틀려요. 다시 확인해주세요!");
+        setIsPasswordConfirm(false);
+      }
+    },
+    [password]
+  );
 
   const postSignup = async (post) => {
     try {
@@ -110,75 +115,74 @@ const SignUpInput = () => {
     });
   };
 
-  const postconfirm = async (post) => {
-    try {
-      const data = await instanceApiV1.post(
-        `api/members/signup/email-validate`,
-        post
-      );
+  // const postconfirm = async (post) => {
+  //   try {
+  //     const data = await instanceApiV1.post(
+  //       `api/members/signup/email-validate`,
+  //       post
+  //     );
+  //     if (data.data.httpStatusCode === 200) {
+  //       alert(data.data.msg);
+  //       setVerifyCode(data.data.data);
+  //       setIsConfirmEamail(true);
+  //       return data;
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-      if (data.data.httpStatusCode === 200) {
-        alert(data.data.msg);
-        setVerifyCode(data.data.data);
-        setIsConfirmEamail(true);
-        return data;
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const confirmHendler = () => {
+  //   setReadOnly(true);
+  //   postconfirm({
+  //     email,
+  //   }).then((res) => {
+  //     if (res === undefined) {
+  //       alert("인증요청실패 했습니다.");
+  //       setReadOnly(false);
+  //     } else {
+  //       setReadOnly(true);
+  //     }
+  //   });
+  // };
 
-  const confirmHendler = () => {
-    setReadOnly(true);
-    postconfirm({
-      email,
-    }).then((res) => {
-      if (res === undefined) {
-        alert("인증요청실패 했습니다.");
-        setReadOnly(false);
-      } else {
-        setReadOnly(true);
-      }
-    });
-  };
+  // const onChangeEmailConfirm = (e) => {
+  //   setVerifyCode(e.target.value);
+  // };
 
-  const onChangeEmailConfirm = (e) => {
-    setVerifyCode(e.target.value);
-  };
+  // const emailconfirm = async (post) => {
+  //   try {
+  //     console.log(post);
+  //     const data = await instanceApiV1.post(
+  //       `api/members/signup/verifycode`,
+  //       post
+  //     );
 
-  const emailconfirm = async (post) => {
-    try {
-      console.log(post);
-      const data = await instanceApiV1.post(
-        `api/members/signup/verifycode`,
-        post
-      );
+  //     if (data.data.httpStatusCode === 200) {
+  //       alert(data.data.msg);
+  //       setVerifyCode(data.data.data);
+  //       console.log(data.data.data);
+  //       return data;
+  //     }
+  //   } catch (error) {
+  //     console.log("error");
+  //   }
+  // };
 
-      if (data.data.httpStatusCode === 200) {
-        alert(data.data.msg);
-        setVerifyCode(data.data.data);
-        console.log(data.data.data);
-        return data;
-      }
-    } catch (error) {
-      console.log("error");
-    }
-  };
-
-  const emailConfirmHandler = () => {
-    setConfirmReadOnly(true);
-    emailconfirm({
-      verifyCode,
-    }).then((res) => {
-      if (res === undefined) {
-        alert("인증실패 했습니다.");
-        setConfirmReadOnly(false);
-      } else {
-        setConfirmReadOnly(true);
-        setIsEmail(true);
-      }
-    });
-  };
+  // const emailConfirmHandler = () => {
+  //   setConfirmReadOnly(true);
+  //   emailconfirm({
+  //     verifyCode,
+  //   }).then((res) => {
+  //     if (res === undefined) {
+  //       alert("인증실패 했습니다.");
+  //       setConfirmReadOnly(false);
+  //     } else {
+  //       setConfirmReadOnly(true);
+  //       setIsEmail(true);
+  //     }
+  //   });
+  // };
 
   return (
     <StForm>
@@ -187,40 +191,40 @@ const SignUpInput = () => {
         <StInputEmail
           placeholder="E-mail"
           onChange={onChangeEmail}
-          readOnly={readonly}
+          // readOnly={readonly}
         ></StInputEmail>
-        <EmailBtn
+        {/* <EmailBtn
           type="button"
-          onClick={() => {
-            confirmHendler();
-          }}
-          disabled={readonly}
+          // onClick={() => {
+          //   confirmHendler();
+          // }}
+          // disabled={readonly}
         >
           인증
-        </EmailBtn>
+        </EmailBtn> */}
       </EmailDiv>
-      {/* {email.length > 0 && <span>{emailMessage}</span>} */}
+      {email.length > 0 && <span>{emailMessage}</span>}
 
-      {isConfirmEmail && (
-        <ComfirmDiv>
-          <StEmailConfirm
-            readOnly={confirmReadOnly}
-            placeholder="인증번호"
-            onChange={(e) => {
-              onChangeEmailConfirm(e);
-            }}
-          ></StEmailConfirm>
-          <EmailConfrimBtn
-            disabled={confirmReadOnly}
-            type="button"
-            onClick={() => {
-              emailConfirmHandler();
-            }}
-          >
-            확인
-          </EmailConfrimBtn>
-        </ComfirmDiv>
-      )}
+      {/* {isConfirmEmail && (
+      <ComfirmDiv>
+        <StEmailConfirm
+          // readOnly={confirmReadOnly}
+          placeholder="인증번호"
+          // onChange={(e) => {
+          //   onChangeEmailConfirm(e);
+          // }}
+        ></StEmailConfirm>
+        <EmailConfrimBtn
+          // disabled={confirmReadOnly}
+          type="button"
+          // onClick={() => {
+          //   emailConfirmHandler();
+          // }}
+        >
+          확인
+        </EmailConfrimBtn>
+      </ComfirmDiv>
+      )} */}
 
       <StInput placeholder="NickName" onChange={onChangeNickName}></StInput>
       {nickname.length > 0 && <span>{nickNameMessage}</span>}

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { baseURLApiV1 } from "../../../core/api";
+import { setCookies } from "../../../core/cookieControler";
 import { encrypt } from "../../../core/encrypt";
 
 const LogInInput = () => {
@@ -15,6 +16,7 @@ const LogInInput = () => {
       // const userInfo = { email, password };
       // console.log(password);
       const data = await baseURLApiV1.post("api/members/login", post);
+
       if (data.data.httpStatusCode === 200) {
         return data;
       }
@@ -36,7 +38,10 @@ const LogInInput = () => {
       if (res === undefined) {
         navigate(`/login`);
       } else {
-        navigate(`/`);
+        navigate(`/home`);
+        setCookies("Authorization", res.headers.authorization, {
+          maxAge: 1750,
+        });
       }
     });
   };
