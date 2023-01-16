@@ -10,6 +10,7 @@ import AddDailyLog from "../pages/AddDailyLog";
 import Start from "../pages/Start";
 import Category from "../pages/Category";
 import Mypage from "../pages/Mypage";
+import Search from "../pages/Search";
 
 const Router = () => {
   return (
@@ -24,6 +25,7 @@ const Router = () => {
           <Route path="/dailys/add" element={<AddDailyLog />} />
           <Route path="/category" element={<Category />} />
           <Route path="/mypage" element={<Mypage />} />
+          <Route path="/search" element={<Search />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -23,8 +23,9 @@ const ContainerBox = styled.div`
 `;
 
 const BulletLogo = styled(Logo)`
+  margin-top: 20%;
   width: 4rem;
-  height: 7rem;
+  height: 3rem;
   fill: white;
 `;
 
