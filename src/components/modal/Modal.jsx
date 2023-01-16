@@ -12,9 +12,6 @@ const useModal = ({ onClose, children }) => {
   return (
     <Overlay>
       <ModalWrap ref={modalRef}>
-        <CloseButton onClick={handleClose}>
-          <i className="fa-solid fa-xmark"></i>
-        </CloseButton>
         <Contents>{children}</Contents>
       </ModalWrap>
     </Overlay>
@@ -48,18 +45,6 @@ const ModalWrap = styled.div`
     margin-top: 10%;
     margin-left: 33%;
     font-size: 10px;
-  }
-`;
-
-const CloseButton = styled.div`
-  float: right;
-  width: 40px;
-  height: 40px;
-  margin: 20px;
-  cursor: pointer;
-  i {
-    color: #5d5d5d;
-    font-size: 30px;
   }
 `;
 
