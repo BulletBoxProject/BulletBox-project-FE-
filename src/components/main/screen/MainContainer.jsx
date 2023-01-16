@@ -11,8 +11,6 @@ import SelectCategory from "../../common/SelectCategory";
 import BulletDiv from "../components/BulletDiv";
 
 import BulletCalendar from "../../calendar/Calendar";
-import MainInputCard from "../components/MainInputCard";
-import MainEditCard from "../components/MainEditCard";
 
 export const BACK_API = process.env.REACT_APP_BACKAPI;
 
@@ -28,7 +26,6 @@ const MainContainer = () => {
 
   return (
     <Container>
-      <NavigationMenu />
       <CalendarDiv>
         <SelectDiv>
           <SelectCategory style={{ padding: "10px" }} />
@@ -50,7 +47,8 @@ export default MainContainer;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
+  height: 83vh;
   padding: 0 3.9% 4.05vh 3.9%;
 `;
 const CalendarDiv = styled.div`

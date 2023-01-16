@@ -26,11 +26,10 @@ const DailyLogContainer = () => {
   } / ${new Date().getDate()} ${day[new Date().getDay()]}`;
   return (
     <Container>
-      <NavigationMenu />
       <DateAndSelectDiv>
         <DateButton>{today}</DateButton>
         <SelectDiv>
-          <ToggleSwitch />
+          <span>카테고리</span>
           <SelectCategory style={{ padding: "10px" }} />
         </SelectDiv>
       </DateAndSelectDiv>
@@ -77,7 +76,7 @@ const DateAndSelectDiv = styled.div`
 const SelectDiv = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+
   padding: 5px 0;
 `;
 const DateButton = styled.button`

@@ -31,8 +31,10 @@ const Layout = (props) => {
 export default Layout;
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 100%;
-  /* min-height: 740px; */
   height: 100vh;
   border: 1px solid black;
 `;
