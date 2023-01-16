@@ -88,7 +88,7 @@ const SignUpInput = () => {
       // const password = encrypt(post.password);
       // const userInfo = { email, password };
       // console.log(password);
-      const data = await instanceApiV1.post("api/members/signup", post);
+      const data = await instanceApiV1.post("/members/signup", post);
       if (data.data.httpStatusCode === 201) {
         alert(data.data.msg);
         return data;
@@ -118,7 +118,7 @@ const SignUpInput = () => {
   // const postconfirm = async (post) => {
   //   try {
   //     const data = await instanceApiV1.post(
-  //       `api/members/signup/email-validate`,
+  //       `/members/signup/email-validate`,
   //       post
   //     );
   //     if (data.data.httpStatusCode === 200) {
@@ -154,7 +154,7 @@ const SignUpInput = () => {
   //   try {
   //     console.log(post);
   //     const data = await instanceApiV1.post(
-  //       `api/members/signup/verifycode`,
+  //       `/members/signup/verifycode`,
   //       post
   //     );
 
