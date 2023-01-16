@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import uuid from "react-uuid";
 
-import { instanceApiV1 } from "../../../core/api";
+import { baseURLApiV1 } from "../../../core/api";
 
 import NavigationMenu from "../../common/NavigationMenu";
 
@@ -20,8 +20,18 @@ const MainContainer = () => {
   const bulletList = useSelector((state) => state.bullet_main.bulletList);
   console.log("리듀서 상태 저장 값", bulletList);
 
+  const loadMainPage = async () => {
+    try {
+      const data = await baseURLApiV1.get("/main");
+      if (data.data.httpStatusCode === 200) {
+        return console.log(data.data.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
-    instanceApiV1.get("/main");
+    loadMainPage();
   }, []);
 
   return (
