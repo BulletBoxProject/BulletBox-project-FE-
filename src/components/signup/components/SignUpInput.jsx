@@ -187,13 +187,13 @@ const SignUpInput = () => {
   return (
     <StForm>
       <StTitle>Sign up</StTitle>
-      <EmailDiv>
-        <StInputEmail
-          placeholder="E-mail"
-          onChange={onChangeEmail}
-          // readOnly={readonly}
-        ></StInputEmail>
-        {/* <EmailBtn
+      {/* <EmailDiv> */}
+      <StInputEmail
+        placeholder="E-mail"
+        onChange={onChangeEmail}
+        // readOnly={readonly}
+      ></StInputEmail>
+      {/* <EmailBtn
           type="button"
           // onClick={() => {
           //   confirmHendler();
@@ -202,7 +202,7 @@ const SignUpInput = () => {
         >
           인증
         </EmailBtn> */}
-      </EmailDiv>
+      {/* </EmailDiv> */}
       {email.length > 0 && <span>{emailMessage}</span>}
 
       {/* {isConfirmEmail && (
