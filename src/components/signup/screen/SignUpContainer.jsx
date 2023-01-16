@@ -5,16 +5,16 @@ import { ReactComponent as Logo } from "../../../img/logo/logo-graphic.svg";
 
 const SignUpContainer = () => {
   return (
-    <StcontainerBox>
+    <ContainerBox>
       <BulletLogo />
       <BulletBold>Bullet Box</BulletBold>
       <SignUpInput />
-    </StcontainerBox>
+    </ContainerBox>
   );
 };
 
 export default SignUpContainer;
-const StcontainerBox = styled.div`
+const ContainerBox = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;

@@ -2,21 +2,20 @@ import React from "react";
 import styled from "styled-components";
 import LogInInput from "../components/LogInInput";
 import { ReactComponent as Logo } from "../../../img/logo/logo-graphic.svg";
-import { ReactComponent as bold } from "../../../img/logo/logo-type-bold.svg";
 
 const LogInContainer = () => {
   return (
-    <StcontainerBox>
+    <Container>
       <BulletLogo />
       <BulletBold>Bullet Box</BulletBold>
       <LogInInput />
-    </StcontainerBox>
+    </Container>
   );
 };
 
 export default LogInContainer;
 
-const StcontainerBox = styled.div`
+const Container = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;

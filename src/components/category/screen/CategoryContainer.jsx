@@ -4,16 +4,16 @@ import CategoryBtn from "../components/CategoryBtn";
 
 const CategoryContainer = () => {
   return (
-    <CategoryDiv>
+    <Container>
       <CategoryBtn />
       <button>카테고리1</button>
-    </CategoryDiv>
+    </Container>
   );
 };
 
 export default CategoryContainer;
 
-const CategoryDiv = styled.div`
+const Container = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;

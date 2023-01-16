@@ -10,17 +10,17 @@ const useModal = ({ onClose, children }) => {
   useOutSideClick(modalRef, handleClose);
 
   return (
-    <Overlay>
+    <Container>
       <ModalWrap ref={modalRef}>
         <Contents>{children}</Contents>
       </ModalWrap>
-    </Overlay>
+    </Container>
   );
 };
 
 export default useModal;
 
-const Overlay = styled.div`
+const Container = styled.div`
   position: fixed;
   width: 100%;
   height: 100%;
