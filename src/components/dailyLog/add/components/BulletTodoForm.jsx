@@ -10,6 +10,7 @@ import styled from "styled-components";
 const BulletTodoForm = ({ AddTodoInput, setAddTodoInput }) => {
   const [showBullet, setShowBullet] = useState(false);
   const [todoInput, setTodoInput] = useState("");
+  const [isTodoInputDone, setIsTodoInputDone] = useState(false);
   const showBulletHandler = () => {
     setShowBullet(!showBullet);
   };
@@ -22,6 +23,7 @@ const BulletTodoForm = ({ AddTodoInput, setAddTodoInput }) => {
   };
   const addTodoHandler = () => {
     setAddTodoInput({ ...AddTodoInput, todoContent: todoInput });
+    setIsTodoInputDone(!isTodoInputDone);
     /* 불렛 입력내용 초기화
     // setTodoInput("");
     // setAddTodoInput({ ...AddTodoInput, todoBulletName: "불렛" });
@@ -56,10 +58,17 @@ const BulletTodoForm = ({ AddTodoInput, setAddTodoInput }) => {
         placeholder="할일을 입력해주세요"
         onChange={todoInputHandler}
         value={todoInput}
+        disabled={isTodoInputDone}
       />
-      <AddTodoButton type="button" onClick={addTodoHandler}>
-        추가
-      </AddTodoButton>
+      {isTodoInputDone ? (
+        <AddTodoButton type="button" onClick={addTodoHandler}>
+          수정
+        </AddTodoButton>
+      ) : (
+        <AddTodoButton type="button" onClick={addTodoHandler}>
+          추가
+        </AddTodoButton>
+      )}
     </Container>
   );
 };
@@ -90,6 +99,13 @@ const BulletList = styled.div`
 `;
 const TodoInput = styled.input`
   width: 80%;
+  :disabled {
+    background-color: white;
+    border: 1px solid black;
+  }
+  :focus {
+    outline: none;
+  }
 `;
 
 const AddTodoButton = styled.button`
