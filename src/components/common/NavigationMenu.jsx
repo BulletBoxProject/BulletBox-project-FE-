@@ -7,7 +7,7 @@ import { ReactComponent as homeMenuIcon } from "../../img/log/home.svg";
 import { ReactComponent as dailyLogIcon } from "../../img/log/dailylog.svg";
 import { BsPerson } from "react-icons/bs";
 import { HiSearch } from "react-icons/hi";
-import { GiBullets } from "react-icons/gi";
+import { SlNotebook } from "react-icons/sl";
 
 const NavigationMenu = () => {
   const navigate = useNavigate();
@@ -17,13 +17,13 @@ const NavigationMenu = () => {
       <ButtonGroup>
         <Button onClick={() => navigate("/dailys")}>
           <span>
-            <Dailylog />
+            <DailylogBtn />
           </span>
           <ButtonTitle></ButtonTitle>
         </Button>
         <Button onClick={() => alert("추가 기능 구상중")}>
           <span>
-            <UntitleMenu />
+            <DiaryBtn />
           </span>
           <ButtonTitle></ButtonTitle>
         </Button>
@@ -33,16 +33,16 @@ const NavigationMenu = () => {
           </span>
           <ButtonTitle></ButtonTitle>
         </Button>
-        <Button onClick={() => alert("검색 기능 구현 예정")}>
+        <Button onClick={() => navigate("/search")}>
           <span>
-            <SearchIcon />
+            <SearchBtn />
           </span>
           <ButtonTitle></ButtonTitle>
         </Button>
 
-        <Button onClick={() => alert("마이페이지 구현 예정")}>
+        <Button onClick={() => navigate("/mypage")}>
           <span>
-            <MyPageIcon />
+            <MyPageBtn />
           </span>
           <ButtonTitle></ButtonTitle>
         </Button>
@@ -77,15 +77,14 @@ const Button = styled.button`
   /* border-radius: 8px; */
   /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15); */
   /* background-color: var(--color-light-gray); */
-  & > :active,
-  & > :hover {
-    background-color: var(--color-main);
+  &:active,
+  &:hover {
+    background-color: var(--color-light-gray);
   }
 `;
-const UntitleMenu = styled(GiBullets)`
+const DiaryBtn = styled(SlNotebook)`
   width: 24px;
   height: 24px;
-  opacity: 0.4;
 `;
 const HomeMenuBtn = styled(homeMenuIcon)`
   width: 24px;
@@ -95,15 +94,15 @@ const ButtonTitle = styled.span`
   font-family: "Oleo Script";
   font-size: 10px;
 `;
-const Dailylog = styled(dailyLogIcon)`
+const DailylogBtn = styled(dailyLogIcon)`
   width: 24px;
   height: 24px;
 `;
-const MyPageIcon = styled(BsPerson)`
+const MyPageBtn = styled(BsPerson)`
   width: 24px;
   height: 24px;
 `;
-const SearchIcon = styled(HiSearch)`
+const SearchBtn = styled(HiSearch)`
   width: 24px;
   height: 24px;
 `;

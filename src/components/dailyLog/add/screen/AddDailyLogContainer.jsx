@@ -15,5 +15,4 @@ export default AddDailyLogContainer;
 
 const Container = styled.div`
   font-family: cursive;
-  padding: 0 3.9% 4.05vh 3.9%;
 `;

@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
-import useOutSideClick from "../../hooks/useOutSideClick";
+import useOutSideClick from "../../../hooks/useOutSideClick";
 
 const useModal = ({ onClose, children }) => {
   const modalRef = useRef(null);

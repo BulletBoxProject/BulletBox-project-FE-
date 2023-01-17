@@ -9,7 +9,9 @@ const Layout = (props) => {
   return (
     <Container>
       <Header />
-      <Outlet>{props.children}</Outlet>
+      <PageContainer>
+        <Outlet>{props.children}</Outlet>
+      </PageContainer>
       <Footer />
     </Container>
   );
@@ -36,5 +38,10 @@ const Container = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 100vh;
-  border: 1px solid black;
+`;
+
+const PageContainer = styled.div`
+  height: 85vh;
+  margin-top: 20%;
+  padding: 0 3.9% 4.05vh 3.9%;
 `;

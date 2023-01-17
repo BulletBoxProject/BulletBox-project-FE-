@@ -10,7 +10,7 @@ import NavigationMenu from "../../common/NavigationMenu";
 import SelectCategory from "../../common/SelectCategory";
 import BulletDiv from "../components/BulletDiv";
 
-import BulletCalendar from "../../calendar/Calendar";
+import BulletCalendar from "../../common/calendar/Calendar";
 
 export const BACK_API = process.env.REACT_APP_BACKAPI;
 
@@ -58,8 +58,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 83vh;
-  padding: 0 3.9% 4.05vh 3.9%;
 `;
 const CalendarDiv = styled.div`
   position: relative;
