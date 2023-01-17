@@ -11,7 +11,6 @@ const SignUpInput = () => {
   const [nickname, setNickName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-  // const [verifyCode, setVerifyCode] = useState("");
 
   const [emailMessage, setEmailMessage] = useState("");
   const [nickNameMessage, setNickNameMessage] = useState("");
@@ -22,9 +21,6 @@ const SignUpInput = () => {
   const [isNickName, setIsNickName] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
   const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
-  // const [isConfirmEmail, setIsConfirmEamail] = useState(false);
-  // const [readonly, setReadOnly] = useState(false);
-  // const [confirmReadOnly, setConfirmReadOnly] = useState(false);
 
   const onChangeEmail = useCallback((e) => {
     const emailRegex =
@@ -84,10 +80,6 @@ const SignUpInput = () => {
 
   const postSignup = async (post) => {
     try {
-      // console.log(post, "1");
-      // const password = encrypt(post.password);
-      // const userInfo = { email, password };
-      // console.log(password);
       const data = await instanceApiV1.post("/members/signup", post);
       if (data.data.httpStatusCode === 201) {
         alert(data.data.msg);
@@ -115,116 +107,16 @@ const SignUpInput = () => {
     });
   };
 
-  // const postconfirm = async (post) => {
-  //   try {
-  //     const data = await instanceApiV1.post(
-  //       `/members/signup/email-validate`,
-  //       post
-  //     );
-  //     if (data.data.httpStatusCode === 200) {
-  //       alert(data.data.msg);
-  //       setVerifyCode(data.data.data);
-  //       setIsConfirmEamail(true);
-  //       return data;
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // const confirmHendler = () => {
-  //   setReadOnly(true);
-  //   postconfirm({
-  //     email,
-  //   }).then((res) => {
-  //     if (res === undefined) {
-  //       alert("인증요청실패 했습니다.");
-  //       setReadOnly(false);
-  //     } else {
-  //       setReadOnly(true);
-  //     }
-  //   });
-  // };
-
-  // const onChangeEmailConfirm = (e) => {
-  //   setVerifyCode(e.target.value);
-  // };
-
-  // const emailconfirm = async (post) => {
-  //   try {
-  //     console.log(post);
-  //     const data = await instanceApiV1.post(
-  //       `/members/signup/verifycode`,
-  //       post
-  //     );
-
-  //     if (data.data.httpStatusCode === 200) {
-  //       alert(data.data.msg);
-  //       setVerifyCode(data.data.data);
-  //       console.log(data.data.data);
-  //       return data;
-  //     }
-  //   } catch (error) {
-  //     console.log("error");
-  //   }
-  // };
-
-  // const emailConfirmHandler = () => {
-  //   setConfirmReadOnly(true);
-  //   emailconfirm({
-  //     verifyCode,
-  //   }).then((res) => {
-  //     if (res === undefined) {
-  //       alert("인증실패 했습니다.");
-  //       setConfirmReadOnly(false);
-  //     } else {
-  //       setConfirmReadOnly(true);
-  //       setIsEmail(true);
-  //     }
-  //   });
-  // };
-
   return (
     <StForm>
       <StTitle>Sign up</StTitle>
-      {/* <EmailDiv> */}
+
       <StInputEmail
         placeholder="E-mail"
         onChange={onChangeEmail}
-        // readOnly={readonly}
       ></StInputEmail>
-      {/* <EmailBtn
-          type="button"
-          // onClick={() => {
-          //   confirmHendler();
-          // }}
-          // disabled={readonly}
-        >
-          인증
-        </EmailBtn> */}
-      {/* </EmailDiv> */}
-      {email.length > 0 && <span>{emailMessage}</span>}
 
-      {/* {isConfirmEmail && (
-      <ComfirmDiv>
-        <StEmailConfirm
-          // readOnly={confirmReadOnly}
-          placeholder="인증번호"
-          // onChange={(e) => {
-          //   onChangeEmailConfirm(e);
-          // }}
-        ></StEmailConfirm>
-        <EmailConfrimBtn
-          // disabled={confirmReadOnly}
-          type="button"
-          // onClick={() => {
-          //   emailConfirmHandler();
-          // }}
-        >
-          확인
-        </EmailConfrimBtn>
-      </ComfirmDiv>
-      )} */}
+      {email.length > 0 && <span>{emailMessage}</span>}
 
       <StInput placeholder="NickName" onChange={onChangeNickName}></StInput>
       {nickname.length > 0 && <span>{nickNameMessage}</span>}
@@ -304,13 +196,6 @@ const StInput = styled.input`
   }
 `;
 
-const EmailDiv = styled.div`
-  width: 74%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
 const StInputEmail = styled.input`
   width: 74%;
   height: 6.6vh;
@@ -338,20 +223,6 @@ const StButtonBox = styled.div`
   width: 74%;
 `;
 
-const EmailBtn = styled.button`
-  margin-left: 0.5rem;
-  width: 11vw;
-  height: 6.8vh;
-  font-size: 1rem;
-  background-color: var(--color-main);
-  border: none;
-  border-radius: 8px;
-  color: white;
-  font-weight: bold;
-  font-size: 1rem;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-`;
-
 const StSignupBtn = styled.button`
   width: 46%;
   height: 5vh;
@@ -374,44 +245,4 @@ const CancelBtn = styled.button`
   background: #d9d9d9;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
-`;
-
-const StEmailConfirm = styled.input`
-  width: 74%;
-  height: 4.6vh;
-  font-family: "Oleo Script";
-  border: white;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-  background: #d9d9d9;
-  border-radius: 8px;
-  ::placeholder {
-    font-family: "Oleo Script";
-    font-style: normal;
-    font-weight: 800;
-    font-size: 1rem;
-    text-align: center;
-    color: #7c7c7c;
-  }
-`;
-
-const EmailConfrimBtn = styled.button`
-  margin-left: 0.5rem;
-  width: 11vw;
-  height: 4.8vh;
-  background-color: var(--color-main);
-  border: none;
-  border-radius: 8px;
-  color: white;
-  font-weight: bold;
-  font-size: 1rem;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-`;
-
-const ComfirmDiv = styled.div`
-  width: 74%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 5%;
-  font-size: 1rem;
 `;

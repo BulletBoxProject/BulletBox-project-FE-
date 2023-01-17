@@ -1,5 +1,5 @@
 import React from "react";
-import CategoryList from "../components/CatergoryList";
+import CategoryList from "../components/category/CatergoryList";
 import AlwaysTodo from "../components/AlwaysTodo";
 import styled from "styled-components";
 
