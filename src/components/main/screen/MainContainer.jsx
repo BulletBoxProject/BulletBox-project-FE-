@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import uuid from "react-uuid";
 
-import { instanceApiV1 } from "../../../core/api";
+import { baseURLApiV1 } from "../../../core/api";
 
 import NavigationMenu from "../../common/NavigationMenu";
 
@@ -11,8 +11,6 @@ import SelectCategory from "../../common/SelectCategory";
 import BulletDiv from "../components/BulletDiv";
 
 import BulletCalendar from "../../calendar/Calendar";
-import MainInputCard from "../components/MainInputCard";
-import MainEditCard from "../components/MainEditCard";
 
 export const BACK_API = process.env.REACT_APP_BACKAPI;
 
@@ -22,13 +20,22 @@ const MainContainer = () => {
   const bulletList = useSelector((state) => state.bullet_main.bulletList);
   console.log("리듀서 상태 저장 값", bulletList);
 
+  const loadMainPage = async () => {
+    try {
+      const data = await baseURLApiV1.get("/main");
+      if (data.data.httpStatusCode === 200) {
+        return console.log(data.data.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
-    instanceApiV1.get("/main");
+    loadMainPage();
   }, []);
 
   return (
     <Container>
-      <NavigationMenu />
       <CalendarDiv>
         <SelectDiv>
           <SelectCategory style={{ padding: "10px" }} />
@@ -50,7 +57,8 @@ export default MainContainer;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
+  height: 83vh;
   padding: 0 3.9% 4.05vh 3.9%;
 `;
 const CalendarDiv = styled.div`

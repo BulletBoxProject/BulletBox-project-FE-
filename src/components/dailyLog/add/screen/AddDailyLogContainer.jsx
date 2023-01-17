@@ -1,8 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
+import AddTodoInput from "../components/AddTodoInput";
+
 const AddDailyLogContainer = () => {
-  return <Container></Container>;
+  return (
+    <Container>
+      <AddTodoInput />
+    </Container>
+  );
 };
 
 export default AddDailyLogContainer;
