@@ -16,9 +16,6 @@ const FooterDiv = styled.div`
   position: fixed;
   display: flex;
   width: 100%;
-  justify-content: flex-end;
   bottom: 0;
-  right: 0;
-
   background-color: var(--color-main);
 `;
