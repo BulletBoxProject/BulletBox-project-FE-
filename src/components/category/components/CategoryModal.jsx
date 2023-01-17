@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Modal from "../../modal/Modal";
+import Modal from "../../common/modal/Modal";
 
 const CategoryModal = ({ onClose }) => {
   const tagColorList = [
