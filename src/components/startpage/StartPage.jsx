@@ -9,7 +9,7 @@ const StartPage = () => {
     navigate("/login");
   };
   return (
-    <StartContainer>
+    <Container>
       <MainLogo />
       Bullet Box
       <StartBtn
@@ -19,28 +19,28 @@ const StartPage = () => {
       >
         Start
       </StartBtn>
-    </StartContainer>
+    </Container>
   );
 };
 
 export default StartPage;
 
-const StartContainer = styled.div`
+const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding-top: 50%;
   background-color: var(--color-main);
   height: 100vh;
   font-size: 1.5rem;
   color: white;
   font-family: "HeirofLightBold";
-
 `;
 
 const MainLogo = styled(Logo)`
   fill: white;
   width: 50%;
-  height: 50vh;
+  height: 25vh;
 `;
 
 const StartBtn = styled.button`

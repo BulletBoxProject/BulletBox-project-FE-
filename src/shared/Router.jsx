@@ -7,9 +7,10 @@ import Main from "../pages/Main";
 import SignUp from "../pages/SignUp";
 import DailyLog from "../pages/DailyLog";
 import AddDailyLog from "../pages/AddDailyLog";
-import MonthlyLog from "../pages/MonthlyLog";
 import Start from "../pages/Start";
 import Category from "../pages/Category";
+import Mypage from "../pages/Mypage";
+import Search from "../pages/Search";
 
 const Router = () => {
   return (
@@ -22,8 +23,9 @@ const Router = () => {
           <Route path="/home" element={<Main />} />
           <Route path="/dailys" element={<DailyLog />} />
           <Route path="/dailys/add" element={<AddDailyLog />} />
-          <Route path="/monthlys" element={<MonthlyLog />} />
           <Route path="/category" element={<Category />} />
+          <Route path="/mypage" element={<Mypage />} />
+          <Route path="/search" element={<Search />} />
         </Route>
       </Routes>
     </BrowserRouter>

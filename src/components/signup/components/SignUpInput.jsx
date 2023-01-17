@@ -118,7 +118,7 @@ const SignUpInput = () => {
   // const postconfirm = async (post) => {
   //   try {
   //     const data = await instanceApiV1.post(
-  //       `api/members/signup/email-validate`,
+  //       `/members/signup/email-validate`,
   //       post
   //     );
   //     if (data.data.httpStatusCode === 200) {
@@ -154,7 +154,7 @@ const SignUpInput = () => {
   //   try {
   //     console.log(post);
   //     const data = await instanceApiV1.post(
-  //       `api/members/signup/verifycode`,
+  //       `/members/signup/verifycode`,
   //       post
   //     );
 
@@ -187,13 +187,13 @@ const SignUpInput = () => {
   return (
     <StForm>
       <StTitle>Sign up</StTitle>
-      <EmailDiv>
-        <StInputEmail
-          placeholder="E-mail"
-          onChange={onChangeEmail}
-          // readOnly={readonly}
-        ></StInputEmail>
-        {/* <EmailBtn
+      {/* <EmailDiv> */}
+      <StInputEmail
+        placeholder="E-mail"
+        onChange={onChangeEmail}
+        // readOnly={readonly}
+      ></StInputEmail>
+      {/* <EmailBtn
           type="button"
           // onClick={() => {
           //   confirmHendler();
@@ -202,7 +202,7 @@ const SignUpInput = () => {
         >
           인증
         </EmailBtn> */}
-      </EmailDiv>
+      {/* </EmailDiv> */}
       {email.length > 0 && <span>{emailMessage}</span>}
 
       {/* {isConfirmEmail && (
