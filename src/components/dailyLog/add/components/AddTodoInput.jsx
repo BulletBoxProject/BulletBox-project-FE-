@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+
+import { baseURLApiV1 } from "../../../../core/api";
 
 import BulletTodoForm from "./BulletTodoForm";
 import AddMemoDiv from "./AddMemoDiv";
@@ -7,6 +10,7 @@ import TimeSettingDiv from "./TimeSettingDiv";
 import CategorySelectDiv from "./CategorySelectDiv";
 
 const AddTodoInput = () => {
+  const navigate = useNavigate();
   const [AddTodoInput, setAddTodoInput] = useState({
     todoContent: "할 일 내용",
     todoBulletName: "불렛",
@@ -27,7 +31,21 @@ const AddTodoInput = () => {
       day: today.getDate(),
     });
   }, []);
-  console.log(AddTodoInput);
+  const postTodo = async (AddTodoInput) => {
+    try {
+      const data = await baseURLApiV1.post("/dailys/todo", AddTodoInput);
+
+      if (data.data.httpStatusCode === 200) {
+        return data;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const submitTodoHandler = () => {
+    postTodo();
+    // navigate("/dailys");
+  };
   return (
     <Container>
       <BulletTodoForm
@@ -51,8 +69,12 @@ const AddTodoInput = () => {
       <hr />
 
       <AddInputButtonGroup>
-        <CancleButton type="button">취소</CancleButton>
-        <SubmitButton type="button">확인</SubmitButton>
+        <CancleButton type="button" onClick={() => navigate("/dailys")}>
+          취소
+        </CancleButton>
+        <SubmitButton type="button" onClick={submitTodoHandler}>
+          확인
+        </SubmitButton>
       </AddInputButtonGroup>
     </Container>
   );
