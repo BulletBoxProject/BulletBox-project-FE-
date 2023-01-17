@@ -16,7 +16,7 @@ const LogInInput = () => {
       // const userInfo = { email, password };
       // console.log(password);
       const data = await baseURLApiV1.post("/members/login", post);
-
+      console.log(data);
       if (data.data.httpStatusCode === 200) {
         return data;
       }
@@ -40,6 +40,7 @@ const LogInInput = () => {
       } else {
         navigate(`/home`);
         setCookies("Authorization", res.headers.authorization, {
+          path: "/",
           maxAge: 1750,
         });
       }
