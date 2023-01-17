@@ -15,7 +15,7 @@ const LogInInput = () => {
       // const password = encrypt(post.password);
       // const userInfo = { email, password };
       // console.log(password);
-      const data = await baseURLApiV1.post("api/members/login", post);
+      const data = await baseURLApiV1.post("/members/login", post);
 
       if (data.data.httpStatusCode === 200) {
         return data;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -19,18 +19,21 @@ import { ReactComponent as importantBullet } from "../../../img/bullet/asterisk-
 import { ReactComponent as favoriteBullet } from "../../../img/bullet/star-7.svg";
 
 const DailyLogContainer = () => {
+  const [showSelectBox, setShowSelectBox] = useState(false);
   const navigate = useNavigate();
   const day = ["일", "월", "화", "수", "목", "금", "토"];
   const today = `${new Date().getFullYear()} / ${
     new Date().getMonth() + 1
   } / ${new Date().getDate()} ${day[new Date().getDay()]}`;
+  const showAddTodoSelect = () => {
+    setShowSelectBox(!showSelectBox);
+  };
   return (
     <Container>
-      <NavigationMenu />
       <DateAndSelectDiv>
         <DateButton>{today}</DateButton>
         <SelectDiv>
-          <ToggleSwitch />
+          <span>카테고리</span>
           <SelectCategory style={{ padding: "10px" }} />
         </SelectDiv>
       </DateAndSelectDiv>
@@ -48,14 +51,24 @@ const DailyLogContainer = () => {
             </OptionButton>
           </MainBulletTodo>
         </BulletTodoCard>
-        <AddButtonDiv>
-          <AddButtonButton
-            type="button"
-            onClick={() => navigate("/dailys/add")}
-          >
+        <AddTodoDiv>
+          <AddTodoButton type="button" onClick={showAddTodoSelect}>
             <AddTodoIcon />
-          </AddButtonButton>
-        </AddButtonDiv>
+          </AddTodoButton>
+          {showSelectBox ? (
+            <AddSelectDiv>
+              <option value="newTodo" onClick={() => navigate("/dailys/add")}>
+                신규 생성
+              </option>
+              <option
+                value="favoriteTodo"
+                onClick={() => alert("자주쓰는할일")}
+              >
+                자주쓰는 할일
+              </option>
+            </AddSelectDiv>
+          ) : null}
+        </AddTodoDiv>
       </TodoBulletDiv>
     </Container>
   );
@@ -77,7 +90,7 @@ const DateAndSelectDiv = styled.div`
 const SelectDiv = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+
   padding: 5px 0;
 `;
 const DateButton = styled.button`
@@ -122,11 +135,12 @@ const MoreIcon = styled(moreIcon)`
   width: 24px;
   height: 24px;
 `;
-const AddButtonDiv = styled.div`
+const AddTodoDiv = styled.div`
   display: flex;
+  position: relative;
   justify-content: center;
 `;
-const AddButtonButton = styled.button`
+const AddTodoButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -139,6 +153,16 @@ const AddTodoIcon = styled(BsFillPlusCircleFill)`
   fill: var(--color-main);
   width: 24px;
   height: 24px;
+`;
+const AddSelectDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 5px;
+  position: absolute;
+  left: 50vw;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
 `;
 const MainBulletTodo = styled.div`
   display: flex;

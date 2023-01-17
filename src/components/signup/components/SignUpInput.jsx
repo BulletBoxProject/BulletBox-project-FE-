@@ -88,7 +88,7 @@ const SignUpInput = () => {
       // const password = encrypt(post.password);
       // const userInfo = { email, password };
       // console.log(password);
-      const data = await instanceApiV1.post("api/members/signup", post);
+      const data = await instanceApiV1.post("/members/signup", post);
       if (data.data.httpStatusCode === 201) {
         alert(data.data.msg);
         return data;

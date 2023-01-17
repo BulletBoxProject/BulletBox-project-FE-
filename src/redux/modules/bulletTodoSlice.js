@@ -38,8 +38,8 @@ const initialState = {
 //   },
 // });
 //thunk
-export const __testInput = createAsyncThunk(
-  "main/bulletInput",
+export const __todoInput = createAsyncThunk(
+  "addTodoInput",
   async (payload, thunkAPI) => {
     const bulletInputValue = payload;
     console.log(bulletInputValue);
@@ -52,11 +52,11 @@ const bulletTodoSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(__testInput.fulfilled, (state, action) => {
+    builder.addCase(__todoInput.fulfilled, (state, action) => {
       const bulletInputValue = action.payload;
       state.bulletList = [...state.bulletList, bulletInputValue];
     });
-    builder.addCase(__testInput.rejected, (state, action) => {
+    builder.addCase(__todoInput.rejected, (state, action) => {
       console.log("오류");
     });
   },

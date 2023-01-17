@@ -24,8 +24,13 @@ body, div, button{
   padding: 0;
   margin: 0;
   font-size: 10px;
+<<<<<<< Updated upstream
   max-width: 400px;
   max-height: 900px;
+=======
+  max-width: 412px;
+  max-height: 915px;
+>>>>>>> Stashed changes
 }
 
 button {
