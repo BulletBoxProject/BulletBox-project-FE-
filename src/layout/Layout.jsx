@@ -42,6 +42,6 @@ const Container = styled.div`
 
 const PageContainer = styled.div`
   height: 85vh;
-  margin-top: 20%;
+  margin-top: 17%;
   padding: 0 3.9% 4.05vh 3.9%;
 `;
