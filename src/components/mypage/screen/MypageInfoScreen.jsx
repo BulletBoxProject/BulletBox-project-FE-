@@ -1,6 +1,6 @@
 import React from "react";
-import CategoryList from "../components/category/CatergoryList";
-import AlwaysTodo from "../components/AlwaysTodo";
+import CategoryList from "../components/category/screen/CatergoryList";
+import AlwaysTodo from "../components/alwaystodo/AlwaysTodo";
 import styled from "styled-components";
 
 const MypageInfoScreen = ({ showInfo }) => {
@@ -23,10 +23,7 @@ const MypageInfoScreen = ({ showInfo }) => {
 export default MypageInfoScreen;
 
 const Container = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 25vh;
+  min-height: 25vh;
   border: 2px solid var(--color-light-gray);
   border-radius: 5px;
   margin-top: 5%;

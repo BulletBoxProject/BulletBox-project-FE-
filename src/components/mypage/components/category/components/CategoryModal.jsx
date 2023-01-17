@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import Modal from "../../../common/modal/Modal";
+import Modal from "../../../../common/modal/Modal";
+import { useDispatch } from "react-redux";
+import { __postCategory } from "../../../../../redux/modules/categorySlice";
 
 const CategoryModal = ({ onClose }) => {
+  const [categoryName, setCategoryName] = useState("");
+  const [categoryColor, setCategoryColor] = useState("");
+
+  const dispatch = useDispatch();
+
+  const CategoryNameHandler = (e) => {
+    const value = e.target.value;
+    setCategoryName(value);
+  };
+  const CategoryColorHandler = (e) => {
+    setCategoryColor(e.target.value);
+  };
+
+  const AddCategoryHandler = () => {
+    const categoryInfo = {
+      categoryName: categoryName,
+      categoryColor: categoryColor,
+    };
+    dispatch(__postCategory(categoryInfo));
+  };
+
   const tagColorList = [
     { key: 0, value: "#FF8B8B" },
     { key: 1, value: "#FFCA8B" },
@@ -38,7 +61,12 @@ const CategoryModal = ({ onClose }) => {
   return (
     <div>
       <Modal onClose={onClose}>
-        <CategoryInput placeholder="카테고리 이름을 입력해주세요"></CategoryInput>
+        <CategoryInput
+          onChange={(e) => {
+            CategoryNameHandler(e);
+          }}
+          placeholder="카테고리 이름을 입력해주세요"
+        ></CategoryInput>
         <div>
           <div>
             <p>색상</p>
@@ -49,14 +77,22 @@ const CategoryModal = ({ onClose }) => {
                     <SelectBtn
                       backGroundColor={val.value}
                       value={val.value}
+                      onClick={(e) => {
+                        CategoryColorHandler(e);
+                      }}
                     ></SelectBtn>
                   </div>
                 );
               })}
             </SelectColorDiv>
             <div>
-              <button name="확인" />
-              <button>추가하기</button>
+              <button
+                onClick={() => {
+                  AddCategoryHandler();
+                }}
+              >
+                추가하기
+              </button>
               <button onClick={onClose}>Close</button>
             </div>
           </div>

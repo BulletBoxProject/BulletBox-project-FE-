@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import CategoryModal from "./CategoryModal";
+import { BsFillPlusCircleFill } from "react-icons/bs";
 
-const CategoryBtn = () => {
+const CategoryAddBtn = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const onClickButton = () => {
@@ -10,13 +11,13 @@ const CategoryBtn = () => {
   };
   return (
     <div>
-      <button
+      <AddButton
         onClick={() => {
           onClickButton();
         }}
       >
-        추가하기
-      </button>
+        <AddCategoryIcon />
+      </AddButton>
       {isOpen && (
         <CategoryModal
           onClose={() => {
@@ -28,4 +29,17 @@ const CategoryBtn = () => {
   );
 };
 
-export default CategoryBtn;
+export default CategoryAddBtn;
+
+const AddButton = styled.button`
+  width: 6.7vw;
+  height: 3.3vh;
+  background-color: transparent;
+  border: none;
+`;
+
+const AddCategoryIcon = styled(BsFillPlusCircleFill)`
+  fill: var(--color-main);
+  width: 6.7vw;
+  height: 3.3vh;
+`;
