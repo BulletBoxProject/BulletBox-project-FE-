@@ -77,9 +77,9 @@ const Button = styled.button`
   /* border-radius: 8px; */
   /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15); */
   /* background-color: var(--color-light-gray); */
-  & > :active,
-  & > :hover {
-    background-color: var(--color-main);
+  &:active,
+  &:hover {
+    background-color: var(--color-light-gray);
   }
 `;
 const DiaryBtn = styled(SlNotebook)`

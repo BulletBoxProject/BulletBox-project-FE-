@@ -78,7 +78,6 @@ export default DailyLogContainer;
 
 const Container = styled.div`
   font-family: cursive;
-  padding: 0 3.9% 4.05vh 3.9%;
 `;
 const DateAndSelectDiv = styled.div`
   position: relative;

@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import { HiSearch } from "react-icons/hi";
 
 const SearchContainer = () => {
   return (
     <SearchBox>
       <InputSearch type="text" placeholder="검색어를 입력하세요"></InputSearch>
-      <button>검색</button>
+      <SearchBtn>
+        <SearchImg />
+      </SearchBtn>
     </SearchBox>
   );
 };
@@ -25,6 +28,20 @@ const InputSearch = styled.input`
   border: transparent;
   padding: 10px;
   width: 70%;
+  :focus {
+    outline: none;
+  }
+`;
+
+const SearchImg = styled(HiSearch)`
+  width: 95%;
+  height: 2vh;
+  background-color: var(--color-light-gray);
+`;
+
+const SearchBtn = styled.button`
+  background-color: var(--color-light-gray);
+  border: 1px;
   :focus {
     outline: none;
   }

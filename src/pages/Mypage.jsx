@@ -8,22 +8,17 @@ const Mypage = () => {
   const [showInfo, setShowInfo] = useState(1);
 
   return (
-    <Container>
+    <div>
       <MypageContainer />
       <MypageInfoBox>
         <MypageInfoButton showInfo={showInfo} setShowInfo={setShowInfo} />
         <MypageInfoScreen showInfo={showInfo} />
       </MypageInfoBox>
-    </Container>
+    </div>
   );
 };
 
 export default Mypage;
-
-const Container = styled.div`
-  height: 80vh;
-  margin: 5%;
-`;
 
 const MypageInfoBox = styled.div`
   margin-top: 15%;

@@ -58,8 +58,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 83vh;
-  padding: 0 3.9% 4.05vh 3.9%;
 `;
 const CalendarDiv = styled.div`
   position: relative;

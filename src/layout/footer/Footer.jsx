@@ -13,12 +13,12 @@ const Footer = () => {
 export default Footer;
 
 const FooterDiv = styled.div`
-  position: relative;
+  position: fixed;
   display: flex;
   width: 100%;
   justify-content: flex-end;
   bottom: 0;
   right: 0;
-  margin-right: 7%;
+
   background-color: var(--color-main);
 `;

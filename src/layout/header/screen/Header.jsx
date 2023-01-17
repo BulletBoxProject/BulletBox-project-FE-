@@ -44,10 +44,16 @@ const Header = () => {
 
 export default Header;
 const HeaderDiv = styled.div`
+  position: fixed;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-top: 8%;
+  justify-content: center;
+  padding-top: 8%;
+  background-color: white;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  width: 100%;
 `;
 
 const HeaderBtn = styled.button`
@@ -55,8 +61,7 @@ const HeaderBtn = styled.button`
   border: none;
 `;
 const Logo = styled(logoIcon)`
-  padding-left: 25%;
-  width: 33%;
+  width: 35%;
 `;
 
 const Question_Icon = styled(icon)`
@@ -65,9 +70,8 @@ const Question_Icon = styled(icon)`
 `;
 
 const Button = styled.button`
-  position: absolute;
   border-radius: 60%;
-  left: 85vw;
+
   background-color: white;
   border: white;
   -webkit-tap-highlight-color: transparent !important;
