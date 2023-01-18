@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import CategoryAddBtn from "../components/CategoryAddBtn";
+import CategoryUpdateBtn from "../components/CategoryUpdateBtn";
 import { useDispatch } from "react-redux";
 import { __getCategory } from "../../../../../redux/modules/categorySlice";
 import { __deleteCategory } from "../../../../../redux/modules/categorySlice";
@@ -12,6 +13,7 @@ const CatergoryList = () => {
   const categoryList = useSelector(
     (state) => state?.category?.category?.categories
   );
+  console.log(categoryList, "23");
 
   useEffect(() => {
     dispatch(__getCategory());
@@ -27,9 +29,12 @@ const CatergoryList = () => {
         {categoryList?.map((val) => {
           return (
             <div key={val.categoryId}>
-              <CategoryBtn backgroundColor={val.categoryColor}>
+              <CategoryUpdateBtn
+                id={val.categoryId}
+                backgroundColor={val.categoryColor}
+              >
                 {val.categoryName}
-              </CategoryBtn>
+              </CategoryUpdateBtn>
               <button
                 onClick={() => {
                   deleteCategoryHandler(val.categoryId);
@@ -72,13 +77,4 @@ const CategoryAddDiv = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 5%;
-`;
-
-const CategoryBtn = styled.button`
-  width: 18vw;
-  height: 4vh;
-  font-weight: 600;
-  border-radius: 10px;
-  border: none;
-  background-color: ${({ backgroundColor }) => backgroundColor || "#D9D9D9"};
 `;

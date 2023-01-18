@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Modal from "../../../../common/modal/Modal";
 import { useDispatch } from "react-redux";
-import { __postCategory } from "../../../../../redux/modules/categorySlice";
+import { __putCategory } from "../../../../../redux/modules/categorySlice";
 
-const CategoryModal = ({ onClose }) => {
-  const [categoryName, setCategoryName] = useState("");
-  const [categoryColor, setCategoryColor] = useState("");
+const CategoryUpdateModal = ({ id, backgroundColor, name, onClose }) => {
+  const [categoryName, setCategoryName] = useState(name);
+  const [categoryColor, setCategoryColor] = useState(backgroundColor);
 
   const dispatch = useDispatch();
+  console.log(id, backgroundColor, name, "55");
 
   const CategoryNameHandler = (e) => {
     const value = e.target.value;
@@ -18,12 +19,13 @@ const CategoryModal = ({ onClose }) => {
     setCategoryColor(e.target.value);
   };
 
-  const AddCategoryHandler = () => {
+  const UpdateCategoryHandler = () => {
     const categoryInfo = {
+      id: id,
       categoryName: categoryName,
       categoryColor: categoryColor,
     };
-    dispatch(__postCategory(categoryInfo));
+    dispatch(__putCategory(categoryInfo));
   };
 
   const tagColorList = [
@@ -88,10 +90,10 @@ const CategoryModal = ({ onClose }) => {
             <div>
               <button
                 onClick={() => {
-                  AddCategoryHandler();
+                  UpdateCategoryHandler();
                 }}
               >
-                추가하기
+                수정하기
               </button>
               <button onClick={onClose}>Close</button>
             </div>
@@ -102,7 +104,7 @@ const CategoryModal = ({ onClose }) => {
   );
 };
 
-export default CategoryModal;
+export default CategoryUpdateModal;
 
 const SelectColorDiv = styled.div`
   width: 15rem;
