@@ -7,7 +7,7 @@ import { IoMdClose } from "react-icons/io";
 const AddMemoDiv = ({ AddTodoInput, setAddTodoInput, memos }) => {
   const [showMemo, setShowMemo] = useState(false);
   const [memoInput, setMemoInput] = useState("");
-  
+
   const addMemoHanlder = () => {
     setShowMemo(!showMemo);
   };
@@ -30,7 +30,7 @@ const AddMemoDiv = ({ AddTodoInput, setAddTodoInput, memos }) => {
       memos: memos,
     });
   };
-  
+
   let num = 0;
   return (
     <Container>
