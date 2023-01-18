@@ -41,7 +41,7 @@ const LogInInput = () => {
         navigate(`/home`);
         setCookies("Authorization", res.headers.authorization, {
           path: "/",
-          maxAge: 1750,
+          maxAge: 17500,
         });
       }
     });

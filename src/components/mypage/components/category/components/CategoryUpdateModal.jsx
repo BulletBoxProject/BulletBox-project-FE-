@@ -1,8 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import Modal from "../../common/modal/Modal";
+import Modal from "../../../../common/modal/Modal";
+import { useDispatch } from "react-redux";
+import { __putCategory } from "../../../../../redux/modules/categorySlice";
 
-const CategoryModal = ({ onClose }) => {
+const CategoryUpdateModal = ({ id, backgroundColor, name, onClose }) => {
+  const [categoryName, setCategoryName] = useState(name);
+  const [categoryColor, setCategoryColor] = useState(backgroundColor);
+
+  const dispatch = useDispatch();
+  console.log(id, backgroundColor, name, "55");
+
+  const CategoryNameHandler = (e) => {
+    const value = e.target.value;
+    setCategoryName(value);
+  };
+  const CategoryColorHandler = (e) => {
+    setCategoryColor(e.target.value);
+  };
+
+  const UpdateCategoryHandler = () => {
+    const categoryInfo = {
+      id: id,
+      categoryName: categoryName,
+      categoryColor: categoryColor,
+    };
+    dispatch(__putCategory(categoryInfo));
+  };
+
   const tagColorList = [
     { key: 0, value: "#FF8B8B" },
     { key: 1, value: "#FFCA8B" },
@@ -38,7 +63,12 @@ const CategoryModal = ({ onClose }) => {
   return (
     <div>
       <Modal onClose={onClose}>
-        <CategoryInput placeholder="카테고리 이름을 입력해주세요"></CategoryInput>
+        <CategoryInput
+          onChange={(e) => {
+            CategoryNameHandler(e);
+          }}
+          placeholder="카테고리 이름을 입력해주세요"
+        ></CategoryInput>
         <div>
           <div>
             <p>색상</p>
@@ -47,16 +77,24 @@ const CategoryModal = ({ onClose }) => {
                 return (
                   <div key={val.key}>
                     <SelectBtn
-                      backGroundColor={val.value}
+                      backgroundColor={val.value}
                       value={val.value}
+                      onClick={(e) => {
+                        CategoryColorHandler(e);
+                      }}
                     ></SelectBtn>
                   </div>
                 );
               })}
             </SelectColorDiv>
             <div>
-              <button name="확인" />
-              <button>추가하기</button>
+              <button
+                onClick={() => {
+                  UpdateCategoryHandler();
+                }}
+              >
+                수정하기
+              </button>
               <button onClick={onClose}>Close</button>
             </div>
           </div>
@@ -66,7 +104,7 @@ const CategoryModal = ({ onClose }) => {
   );
 };
 
-export default CategoryModal;
+export default CategoryUpdateModal;
 
 const SelectColorDiv = styled.div`
   width: 15rem;
@@ -84,7 +122,7 @@ const SelectBtn = styled.button`
   height: 2rem;
   border-radius: 8px;
   border: none;
-  background-color: ${({ backGroundColor }) => backGroundColor};
+  background-color: ${({ backgroundColor }) => backgroundColor};
 `;
 
 const CategoryInput = styled.input`
