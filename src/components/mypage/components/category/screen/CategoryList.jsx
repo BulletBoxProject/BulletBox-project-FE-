@@ -12,17 +12,13 @@ const CatergoryList = () => {
   const categoryList = useSelector(
     (state) => state?.category?.category?.categories
   );
-  const categoryList2 = useSelector((state) => state);
-
-  console.log(categoryList, "1");
-  console.log(categoryList2, "state1");
 
   useEffect(() => {
     dispatch(__getCategory());
   }, [dispatch]);
 
-  const deleteCategoryHandler = (e) => {
-    dispatch(__deleteCategory(e));
+  const deleteCategoryHandler = (categoryId) => {
+    dispatch(__deleteCategory(categoryId));
   };
 
   return (
@@ -44,7 +40,6 @@ const CatergoryList = () => {
             </div>
           );
         })}
-        <CategoryBtn backgroundColor={"red"}>카테고리</CategoryBtn>
       </CategoryAddList>
       <CategoryAddDiv>
         <CategoryAddBtn></CategoryAddBtn>
