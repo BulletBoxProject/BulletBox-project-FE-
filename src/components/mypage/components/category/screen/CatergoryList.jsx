@@ -1,27 +1,46 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import CategoryAddBtn from "../components/CategoryAddBtn";
 import { useDispatch } from "react-redux";
 import { __getCategory } from "../../../../../redux/modules/categorySlice";
+import { __deleteCategory } from "../../../../../redux/modules/categorySlice";
 import { useSelector } from "react-redux";
 
 const CatergoryList = () => {
   const dispatch = useDispatch();
+
+  // if isLoding = true => 로딩화면 띄워지기
+
   const categoryList = useSelector(
-    (state) => state.category.category.categories
+    (state) => state?.category?.category?.categories
   );
+  console.log(categoryList, "1");
 
   useEffect(() => {
     dispatch(__getCategory());
   }, [dispatch]);
+
+  const deleteCategoryHandler = (e) => {
+    dispatch(__deleteCategory(e));
+  };
+
   return (
     <Container>
       <CategoryAddList>
-        {categoryList.map((val) => {
+        {categoryList?.map((val) => {
           return (
-            <CategoryBtn backgroundColor={val.categoryColor}>
-              {val.categoryName}
-            </CategoryBtn>
+            <div key={val.categoryId}>
+              <CategoryBtn backgroundColor={val.categoryColor}>
+                {val.categoryName}
+              </CategoryBtn>
+              <button
+                onClick={() => {
+                  deleteCategoryHandler(val.categoryId);
+                }}
+              >
+                삭제
+              </button>
+            </div>
           );
         })}
         <CategoryBtn backgroundColor={"red"}>카테고리</CategoryBtn>
