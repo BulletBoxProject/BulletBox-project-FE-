@@ -9,12 +9,13 @@ import { useSelector } from "react-redux";
 const CatergoryList = () => {
   const dispatch = useDispatch();
 
-  // if isLoding = true => 로딩화면 띄워지기
-
   const categoryList = useSelector(
     (state) => state?.category?.category?.categories
   );
+  const categoryList2 = useSelector((state) => state);
+
   console.log(categoryList, "1");
+  console.log(categoryList2, "state1");
 
   useEffect(() => {
     dispatch(__getCategory());

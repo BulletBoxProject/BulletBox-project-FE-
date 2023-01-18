@@ -1,5 +1,5 @@
 import React from "react";
-import CategoryList from "../components/category/screen/CatergoryList";
+import CategoryList from "../components/category/screen/CategoryList";
 import AlwaysTodo from "../components/alwaystodo/AlwaysTodo";
 import styled from "styled-components";
 

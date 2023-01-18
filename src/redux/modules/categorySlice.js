@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { baseURLApiV1 } from "../../core/api";
+import { current } from "@reduxjs/toolkit";
 
 // 초기값 설정
 const initialState = {
-  isLoading: false,
+  category: [],
 };
 
 // thunk
@@ -35,7 +36,6 @@ export const __deleteCategory = createAsyncThunk(
   "category/deleteCategory",
   async (payload, thunkAPI) => {
     try {
-      console.log(payload, "111");
       const { data } = await baseURLApiV1.delete(`categories/${payload}`);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
@@ -56,8 +56,11 @@ const categorySlice = createSlice({
       })
 
       .addCase(__postCategory.fulfilled, (state, action) => {
-        //   state.categoryName = action.payload.data.categoryName;
-        //   state.categoryColor = action.payload.data.categoryColor;
+        console.log(current(state), "state2");
+        state.category.categories = [
+          ...state.category.categories,
+          action.payload.data,
+        ];
       })
       .addCase(__postCategory.rejected, (state, action) => {
         console.log(action.payload.response.data.msg);
@@ -68,12 +71,7 @@ const categorySlice = createSlice({
       })
       .addCase(__deleteCategory.fulfilled, (state, action) => {
         state.isLoading = false;
-        console.log(action.payload.data, "22");
-        console.log(state.category, "33");
-        state.category = state.category.filter(
-          (category) =>
-            category.category.categoryId !== action.payload.data.categoryId
-        );
+        console.log(action.payload.data, "delete");
       })
       .addCase(__deleteCategory.rejected, (state, action) => {
         state.isLoading = false;
