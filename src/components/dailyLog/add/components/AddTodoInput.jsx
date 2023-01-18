@@ -31,19 +31,25 @@ const AddTodoInput = () => {
       day: today.getDate(),
     });
   }, []);
-  const postTodo = async (AddTodoInput) => {
-    try {
-      const data = await baseURLApiV1.post("/dailys/todo", AddTodoInput);
+  const postTodo = async (AddTodoInput, setAddTodoInput) => {
+    let memos = AddTodoInput.memos;
+    memos = memos.map((memo) =>
+      delete memo.memoId === true
+        ? { ...memo, memoContent: memo.memoContent }
+        : null
+    );
+    // try {
+    //   const data = await baseURLApiV1.post("/dailys/todo", AddTodoInput);
 
-      if (data.data.httpStatusCode === 200) {
-        return data;
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    //   if (data.data.httpStatusCode === 200) {
+    //     return data;
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
   const submitTodoHandler = () => {
-    postTodo();
+    postTodo(AddTodoInput);
     // navigate("/dailys");
   };
   return (
