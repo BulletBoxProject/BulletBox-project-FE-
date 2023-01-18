@@ -9,7 +9,7 @@ const CategoryUpdateModal = ({ id, backgroundColor, name, onClose }) => {
   const [categoryColor, setCategoryColor] = useState(backgroundColor);
 
   const dispatch = useDispatch();
-  console.log(id, backgroundColor, name, "55");
+  const onCloseHandler = onClose;
 
   const CategoryNameHandler = (e) => {
     const value = e.target.value;
@@ -26,6 +26,7 @@ const CategoryUpdateModal = ({ id, backgroundColor, name, onClose }) => {
       categoryColor: categoryColor,
     };
     dispatch(__putCategory(categoryInfo));
+    onCloseHandler();
   };
 
   const tagColorList = [
