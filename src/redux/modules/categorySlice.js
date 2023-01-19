@@ -60,6 +60,7 @@ export const __deleteCategory = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await baseURLApiV1.delete(`categories/${payload}`);
+      alert(data.msg);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

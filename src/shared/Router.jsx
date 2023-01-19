@@ -1,5 +1,4 @@
 import React from "react";
-
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "../layout/Layout";
 import LogIn from "../pages/LogIn";

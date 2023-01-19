@@ -42,6 +42,6 @@ const Button = styled.button`
   border-bottom: 1px solid var(--color-light-gray);
   &:active,
   &:hover {
-    border-bottom: 2px solid var(--color-black);
+    border-bottom: 4px solid var(--color-main);
   }
 `;

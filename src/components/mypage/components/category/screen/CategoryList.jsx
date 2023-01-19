@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import CategoryAddBtn from "../components/CategoryAddBtn";
 import CategoryUpdateBtn from "../components/CategoryUpdateBtn";
 import { useDispatch } from "react-redux";
 import { __getCategory } from "../../../../../redux/modules/categorySlice";
-import { __deleteCategory } from "../../../../../redux/modules/categorySlice";
 import { useSelector } from "react-redux";
 
 const CatergoryList = () => {
@@ -19,36 +17,27 @@ const CatergoryList = () => {
     dispatch(__getCategory());
   }, [dispatch]);
 
-  const deleteCategoryHandler = (categoryId) => {
-    dispatch(__deleteCategory(categoryId));
-  };
-
   return (
     <Container>
       <CategoryAddList>
-        {categoryList?.map((val) => {
-          return (
-            <div key={val.categoryId}>
-              <CategoryUpdateBtn
-                id={val.categoryId}
-                backgroundColor={val.categoryColor}
-              >
-                {val.categoryName}
-              </CategoryUpdateBtn>
-              <button
-                onClick={() => {
-                  deleteCategoryHandler(val.categoryId);
-                }}
-              >
-                삭제
-              </button>
-            </div>
-          );
-        })}
+        {categoryList == 0 ? (
+          <CategoryAddPtag>카테고리를 추가해보세요.</CategoryAddPtag>
+        ) : (
+          categoryList?.map((val) => {
+            return (
+              <div key={val.categoryId}>
+                <CategoryUpdateBtn
+                  id={val.categoryId}
+                  backgroundColor={val.categoryColor}
+                >
+                  {val.categoryName}
+                </CategoryUpdateBtn>
+              </div>
+            );
+          })
+        )}
       </CategoryAddList>
-      <CategoryAddDiv>
-        <CategoryAddBtn></CategoryAddBtn>
-      </CategoryAddDiv>
+      <CategoryAddDiv></CategoryAddDiv>
     </Container>
   );
 };
@@ -68,8 +57,9 @@ const CategoryAddList = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 0.2rem;
+  gap: 0.8rem;
   flex-wrap: wrap;
+  margin-top: 15%;
 `;
 
 const CategoryAddDiv = styled.div`
@@ -77,4 +67,8 @@ const CategoryAddDiv = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 5%;
+`;
+
+const CategoryAddPtag = styled.p`
+  font-size: 1.2rem;
 `;

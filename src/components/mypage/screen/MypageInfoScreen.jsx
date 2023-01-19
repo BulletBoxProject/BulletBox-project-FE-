@@ -23,8 +23,7 @@ const MypageInfoScreen = ({ showInfo }) => {
 export default MypageInfoScreen;
 
 const Container = styled.div`
-  min-height: 25vh;
-  border: 2px solid var(--color-light-gray);
-  border-radius: 5px;
+  min-height: 30vh;
+  overflow: auto;
   margin-top: 5%;
 `;
