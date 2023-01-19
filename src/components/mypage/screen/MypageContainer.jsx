@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as Logo } from "../../../img/logo/logo-graphic.svg";
 import { baseURLApiV1 } from "../../../core/api";
+import { useNavigate } from "react-router-dom";
 
 const MypageContainer = () => {
   const [email, setEmail] = useState("");
   const [nickname, setNicknmae] = useState("");
+  const navigate = useNavigate();
 
   const getMypage = async () => {
     try {
@@ -15,6 +17,7 @@ const MypageContainer = () => {
         setNicknmae(data.data.data.nickname);
       }
     } catch (error) {
+      navigate("/login");
       console.log(error);
     }
   };
