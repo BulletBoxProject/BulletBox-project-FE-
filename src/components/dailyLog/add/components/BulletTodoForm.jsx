@@ -37,20 +37,20 @@ const BulletTodoForm = ({ AddTodoInput, setAddTodoInput }) => {
       </BulletSelectButton>
       {showBullet ? (
         <BulletList>
-          <option onClick={selectBulletHandler} value={"todo"}>
-            todo
+          <option onClick={selectBulletHandler} value={"할 일"}>
+            할 일
           </option>
-          <option onClick={selectBulletHandler} value={"complete"}>
-            complete
+          <option onClick={selectBulletHandler} value={"완료"}>
+            완료
           </option>
-          <option onClick={selectBulletHandler} value={"postpone"}>
-            postpone
+          <option onClick={selectBulletHandler} value={"미룬 일"}>
+            미룬 일
           </option>
-          <option onClick={selectBulletHandler} value={"important"}>
-            important
+          <option onClick={selectBulletHandler} value={"중요"}>
+            중요
           </option>
-          <option onClick={selectBulletHandler} value={"memo"}>
-            memo
+          <option onClick={selectBulletHandler} value={"메모"}>
+            메모
           </option>
         </BulletList>
       ) : null}
