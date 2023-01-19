@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import Modal from "../../footer/components/Modal";
+import Modal from "../components/Modal";
 import { ReactComponent as icon } from "../../../img/menu/help.svg";
 import { ReactComponent as logoIcon } from "../../../img/logo/logo-type-bold.svg";
 
@@ -48,7 +48,8 @@ const HeaderDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 3vh;
+  padding-top: 4vh;
+  margin-bottom: 1.5vh;
   background-color: white;
   top: 0px;
   left: 0px;
@@ -61,7 +62,8 @@ const HeaderBtn = styled.button`
   border: none;
 `;
 const Logo = styled(logoIcon)`
-  width: 35%;
+  width: 33%;
+  margin-left: 6%;
 `;
 
 const Question_Icon = styled(icon)`
