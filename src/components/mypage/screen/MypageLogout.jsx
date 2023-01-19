@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { removeCookies } from "../../../core/cookieControler";
 import styled from "styled-components";
-import { ReactComponent as Logout } from "../../../img/menu/logout.svg";
+import { ReactComponent as Logout } from "../../../img/myPage/logout.svg";
 
 const MypageLogout = () => {
   const navigate = useNavigate();

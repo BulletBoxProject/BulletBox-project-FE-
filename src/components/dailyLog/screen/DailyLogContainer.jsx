@@ -9,7 +9,7 @@ import NavigationMenu from "../../../layout/footer/components/NavigationMenu";
 import SelectCategory from "../../common/SelectCategory";
 import ToggleSwitch from "../../common/ToggleSwitch";
 
-import { ReactComponent as moreIcon } from "../../../img/navi/more.svg";
+import { ReactComponent as moreIcon } from "../../../img/dailyLog/more.svg";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 
 import { ReactComponent as todoBullet } from "../../../img/bullet/todo-1.svg";
@@ -60,6 +60,9 @@ const DailyLogContainer = () => {
               </span>
               <span>추가한 할 일 목록입니다.</span>
             </TodoBodyDiv>
+            <OptionButton onClick={() => console.log("option click!")}>
+              <MoreIcon />
+            </OptionButton>
             <OptionButton onClick={() => console.log("option click!")}>
               <MoreIcon />
             </OptionButton>

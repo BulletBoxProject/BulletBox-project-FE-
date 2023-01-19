@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Modal from "../components/Modal";
-import { ReactComponent as icon } from "../../../img/menu/help.svg";
+import { ReactComponent as icon } from "../../../img/etc/help.svg";
 import { ReactComponent as logoIcon } from "../../../img/logo/logo-type-bold.svg";
 
 const Header = () => {

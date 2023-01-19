@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 import { useNavigate } from "react-router-dom";
 
-import { ReactComponent as homeMenuIcon } from "../../../img/log/home.svg";
-import { ReactComponent as dailyLogIcon } from "../../../img/log/dailylog.svg";
+import { ReactComponent as homeMenuIcon } from "../../../img/tabBar/home.svg";
+import { ReactComponent as dailyLogIcon } from "../../../img/tabBar/daily.svg";
 import { BsPerson } from "react-icons/bs";
 import { HiSearch } from "react-icons/hi";
 import { SlNotebook } from "react-icons/sl";
