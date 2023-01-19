@@ -35,18 +35,19 @@ const AddTodoInput = () => {
     let memos = AddTodoInput.memos;
     memos = memos.map((memo) =>
       delete memo.memoId === true
-        ? { ...memo, memoContent: memo.memoContent }
+        ? { ...memo, todoMemoContent: memo.todoMemoContent }
         : null
     );
-    // try {
-    //   const data = await baseURLApiV1.post("/dailys/todo", AddTodoInput);
+    // console.log(memos);
+    try {
+      const data = await baseURLApiV1.post("/dailys/todo", AddTodoInput);
 
-    //   if (data.data.httpStatusCode === 200) {
-    //     return data;
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
+      if (data.data.httpStatusCode === 200) {
+        return data;
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   const submitTodoHandler = () => {
     postTodo(AddTodoInput);

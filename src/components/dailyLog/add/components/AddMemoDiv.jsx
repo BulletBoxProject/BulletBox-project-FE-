@@ -21,7 +21,7 @@ const AddMemoDiv = ({ AddTodoInput, setAddTodoInput, memos }) => {
       memos: [
         ...memos,
         {
-          memoContent: memoInput,
+          todoMemoContent: memoInput,
           memoId: memos.length === 0 ? 1 : memos.pop().memoId + 1,
         },
       ],
@@ -46,7 +46,7 @@ const AddMemoDiv = ({ AddTodoInput, setAddTodoInput, memos }) => {
           : memos.map((memo, idx) => (
               <MemoCard id={idx} key={num++}>
                 <span>memo</span>
-                <span>{memo.memoContent}</span>
+                <span>{memo.todoMemoContent}</span>
                 <MemoDeleteButton id={idx} onClick={memoDeleteHanlder}>
                   <CancelMemoIcon />
                 </MemoDeleteButton>
