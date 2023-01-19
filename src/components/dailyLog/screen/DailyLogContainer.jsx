@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+
+import { baseURLApiV1 } from "../../../core/api";
 
 import NavigationMenu from "../../../layout/footer/components/NavigationMenu";
 
@@ -29,6 +31,19 @@ const DailyLogContainer = () => {
     console.log("clicked");
     setShowSelectBox(!showSelectBox);
   };
+  const loadDailyLog = async () => {
+    try {
+      const data = await baseURLApiV1.get("/dailys");
+      if (data.data.httpStatusCode === 200) {
+        return console.log(data.data.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    loadDailyLog();
+  }, []);
   return (
     <Container>
       <DateAndSelectDiv>
