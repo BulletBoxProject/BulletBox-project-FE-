@@ -3,6 +3,7 @@ import styled from "styled-components";
 import MypageContainer from "../components/mypage/screen/MypageContainer";
 import MypageInfoButton from "../components/mypage/screen/MypageInfoButton";
 import MypageInfoScreen from "../components/mypage/screen/MypageInfoScreen";
+import MypageLogout from "../components/mypage/screen/MypageLogout";
 
 const Mypage = () => {
   const [showInfo, setShowInfo] = useState(1);
@@ -13,6 +14,7 @@ const Mypage = () => {
       <MypageInfoBox>
         <MypageInfoButton showInfo={showInfo} setShowInfo={setShowInfo} />
         <MypageInfoScreen showInfo={showInfo} />
+        <MypageLogout />
       </MypageInfoBox>
     </div>
   );
