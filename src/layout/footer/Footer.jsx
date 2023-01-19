@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import NavigationMenu from "../../components/common/NavigationMenu";
+import NavigationMenu from "./components/NavigationMenu";
 
 const Footer = () => {
   return (
@@ -17,5 +17,4 @@ const FooterDiv = styled.div`
   display: flex;
   width: 100%;
   bottom: 0;
-  background-color: var(--color-main);
 `;

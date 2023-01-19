@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-import NavigationMenu from "../../common/NavigationMenu";
+import NavigationMenu from "../../../layout/footer/components/NavigationMenu";
 
 import SelectCategory from "../../common/SelectCategory";
 import ToggleSwitch from "../../common/ToggleSwitch";

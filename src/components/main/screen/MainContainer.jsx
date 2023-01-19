@@ -5,7 +5,7 @@ import uuid from "react-uuid";
 
 import { baseURLApiV1 } from "../../../core/api";
 
-import NavigationMenu from "../../common/NavigationMenu";
+import NavigationMenu from "../../../layout/footer/components/NavigationMenu";
 
 import SelectCategory from "../../common/SelectCategory";
 import BulletDiv from "../components/BulletDiv";
