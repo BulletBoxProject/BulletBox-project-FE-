@@ -10,6 +10,10 @@ export const getCookies = (id) => {
   return cookies.get(id);
 };
 
+export const removeCookies = (id) => {
+  return cookies.remove(id);
+};
+
 function cookieControler() {
   return null;
 }
