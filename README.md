@@ -70,22 +70,7 @@
 
 - 기능별로 PR을 보내자 (레포 → 서비스 → 컨트롤러를 아우르는 한 사이클)
 - PR 제목 : [feat/refactor/docs/…] 이슈 이름
-    - 다음 이모지 사용
-    
-    ```java
-    🚀 Release
-    🐛 Fix
-    ✨ Feat
-    📝 Doc
-    ♻️ Refactor
-    🔧 Chore
-    ⏪️ Revert
-    🎉 Init
-    ```
-    
-    - ex) `♻️ **Refactor: ResponseDto 재구조화**`
 
- ![image](https://user-images.githubusercontent.com/99157565/213340860-774d4994-e8b7-4681-860f-9cb43486d229.png)
 
     
 - PR 템플릿 형식에 맞게 작성
