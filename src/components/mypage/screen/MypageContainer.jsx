@@ -30,7 +30,7 @@ const MypageContainer = () => {
       <MyInfo>
         <MainLogo />
         <MyDetailInfo>
-          <p>{nickname}</p>
+          <NicknameTag>{nickname}</NicknameTag>
           <p>{email}</p>
         </MyDetailInfo>
       </MyInfo>
@@ -60,4 +60,9 @@ const MainLogo = styled(Logo)`
   height: 11vh;
   background-color: var(--color-main);
   border-radius: 50%;
+`;
+
+const NicknameTag = styled.p`
+  font-size: 1rem;
+  font-weight: bold;
 `;

@@ -10,7 +10,7 @@ const CategoryAddBtn = () => {
     setIsOpen(true);
   };
   return (
-    <div>
+    <AddBtnContainer>
       <AddButton
         onClick={() => {
           onClickButton();
@@ -25,7 +25,7 @@ const CategoryAddBtn = () => {
           }}
         />
       )}
-    </div>
+    </AddBtnContainer>
   );
 };
 
@@ -39,7 +39,14 @@ const AddButton = styled.button`
 `;
 
 const AddCategoryIcon = styled(BsFillPlusCircleFill)`
-  fill: var(--color-main);
+  fill: var(--color-black);
   width: 6.7vw;
   height: 3.3vh;
+`;
+
+const AddBtnContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10%;
 `;
