@@ -4,8 +4,7 @@ import styled from "styled-components";
 import { ReactComponent as todoBullet } from "../../../img/bullet/todo-1.svg";
 import { ReactComponent as checkBullet } from "../../../img/bullet/check-2.svg";
 import { ReactComponent as postphoneBullet } from "../../../img/bullet/postpone-3.svg";
-import { ReactComponent as experienceBullet } from "../../../img/bullet/ex-4.svg";
-import { ReactComponent as memoBullet } from "../../../img/bullet/meno-5.svg";
+import { ReactComponent as memoBullet } from "../../../img/bullet/memo-5.svg";
 import { ReactComponent as importantBullet } from "../../../img/bullet/asterisk-6.svg";
 import { ReactComponent as favoriteBullet } from "../../../img/bullet/star-7.svg";
 
@@ -14,7 +13,6 @@ const BulletDiv = () => {
     { icon: <TodoBullet />, title: "할 일" },
     { icon: <CheckBullet />, title: "완 료" },
     { icon: <PostphoneBullet />, title: "미룬 일" },
-    { icon: <ExperienceBullet />, title: "경 험" },
     { icon: <MemoBullet />, title: "메 모" },
     { icon: <ImportantBullet />, title: "중 요" },
     { icon: <FavoriteBullet />, title: "자 주" },
@@ -62,10 +60,6 @@ const CheckBullet = styled(checkBullet)`
   height: 18px;
 `;
 const PostphoneBullet = styled(postphoneBullet)`
-  width: 24px;
-  height: 18px;
-`;
-const ExperienceBullet = styled(experienceBullet)`
   width: 24px;
   height: 18px;
 `;

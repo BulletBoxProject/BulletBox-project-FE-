@@ -15,8 +15,7 @@ import { BsFillPlusCircleFill } from "react-icons/bs";
 import { ReactComponent as todoBullet } from "../../../img/bullet/todo-1.svg";
 import { ReactComponent as checkBullet } from "../../../img/bullet/check-2.svg";
 import { ReactComponent as postphoneBullet } from "../../../img/bullet/postpone-3.svg";
-import { ReactComponent as experienceBullet } from "../../../img/bullet/ex-4.svg";
-import { ReactComponent as memoBullet } from "../../../img/bullet/meno-5.svg";
+import { ReactComponent as memoBullet } from "../../../img/bullet/memo-5.svg";
 import { ReactComponent as importantBullet } from "../../../img/bullet/asterisk-6.svg";
 import { ReactComponent as favoriteBullet } from "../../../img/bullet/star-7.svg";
 
@@ -49,7 +48,6 @@ const DailyLogContainer = () => {
       <DateAndSelectDiv>
         <DateButton>{today}</DateButton>
         <SelectDiv>
-          <span>카테고리</span>
           <SelectCategory style={{ padding: "10px" }} />
         </SelectDiv>
       </DateAndSelectDiv>
@@ -207,10 +205,6 @@ const CheckBullet = styled(checkBullet)`
   height: 18px;
 `;
 const PostphoneBullet = styled(postphoneBullet)`
-  width: 24px;
-  height: 18px;
-`;
-const ExperienceBullet = styled(experienceBullet)`
   width: 24px;
   height: 18px;
 `;

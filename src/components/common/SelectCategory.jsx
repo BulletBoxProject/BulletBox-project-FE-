@@ -12,7 +12,7 @@ const SelectCategory = () => {
     <div>
       <SelectCategoryDiv>
         <CategoryButton type="button" onClick={categoryShowHandler}>
-          전체 <RxTriangleDown />
+          전체
         </CategoryButton>
         {showCategory ? (
           <CategoryList>
