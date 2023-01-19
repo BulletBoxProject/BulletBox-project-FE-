@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Modal from "../../../../common/modal/Modal";
 import { useDispatch } from "react-redux";
 import { __putCategory } from "../../../../../redux/modules/categorySlice";
+import { __deleteCategory } from "../../../../../redux/modules/categorySlice";
 
 const CategoryUpdateModal = ({ id, backgroundColor, name, onClose }) => {
   const [categoryName, setCategoryName] = useState(name);
@@ -27,6 +28,11 @@ const CategoryUpdateModal = ({ id, backgroundColor, name, onClose }) => {
     };
     dispatch(__putCategory(categoryInfo));
     onCloseHandler();
+  };
+
+  const deleteCategoryHandler = () => {
+    const categoryId = id;
+    dispatch(__deleteCategory(categoryId));
   };
 
   const tagColorList = [
@@ -95,6 +101,13 @@ const CategoryUpdateModal = ({ id, backgroundColor, name, onClose }) => {
                 }}
               >
                 수정하기
+              </button>
+              <button
+                onClick={() => {
+                  deleteCategoryHandler(id);
+                }}
+              >
+                삭제하기
               </button>
               <button onClick={onClose}>Close</button>
             </div>

@@ -4,7 +4,6 @@ import CategoryAddBtn from "../components/CategoryAddBtn";
 import CategoryUpdateBtn from "../components/CategoryUpdateBtn";
 import { useDispatch } from "react-redux";
 import { __getCategory } from "../../../../../redux/modules/categorySlice";
-import { __deleteCategory } from "../../../../../redux/modules/categorySlice";
 import { useSelector } from "react-redux";
 
 const CatergoryList = () => {
@@ -19,10 +18,6 @@ const CatergoryList = () => {
     dispatch(__getCategory());
   }, [dispatch]);
 
-  const deleteCategoryHandler = (categoryId) => {
-    dispatch(__deleteCategory(categoryId));
-  };
-
   return (
     <Container>
       <CategoryAddList>
@@ -35,13 +30,6 @@ const CatergoryList = () => {
               >
                 {val.categoryName}
               </CategoryUpdateBtn>
-              <button
-                onClick={() => {
-                  deleteCategoryHandler(val.categoryId);
-                }}
-              >
-                삭제
-              </button>
             </div>
           );
         })}
