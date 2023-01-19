@@ -135,23 +135,23 @@ const MoreIcon = styled(moreIcon)`
   height: 24px;
 `;
 const AddTodoDiv = styled.div`
-  display: flex;
-  position: relative;
-  justify-content: center;
+  position: fixed;
+  left: 85vw;
+  top: 86vh;
 `;
 const AddTodoButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  /* width: 24px;
+  height: 24px; */
   border: 0;
   background-color: transparent;
 `;
 const AddTodoIcon = styled(BsFillPlusCircleFill)`
   fill: var(--color-main);
-  width: 24px;
-  height: 24px;
+  width: 40px;
+  height: 40px;
 `;
 const AddSelectDiv = styled.div`
   display: flex;
