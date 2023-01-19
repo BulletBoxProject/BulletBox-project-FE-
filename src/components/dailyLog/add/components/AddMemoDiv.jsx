@@ -18,7 +18,13 @@ const AddMemoDiv = ({ AddTodoInput, setAddTodoInput, memos }) => {
   const memoSubmitHandler = () => {
     setAddTodoInput({
       ...AddTodoInput,
-      memos: [...memos, { memoContent: memoInput, memoId: memos.length + 1 }],
+      memos: [
+        ...memos,
+        {
+          todoMemoContent: memoInput,
+          memoId: memos.length === 0 ? 1 : memos.pop().memoId + 1,
+        },
+      ],
     });
     setMemoInput("");
     setShowMemo(false);
@@ -40,7 +46,7 @@ const AddMemoDiv = ({ AddTodoInput, setAddTodoInput, memos }) => {
           : memos.map((memo, idx) => (
               <MemoCard id={idx} key={num++}>
                 <span>memo</span>
-                <span>{memo.memoContent}</span>
+                <span>{memo.todoMemoContent}</span>
                 <MemoDeleteButton id={idx} onClick={memoDeleteHanlder}>
                   <CancelMemoIcon />
                 </MemoDeleteButton>
