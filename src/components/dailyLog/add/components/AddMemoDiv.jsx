@@ -18,7 +18,13 @@ const AddMemoDiv = ({ AddTodoInput, setAddTodoInput, memos }) => {
   const memoSubmitHandler = () => {
     setAddTodoInput({
       ...AddTodoInput,
-      memos: [...memos, { memoContent: memoInput, memoId: memos.length + 1 }],
+      memos: [
+        ...memos,
+        {
+          memoContent: memoInput,
+          memoId: memos.length === 0 ? 1 : memos.pop().memoId + 1,
+        },
+      ],
     });
     setMemoInput("");
     setShowMemo(false);

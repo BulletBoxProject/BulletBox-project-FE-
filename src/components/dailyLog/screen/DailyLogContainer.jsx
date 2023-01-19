@@ -26,6 +26,7 @@ const DailyLogContainer = () => {
     new Date().getMonth() + 1
   } / ${new Date().getDate()} ${day[new Date().getDay()]}`;
   const showAddTodoSelect = () => {
+    console.log("clicked");
     setShowSelectBox(!showSelectBox);
   };
   return (
@@ -135,16 +136,15 @@ const MoreIcon = styled(moreIcon)`
   height: 24px;
 `;
 const AddTodoDiv = styled.div`
-  position: fixed;
-  left: 85vw;
-  top: 86vh;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 63vh;
 `;
 const AddTodoButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  /* width: 24px;
-  height: 24px; */
   border: 0;
   background-color: transparent;
 `;
