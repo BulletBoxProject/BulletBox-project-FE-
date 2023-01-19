@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { ReactComponent as Logo } from "../../../img/logo/logo-graphic.svg";
 import { baseURLApiV1 } from "../../../core/api";
 import { useNavigate } from "react-router-dom";
+import MypageLogout from "./MypageLogout";
 
 const MypageContainer = () => {
   const [email, setEmail] = useState("");
@@ -31,8 +32,9 @@ const MypageContainer = () => {
         <MainLogo />
         <MyDetailInfo>
           <NicknameTag>{nickname}</NicknameTag>
-          <p>{email}</p>
+          <EmailTag>{email}</EmailTag>
         </MyDetailInfo>
+        <MypageLogout />
       </MyInfo>
     </Container>
   );
@@ -48,6 +50,8 @@ const Container = styled.div`
 const MyInfo = styled.div`
   display: flex;
   align-items: center;
+  margin-left: 6%;
+  margin-top: 4%;
 `;
 const MyDetailInfo = styled.div`
   margin-left: 5%;
@@ -56,13 +60,19 @@ const MyDetailInfo = styled.div`
 
 const MainLogo = styled(Logo)`
   fill: white;
-  width: 25%;
-  height: 11vh;
+  width: 20.5%;
+  height: 8.66vh;
   background-color: var(--color-main);
   border-radius: 50%;
 `;
 
 const NicknameTag = styled.p`
-  font-size: 1rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+`;
+
+const EmailTag = styled.p`
+  font-size: 0.7rem;
+  color: #7c7c7c;
   font-weight: bold;
 `;

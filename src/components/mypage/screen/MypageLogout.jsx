@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { removeCookies } from "../../../core/cookieControler";
 import styled from "styled-components";
+import { ReactComponent as Logout } from "../../../img/menu/logout.svg";
 
 const MypageLogout = () => {
   const navigate = useNavigate();
@@ -13,7 +14,9 @@ const MypageLogout = () => {
 
   return (
     <LogoutBtnContainer>
-      <button onClick={logoutHandler}>로그아웃</button>
+      <LogoutBtn onClick={logoutHandler}>
+        <LogoutImg />
+      </LogoutBtn>
     </LogoutBtnContainer>
   );
 };
@@ -24,5 +27,19 @@ const LogoutBtnContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  margin-top: 35%;
+  margin-left: 33%;
+`;
+
+const LogoutBtn = styled.button`
+  background-color: white;
+  border: none;
+  :focus {
+    outline: none;
+  }
+`;
+
+const LogoutImg = styled(Logout)`
+  color: var(--color-main);
+  width: 24px;
+  height: 24px;
 `;

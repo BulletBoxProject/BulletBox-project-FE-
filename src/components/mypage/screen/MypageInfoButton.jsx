@@ -41,7 +41,6 @@ const Button = styled.button`
   border-right: 1px solid var(--color-light-gray);
   border-bottom: 1px solid var(--color-light-gray);
   &:active,
-  &:visited,
   &:hover {
     border-bottom: 4px solid var(--color-main);
   }

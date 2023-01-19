@@ -3,7 +3,6 @@ import styled from "styled-components";
 import MypageContainer from "../components/mypage/screen/MypageContainer";
 import MypageInfoButton from "../components/mypage/screen/MypageInfoButton";
 import MypageInfoScreen from "../components/mypage/screen/MypageInfoScreen";
-import MypageLogout from "../components/mypage/screen/MypageLogout";
 import CategoryAddBtn from "../components/mypage/components/category/components/CategoryAddBtn";
 
 const Mypage = () => {
@@ -16,7 +15,6 @@ const Mypage = () => {
         <MypageInfoButton showInfo={showInfo} setShowInfo={setShowInfo} />
         <MypageInfoScreen showInfo={showInfo} />
         <CategoryAddBtn />
-        <MypageLogout />
       </MypageInfoBox>
     </div>
   );
