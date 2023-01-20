@@ -16,6 +16,7 @@ import BulletCalendar from "../../common/calendar/Calendar";
 const MainContainer = () => {
   const [date, setDate] = useState(new Date());
   const [todoList, setTodoList] = useState([]);
+  console.log(todoList);
   const bulletList = useSelector((state) => state.bullet_main.bulletList);
   console.log("리듀서 상태 저장 값", bulletList);
 
@@ -36,6 +37,7 @@ const MainContainer = () => {
   const today = `${String(new Date().getFullYear()).substr(2, 2)}/${
     new Date().getMonth() + 1
   }/${new Date().getDate()}(${day[new Date().getDay()]})`;
+  let num = 0;
   return (
     <Container>
       <CalendarDiv>
@@ -44,12 +46,18 @@ const MainContainer = () => {
       </CalendarDiv>
       <TodoDiv>
         <DateTitle>{today}</DateTitle>
-        {todoList.map((todo) => (
+        {todoList.length === 0 ? (
           <DailyTodoList>
-            <BulletSwitchList bulletName={todo.todoBulletName} />
-            <TodoTitle>{todo.todoContent}</TodoTitle>
+            <TodoTitle>할일을 추가해주세요.</TodoTitle>
           </DailyTodoList>
-        ))}
+        ) : (
+          todoList.map((todo) => (
+            <DailyTodoList key={num++}>
+              <BulletSwitchList bulletName={todo.todoBulletName} />
+              <TodoTitle>{todo.todoContent}</TodoTitle>
+            </DailyTodoList>
+          ))
+        )}
       </TodoDiv>
     </Container>
   );
