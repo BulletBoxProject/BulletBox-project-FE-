@@ -98,6 +98,7 @@ const SignUpInput = () => {
       alert("유효한 양식에 맞게 입력해주세요");
       return;
     }
+
     postSignup({
       email,
       nickname,
@@ -137,11 +138,7 @@ const SignUpInput = () => {
       ></StInput>
       {passwordConfirm.length > 0 && <span>{passwordConfirmMessage}</span>}
       <StButtonBox>
-        <StSignupBtn
-          type="submit"
-          // disabled={!(isEmail && isNickName && isPassword && isPasswordConfirm)}
-          onClick={onSubmitBtn}
-        >
+        <StSignupBtn type="submit" onClick={onSubmitBtn}>
           회원가입
         </StSignupBtn>
         <CancelBtn
