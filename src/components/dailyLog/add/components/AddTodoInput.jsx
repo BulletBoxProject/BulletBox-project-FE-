@@ -30,7 +30,6 @@ const AddTodoInput = () => {
         ? { ...memo, todoMemoContent: memo.todoMemoContent }
         : null
     );
-    // console.log(memos);
     try {
       const data = await baseURLApiV1.post("/dailys/todo", AddTodoInput);
 
@@ -68,8 +67,15 @@ const AddTodoInput = () => {
       day: today.getDate(),
     });
   }, []);
+  const day = ["일", "월", "화", "수", "목", "금", "토"];
+  const today = `${String(new Date().getFullYear()).substr(2, 2)}/${
+    new Date().getMonth() + 1
+  }/${new Date().getDate()}(${day[new Date().getDay()]})`;
   return (
     <Container>
+      <DateDiv>
+        <DateButton>{today}</DateButton>
+      </DateDiv>
       <TodoAndMemoDiv>
         <BulletTodoForm
           AddTodoInput={AddTodoInput}
@@ -81,8 +87,6 @@ const AddTodoInput = () => {
           memos={AddTodoInput.memos}
         />
       </TodoAndMemoDiv>
-
-      <hr />
       <TimeSettingDiv
         AddTodoInput={AddTodoInput}
         setAddTodoInput={setAddTodoInput}
@@ -108,10 +112,26 @@ const AddTodoInput = () => {
 export default AddTodoInput;
 
 const Container = styled.div``;
+const DateDiv = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 10px;
+`;
+const DateButton = styled.button`
+  padding: 3px 0;
+  color: var(--color-main);
+  font-size: 14px;
+  font-weight: bold;
+  background-color: white;
+  border: 0;
+`;
 
 const TodoAndMemoDiv = styled.div`
   padding: 15px 20px 20px 20px;
   background-color: var(--color-default);
+  border-radius: 8px;
+  margin: 10px auto;
 `;
 
 const AddInputButtonGroup = styled.div`
