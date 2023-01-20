@@ -13,7 +13,8 @@ const MypageInfoButton = ({ showInfo, setShowInfo }) => {
       </Button>
       <Button
         onClick={() => {
-          setShowInfo(2);
+          // setShowInfo(2);
+          alert("추가 기능 구상중");
         }}
       >
         자주 쓰는 할일
@@ -31,17 +32,15 @@ const Container = styled.div`
 
 const Button = styled.button`
   flex: 1;
-  font-size: 0.8rem;
-  font-weight: bold;
+  font-size: 0.9rem;
+  font-weight: 700;
   padding: 0.5rem;
   background: none;
-
-  border-top: 1px solid var(--color-light-gray);
-  border-left: 1px solid var(--color-light-gray);
-  border-right: 1px solid var(--color-light-gray);
-  border-bottom: 1px solid var(--color-light-gray);
+  border: none;
   &:active,
   &:hover {
+    border: none;
     border-bottom: 4px solid var(--color-main);
+    border-radius: 4px;
   }
 `;

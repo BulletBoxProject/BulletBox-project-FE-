@@ -20,7 +20,7 @@ const CatergoryList = () => {
   return (
     <Container>
       <CategoryAddList>
-        {categoryList == 0 ? (
+        {categoryList && categoryList.length === 0 ? (
           <CategoryAddPtag>카테고리를 추가해보세요.</CategoryAddPtag>
         ) : (
           categoryList?.map((val) => {
@@ -59,7 +59,6 @@ const CategoryAddList = styled.div`
   align-items: center;
   gap: 0.8rem;
   flex-wrap: wrap;
-  margin-top: 15%;
 `;
 
 const CategoryAddDiv = styled.div`

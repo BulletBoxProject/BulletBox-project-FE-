@@ -151,9 +151,9 @@ const AddModalBtn = styled.button`
   width: 47.4%;
   height: 7vh;
   font-size: 1rem;
-  font-size: bold;
   border-radius: 8px;
   border: none;
+  font-weight: 700;
 `;
 
 const BtnContainer = styled.div`

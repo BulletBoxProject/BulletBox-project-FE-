@@ -66,7 +66,7 @@ const CategoryUpdateModal = ({ id, backgroundColor, name, onClose }) => {
           }}
           placeholder="카테고리 이름을 입력해주세요"
         ></CategoryInput>
-
+        <TitleLength>({categoryName.length}/8)</TitleLength>
         <SelectColorDiv>
           <SelectWhiteBtn
             onClick={(e) => {
@@ -165,7 +165,7 @@ const AddModalBtn = styled.button`
   width: 47.4%;
   height: 7vh;
   font-size: 1rem;
-  font-size: bold;
+  font-weight: bold;
   border-radius: 8px;
   border: none;
 `;
