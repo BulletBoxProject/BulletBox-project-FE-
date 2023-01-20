@@ -17,7 +17,9 @@ import { ReactComponent as newTodo } from "../../../img/dailyLog/new.svg";
 
 const DailyLogContainer = () => {
   const [showSelectBox, setShowSelectBox] = useState(false);
-
+  const [dailyLogs, setDailyLogs] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  console.log(dailyLogs);
   const navigate = useNavigate();
   const day = ["일", "월", "화", "수", "목", "금", "토"];
   const today = `${String(new Date().getFullYear()).substr(2, 2)}/${
@@ -31,16 +33,19 @@ const DailyLogContainer = () => {
     try {
       const data = await baseURLApiV1.get("/dailys");
       if (data.data.httpStatusCode === 200) {
-        return console.log(data.data.data);
+        return setDailyLogs(data.data.data.daily);
       }
     } catch (error) {
       console.log(error);
     }
   };
   useEffect(() => {
-    // loadDailyLog();
+    loadDailyLog();
+    setIsLoading(!isLoading);
   }, []);
-
+  if (isLoading) {
+    <h1>Loading..</h1>;
+  }
   return (
     <Container>
       <DateAndSelectDiv>
@@ -51,13 +56,12 @@ const DailyLogContainer = () => {
             <IoIosArrowDown />
           </SelectDateButton>
         </DateButtonDiv>
-
         <SelectDiv>
           <SelectCategory style={{ padding: "10px" }} />
         </SelectDiv>
       </DateAndSelectDiv>
       <TodoBulletDiv>
-        <BulletTodoCard />
+        <BulletTodoCard dailyLogs={dailyLogs} />
         <AddTodoDiv>
           <AddTodoButton type="button" onClick={showAddTodoSelect}>
             <AddTodoIcon />
