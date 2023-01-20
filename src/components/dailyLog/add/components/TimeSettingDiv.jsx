@@ -43,11 +43,11 @@ const TimeSettingDiv = ({ AddTodoInput, setAddTodoInput }) => {
     <Container>
       <TimeSetOnOffDiv>
         <SwitchDiv>
+          <SwitchTitle>시간설정</SwitchTitle>
           <OnOffSwitchButton type="button" onClick={showSetTimeHandler}>
             {showTimeSet ? "ON" : "OFF"}
           </OnOffSwitchButton>
         </SwitchDiv>
-        {showTimeSet ? null : <hr style={{ width: " 100%" }} />}
         {showTimeSet ? (
           <SetTimeSelectDiv>
             <SelectHoursDiv>
@@ -57,9 +57,13 @@ const TimeSettingDiv = ({ AddTodoInput, setAddTodoInput }) => {
                   type="button"
                   onClick={showSelectHourHandler}
                 >
-                  {selectTime.hour === 0 ? "선택" : selectTime.hour}
-
-                  <SelectDownIcon />
+                  <span>
+                    {selectTime.hour === 0 ? (
+                      <SelectDownIcon />
+                    ) : (
+                      selectTime.hour
+                    )}
+                  </span>
                 </SelectHoursButton>
                 <span>시</span>
               </SelectButtonDiv>
@@ -79,8 +83,13 @@ const TimeSettingDiv = ({ AddTodoInput, setAddTodoInput }) => {
                   type="button"
                   onClick={showSelectMinuteHandler}
                 >
-                  {selectTime.minute === 0 ? "선택" : selectTime.minute}
-                  <SelectDownIcon />
+                  <span>
+                    {selectTime.minute === 0 ? (
+                      <SelectDownIcon />
+                    ) : (
+                      selectTime.minute
+                    )}
+                  </span>
                 </SelectMinutesButton>
                 <span>분</span>
               </SelectButtonDiv>
@@ -95,7 +104,6 @@ const TimeSettingDiv = ({ AddTodoInput, setAddTodoInput }) => {
             </SelectMinutesDiv>
           </SetTimeSelectDiv>
         ) : null}
-        {showTimeSet ? <hr style={{ width: " 100%" }} /> : null}
       </TimeSetOnOffDiv>
     </Container>
   );
@@ -105,6 +113,8 @@ export default TimeSettingDiv;
 
 const Container = styled.div`
   width: 100%;
+  background-color: var(--color-default);
+  padding: 15px 20px 20px 20px;
 `;
 const TimeSetOnOffDiv = styled.div`
   display: flex;
@@ -116,16 +126,25 @@ const TimeSetOnOffDiv = styled.div`
 const SwitchDiv = styled.div`
   width: 100%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  gap: 20%;
+`;
+const SwitchTitle = styled.div`
+  color: var(--color-gray);
+  font-size: 14px;
 `;
 const OnOffSwitchButton = styled.button`
-  display: flex;
-  justify-self: flex-end;
+  background-color: inherit;
+  border: 0;
+  font-size: 14px;
+  color: var(--color-main);
+  font-weight: 700;
 `;
 const SetTimeSelectDiv = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 60%;
+  width: 50%;
+  margin-top: 10px;
 `;
 const SelectHoursDiv = styled.div`
   display: flex;
@@ -138,15 +157,23 @@ const SelectButtonDiv = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
+  & > span {
+    font-size: 14px;
+  }
 `;
 const SelectHoursButton = styled.button`
   display: flex;
   align-items: center;
   padding: 2px 5px;
+  background-color: inherit;
+  border: 0;
+  & > span {
+    font-size: 14px;
+  }
 `;
 const SelectDownIcon = styled(RxTriangleDown)`
-  width: 15px;
-  height: 15px;
+  width: 20px;
+  height: 20px;
 `;
 const SelectMinutesDiv = styled.div`
   display: flex;
@@ -159,4 +186,9 @@ const SelectMinutesButton = styled.button`
   display: flex;
   align-items: center;
   padding: 2px 5px;
+  background-color: inherit;
+  border: 0;
+  & > span {
+    font-size: 14px;
+  }
 `;

@@ -4,24 +4,28 @@ import { useDispatch, useSelector } from "react-redux";
 
 // import { BsFillPlusCircleFill } from "react-icons/bs";
 
-const CategorySelectDiv = ({ AddTodoInput, setAddTodoInput }) => {
+const CategorySelectDiv = ({ categories, AddTodoInput, setAddTodoInput }) => {
   const categorySelectHandler = (e) => {
-    setAddTodoInput({ ...AddTodoInput, categoryId: Number(e.target.value) });
+    setAddTodoInput({ ...AddTodoInput, categoryId: Number(e.target.id) });
   };
-  const categoryIdArray = [1, 2, 3, 4, 5, 6];
+  const categoryList = categories;
   let num = 0;
   return (
     <Container>
-      {categoryIdArray.map((id) => (
-        <CategoryButton
-          key={num++}
-          type="button"
-          value={id}
-          onClick={categorySelectHandler}
-        >
-          카테고리{id}
-        </CategoryButton>
-      ))}
+      <CategoryTitle>카테고리</CategoryTitle>
+      <ButtonDiv>
+        {categoryList.map((category) => (
+          <CategoryButton
+            key={num++}
+            type="button"
+            id={category.categoryId}
+            backgroundColor={category.categoryColor}
+            onClick={categorySelectHandler}
+          >
+            {category.categoryName}
+          </CategoryButton>
+        ))}
+      </ButtonDiv>
     </Container>
   );
 };
@@ -30,18 +34,34 @@ export default CategorySelectDiv;
 
 const Container = styled.div`
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
   margin: 10px auto;
+  gap: 15px;
+  padding: 15px 20px 20px 20px;
+  width: 100%;
+  background-color: var(--color-default);
+  border-radius: 8px;
+`;
+const CategoryTitle = styled.div`
+  color: var(--color-gray);
+  font-size: 14px;
+`;
+const ButtonDiv = styled.div`
+  display: flex;
+  justify-content: space-around;
   flex-wrap: wrap;
-  gap: 10px;
-  width: 80%;
+  gap: 20px;
+  width: 100%;
 `;
 const CategoryButton = styled.button`
-  width: 30%;
+  background-color: ${(props) => props.backgroundColor};
+  width: 25%;
+  font-size: 14px;
   height: 3em;
   border: 0;
-  &:active,
+  border-radius: 8px;
   &:hover {
-    background-color: var(--color-main);
+    border: 3px solid var(--color-light-gray);
   }
 `;

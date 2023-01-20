@@ -21,16 +21,8 @@ const AddTodoInput = () => {
     day: 4,
     memos: [],
   });
-  console.log(AddTodoInput);
-  useEffect(() => {
-    const today = new Date();
-    setAddTodoInput({
-      ...AddTodoInput,
-      year: today.getFullYear(),
-      month: today.getMonth() + 1,
-      day: today.getDate(),
-    });
-  }, []);
+  const [categories, setCategories] = useState([]);
+  console.log("할일 추가", AddTodoInput);
   const postTodo = async (AddTodoInput, setAddTodoInput) => {
     let memos = AddTodoInput.memos;
     memos = memos.map((memo) =>
@@ -38,7 +30,6 @@ const AddTodoInput = () => {
         ? { ...memo, todoMemoContent: memo.todoMemoContent }
         : null
     );
-    // console.log(memos);
     try {
       const data = await baseURLApiV1.post("/dailys/todo", AddTodoInput);
 
@@ -49,55 +40,70 @@ const AddTodoInput = () => {
       console.log(error);
     }
   };
-  const loadMainPage = async () => {
+  const loadAddTodoPage = async () => {
     try {
       const data = await baseURLApiV1.get(
         "/dailys/todo?year=2023&month=1&day=21"
       );
       if (data.data.httpStatusCode === 200) {
-        return console.log(data.data.data);
+        return setCategories(data.data.data.categories);
       }
     } catch (error) {
       console.log(error);
     }
   };
-  useEffect(() => {
-    loadMainPage();
-  }, []);
   const submitTodoHandler = () => {
     postTodo(AddTodoInput);
 
     navigate("/dailys");
   };
+  useEffect(() => {
+    loadAddTodoPage();
+    const today = new Date();
+    setAddTodoInput({
+      ...AddTodoInput,
+      year: today.getFullYear(),
+      month: today.getMonth() + 1,
+      day: today.getDate(),
+    });
+  }, []);
+  const day = ["일", "월", "화", "수", "목", "금", "토"];
+  const today = `${String(new Date().getFullYear()).substr(2, 2)}/${
+    new Date().getMonth() + 1
+  }/${new Date().getDate()}(${day[new Date().getDay()]})`;
   return (
     <Container>
-      <BulletTodoForm
-        AddTodoInput={AddTodoInput}
-        setAddTodoInput={setAddTodoInput}
-      />
-      <AddMemoDiv
-        AddTodoInput={AddTodoInput}
-        setAddTodoInput={setAddTodoInput}
-        memos={AddTodoInput.memos}
-      />
-      <hr />
+      <DateDiv>
+        <DateButton>{today}</DateButton>
+      </DateDiv>
+      <TodoAndMemoDiv>
+        <BulletTodoForm
+          AddTodoInput={AddTodoInput}
+          setAddTodoInput={setAddTodoInput}
+        />
+        <AddMemoDiv
+          AddTodoInput={AddTodoInput}
+          setAddTodoInput={setAddTodoInput}
+          memos={AddTodoInput.memos}
+        />
+      </TodoAndMemoDiv>
       <TimeSettingDiv
         AddTodoInput={AddTodoInput}
         setAddTodoInput={setAddTodoInput}
       />
       <CategorySelectDiv
+        categories={categories}
         AddTodoInput={AddTodoInput}
         setAddTodoInput={setAddTodoInput}
       />
-      <hr />
 
       <AddInputButtonGroup>
+        <SubmitButton type="button" onClick={submitTodoHandler}>
+          완료
+        </SubmitButton>
         <CancleButton type="button" onClick={() => navigate("/dailys")}>
           취소
         </CancleButton>
-        <SubmitButton type="button" onClick={submitTodoHandler}>
-          확인
-        </SubmitButton>
       </AddInputButtonGroup>
     </Container>
   );
@@ -106,20 +112,51 @@ const AddTodoInput = () => {
 export default AddTodoInput;
 
 const Container = styled.div``;
+const DateDiv = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 10px;
+`;
+const DateButton = styled.button`
+  padding: 3px 0;
+  color: var(--color-main);
+  font-size: 14px;
+  font-weight: bold;
+  background-color: white;
+  border: 0;
+`;
+
+const TodoAndMemoDiv = styled.div`
+  padding: 15px 20px 20px 20px;
+  background-color: var(--color-default);
+  border-radius: 8px;
+  margin: 10px auto;
+`;
 
 const AddInputButtonGroup = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 0 auto;
-  width: 40%;
-`;
-const CancleButton = styled.button`
-  width: 30%;
-  height: 3em;
+  width: 100%;
+  padding: 0 5vw;
+  margin-top: 2vh;
 `;
 const SubmitButton = styled.button`
-  width: 30%;
-  height: 3em;
+  width: 45%;
+  height: 2.7em;
+  font-size: 14px;
   background-color: var(--color-main);
   border: 0;
+  border-radius: 8px;
+  color: white;
+`;
+const CancleButton = styled.button`
+  width: 45%;
+  height: 2.7em;
+  font-size: 14px;
+  border: 0;
+  border-radius: 8px;
+  background-color: var(--color-default);
+  color: var(--color-gray);
 `;

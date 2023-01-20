@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
+import { ReactComponent as memoBullet } from "../../../../img/bullet/memo-5.svg";
+import { ReactComponent as memoAddIcon } from "../../../../img/dailyLog/edit.svg";
 
 const AddMemoDiv = ({ AddTodoInput, setAddTodoInput, memos }) => {
   const [showMemo, setShowMemo] = useState(false);
@@ -45,16 +47,18 @@ const AddMemoDiv = ({ AddTodoInput, setAddTodoInput, memos }) => {
           ? null
           : memos.map((memo, idx) => (
               <MemoCard id={idx} key={num++}>
-                <span>memo</span>
+                <MemoBullet>
+                  <MemoBulletIcon />
+                </MemoBullet>
                 <span>{memo.todoMemoContent}</span>
-                <MemoDeleteButton id={idx} onClick={memoDeleteHanlder}>
-                  <CancelMemoIcon />
-                </MemoDeleteButton>
               </MemoCard>
             ))}
       </MemoList>
       {showMemo ? (
         <AddMemoInputDiv>
+          <MemoBullet>
+            <MemoBulletIcon />
+          </MemoBullet>
           <AddMemoInput
             type="text"
             placeholder="불렛메모를 추가하세요"
@@ -62,13 +66,13 @@ const AddMemoDiv = ({ AddTodoInput, setAddTodoInput, memos }) => {
             value={memoInput}
           />
           <MemoSubmitButton onClick={memoSubmitHandler} type="button">
-            추가
+            <MemoAddIcon />
           </MemoSubmitButton>
         </AddMemoInputDiv>
       ) : null}
-      <AddTodoMemo type="button" onClick={addMemoHanlder}>
+      <AddTodoMemoButton type="button" onClick={addMemoHanlder}>
         <AddMemoIcon />
-      </AddTodoMemo>
+      </AddTodoMemoButton>
     </Container>
   );
 };
@@ -78,12 +82,13 @@ export default AddMemoDiv;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 3px;
 `;
 const MemoList = styled.div`
   display: flex;
   flex-direction: column;
-  width: 65%;
+  width: 80%;
+  margin-left: 5vw;
   margin-top: 5px;
   gap: 5px;
 `;
@@ -96,8 +101,6 @@ const MemoCard = styled.div`
   & > span {
     display: flex;
     align-items: center;
-    border: 1px solid black;
-    padding: 0 3px;
     height: 20px;
   }
 `;
@@ -113,14 +116,41 @@ const CancelMemoIcon = styled(IoMdClose)`
   fill: var(--color-dark-gary);
   pointer-events: none;
 `;
-const AddMemoInputDiv = styled.div``;
-const AddMemoInput = styled.input``;
-const MemoSubmitButton = styled.button``;
-const AddTodoMemo = styled.button`
+const AddMemoInputDiv = styled.div`
+  display: flex;
+  width: 80%;
+  margin-left: 5vw;
+`;
+const MemoBullet = styled.div``;
+
+const AddMemoInput = styled.input`
+  width: 80%;
+  border: 0;
+  font-size: 12px;
+  background-color: inherit;
+  &:focus {
+    outline: none;
+  }
+`;
+const MemoSubmitButton = styled.button`
+  border: 0;
+  background-color: inherit;
+`;
+const AddTodoMemoButton = styled.button`
   margin-top: 5px;
+  border: 0;
+  background-color: inherit;
 `;
 const AddMemoIcon = styled(BsFillPlusCircleFill)`
-  fill: var(--color-main);
+  fill: var(--color-gray);
+  width: 20px;
+  height: 20px;
+`;
+const MemoBulletIcon = styled(memoBullet)`
   width: 24px;
-  height: 24px;
+  height: 18px;
+`;
+const MemoAddIcon = styled(memoAddIcon)`
+  width: 16px;
+  height: 16px;
 `;
