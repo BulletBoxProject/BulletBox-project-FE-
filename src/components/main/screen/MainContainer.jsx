@@ -9,11 +9,13 @@ import NavigationMenu from "../../../layout/footer/components/NavigationMenu";
 
 import SelectCategory from "../../common/SelectCategory";
 import BulletDiv from "../components/BulletDiv";
+import BulletSwitchList from "../../dailyLog/components/BulletSwitchList";
 
 import BulletCalendar from "../../common/calendar/Calendar";
 
 const MainContainer = () => {
   const [date, setDate] = useState(new Date());
+  const [todoList, setTodoList] = useState([]);
   const bulletList = useSelector((state) => state.bullet_main.bulletList);
   console.log("리듀서 상태 저장 값", bulletList);
 
@@ -21,7 +23,7 @@ const MainContainer = () => {
     try {
       const data = await baseURLApiV1.get("/main");
       if (data.data.httpStatusCode === 200) {
-        return console.log(data.data.data);
+        return setTodoList(data.data.data.daily);
       }
     } catch (error) {
       console.log(error);
@@ -30,20 +32,24 @@ const MainContainer = () => {
   useEffect(() => {
     loadMainPage();
   }, []);
-
+  const day = ["일", "월", "화", "수", "목", "금", "토"];
+  const today = `${String(new Date().getFullYear()).substr(2, 2)}/${
+    new Date().getMonth() + 1
+  }/${new Date().getDate()}(${day[new Date().getDay()]})`;
   return (
     <Container>
       <CalendarDiv>
-        <SelectDiv>
-          <SelectCategory style={{ padding: "10px" }} />
-        </SelectDiv>
+        <SelectDiv>Today</SelectDiv>
         <BulletCalendar />
       </CalendarDiv>
       <TodoDiv>
-        <DateTitle>23/01/04/목</DateTitle>
-        <InputDiv>
-          <input style={{ marginTop: "10px" }} />
-        </InputDiv>
+        <DateTitle>{today}</DateTitle>
+        {todoList.map((todo) => (
+          <DailyTodoList>
+            <BulletSwitchList bulletName={todo.todoBulletName} />
+            <TodoTitle>{todo.todoContent}</TodoTitle>
+          </DailyTodoList>
+        ))}
       </TodoDiv>
     </Container>
   );
@@ -58,29 +64,35 @@ const Container = styled.div`
 `;
 const CalendarDiv = styled.div`
   position: relative;
-  height: 320px;
+  height: 48vh;
   margin: 10px 0;
   justify-content: center;
   align-items: center;
 `;
 const SelectDiv = styled.div`
   position: absolute;
-  top: 2%;
-  left: 85%;
+  top: 3%;
+  left: 88%;
   align-items: center;
   padding: 5px 0;
 `;
 const TodoDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
   width: 100%;
-  height: 210px;
-  border-radius: 8px;
-  background-color: var(--color-light-gray);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  height: 32vh;
+  padding: 15px;
+  border-radius: 16px;
+  background-color: var(--color-default);
 `;
 const DateTitle = styled.h2`
   text-align: center;
 `;
-const InputDiv = styled.div`
-  width: 100%;
-  padding: 0 10px;
+const DailyTodoList = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+const TodoTitle = styled.div`
+  font-size: 14px;
 `;
