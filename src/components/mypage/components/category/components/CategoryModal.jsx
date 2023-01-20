@@ -29,41 +29,27 @@ const CategoryModal = ({ onClose }) => {
   };
 
   const tagColorList = [
-    { key: 0, value: "#FF8B8B" },
-    { key: 1, value: "#FFCA8B" },
-    { key: 2, value: "#FFEC8B" },
-    { key: 3, value: "#D3FF8B" },
-    { key: 4, value: "#9BFF8B" },
-    { key: 5, value: "#8BFFCE" },
-    { key: 6, value: "#8BFFFF" },
-    { key: 7, value: "#8BB2FF" },
-    { key: 8, value: "#8B90FF" },
-    { key: 9, value: "#D38BFF" },
-    { key: 10, value: "#FD8BFF" },
-    { key: 12, value: "#FF8BB5" },
-    { key: 13, value: "#ef2c05" },
-    { key: 14, value: "#eb8715" },
-    { key: 15, value: "#e2d634" },
-    { key: 16, value: "#3ce919" },
-    { key: 17, value: "#1628ef" },
-    { key: 18, value: "#2d03e7" },
-    { key: 19, value: "#821ff3" },
-    { key: 20, value: "#0b0b0b" },
-    { key: 21, value: "#aea8a4" },
-    { key: 22, value: "#57484d" },
-    { key: 23, value: "#4d4c0a" },
-    { key: 24, value: "#e45d8e" },
-    { key: 25, value: "#35dc40" },
-    { key: 26, value: "#f77535" },
-    { key: 27, value: "#bfa3ef" },
-    { key: 28, value: "#7888f2" },
-    { key: 29, value: "#e048c7" },
-    { key: 30, value: "#2c0707" },
+    { key: 1, value: "#E3E2E3" },
+    { key: 2, value: "#C6C5C5" },
+    { key: 3, value: "#F4BBE3" },
+    { key: 4, value: "#DCB8F9" },
+    { key: 5, value: "#F4BCB8" },
+    { key: 6, value: "#F7D5BA" },
+    { key: 7, value: "#FEFE93" },
+    { key: 8, value: "#ABFC92" },
+    { key: 9, value: "#96C6FA" },
+    { key: 10, value: "#EC675F" },
+    { key: 11, value: "#F09F63" },
+    { key: 12, value: "#F4BB65" },
+    { key: 13, value: "#91FB6C" },
+    { key: 14, value: "#6FAEF8" },
   ];
   return (
     <div>
       <Modal onClose={onClose}>
         <CategoryInput
+          type="text"
+          maxlength="8"
           onChange={(e) => {
             CategoryNameHandler(e);
           }}
@@ -73,17 +59,21 @@ const CategoryModal = ({ onClose }) => {
           <div>
             <p>색상</p>
             <SelectColorDiv>
+              <SelectWhiteBtn
+                onClick={(e) => {
+                  CategoryColorHandler(e);
+                }}
+              ></SelectWhiteBtn>
               {tagColorList.map((val) => {
                 return (
-                  <div key={val.key}>
-                    <SelectBtn
-                      backgroundColor={val.value}
-                      value={val.value}
-                      onClick={(e) => {
-                        CategoryColorHandler(e);
-                      }}
-                    ></SelectBtn>
-                  </div>
+                  <SelectBtn
+                    key={val.key}
+                    backgroundColor={val.value}
+                    value={val.value}
+                    onClick={(e) => {
+                      CategoryColorHandler(e);
+                    }}
+                  ></SelectBtn>
                 );
               })}
             </SelectColorDiv>
@@ -113,13 +103,20 @@ const SelectColorDiv = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 0.2rem;
+  gap: 0.5rem;
   flex-wrap: wrap;
+`;
+const SelectWhiteBtn = styled.button`
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 8px;
+  border: 0.5px solid black;
+  background-color: white;
 `;
 
 const SelectBtn = styled.button`
-  width: 2rem;
-  height: 2rem;
+  width: 2.13rem;
+  height: 2.13rem;
   border-radius: 8px;
   border: none;
   background-color: ${({ backgroundColor }) => backgroundColor};
