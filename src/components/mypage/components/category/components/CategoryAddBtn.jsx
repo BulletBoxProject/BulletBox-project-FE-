@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import CategoryModal from "./CategoryModal";
+import CategoryModal from "./CategoryAddModal";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 
 const CategoryAddBtn = () => {
@@ -39,14 +39,13 @@ const AddButton = styled.button`
 `;
 
 const AddCategoryIcon = styled(BsFillPlusCircleFill)`
-  fill: var(--color-black);
+  fill: var(--color-gray);
   width: 6.7vw;
   height: 3.3vh;
 `;
 
 const AddBtnContainer = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
-  margin-top: 10%;
+  margin-top: 55%;
 `;

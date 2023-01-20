@@ -14,8 +14,8 @@ const Mypage = () => {
       <MypageInfoBox>
         <MypageInfoButton showInfo={showInfo} setShowInfo={setShowInfo} />
         <MypageInfoScreen showInfo={showInfo} />
-        <CategoryAddBtn />
       </MypageInfoBox>
+      <CategoryAddBtn />
     </div>
   );
 };
