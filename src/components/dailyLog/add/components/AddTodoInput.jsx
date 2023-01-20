@@ -21,16 +21,8 @@ const AddTodoInput = () => {
     day: 4,
     memos: [],
   });
-  console.log(AddTodoInput);
-  useEffect(() => {
-    const today = new Date();
-    setAddTodoInput({
-      ...AddTodoInput,
-      year: today.getFullYear(),
-      month: today.getMonth() + 1,
-      day: today.getDate(),
-    });
-  }, []);
+  const [categories, setCategories] = useState([]);
+  console.log("할일 추가", AddTodoInput);
   const postTodo = async (AddTodoInput, setAddTodoInput) => {
     let memos = AddTodoInput.memos;
     memos = memos.map((memo) =>
@@ -55,20 +47,27 @@ const AddTodoInput = () => {
         "/dailys/todo?year=2023&month=1&day=21"
       );
       if (data.data.httpStatusCode === 200) {
-        return console.log(data.data.data);
+        return setCategories(data.data.data.categories);
       }
     } catch (error) {
       console.log(error);
     }
   };
-  useEffect(() => {
-    loadMainPage();
-  }, []);
   const submitTodoHandler = () => {
     postTodo(AddTodoInput);
 
     navigate("/dailys");
   };
+  useEffect(() => {
+    loadMainPage();
+    const today = new Date();
+    setAddTodoInput({
+      ...AddTodoInput,
+      year: today.getFullYear(),
+      month: today.getMonth() + 1,
+      day: today.getDate(),
+    });
+  }, []);
   return (
     <Container>
       <BulletTodoForm
@@ -86,18 +85,19 @@ const AddTodoInput = () => {
         setAddTodoInput={setAddTodoInput}
       />
       <CategorySelectDiv
+        categories={categories}
         AddTodoInput={AddTodoInput}
         setAddTodoInput={setAddTodoInput}
       />
       <hr />
 
       <AddInputButtonGroup>
+        <SubmitButton type="button" onClick={submitTodoHandler}>
+          완료
+        </SubmitButton>
         <CancleButton type="button" onClick={() => navigate("/dailys")}>
           취소
         </CancleButton>
-        <SubmitButton type="button" onClick={submitTodoHandler}>
-          확인
-        </SubmitButton>
       </AddInputButtonGroup>
     </Container>
   );
@@ -109,17 +109,27 @@ const Container = styled.div``;
 
 const AddInputButtonGroup = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 0 auto;
-  width: 40%;
-`;
-const CancleButton = styled.button`
-  width: 30%;
-  height: 3em;
+  width: 100%;
+  padding: 0 5vw;
+  margin-top: 2vh;
 `;
 const SubmitButton = styled.button`
-  width: 30%;
-  height: 3em;
+  width: 45%;
+  height: 2.7em;
+  font-size: 14px;
   background-color: var(--color-main);
   border: 0;
+  border-radius: 8px;
+  color: white;
+`;
+const CancleButton = styled.button`
+  width: 45%;
+  height: 2.7em;
+  font-size: 14px;
+  border: 0;
+  border-radius: 8px;
+  background-color: var(--color-default);
+  color: var(--color-gray);
 `;
