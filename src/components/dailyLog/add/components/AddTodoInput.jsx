@@ -70,15 +70,18 @@ const AddTodoInput = () => {
   }, []);
   return (
     <Container>
-      <BulletTodoForm
-        AddTodoInput={AddTodoInput}
-        setAddTodoInput={setAddTodoInput}
-      />
-      <AddMemoDiv
-        AddTodoInput={AddTodoInput}
-        setAddTodoInput={setAddTodoInput}
-        memos={AddTodoInput.memos}
-      />
+      <TodoAndMemoDiv>
+        <BulletTodoForm
+          AddTodoInput={AddTodoInput}
+          setAddTodoInput={setAddTodoInput}
+        />
+        <AddMemoDiv
+          AddTodoInput={AddTodoInput}
+          setAddTodoInput={setAddTodoInput}
+          memos={AddTodoInput.memos}
+        />
+      </TodoAndMemoDiv>
+
       <hr />
       <TimeSettingDiv
         AddTodoInput={AddTodoInput}
@@ -89,7 +92,6 @@ const AddTodoInput = () => {
         AddTodoInput={AddTodoInput}
         setAddTodoInput={setAddTodoInput}
       />
-      <hr />
 
       <AddInputButtonGroup>
         <SubmitButton type="button" onClick={submitTodoHandler}>
@@ -106,6 +108,11 @@ const AddTodoInput = () => {
 export default AddTodoInput;
 
 const Container = styled.div``;
+
+const TodoAndMemoDiv = styled.div`
+  padding: 15px 20px 20px 20px;
+  background-color: var(--color-default);
+`;
 
 const AddInputButtonGroup = styled.div`
   display: flex;
