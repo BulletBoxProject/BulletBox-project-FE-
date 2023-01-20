@@ -14,8 +14,8 @@ const Mypage = () => {
       <MypageInfoBox>
         <MypageInfoButton showInfo={showInfo} setShowInfo={setShowInfo} />
         <MypageInfoScreen showInfo={showInfo} />
-        <CategoryAddBtn />
       </MypageInfoBox>
+      <CategoryAddBtn />
     </div>
   );
 };
@@ -23,5 +23,5 @@ const Mypage = () => {
 export default Mypage;
 
 const MypageInfoBox = styled.div`
-  margin-top: 10%;
+  margin-top: 5%;
 `;

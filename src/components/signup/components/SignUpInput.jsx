@@ -28,7 +28,7 @@ const SignUpInput = () => {
     const email = e.target.value;
     setEmail(email);
     if (!emailRegex.test(email)) {
-      setEmailMessage("올바른 이메일 형식이 아닙니다.");
+      setEmailMessage("email 형식으로 입력해주세요.");
       setIsEmail(false);
     } else {
       setEmailMessage("올바른 이메일 형식입니다.");
@@ -37,11 +37,11 @@ const SignUpInput = () => {
   }, []);
 
   const onChangeNickName = useCallback((e) => {
-    const nickNameRegex = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$/;
+    const nickNameRegex = /^[가-힣a-zA-Z0-9]{2,16}$/;
     const nickname = e.target.value;
     setNickName(nickname);
     if (!nickNameRegex.test(nickname)) {
-      setNickNameMessage(`올바른 닉네임 형식이 아닙니다.`);
+      setNickNameMessage(`특수문자를 포함하지 않은 2~16자리여야 합니다.`);
       setIsNickName(false);
     } else {
       setNickNameMessage(`올바른 닉네임 형식입니다.`);
@@ -88,12 +88,26 @@ const SignUpInput = () => {
         alert("회원가입에 실패했습니다.");
       }
     } catch (error) {
+      alert("회원가입에 실패했습니다.");
       console.log(error);
     }
   };
 
   const onSubmitBtn = (e) => {
     e.preventDefault();
+    if (!isEmail) {
+      alert("Email을 확인해주세요!");
+      return;
+    } else if (!isNickName) {
+      alert("NickName을 확인해주세요!");
+      return;
+    } else if (!isPassword) {
+      alert("비밀번호를 확인해주세요!");
+      return;
+    } else if (!isPasswordConfirm) {
+      alert("비밀번호를 확인해주세요!");
+      return;
+    }
     postSignup({
       email,
       nickname,
@@ -116,28 +130,24 @@ const SignUpInput = () => {
         onChange={onChangeEmail}
       ></StInputEmail>
 
-      {email.length > 0 && <span>{emailMessage}</span>}
+      {email.length > 0 && <Stspan>{emailMessage}</Stspan>}
 
       <StInput placeholder="NickName" onChange={onChangeNickName}></StInput>
-      {nickname.length > 0 && <span>{nickNameMessage}</span>}
+      {nickname.length > 0 && <Stspan>{nickNameMessage}</Stspan>}
       <StInput
         placeholder="Password"
         type="password"
         onChange={onChangePassword}
       ></StInput>
-      {password.length > 0 && <span>{passwordMessage}</span>}
+      {password.length > 0 && <Stspan>{passwordMessage}</Stspan>}
       <StInput
         placeholder="Re_Password"
         type="password"
         onChange={onChangePasswordConfirm}
       ></StInput>
-      {passwordConfirm.length > 0 && <span>{passwordConfirmMessage}</span>}
+      {passwordConfirm.length > 0 && <Stspan>{passwordConfirmMessage}</Stspan>}
       <StButtonBox>
-        <StSignupBtn
-          type="submit"
-          disabled={!(isEmail && isNickName && isPassword && isPasswordConfirm)}
-          onClick={onSubmitBtn}
-        >
+        <StSignupBtn type="submit" onClick={onSubmitBtn}>
           회원가입
         </StSignupBtn>
         <CancelBtn
@@ -178,7 +188,7 @@ const StTitle = styled.div`
 
 const StInput = styled.input`
   width: 74%;
-  height: 6.6vh;
+  height: 5.6vh;
   margin-top: 5%;
   font-size: 1rem;
   border: white;
@@ -198,7 +208,7 @@ const StInput = styled.input`
 
 const StInputEmail = styled.input`
   width: 74%;
-  height: 6.6vh;
+  height: 5.6vh;
   font-size: 1rem;
   font-family: "Oleo Script";
   border: white;
@@ -245,4 +255,10 @@ const CancelBtn = styled.button`
   background: #d9d9d9;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
+`;
+
+const Stspan = styled.span`
+  margin-top: 2%;
+  font-size: 0.7rem;
+  font-weight: bold;
 `;

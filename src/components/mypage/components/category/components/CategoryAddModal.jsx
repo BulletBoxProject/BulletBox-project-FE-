@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Modal from "../../../../common/modal/Modal";
 import { useDispatch } from "react-redux";
-import { __putCategory } from "../../../../../redux/modules/categorySlice";
-import { __deleteCategory } from "../../../../../redux/modules/categorySlice";
+import { __postCategory } from "../../../../../redux/modules/categorySlice";
 import { ReactComponent as close } from "../../../../../img/myPage/close.svg";
 
-const CategoryUpdateModal = ({ id, backgroundColor, name, onClose }) => {
-  const [categoryName, setCategoryName] = useState(name);
-  const [categoryColor, setCategoryColor] = useState(backgroundColor);
+const CategoryModal = ({ onClose }) => {
+  const [categoryName, setCategoryName] = useState("");
+  const [categoryColor, setCategoryColor] = useState("");
 
   const dispatch = useDispatch();
   const onCloseHandler = onClose;
@@ -21,19 +20,13 @@ const CategoryUpdateModal = ({ id, backgroundColor, name, onClose }) => {
     setCategoryColor(e.target.value);
   };
 
-  const UpdateCategoryHandler = () => {
+  const AddCategoryHandler = () => {
     const categoryInfo = {
-      id: id,
       categoryName: categoryName,
       categoryColor: categoryColor,
     };
-    dispatch(__putCategory(categoryInfo));
+    dispatch(__postCategory(categoryInfo));
     onCloseHandler();
-  };
-
-  const deleteCategoryHandler = () => {
-    const categoryId = id;
-    dispatch(__deleteCategory(categoryId));
   };
 
   const tagColorList = [
@@ -60,11 +53,10 @@ const CategoryUpdateModal = ({ id, backgroundColor, name, onClose }) => {
         </CloseBtn>
         <CategoryInput
           type="text"
-          maxlength="8"
           onChange={(e) => {
             CategoryNameHandler(e);
           }}
-          placeholder="카테고리 이름을 입력해주세요"
+          placeholder="카테고리 이름을 입력해주세요."
         ></CategoryInput>
         <TitleLength>({categoryName.length}/8)</TitleLength>
         <SelectColorDiv>
@@ -89,25 +81,19 @@ const CategoryUpdateModal = ({ id, backgroundColor, name, onClose }) => {
         <BtnContainer>
           <AddModalBtn
             onClick={() => {
-              deleteCategoryHandler(id);
+              AddCategoryHandler();
             }}
           >
-            삭제하기
+            추가
           </AddModalBtn>
-          <AddModalBtn
-            onClick={() => {
-              UpdateCategoryHandler();
-            }}
-          >
-            수정하기
-          </AddModalBtn>
+          <AddModalBtn onClick={onClose}>취소</AddModalBtn>
         </BtnContainer>
       </Modal>
     </>
   );
 };
 
-export default CategoryUpdateModal;
+export default CategoryModal;
 
 const SelectColorDiv = styled.div`
   width: 15rem;
@@ -165,9 +151,9 @@ const AddModalBtn = styled.button`
   width: 47.4%;
   height: 7vh;
   font-size: 1rem;
-  font-weight: bold;
   border-radius: 8px;
   border: none;
+  font-weight: 700;
 `;
 
 const BtnContainer = styled.div`

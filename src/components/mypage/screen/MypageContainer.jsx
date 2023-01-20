@@ -52,6 +52,8 @@ const MyInfo = styled.div`
   align-items: center;
   margin-left: 6%;
   margin-top: 4%;
+  padding-bottom: 5%;
+  border-bottom: 1px solid var(--color-default);
 `;
 const MyDetailInfo = styled.div`
   margin-left: 5%;

@@ -15,7 +15,7 @@ const Header = () => {
   };
 
   const onClickHandler = () => {
-    navigate("/");
+    navigate("/home");
   };
 
   return (

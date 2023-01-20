@@ -10,6 +10,7 @@ const StartPage = () => {
   };
   return (
     <Container>
+      당신의 할일을 담아보세요
       <MainLogo />
       Bullet Box
       <StartBtn
