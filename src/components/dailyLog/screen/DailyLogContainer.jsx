@@ -51,7 +51,6 @@ const DailyLogContainer = () => {
             <IoIosArrowDown />
           </SelectDateButton>
         </DateButtonDiv>
-
         <SelectDiv>
           <SelectCategory style={{ padding: "10px" }} />
         </SelectDiv>

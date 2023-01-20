@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import { ReactComponent as moreIcon } from "../../../img/dailyLog/more.svg";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
 
+import { ReactComponent as moreIcon } from "../../../img/dailyLog/more.svg";
 import { ReactComponent as todoBullet } from "../../../img/bullet/todo-1.svg";
 import { ReactComponent as checkBullet } from "../../../img/bullet/check-2.svg";
 import { ReactComponent as postphoneBullet } from "../../../img/bullet/postpone-3.svg";
@@ -17,15 +17,43 @@ import { ReactComponent as deleteIcon } from "../../../img/dailyLog/delete.svg";
 const BulletTodoCard = () => {
   const [showSelectBox, setShowSelectBox] = useState(false);
   const [showTodoMemo, setShowTodoMemo] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const memoViewHandler = () => {
     setShowTodoMemo(!showTodoMemo);
   };
   const SelectOptionHandler = () => {
     setShowSelectBox(!showSelectBox);
   };
+  const selectDeleteHandler = () => {
+    setShowSelectBox(!showSelectBox);
+    setShowDeleteModal(!showDeleteModal);
+  };
+  const deleteButtonHandler = () => {
+    setShowDeleteModal(!showDeleteModal);
+  };
+  const cancelButtonHandler = () => {
+    setShowDeleteModal(!showDeleteModal);
+  };
   return (
     <div>
       <Container>
+        {showDeleteModal ? (
+          <ModalContainer>
+            <ModalContent>
+              <DeleteMsg>
+                <span>
+                  <DeleteIcon />
+                </span>
+                <span>삭제하시겠습니까?</span>
+              </DeleteMsg>
+              <SelectLine></SelectLine>
+              <ModalButtonGroup>
+                <DeleteButton onClick={deleteButtonHandler}>삭제</DeleteButton>
+                <CancelButton onClick={cancelButtonHandler}>취소</CancelButton>
+              </ModalButtonGroup>
+            </ModalContent>
+          </ModalContainer>
+        ) : null}
         <MainBulletTodo>
           <TodoBodyDiv>
             <span>
@@ -44,11 +72,14 @@ const BulletTodoCard = () => {
             </OptionButton>
             {showSelectBox ? (
               <SelectDiv>
-                <div value="editTodo" onClick={() => alert("자주쓰는할일")}>
+                <div
+                  value="editTodo"
+                  onClick={() => alert("수정하기페이지 이동")}
+                >
                   수정하기 <EditIcon />
                 </div>
                 <SelectLine></SelectLine>
-                <div value="deleteTodo" onClick={() => alert("삭제하기")}>
+                <div value="deleteTodo" onClick={selectDeleteHandler}>
                   <span>삭제하기</span>
                   <span>
                     <DeleteIcon />
@@ -91,6 +122,52 @@ const Container = styled.div`
   /* box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.1); */
   padding: 12px;
   border-radius: 8px;
+`;
+const ModalContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+`;
+const ModalContent = styled.div`
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1em 0;
+  width: 200px;
+  height: 100px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--color-default);
+  border-radius: 8px;
+  font-size: 14px;
+`;
+const DeleteMsg = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: var(--color-gray);
+  gap: 10px;
+`;
+const ModalButtonGroup = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  & > div {
+    cursor: pointer;
+  }
+`;
+const DeleteButton = styled.div`
+  font-size: 14px;
+  color: var(--color-main);
+`;
+const CancelButton = styled.div`
+  font-size: 14px;
 `;
 const MainBulletTodo = styled.div`
   display: flex;
