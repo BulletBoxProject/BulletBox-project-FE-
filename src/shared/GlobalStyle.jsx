@@ -5,8 +5,10 @@ const GlobalStyle = createGlobalStyle`
 :root{
   --color-black: #111111;
   --color-main: #FF9000;
+  --color-gray: #7C7C7C;
   --color-dark-gray: #3E3E3E;
   --color-light-gray: #D9D9D9;
+  --color-default: #F6F6F6;
 }
 @import url('https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&display=swap');
 @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');

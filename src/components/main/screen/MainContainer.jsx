@@ -12,10 +12,7 @@ import BulletDiv from "../components/BulletDiv";
 
 import BulletCalendar from "../../common/calendar/Calendar";
 
-export const BACK_API = process.env.REACT_APP_BACKAPI;
-
 const MainContainer = () => {
-  console.log(BACK_API);
   const [date, setDate] = useState(new Date());
   const bulletList = useSelector((state) => state.bullet_main.bulletList);
   console.log("리듀서 상태 저장 값", bulletList);

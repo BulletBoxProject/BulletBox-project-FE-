@@ -12,7 +12,7 @@ const SelectCategory = () => {
     <div>
       <SelectCategoryDiv>
         <CategoryButton type="button" onClick={categoryShowHandler}>
-          전체 <RxTriangleDown />
+          전체
         </CategoryButton>
         {showCategory ? (
           <CategoryList>
@@ -29,7 +29,7 @@ const SelectCategory = () => {
 export default SelectCategory;
 
 const SelectCategoryDiv = styled.div`
-  position: relative;
+  /* position: relative; */
 `;
 const CategoryButton = styled.button`
   display: flex;
@@ -43,13 +43,13 @@ const CategoryButton = styled.button`
 `;
 const CategoryList = styled.div`
   position: absolute;
-  left: -21px;
+  left: 75vw;
   border: 1px solid gray;
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.85);
   margin-top: 5px;
   padding: 0 5px;
-  font-size: 12px;
+  font-size: 11.5px;
   & > option {
     margin: 5px 0;
     font-size: inherit;
