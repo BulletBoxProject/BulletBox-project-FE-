@@ -15,7 +15,7 @@ const AddTodoInput = () => {
     todoContent: "할 일 내용",
     todoBulletName: "불렛",
     time: "00:00",
-    categoryId: 3,
+    categoryId: null,
     year: 2023,
     month: 1,
     day: 4,
@@ -49,9 +49,25 @@ const AddTodoInput = () => {
       console.log(error);
     }
   };
+  const loadMainPage = async () => {
+    try {
+      const data = await baseURLApiV1.get(
+        "/dailys/todo?year=2023&month=1&day=21"
+      );
+      if (data.data.httpStatusCode === 200) {
+        return console.log(data.data.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    loadMainPage();
+  }, []);
   const submitTodoHandler = () => {
     postTodo(AddTodoInput);
-    // navigate("/dailys");
+
+    navigate("/dailys");
   };
   return (
     <Container>
