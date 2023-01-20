@@ -40,7 +40,7 @@ const AddTodoInput = () => {
       console.log(error);
     }
   };
-  const loadMainPage = async () => {
+  const loadAddTodoPage = async () => {
     try {
       const data = await baseURLApiV1.get(
         "/dailys/todo?year=2023&month=1&day=21"
@@ -58,7 +58,7 @@ const AddTodoInput = () => {
     navigate("/dailys");
   };
   useEffect(() => {
-    loadMainPage();
+    loadAddTodoPage();
     const today = new Date();
     setAddTodoInput({
       ...AddTodoInput,
