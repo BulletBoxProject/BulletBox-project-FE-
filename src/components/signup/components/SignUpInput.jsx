@@ -94,6 +94,10 @@ const SignUpInput = () => {
 
   const onSubmitBtn = (e) => {
     e.preventDefault();
+    if (!(isEmail && isNickName && isPassword && isPasswordConfirm)) {
+      alert("유효한 양식에 맞게 입력해주세요");
+      return;
+    }
     postSignup({
       email,
       nickname,
@@ -135,7 +139,7 @@ const SignUpInput = () => {
       <StButtonBox>
         <StSignupBtn
           type="submit"
-          disabled={!(isEmail && isNickName && isPassword && isPasswordConfirm)}
+          // disabled={!(isEmail && isNickName && isPassword && isPasswordConfirm)}
           onClick={onSubmitBtn}
         >
           회원가입
