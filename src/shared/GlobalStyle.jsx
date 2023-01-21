@@ -24,7 +24,7 @@ const GlobalStyle = createGlobalStyle`
 body, div, button{
   box-sizing: border-box;
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
   font-size: 10px;
   max-width: 412px;
   max-height: 915px;

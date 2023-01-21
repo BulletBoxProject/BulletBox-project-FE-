@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
 import useOutSideClick from "../../../hooks/useOutSideClick";
+import ModalContainer from "./ModalContainer";
 
 const useModal = ({ onClose, children }) => {
   const modalRef = useRef(null);
@@ -10,11 +11,13 @@ const useModal = ({ onClose, children }) => {
   useOutSideClick(modalRef, handleClose);
 
   return (
-    <Container>
-      <ModalWrap ref={modalRef}>
-        <Contents>{children}</Contents>
-      </ModalWrap>
-    </Container>
+    <ModalContainer>
+      <Container>
+        <ModalWrap ref={modalRef}>
+          <Contents>{children}</Contents>
+        </ModalWrap>
+      </Container>
+    </ModalContainer>
   );
 };
 
