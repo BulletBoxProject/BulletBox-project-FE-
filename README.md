@@ -1,6 +1,6 @@
 # ![image](https://user-images.githubusercontent.com/99157565/213341943-0b61a0f7-dc4c-4798-b336-c4d465fc1475.png) Bullet Box (불렛 박스)
 
-##노션 팀 문서 https://www.notion.so/c453f0e24a254c46b0dfc43e40e5cdbc
+## 노션 팀 문서 https://www.notion.so/c453f0e24a254c46b0dfc43e40e5cdbc
 
 ## ⭐Convention
 #### 1. **CSS**
