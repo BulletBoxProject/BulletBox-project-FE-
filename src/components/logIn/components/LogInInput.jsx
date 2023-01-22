@@ -3,32 +3,32 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { baseURLApiV1 } from "../../../core/api";
 import { setCookies } from "../../../core/cookieControler";
-import { encrypt } from "../../../core/encrypt";
+import AlertModal from "../../common/modal/AlertModal";
 
 const LogInInput = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [isOpen, setIsOpen] = useState(false);
+  const [message, setMessage] = useState("");
+
   const postLogin = async (post) => {
     try {
-      // const password = encrypt(post.password);
-      // const userInfo = { email, password };
-      // console.log(password);
       const data = await baseURLApiV1.post("/members/login", post);
-      console.log(data);
       if (data.data.httpStatusCode === 200) {
         return data;
       }
     } catch (error) {
-      console.log(error);
-      alert("아이디, 비밀번호를 잘못입력하셨습니다.");
+      setIsOpen(true);
+      setMessage("이메일 또는 비밀번호가 일치하지 않습니다.");
     }
   };
 
   const loginHandler = () => {
     if (email === "" || password === "") {
-      alert("아이디, 비밀번호를 확인해주세요.");
+      setIsOpen(true);
+      setMessage("이메일과 비밀번호를 입력해주세요.");
       return;
     }
     postLogin({
@@ -50,7 +50,6 @@ const LogInInput = () => {
   return (
     <StForm>
       <StTitle>Login</StTitle>
-
       <StInput
         placeholder="ID"
         name="userid"
@@ -69,7 +68,6 @@ const LogInInput = () => {
           setPassword(value);
         }}
       ></StInput>
-
       <br />
       <StButtonBox>
         <StSignupBtn
@@ -89,6 +87,16 @@ const LogInInput = () => {
           로그인
         </StLoginBtn>
       </StButtonBox>
+      {isOpen && (
+        <AlertModal
+          open={isOpen}
+          onClose={() => {
+            setIsOpen(false);
+          }}
+        >
+          {message}
+        </AlertModal>
+      )}
     </StForm>
   );
 };

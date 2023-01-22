@@ -4,7 +4,7 @@ import useOutSideClick from "../../../hooks/useOutSideClick";
 import ModalContainer from "./ModalContainer";
 import { ReactComponent as close } from "../../../img/myPage/close.svg";
 
-const ConfirmModal = ({ onClose, children, onClick }) => {
+const AlertModal = ({ onClose, children }) => {
   const modalRef = useRef(null);
   const handleClose = () => {
     onClose?.();
@@ -19,17 +19,16 @@ const ConfirmModal = ({ onClose, children, onClick }) => {
             <CloseImg />
           </CloseBtn>
           <Contents>
-            <h1>{children}</h1>
+            <p>{children}</p>
           </Contents>
-          <ConfirmBtn onClick={onClick}>확인</ConfirmBtn>
-          <CancleBtn onClick={onClose}>취소</CancleBtn>
+          <AlertBtn onClick={onClose}>확인</AlertBtn>
         </ModalWrap>
       </Container>
     </ModalContainer>
   );
 };
 
-export default ConfirmModal;
+export default AlertModal;
 
 const Container = styled.div`
   position: fixed;
@@ -60,31 +59,20 @@ const ModalWrap = styled.div`
 `;
 
 const Contents = styled.div`
-  margin: 150px 30px;
-`;
-
-const ConfirmBtn = styled.button`
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin-right: 51%;
-  margin-bottom: 13%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 15px;
-  padding: 15px 38.5px;
-  border: none;
-  background-color: var(--color-default);
-  border-radius: 8px;
-  color: var(--color-dark-gray);
   font-weight: bold;
-  cursor: pointer;
+  margin-top: 20%;
 `;
 
-const CancleBtn = styled.button`
+const AlertBtn = styled.button`
   position: absolute;
   bottom: 0;
   right: 0;
-  margin-right: 13%;
-  margin-bottom: 13%;
+  margin-right: 32%;
+  margin-bottom: 5%;
   font-size: 15px;
   padding: 15px 38.5px;
   border: none;
