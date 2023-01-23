@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 
 import { ReactComponent as homeMenuIcon } from "../../../img/tabBar/home.svg";
 import { ReactComponent as dailyLogIcon } from "../../../img/tabBar/daily.svg";
+import { ReactComponent as diaryLogIcon } from "../../../img/tabBar/diary.svg";
 import { BsPerson } from "react-icons/bs";
 import { HiSearch } from "react-icons/hi";
-import { SlNotebook } from "react-icons/sl";
 
 const NavigationMenu = () => {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const NavigationMenu = () => {
   return (
     <Container>
       <ButtonGroup>
-        <Button onClick={() => alert("추가 기능 구상중")}>
+        <Button onClick={() => navigate("/diary")}>
           <span>
             <DiaryBtn />
           </span>
@@ -30,7 +30,7 @@ const NavigationMenu = () => {
             <HomeMenuBtn />
           </span>
         </Button>
-        <Button onClick={() => alert("추가 기능 구상중")}>
+        <Button onClick={() => navigate("/search")}>
           <span>
             <SearchBtn />
           </span>
@@ -75,9 +75,9 @@ const Button = styled.button`
     color: var(--color-main);
   }
 `;
-const DiaryBtn = styled(SlNotebook)`
-  width: 21px;
-  height: 21px;
+const DiaryBtn = styled(diaryLogIcon)`
+  width: 24px;
+  height: 24px;
 `;
 const HomeMenuBtn = styled(homeMenuIcon)`
   width: 26px;

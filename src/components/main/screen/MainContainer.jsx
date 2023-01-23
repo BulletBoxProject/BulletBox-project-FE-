@@ -83,6 +83,7 @@ const SelectDiv = styled.div`
   left: 88%;
   align-items: center;
   padding: 5px 0;
+  font-weight: bold;
 `;
 const TodoDiv = styled.div`
   display: flex;

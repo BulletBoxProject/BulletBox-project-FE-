@@ -9,6 +9,7 @@ import AddDailyLog from "../pages/AddDailyLog";
 import Start from "../pages/Start";
 import Mypage from "../pages/Mypage";
 import Search from "../pages/Search";
+import Diary from "../pages/Diary";
 
 const Router = () => {
   return (
@@ -23,6 +24,7 @@ const Router = () => {
           <Route path="/dailys/add" element={<AddDailyLog />} />
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/diary" element={<Diary />} />
         </Route>
       </Routes>
     </BrowserRouter>
