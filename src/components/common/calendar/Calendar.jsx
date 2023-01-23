@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Calendar from "react-calendar";
 import styled from "styled-components";
+import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io";
 
 const BulletCalendar = () => {
   // const [value, onChange] = useState(new Date());
@@ -11,7 +13,17 @@ const BulletCalendar = () => {
 
   return (
     <Calendarcontainer>
-      <Calendar calendarType="US" onChange={dateChangeHandler} />
+      <Calendar
+        calendarType="US"
+        onChange={dateChangeHandler}
+        nextLabel={<NextIcon />}
+        prevLabel={<PrevIcon />}
+        next2Label={null}
+        prev2Label={null}
+        formatDay={(locale, date) =>
+          date.toLocaleString("en", { day: "numeric" })
+        }
+      />
     </Calendarcontainer>
   );
 };
@@ -22,38 +34,48 @@ const Calendarcontainer = styled.div`
   .react-calendar {
     width: 95%;
     max-width: 100%;
-    background: white;
+    background: transparent;
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.125em;
     margin-left: 3%;
   }
+  .eUWrDx .react-calendar__navigation {
+    margin: 0.2rem;
+  }
   .react-calendar__navigation {
     display: flex;
-    width: 80%;
-    margin: 12px !important;
+    padding-left: 40px;
+    width: 100%;
   }
   .react-calendar__navigation__label > span {
-    width: 100px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100% !important;
     font-size: 14px;
     font-weight: 700;
+    color: var(--color-main);
+    margin-bottom: 5%;
   }
   .react-calendar__month-view__weekdays {
-    height: 30px !important;
+    height: 25px !important;
   }
   .react-calendar__month-view__weekdays__weekday {
     background-color: white !important;
-    border-top: 1px solid rgba(240, 161, 59, 0.5);
-    border-left: 1px solid rgba(240, 161, 59, 0.5);
-    box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.1);
+    /* border-top: 1px solid rgba(240, 161, 59, 0.5);
+    border-left: 1px solid rgba(240, 161, 59, 0.5); */
+    /* box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.1); */
     padding: 5px 4px !important;
-    font-size: 14px;
+    font-size: 12px;
   }
   .react-calendar__month-view__days {
     margin-top: 5px !important;
     & > :active,
     & > :hover {
+      color: black;
       border: 0 !important;
-      background-color: rgba(240, 161, 59, 0.2);
+      /* background-color: var(--color-main); */
     }
   }
   .react-calendar__month-view__days__day {
@@ -61,6 +83,8 @@ const Calendarcontainer = styled.div`
     align-items: flex-start !important;
     height: 48px !important;
     padding-top: 10px;
+    font-size: 10px;
+    font-weight: bold;
   }
   .react-calendar--doubleView {
     width: 700px;
@@ -107,9 +131,10 @@ const Calendarcontainer = styled.div`
   }
   .react-calendar__month-view__weekdays {
     font-weight: bold;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     width: 88%;
     height: 40px;
+    color: var(--color-gray);
   }
 
   .react-calendar__month-view__weekdays__weekday {
@@ -122,13 +147,13 @@ const Calendarcontainer = styled.div`
     margin: 1%;
   }
   .react-calendar__month-view__weekdays__weekday--weekend {
-    color: red;
+    color: var(--color-main);
   }
   .react-calendar__month-view__weekNumbers .react-calendar__tile {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.75em;
+    font-size: 0.65em;
     font-weight: bold;
   }
 
@@ -156,6 +181,8 @@ const Calendarcontainer = styled.div`
   .react-calendar__tile:enabled:focus {
     border-radius: 5px;
     border: 3px solid #e6e6e6;
+    background-color: var(--color-main);
+    color: white;
   }
 
   .react-calendar__tile--now {
@@ -165,7 +192,10 @@ const Calendarcontainer = styled.div`
   }
   .react-calendar__tile--now:enabled:hover,
   .react-calendar__tile--now:enabled:focus {
-    background-color: white;
+    background-color: var(--color-main);
+    border-radius: 5px;
+    border: 1px solid var(--color-main);
+    color: white;
   }
   .react-calendar__tile--hasActive {
     background: white;
@@ -181,7 +211,9 @@ const Calendarcontainer = styled.div`
   .react-calendar__tile--active {
     background: white;
     border-radius: 5px;
-    border: 3px solid #e6e6e6;
+    border: 1px solid var(--color-main);
+    background-color: var(--color-main);
+    color: white;
   }
   .react-calendar__tile--active:enabled:hover,
   .react-calendar__tile--active:enabled:focus {
@@ -190,4 +222,19 @@ const Calendarcontainer = styled.div`
   .react-calendar--selectRange .react-calendar__tile--hover {
     background-color: #e6e6e6;
   }
+`;
+
+const NextIcon = styled(IoIosArrowForward)`
+  width: 2rem;
+  height: 2.5vh;
+  margin-right: 28vw;
+  margin-left: 1vw;
+  color: var(--color-main);
+`;
+const PrevIcon = styled(IoIosArrowBack)`
+  width: 2rem;
+  height: 2.5vh;
+  margin-left: 3vw;
+  margin-right: 1vw;
+  color: var(--color-main);
 `;
