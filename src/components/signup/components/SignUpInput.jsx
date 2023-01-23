@@ -126,7 +126,7 @@ const SignUpInput = () => {
       } else {
         setTimeout(() => {
           navigate(`/login`);
-        }, 5000);
+        }, 2000);
       }
     });
   };
