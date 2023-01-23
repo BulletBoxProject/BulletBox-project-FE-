@@ -13,8 +13,7 @@ const MypageInfoButton = ({ showInfo, setShowInfo }) => {
       </Button>
       <Button
         onClick={() => {
-          // setShowInfo(2);
-          alert("추가 기능 구상중");
+          setShowInfo(2);
         }}
       >
         자주 쓰는 할일

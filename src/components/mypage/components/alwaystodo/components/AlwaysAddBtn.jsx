@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import CategoryModal from "./CategoryAddModal";
+import AlwaysAddModal from "./AlwaysAddModal";
 import { ReactComponent as addIcon } from "../../../../../img/myPage/add.svg";
 
-const CategoryAddBtn = () => {
+const AlwaysAddBtn = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const onClickButton = () => {
@@ -19,7 +19,7 @@ const CategoryAddBtn = () => {
         <AddCategoryIcon />
       </AddButton>
       {isOpen && (
-        <CategoryModal
+        <AlwaysAddModal
           onClose={() => {
             setIsOpen(false);
           }}
@@ -29,7 +29,7 @@ const CategoryAddBtn = () => {
   );
 };
 
-export default CategoryAddBtn;
+export default AlwaysAddBtn;
 
 const AddButton = styled.button`
   width: 5rem;

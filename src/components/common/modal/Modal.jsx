@@ -53,8 +53,4 @@ const ModalWrap = styled.div`
 
 const Contents = styled.div`
   margin: 40px 30px;
-  img {
-    margin-top: 60px;
-    width: 300px;
-  }
 `;
