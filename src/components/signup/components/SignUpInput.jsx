@@ -2,7 +2,7 @@ import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
 import { instanceApiV1 } from "../../../core/api";
-// import { encrypt } from "../../../core/encrypt";
+import AlertModal from "../../common/modal/AlertModal";
 
 const SignUpInput = () => {
   const navigate = useNavigate();
@@ -21,6 +21,9 @@ const SignUpInput = () => {
   const [isNickName, setIsNickName] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
   const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [message, setMessage] = useState("");
 
   const onChangeEmail = useCallback((e) => {
     const emailRegex =
@@ -82,30 +85,34 @@ const SignUpInput = () => {
     try {
       const data = await instanceApiV1.post("/members/signup", post);
       if (data.data.httpStatusCode === 201) {
-        alert(data.data.msg);
+        setIsOpen(true);
+        setMessage("회원가입이 완료되었습니다.");
         return data;
-      } else {
-        alert("회원가입에 실패했습니다.");
       }
     } catch (error) {
-      alert("회원가입에 실패했습니다.");
-      console.log(error);
+      setIsOpen(true);
+      setMessage(error.response.data.msg);
     }
   };
 
   const onSubmitBtn = (e) => {
     e.preventDefault();
+
     if (!isEmail) {
-      alert("Email을 확인해주세요!");
+      setIsOpen(true);
+      setMessage("Email을 확인해주세요!");
       return;
     } else if (!isNickName) {
-      alert("NickName을 확인해주세요!");
+      setIsOpen(true);
+      setMessage("NickName을 확인해주세요!");
       return;
     } else if (!isPassword) {
-      alert("비밀번호를 확인해주세요!");
+      setIsOpen(true);
+      setMessage("비밀번호를 확인해주세요!");
       return;
     } else if (!isPasswordConfirm) {
-      alert("비밀번호를 확인해주세요!");
+      setIsOpen(true);
+      setMessage("비밀번호를 확인해주세요!");
       return;
     }
     postSignup({
@@ -113,10 +120,13 @@ const SignUpInput = () => {
       nickname,
       password,
     }).then((res) => {
+      console.log(res);
       if (res === undefined) {
         navigate(`/signup`);
       } else {
-        navigate(`/login`);
+        setTimeout(() => {
+          navigate(`/login`);
+        }, 2000);
       }
     });
   };
@@ -124,12 +134,10 @@ const SignUpInput = () => {
   return (
     <StForm>
       <StTitle>Sign up</StTitle>
-
       <StInputEmail
         placeholder="E-mail"
         onChange={onChangeEmail}
       ></StInputEmail>
-
       {email.length > 0 && <Stspan>{emailMessage}</Stspan>}
 
       <StInput placeholder="NickName" onChange={onChangeNickName}></StInput>
@@ -159,6 +167,16 @@ const SignUpInput = () => {
           취소
         </CancelBtn>
       </StButtonBox>
+      {isOpen && (
+        <AlertModal
+          open={isOpen}
+          onClose={() => {
+            setIsOpen(false);
+          }}
+        >
+          {message}
+        </AlertModal>
+      )}
     </StForm>
   );
 };

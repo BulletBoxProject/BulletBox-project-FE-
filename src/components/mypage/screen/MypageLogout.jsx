@@ -1,12 +1,18 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { removeCookies } from "../../../core/cookieControler";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as Logout } from "../../../img/myPage/logout.svg";
+import ConfirmModal from "../../common/modal/ConfirmModal";
+import { useNavigate } from "react-router";
+import { removeCookies } from "../../../core/cookieControler";
 
 const MypageLogout = () => {
-  const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
 
+  const onClickButton = () => {
+    setIsOpen(true);
+  };
+
+  const navigate = useNavigate();
   const logoutHandler = () => {
     removeCookies("Authorization");
     navigate("/login");
@@ -14,9 +20,20 @@ const MypageLogout = () => {
 
   return (
     <LogoutBtnContainer>
-      <LogoutBtn onClick={logoutHandler}>
+      <LogoutBtn onClick={onClickButton}>
         <LogoutImg />
       </LogoutBtn>
+      {isOpen && (
+        <ConfirmModal
+          open={isOpen}
+          onClose={() => {
+            setIsOpen(false);
+          }}
+          onClick={logoutHandler}
+        >
+          로그아웃하시겠습니까?
+        </ConfirmModal>
+      )}
     </LogoutBtnContainer>
   );
 };
