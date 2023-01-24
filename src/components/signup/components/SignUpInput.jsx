@@ -155,9 +155,6 @@ const SignUpInput = () => {
       ></StInput>
       {passwordConfirm.length > 0 && <Stspan>{passwordConfirmMessage}</Stspan>}
       <StButtonBox>
-        <StSignupBtn type="submit" onClick={onSubmitBtn}>
-          회원가입
-        </StSignupBtn>
         <CancelBtn
           type="button"
           onClick={() => {
@@ -166,6 +163,9 @@ const SignUpInput = () => {
         >
           취소
         </CancelBtn>
+        <StSignupBtn type="submit" onClick={onSubmitBtn}>
+          회원가입
+        </StSignupBtn>
       </StButtonBox>
       {isOpen && (
         <AlertModal
@@ -211,7 +211,7 @@ const StInput = styled.input`
   font-size: 1rem;
   border: white;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-  background: #d9d9d9;
+  background: var(--color-light-gray);
   border-radius: 8px;
   font-family: "Oleo Script";
   ::placeholder {
@@ -220,7 +220,8 @@ const StInput = styled.input`
     font-weight: 800;
     font-size: 1rem;
     text-align: center;
-    color: #7c7c7c;
+    color: var(--color-gray);
+    padding-right: 1em;
   }
 `;
 
@@ -231,7 +232,7 @@ const StInputEmail = styled.input`
   font-family: "Oleo Script";
   border: white;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-  background: #d9d9d9;
+  background: var(--color-light-gray);
   border-radius: 8px;
   ::placeholder {
     font-family: "Oleo Script";
@@ -239,7 +240,8 @@ const StInputEmail = styled.input`
     font-weight: 800;
     font-size: 1rem;
     text-align: center;
-    color: #7c7c7c;
+    color: var(--color-gray);
+    padding-right: 1em;
   }
 `;
 
@@ -268,9 +270,9 @@ const CancelBtn = styled.button`
   height: 5vh;
   font-size: 1rem;
   font-weight: 800;
-  color: #7c7c7c;
+  color: var(--color-gray);
   border: white;
-  background: #d9d9d9;
+  background: var(--color-light-gray);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
 `;

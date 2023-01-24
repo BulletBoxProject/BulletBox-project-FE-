@@ -159,9 +159,9 @@ const StSignupBtn = styled.button`
   top: 474px;
   font-size: 16px;
   font-weight: 800;
-  color: white;
+  color: var(--color-gray);
   border: white;
-  background: var(--color-main);
+  background: var(--color-light-gray);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
 `;
@@ -173,9 +173,9 @@ const StLoginBtn = styled.button`
   top: 474px;
   font-size: 16px;
   font-weight: 800;
-  color: #7c7c7c;
+  color: white;
   border: white;
-  background: #d9d9d9;
+  background: var(--color-main);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
 `;
