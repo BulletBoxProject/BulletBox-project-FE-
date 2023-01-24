@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import NavigationMenu from "./components/NavigationMenu";
+import NavigationMenu from "../components/NavigationMenu";
 
 const Footer = () => {
   return (

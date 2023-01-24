@@ -37,7 +37,6 @@ const CatergoryList = () => {
           })
         )}
       </CategoryAddList>
-      <CategoryAddDiv></CategoryAddDiv>
     </Container>
   );
 };
@@ -59,13 +58,6 @@ const CategoryAddList = styled.div`
   align-items: center;
   gap: 0.8rem;
   flex-wrap: wrap;
-`;
-
-const CategoryAddDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 5%;
 `;
 
 const CategoryAddPtag = styled.p`
