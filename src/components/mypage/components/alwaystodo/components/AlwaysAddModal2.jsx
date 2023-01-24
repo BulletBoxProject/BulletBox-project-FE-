@@ -1,19 +1,27 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Modal from "../../../../common/modal/Modal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ReactComponent as memoBullet } from "../../../../../img/myPage/memo-5.svg";
 import { ReactComponent as todoBullet } from "../../../../../img/myPage/todo-1.svg";
 import { ReactComponent as addIcon } from "../../../../../img/myPage/add.svg";
 import { ReactComponent as closeIcon } from "../../../../../img/myPage/close.svg";
 
+import { __postFavorite } from "../../../../../redux/modules/favoriteSlice";
+
 const AlwaysAddModal2 = ({ onClose }) => {
+  const dispatch = useDispatch();
   const categoryList = useSelector(
     (state) => state?.category?.category?.categories
   );
 
+  const [favoriteContent, setFavoriteContent] = useState("");
   const [favoriteMemos, setFavoriteMemos] = useState([{ id: 0, memo: "" }]);
   const [plusId, setPlusId] = useState(1);
+
+  const [categoryId, setCategoryId] = useState(0);
+  const [categoryName, setCategoryName] = useState("");
+  const [categoryColor, setCategoryColor] = useState("");
 
   const onAddHandler = () => {
     const input = { id: plusId, memo: "" };
@@ -24,11 +32,37 @@ const AlwaysAddModal2 = ({ onClose }) => {
     setFavoriteMemos(favoriteMemos.filter((value) => value.id !== index));
   };
 
-  const onChaneHandler = (e, index) => {
+  const onChaneMemoHandler = (e, index) => {
     let favoriteMemosCopy = [...favoriteMemos];
     favoriteMemosCopy[index].memo = e.target.value;
     setFavoriteMemos(favoriteMemosCopy);
     console.log(favoriteMemos[index].memo);
+  };
+
+  const onChaneTodoHandler = (e) => {
+    setFavoriteContent(e.target.value);
+  };
+
+  const onCategoryHandler = (e) => {
+    setCategoryId(e.categoryId);
+    setCategoryName(e.categoryName);
+    setCategoryColor(e.categoryColor);
+  };
+
+  const onAddFavoriteHandler = () => {
+    const favoriteInfo = {
+      favoriteContent: favoriteContent,
+      favoriteMemos: 
+        favoriteMemos.map((val) => ({
+          favoriteMemos: val.memo,
+        })),
+      
+      categoryId: categoryId,
+      categoryName: categoryName,
+      categoryColor: categoryColor,
+    };
+    console.log(favoriteInfo);
+    dispatch(__postFavorite(favoriteInfo));
   };
 
   return (
@@ -37,7 +71,12 @@ const AlwaysAddModal2 = ({ onClose }) => {
         <TodoBodyDiv>
           <TodoTitle>
             <TodoBullet />
-            <AlwaysTodoInput placeholder="할일을 입력해주세요."></AlwaysTodoInput>
+            <AlwaysTodoInput
+              placeholder="할일을 입력해주세요."
+              onChange={(e) => {
+                onChaneTodoHandler(e);
+              }}
+            ></AlwaysTodoInput>
           </TodoTitle>
           <TodoMemoDiv>
             {favoriteMemos.map((value, index) => (
@@ -46,8 +85,7 @@ const AlwaysAddModal2 = ({ onClose }) => {
                 <AlwaysMemoInput
                   type="text"
                   placeholder="메모을 입력해주세요."
-                  //   value={value.memo}
-                  onChange={(e) => onChaneHandler(e, index)}
+                  onChange={(e) => onChaneMemoHandler(e, index)}
                 ></AlwaysMemoInput>
                 <DeleteButton onClick={() => onDeleteHandler(value.id)}>
                   <DeleteIcon />
@@ -69,6 +107,10 @@ const AlwaysAddModal2 = ({ onClose }) => {
                   <SelectBtn
                     key={val.categoryId}
                     backgroundColor={val.categoryColor}
+                    value={val.categoryName}
+                    onClick={() => {
+                      onCategoryHandler(val);
+                    }}
                   >
                     {val.categoryName}
                   </SelectBtn>
@@ -80,9 +122,9 @@ const AlwaysAddModal2 = ({ onClose }) => {
 
         <BtnContainer>
           <AddModalBtn
-          // onClick={() => {
-          //   AddCategoryHandler();
-          // }}
+            onClick={() => {
+              onAddFavoriteHandler();
+            }}
           >
             추가
           </AddModalBtn>
