@@ -95,7 +95,7 @@ const CategoryModal = ({ onClose }) => {
 export default CategoryModal;
 
 const SelectColorDiv = styled.div`
-  width: 15rem;
+  width: 15.5rem;
   height: 10rem;
   display: flex;
   flex-direction: row;
