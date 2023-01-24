@@ -23,6 +23,9 @@ const BulletCalendar = () => {
         formatDay={(locale, date) =>
           date.toLocaleString("en", { day: "numeric" })
         }
+        formatShortWeekday={(locale, date) =>
+          ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][date.getDay()]
+        }
       />
     </Calendarcontainer>
   );
