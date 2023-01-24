@@ -62,7 +62,7 @@ const HeaderBtn = styled.button`
   border: none;
 `;
 const Logo = styled(logoIcon)`
-  width: 33%;
+  width: 36%;
   margin-left: 6%;
 `;
 
