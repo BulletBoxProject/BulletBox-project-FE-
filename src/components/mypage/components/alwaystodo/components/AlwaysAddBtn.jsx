@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import AlwaysAddModal from "./AlwaysAddModal";
+import AlwaysAddModal2 from "./AlwaysAddModal2";
 import { ReactComponent as addIcon } from "../../../../../img/myPage/add.svg";
 
 const AlwaysAddBtn = () => {
@@ -19,7 +19,7 @@ const AlwaysAddBtn = () => {
         <AddCategoryIcon />
       </AddButton>
       {isOpen && (
-        <AlwaysAddModal
+        <AlwaysAddModal2
           onClose={() => {
             setIsOpen(false);
           }}
