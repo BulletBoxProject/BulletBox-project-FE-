@@ -139,6 +139,7 @@ const StInput = styled.input`
     font-size: 1rem;
     text-align: center;
     color: #7c7c7c;
+    padding-right: 1em;
   }
 `;
 

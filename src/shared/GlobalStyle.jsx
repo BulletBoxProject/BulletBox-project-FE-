@@ -30,6 +30,10 @@ body, div, button{
   max-height: 915px;
 }
 
+input {
+  text-indent: 1em
+}
+
 button {
   cursor: pointer;
   outline: none;
