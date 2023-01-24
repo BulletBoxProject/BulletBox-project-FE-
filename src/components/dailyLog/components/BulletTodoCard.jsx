@@ -5,18 +5,19 @@ import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
 
 import { ReactComponent as moreIcon } from "../../../img/dailyLog/more.svg";
-
-import { ReactComponent as editIcon } from "../../../img/dailyLog/edit.svg";
 import { ReactComponent as deleteIcon } from "../../../img/dailyLog/delete.svg";
 import { ReactComponent as memoBullet } from "../../../img/bullet/memo-5.svg";
 
 import BulletSwitchList from "./BulletSwitchList";
+import Option from "./Option";
 
 const BulletTodoCard = ({ dailyLogs }) => {
   console.log("데일리로그 할일", dailyLogs);
-  const [showSelectBox, setShowSelectBox] = useState(false);
   const [showTodoMemo, setShowTodoMemo] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showOption, setShowOption] = useState(0);
+  const [showSelectBox, setShowSelectBox] = useState(false);
+
   const memoViewHandler = (e) => {
     if (showTodoMemo.find((id) => id === Number(e.target.id)) === undefined) {
       setShowTodoMemo([...showTodoMemo, Number(e.target.id)]);
@@ -24,18 +25,16 @@ const BulletTodoCard = ({ dailyLogs }) => {
       setShowTodoMemo(showTodoMemo.filter((id) => id !== Number(e.target.id)));
     }
   };
-  const SelectOptionHandler = () => {
-    setShowSelectBox(!showSelectBox);
-  };
-  const selectDeleteHandler = () => {
-    setShowSelectBox(!showSelectBox);
-    setShowDeleteModal(!showDeleteModal);
-  };
+
   const deleteButtonHandler = () => {
     setShowDeleteModal(!showDeleteModal);
   };
   const cancelButtonHandler = () => {
     setShowDeleteModal(!showDeleteModal);
+  };
+  const SelectOptionHandler = (e) => {
+    setShowOption(Number(e.target.id));
+    setShowSelectBox(!showSelectBox);
   };
   let num = 0;
   return (
@@ -63,25 +62,11 @@ const BulletTodoCard = ({ dailyLogs }) => {
               </TodoMoreViewButton>
             </TodoMoreViewDiv>
             <OptionSelectDiv>
-              <OptionButton onClick={SelectOptionHandler}>
+              <OptionButton id={dailyLog.todoId} onClick={SelectOptionHandler}>
                 <OptionIcon />
               </OptionButton>
-              {showSelectBox ? (
-                <SelectDiv>
-                  <div
-                    value="editTodo"
-                    onClick={() => alert("수정하기페이지 이동")}
-                  >
-                    수정하기 <EditIcon />
-                  </div>
-                  <SelectLine></SelectLine>
-                  <div value="deleteTodo" onClick={selectDeleteHandler}>
-                    <span>삭제하기</span>
-                    <span>
-                      <DeleteIcon />
-                    </span>
-                  </div>
-                </SelectDiv>
+              {showOption === dailyLog.todoId && showSelectBox ? (
+                <Option />
               ) : null}
             </OptionSelectDiv>
           </MainBulletTodo>
@@ -227,52 +212,19 @@ const TodoMoreViewButton = styled.button`
 const OptionSelectDiv = styled.div`
   position: relative;
 `;
-
 const OptionButton = styled.button`
   background-color: transparent;
   border: 0;
-`;
-const SelectDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  width: 35vw;
-  left: -28vw;
-  top: 5vh;
-  gap: 3px;
-  padding: 5px 14px;
-  position: absolute;
-  /* top: -12.5vh;
-  left: -28vw; */
-  border-radius: 4px;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
-  background-color: var(--color-default);
-  & > div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    font-size: 14px;
-    color: var(--color-gray);
-    padding: 5px 0;
-    &:hover {
-      color: var(--color-main);
-    }
+  & > svg {
+    pointer-events: none;
   }
 `;
-const SelectLine = styled.hr`
-  width: 100%;
-  border: 0;
-  height: 1px;
-  background-color: #ebebeb;
-  margin: 2px 0;
-`;
-const EditIcon = styled(editIcon)``;
-const DeleteIcon = styled(deleteIcon)``;
+
 const OptionIcon = styled(moreIcon)`
   width: 24px;
   height: 24px;
 `;
+
 const MoreIcon = styled(IoIosArrowDown)`
   width: 24px;
   height: 24px;
@@ -288,3 +240,11 @@ const MemoBullet = styled(memoBullet)`
   width: 24px;
   height: 18px;
 `;
+const SelectLine = styled.hr`
+  width: 100%;
+  border: 0;
+  height: 1px;
+  background-color: #ebebeb;
+  margin: 2px 0;
+`;
+const DeleteIcon = styled(deleteIcon)``;

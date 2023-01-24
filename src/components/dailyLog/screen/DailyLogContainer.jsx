@@ -43,6 +43,7 @@ const DailyLogContainer = () => {
     loadDailyLog();
     setIsLoading(!isLoading);
   }, []);
+
   if (isLoading) {
     <h1>Loading..</h1>;
   }
@@ -61,7 +62,12 @@ const DailyLogContainer = () => {
         </SelectDiv>
       </DateAndSelectDiv>
       <TodoBulletDiv>
-        <BulletTodoCard dailyLogs={dailyLogs} />
+        {dailyLogs.length === 0 ? (
+          <NoneTodo>할일을 추가해주세요.</NoneTodo>
+        ) : (
+          <BulletTodoCard dailyLogs={dailyLogs} />
+        )}
+
         <AddTodoDiv>
           <AddTodoButton type="button" onClick={showAddTodoSelect}>
             <AddTodoIcon />
@@ -134,7 +140,13 @@ const TodoBulletDiv = styled.div`
   min-height: 71vh;
   gap: 10px;
 `;
-
+const NoneTodo = styled.div`
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  margin-top: 2em;
+  color: var(--color-gray);
+`;
 const AddTodoDiv = styled.div`
   position: absolute;
   top: 84.5vh;
