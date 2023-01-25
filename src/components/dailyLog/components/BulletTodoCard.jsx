@@ -11,7 +11,7 @@ import { ReactComponent as memoBullet } from "../../../img/bullet/memo-5.svg";
 import BulletSwitchList from "./BulletSwitchList";
 import Option from "./Option";
 
-const BulletTodoCard = ({ dailyLogs }) => {
+const BulletTodoCard = ({ dailyLogs, setDailyLogs }) => {
   console.log("데일리로그 할일", dailyLogs);
   const [showTodoMemo, setShowTodoMemo] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -66,7 +66,11 @@ const BulletTodoCard = ({ dailyLogs }) => {
                 <OptionIcon />
               </OptionButton>
               {showOption === dailyLog.todoId && showSelectBox ? (
-                <Option />
+                <Option
+                  todoId={dailyLog.todoId}
+                  dailyLogs={dailyLogs}
+                  setDailyLogs={setDailyLogs}
+                />
               ) : null}
             </OptionSelectDiv>
           </MainBulletTodo>

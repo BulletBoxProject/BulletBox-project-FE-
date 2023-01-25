@@ -22,21 +22,19 @@ const BulletTodoForm = ({ AddTodoInput, setAddTodoInput }) => {
   };
   const selectBulletHandler = (e) => {
     e.preventDefault();
-    setAddTodoInput({ ...AddTodoInput, todoBulletName: e.target.value });
+    setAddTodoInput({
+      ...AddTodoInput,
+      todoBulletName: e.target.value,
+    });
     setShowBullet(!showBullet);
   };
   const todoInputHandler = (e) => {
     e.preventDefault();
     setTodoInput(e.target.value);
-  };
-  const addTodoHandler = (e) => {
-    e.preventDefault();
-    setAddTodoInput({ ...AddTodoInput, todoContent: todoInput });
-    setIsTodoInputDone(!isTodoInputDone);
-    /* 불렛 입력내용 초기화
-    // setTodoInput("");
-    // setAddTodoInput({ ...AddTodoInput, todoBulletName: "불렛" });
-    */
+    setAddTodoInput({
+      ...AddTodoInput,
+      todoContent: e.target.value,
+    });
   };
 
   return (
@@ -73,15 +71,6 @@ const BulletTodoForm = ({ AddTodoInput, setAddTodoInput }) => {
         value={todoInput}
         disabled={isTodoInputDone}
       />
-      {isTodoInputDone ? (
-        <AddTodoButton type="button" onClick={addTodoHandler}>
-          <TodoAddEditIcon style={{ color: "var(--color-gray)" }} />
-        </AddTodoButton>
-      ) : (
-        <AddTodoButton type="button" onClick={addTodoHandler}>
-          <TodoAddEditIcon />
-        </AddTodoButton>
-      )}
     </Container>
   );
 };
@@ -90,12 +79,13 @@ export default BulletTodoForm;
 
 const Container = styled.div`
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
 `;
 const BulletSelectButton = styled.button`
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   width: 12%;
   background-color: inherit;
   border: 0;
@@ -111,8 +101,8 @@ const BulletList = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
-  left: 7.5vw;
-  top: 13.2vh;
+  left: 6.5vw;
+  top: 15vh;
   border: 1px solid gray;
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.85);
@@ -127,14 +117,16 @@ const BulletList = styled.div`
     padding: 5px 2px;
     & > svg {
       pointer-events: none;
+      width: 24px;
+      height: 24px;
     }
   }
 `;
 const TodoInput = styled.input`
-  width: 75%;
+  width: 85%;
   border: 0;
   background-color: inherit;
-
+  padding-left: 0;
   :disabled {
     background-color: inherit;
     border: 0;
