@@ -31,15 +31,15 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   padding-top: 50%;
-  background-color: var(--color-main);
+  background-color: white;
   height: 100vh;
   font-size: 1.5rem;
-  color: white;
+  color: var(--color-main);
   font-family: "HeirofLightBold";
 `;
 
 const MainLogo = styled(Logo)`
-  fill: white;
+  fill: var(--color-main);
   width: 50%;
   height: 25vh;
 `;

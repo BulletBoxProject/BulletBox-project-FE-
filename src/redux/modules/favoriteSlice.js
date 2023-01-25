@@ -15,7 +15,7 @@ export const __postFavorite = createAsyncThunk(
       alert(data.msg);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
-      alert("같은 이름의 카테고리가 존재합니다.");
+      alert("루틴 추가를 실패했습니다.");
       return thunkAPI.rejectWithValue(error);
     }
   }

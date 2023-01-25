@@ -1,17 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Modal from "../../../../common/modal/Modal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ReactComponent as memoBullet } from "../../../../../img/myPage/memo-5.svg";
 import { ReactComponent as todoBullet } from "../../../../../img/myPage/todo-1.svg";
 import { ReactComponent as addIcon } from "../../../../../img/myPage/add.svg";
 import { ReactComponent as closeIcon } from "../../../../../img/myPage/close.svg";
 
+import { __postFavorite } from "../../../../../redux/modules/favoriteSlice";
+
 const AlwaysAddModal = ({ onClose }) => {
+  const dispatch = useDispatch();
   const categoryList = useSelector(
     (state) => state?.category?.category?.categories
   );
-  console.log(categoryList, "123");
+
+  const [favoriteContent, setFavoriteContent] = useState("");
+  const [favoriteMemos, setFavoriteMemos] = useState([{ id: 0, memo: "" }]);
+  const [plusId, setPlusId] = useState(1);
+
+  const [categoryId, setCategoryId] = useState(0);
+  const [categoryName, setCategoryName] = useState("");
+  const [categoryColor, setCategoryColor] = useState("");
+
+  const onMemoAddHandler = () => {
+    const input = { id: plusId, memo: "" };
+    setFavoriteMemos([...favoriteMemos, input]);
+    setPlusId(plusId + 1);
+  };
+  const onDeleteHandler = (index) => {
+    setFavoriteMemos(favoriteMemos.filter((value) => value.id !== index));
+  };
+
+  const onChaneMemoHandler = (e, index) => {
+    let favoriteMemosCopy = [...favoriteMemos];
+    favoriteMemosCopy[index].memo = e.target.value;
+    setFavoriteMemos(favoriteMemosCopy);
+  };
+
+  const onChaneTodoHandler = (e) => {
+    setFavoriteContent(e.target.value);
+  };
+
+  const onCategoryHandler = (e) => {
+    setCategoryId(e.categoryId);
+    setCategoryName(e.categoryName);
+    setCategoryColor(e.categoryColor);
+  };
+
+  const onAddFavoriteHandler = () => {
+    const favoriteInfo = {
+      favoriteContent: favoriteContent,
+      favoriteMemos: favoriteMemos.map((val) => ({
+        favoriteMemoContent: val.memo,
+      })),
+
+      categoryId: categoryId,
+      categoryName: categoryName,
+      categoryColor: categoryColor,
+    };
+    dispatch(__postFavorite(favoriteInfo));
+  };
 
   return (
     <>
@@ -19,55 +68,60 @@ const AlwaysAddModal = ({ onClose }) => {
         <TodoBodyDiv>
           <TodoTitle>
             <TodoBullet />
-            친구랑 등산가기
+            <AlwaysTodoInput
+              placeholder="루틴을 입력해주세요."
+              onChange={(e) => {
+                onChaneTodoHandler(e);
+              }}
+            ></AlwaysTodoInput>
           </TodoTitle>
           <TodoMemoDiv>
-            <MemoContent>
-              <MemoBullet />
-              오전7시 관악산 입구
-              <DeleteIcon />
-            </MemoContent>
-            <MemoContent>
-              <MemoBullet />
-              오전7시 관악산 입구
-              <DeleteIcon />
-            </MemoContent>
-            <MemoContent>
-              <MemoBullet />
-              오전7시 관악산 입구
-              <DeleteIcon />
-            </MemoContent>
-            <MemoContent>
-              <MemoBullet />
-              오전7시 관악산 입구
-              <DeleteIcon />
-            </MemoContent>
+            {favoriteMemos.map((value, index) => (
+              <MemoContent key={index}>
+                <MemoBullet />
+                <AlwaysMemoInput
+                  type="text"
+                  placeholder="메모을 입력해주세요."
+                  onChange={(e) => onChaneMemoHandler(e, index)}
+                ></AlwaysMemoInput>
+                <DeleteButton onClick={() => onDeleteHandler(value.id)}>
+                  <DeleteIcon />
+                </DeleteButton>
+              </MemoContent>
+            ))}
           </TodoMemoDiv>
+          <IconDiv>
+            <AddButton onClick={onMemoAddHandler}>
+              <AddIcon />
+            </AddButton>
+          </IconDiv>
+          <CategoryBtnContainer>
+            {categoryList && categoryList.length === 0 ? (
+              <p>카테고리를 추가해보세요.</p>
+            ) : (
+              categoryList?.map((val) => {
+                return (
+                  <SelectBtn
+                    key={val.categoryId}
+                    backgroundColor={val.categoryColor}
+                    value={val.categoryName}
+                    onClick={() => {
+                      onCategoryHandler(val);
+                    }}
+                  >
+                    {val.categoryName}
+                  </SelectBtn>
+                );
+              })
+            )}
+          </CategoryBtnContainer>
         </TodoBodyDiv>
-        <IconDiv>
-          <AddIcon />
-        </IconDiv>
-        <CategoryBtnContainer>
-          {categoryList && categoryList.length === 0 ? (
-            <p>카테고리를 추가해보세요.</p>
-          ) : (
-            categoryList?.map((val) => {
-              return (
-                <SelectBtn
-                  key={val.categoryId}
-                  backgroundColor={val.categoryColor}
-                >
-                  {val.categoryName}
-                </SelectBtn>
-              );
-            })
-          )}
-        </CategoryBtnContainer>
+
         <BtnContainer>
           <AddModalBtn
-          // onClick={() => {
-          //   AddCategoryHandler();
-          // }}
+            onClick={() => {
+              onAddFavoriteHandler();
+            }}
           >
             추가
           </AddModalBtn>
@@ -84,25 +138,18 @@ const TodoBodyDiv = styled.div`
   display: flex;
   flex-direction: column;
   font-weight: bold;
-  height: 9.5vh;
+  height: 30vh;
+  overflow: auto;
 `;
 
 const TodoTitle = styled.div`
-  position: absolute;
   display: flex;
   align-items: center;
   font-size: 14px;
-  top: 0;
-  left: 0;
-  margin-top: 30px;
-  margin-left: 25px;
 `;
 const TodoMemoDiv = styled.div`
   display: flex;
   flex-direction: column;
-  overflow: auto;
-  height: 12vh;
-  margin-top: 10px;
   margin-left: 10px;
 `;
 const MemoContent = styled.div`
@@ -114,7 +161,7 @@ const MemoContent = styled.div`
 `;
 
 const AddModalBtn = styled.button`
-  width: 6.3rem;
+  width: 47.4%;
   height: 7vh;
   font-size: 1rem;
   border-radius: 8px;
@@ -125,24 +172,22 @@ const AddModalBtn = styled.button`
 const BtnContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   margin-top: 10%;
 `;
 
 const CategoryBtnContainer = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   flex-wrap: wrap;
   height: 15vh;
-  overflow: auto;
-  width: 100%;
-  gap: 8px;
-  padding: 5px 2px;
+  padding-top: 3%;
 `;
 
 const SelectBtn = styled.button`
-  width: 6.3rem;
+  width: 6.5rem;
   height: 2.5rem;
+  margin: 2%;
   font-size: 12px;
   font-weight: bold;
   border-radius: 8px;
@@ -172,14 +217,39 @@ const IconDiv = styled.div`
   margin-top: 15px;
   margin-bottom: 8px;
 `;
+const AddButton = styled.button`
+  width: 1.8rem;
+  height: 2.6vh;
+  border: none;
+  background-color: transparent;
+`;
 const AddIcon = styled(addIcon)`
   fill: var(--color-gray);
-  width: 2.5rem;
-  height: 2.7vh;
+  width: 1.5rem;
+  height: 2.5vh;
 `;
 
+const DeleteButton = styled.button`
+  width: 1.5rem;
+  height: 2.6vh;
+  border: none;
+  background-color: transparent;
+`;
 const DeleteIcon = styled(closeIcon)`
   fill: var(--color-gray);
-  width: 1.9rem;
+  width: 1.5rem;
   height: 2.5vh;
+`;
+
+const AlwaysTodoInput = styled.input`
+  border: none;
+  ::placeholder {
+  }
+`;
+
+const AlwaysMemoInput = styled.input`
+  border: none;
+  width: 65%;
+  ::placeholder {
+  }
 `;

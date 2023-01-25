@@ -43,5 +43,7 @@ const CategoryBtn = styled.button`
   font-weight: 600;
   border-radius: 10px;
   border: none;
-  background-color: ${({ backgroundColor }) => backgroundColor || "#D9D9D9"};
+  background-color: ${({ backgroundColor }) => backgroundColor || "white"};
+  /* {background-color= white ? box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2): null} */
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.8);
 `;

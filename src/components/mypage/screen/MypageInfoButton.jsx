@@ -16,7 +16,7 @@ const MypageInfoButton = ({ showInfo, setShowInfo }) => {
           setShowInfo(2);
         }}
       >
-        자주 쓰는 할일
+        루 틴
       </Button>
     </Container>
   );

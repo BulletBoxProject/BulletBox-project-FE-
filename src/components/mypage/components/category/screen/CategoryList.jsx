@@ -50,14 +50,15 @@ const Container = styled.div`
   margin-top: 3%;
 `;
 const CategoryAddList = styled.div`
-  width: 100%;
   height: 4rem;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 0.8rem;
   flex-wrap: wrap;
+  margin-left: 12%;
+  
 `;
 
 const CategoryAddPtag = styled.p`

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import AlwaysAddModal2 from "./AlwaysAddModal2";
-import { ReactComponent as addIcon } from "../../../../../img/myPage/add.svg";
+import AlwaysAddModal from "./AlwaysAddModal";
+import { BsFillPlusCircleFill } from "react-icons/bs";
 
 const AlwaysAddBtn = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,7 +19,7 @@ const AlwaysAddBtn = () => {
         <AddCategoryIcon />
       </AddButton>
       {isOpen && (
-        <AlwaysAddModal2
+        <AlwaysAddModal
           onClose={() => {
             setIsOpen(false);
           }}
@@ -32,20 +32,22 @@ const AlwaysAddBtn = () => {
 export default AlwaysAddBtn;
 
 const AddButton = styled.button`
-  width: 5rem;
-  height: 4vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
   background-color: transparent;
-  border: none;
 `;
 
-const AddCategoryIcon = styled(addIcon)`
-  fill: var(--color-gray);
-  width: 5rem;
-  height: 4vh;
+const AddCategoryIcon = styled(BsFillPlusCircleFill)`
+  fill: var(--color-main);
+  width: 40px;
+  height: 40px;
 `;
 
 const AddBtnContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 10%;
+  position: absolute;
+  top: 84.5vh;
+  left: 84vw;
 `;

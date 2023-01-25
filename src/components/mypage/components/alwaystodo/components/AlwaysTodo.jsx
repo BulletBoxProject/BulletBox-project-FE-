@@ -143,7 +143,7 @@ const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 100%;
+  width: 95%;
   background-color: var(--color-default);
   /* border: 1px solid rgba(240, 161, 59, 0.2); */
   /* box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.1); */

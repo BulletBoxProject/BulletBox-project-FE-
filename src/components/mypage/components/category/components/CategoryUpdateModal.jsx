@@ -10,15 +10,24 @@ const CategoryUpdateModal = ({ id, backgroundColor, name, onClose }) => {
   const [categoryName, setCategoryName] = useState("");
   const [categoryColor, setCategoryColor] = useState(backgroundColor);
 
+  const [isName, setIsName] = useState(false);
+  const [isColor, setIsColor] = useState(false);
+
   const dispatch = useDispatch();
   const onCloseHandler = onClose;
 
   const CategoryNameHandler = (e) => {
     const value = e.target.value;
     setCategoryName(value);
+    if (value.length !== 0) {
+      setIsName(true);
+    } else {
+      setIsName(false);
+    }
   };
   const CategoryColorHandler = (e) => {
     setCategoryColor(e.target.value);
+    setIsColor(true);
   };
 
   const UpdateCategoryHandler = () => {
@@ -87,20 +96,21 @@ const CategoryUpdateModal = ({ id, backgroundColor, name, onClose }) => {
           })}
         </SelectColorDiv>
         <BtnContainer>
-          <AddModalBtn
+          <DeleteModalBtn
             onClick={() => {
               deleteCategoryHandler(id);
             }}
           >
             삭제하기
-          </AddModalBtn>
-          <AddModalBtn
+          </DeleteModalBtn>
+          <UpdateModalBtn
+            disabled={!(isName && isColor)}
             onClick={() => {
               UpdateCategoryHandler();
             }}
           >
             수정하기
-          </AddModalBtn>
+          </UpdateModalBtn>
         </BtnContainer>
       </Modal>
     </>
@@ -158,13 +168,29 @@ const CategoryInput = styled.input.attrs({ maxLength: 8 })`
   font-size: 1rem;
 `;
 
-const AddModalBtn = styled.button`
+const UpdateModalBtn = styled.button`
   width: 47.4%;
   height: 7vh;
   font-size: 1rem;
   font-weight: bold;
   border-radius: 8px;
   border: none;
+  color: white;
+  background-color: var(--color-main);
+  &:disabled {
+    color: black;
+    background-color: var(--color-default);
+  }
+`;
+
+const DeleteModalBtn = styled.button`
+  width: 47.4%;
+  height: 7vh;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--color-default);
 `;
 
 const BtnContainer = styled.div`

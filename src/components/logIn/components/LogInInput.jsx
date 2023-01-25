@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { baseURLApiV1 } from "../../../core/api";
 import { setCookies } from "../../../core/cookieControler";
 import AlertModal from "../../common/modal/AlertModal";
+import { IoIosArrowBack } from "react-icons/io";
 
 const LogInInput = () => {
   const navigate = useNavigate();
@@ -12,6 +13,10 @@ const LogInInput = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
+
+  const onBackHandler = () => {
+    navigate("/");
+  };
 
   const postLogin = async (post) => {
     try {
@@ -25,7 +30,8 @@ const LogInInput = () => {
     }
   };
 
-  const loginHandler = () => {
+  const loginHandler = (e) => {
+    e.preventDefault();
     if (email === "" || password === "") {
       setIsOpen(true);
       setMessage("이메일과 비밀번호를 입력해주세요.");
@@ -49,6 +55,9 @@ const LogInInput = () => {
 
   return (
     <StForm>
+      <BackBtn type="button" onClick={onBackHandler}>
+        <BackIcon />
+      </BackBtn>
       <StTitle>Login</StTitle>
       <StInput
         placeholder="ID"
@@ -79,9 +88,9 @@ const LogInInput = () => {
           회원가입
         </StSignupBtn>
         <StLoginBtn
-          type="button"
-          onClick={() => {
-            loginHandler();
+          type="submit"
+          onClick={(e) => {
+            loginHandler(e);
           }}
         >
           로그인
@@ -178,4 +187,20 @@ const StLoginBtn = styled.button`
   background: var(--color-main);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
+`;
+
+const BackBtn = styled.button`
+  position: absolute;
+  left: 0;
+  margin-top: 1vh;
+  margin-left: 23vw;
+  border: none;
+  background-color: transparent;
+  width: 25px;
+  height: 20px;
+`;
+const BackIcon = styled(IoIosArrowBack)`
+  color: var(--color-gray);
+  width: 20px;
+  height: 18px;
 `;
