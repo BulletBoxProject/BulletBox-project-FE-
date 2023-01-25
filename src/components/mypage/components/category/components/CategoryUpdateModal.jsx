@@ -165,6 +165,7 @@ const AddModalBtn = styled.button`
   font-weight: bold;
   border-radius: 8px;
   border: none;
+  background-color: var(--color-default);
 `;
 
 const BtnContainer = styled.div`

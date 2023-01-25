@@ -52,7 +52,7 @@ const AlwaysAddModal = ({ onClose }) => {
     const favoriteInfo = {
       favoriteContent: favoriteContent,
       favoriteMemos: favoriteMemos.map((val) => ({
-        favoriteMemos: val.memo,
+        favoriteMemoContent: val.memo,
       })),
 
       categoryId: categoryId,
@@ -161,7 +161,7 @@ const MemoContent = styled.div`
 `;
 
 const AddModalBtn = styled.button`
-  width: 6.3rem;
+  width: 47.4%;
   height: 7vh;
   font-size: 1rem;
   border-radius: 8px;
@@ -178,18 +178,16 @@ const BtnContainer = styled.div`
 
 const CategoryBtnContainer = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   flex-wrap: wrap;
   height: 15vh;
-
-  width: 100%;
-  gap: 8px;
-  padding: 5px 2px;
+  padding-top: 3%;
 `;
 
 const SelectBtn = styled.button`
-  width: 6.3rem;
+  width: 6.5rem;
   height: 2.5rem;
+  margin: 2%;
   font-size: 12px;
   font-weight: bold;
   border-radius: 8px;
