@@ -55,7 +55,7 @@ const CategoryModal = ({ onClose }) => {
           onChange={(e) => {
             CategoryNameHandler(e);
           }}
-          placeholder="카테고리 이름을 입력해주세요."
+          placeholder="카테고리 이름을 입력하세요."
         ></CategoryInput>
         <TitleLength>({categoryName.length}/8)</TitleLength>
         <SelectColorDiv>
@@ -95,7 +95,7 @@ const CategoryModal = ({ onClose }) => {
 export default CategoryModal;
 
 const SelectColorDiv = styled.div`
-  width: 15rem;
+  width: 15.5rem;
   height: 10rem;
   display: flex;
   flex-direction: row;
@@ -141,9 +141,6 @@ const CategoryInput = styled.input.attrs({ maxLength: 8 })`
   border: 1px solid var(--color-gray);
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
   font-size: 1rem;
-  ::placeholder {
-    text-align: center;
-  }
 `;
 
 const AddModalBtn = styled.button`

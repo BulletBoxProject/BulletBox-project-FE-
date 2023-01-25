@@ -47,5 +47,5 @@ const AddCategoryIcon = styled(addIcon)`
 const AddBtnContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 15%;
+  margin-top: 10%;
 `;

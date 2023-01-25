@@ -29,9 +29,11 @@ body, div, button{
   max-width: 412px;
   max-height: 915px;
 }
+
 input {
-  padding-left: 1em;
+  text-indent: 1em
 }
+
 button {
   cursor: pointer;
   outline: none;

@@ -81,6 +81,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  z-index: 999;
 `;
 const CalendarDiv = styled.div`
   position: relative;
@@ -182,6 +183,9 @@ const DiaryText = styled.textarea.attrs({ maxLength: 200 })`
     text-align: center;
     font-size: 12px;
     font-weight: bold;
+  }
+  :focus {
+    outline: none;
   }
 `;
 

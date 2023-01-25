@@ -7,7 +7,7 @@ import { __deleteCategory } from "../../../../../redux/modules/categorySlice";
 import { ReactComponent as close } from "../../../../../img/myPage/close.svg";
 
 const CategoryUpdateModal = ({ id, backgroundColor, name, onClose }) => {
-  const [categoryName, setCategoryName] = useState(name);
+  const [categoryName, setCategoryName] = useState("");
   const [categoryColor, setCategoryColor] = useState(backgroundColor);
 
   const dispatch = useDispatch();
@@ -64,7 +64,7 @@ const CategoryUpdateModal = ({ id, backgroundColor, name, onClose }) => {
           onChange={(e) => {
             CategoryNameHandler(e);
           }}
-          placeholder="카테고리 이름을 입력해주세요"
+          placeholder="카테고리 이름을 수정하세요."
         ></CategoryInput>
         <TitleLength>({categoryName.length}/8)</TitleLength>
         <SelectColorDiv>
@@ -156,9 +156,6 @@ const CategoryInput = styled.input.attrs({ maxLength: 8 })`
   border: 1px solid var(--color-gray);
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
   font-size: 1rem;
-  ::placeholder {
-    text-align: center;
-  }
 `;
 
 const AddModalBtn = styled.button`
