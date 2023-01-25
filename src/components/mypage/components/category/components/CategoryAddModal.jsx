@@ -17,7 +17,7 @@ const CategoryModal = ({ onClose }) => {
   const CategoryNameHandler = (e) => {
     const value = e.target.value;
     setCategoryName(value);
-    if (value.lengt !== 0) {
+    if (value.length !== 0) {
       setIsName(true);
     } else {
       setIsName(false);

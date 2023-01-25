@@ -6,12 +6,12 @@ const AlwaysTodoList = () => {
   return (
     <Container>
       <AlwaysAddList>
-        <AlwaysTodo />
-        <AlwaysTodo />
-        <AlwaysTodo />
-        <AlwaysTodo />
-        <AlwaysTodo />
-        <AlwaysTodo />
+        <AlwaysTodo /> 
+        <AlwaysTodo /> 
+        <AlwaysTodo /> 
+        <AlwaysTodo /> 
+        <AlwaysTodo /> 
+        <AlwaysTodo /> 
       </AlwaysAddList>
     </Container>
   );

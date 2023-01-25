@@ -30,7 +30,8 @@ const LogInInput = () => {
     }
   };
 
-  const loginHandler = () => {
+  const loginHandler = (e) => {
+    e.preventDefault();
     if (email === "" || password === "") {
       setIsOpen(true);
       setMessage("이메일과 비밀번호를 입력해주세요.");
@@ -54,7 +55,7 @@ const LogInInput = () => {
 
   return (
     <StForm>
-      <BackBtn onClick={onBackHandler}>
+      <BackBtn type="button" onClick={onBackHandler}>
         <BackIcon />
       </BackBtn>
       <StTitle>Login</StTitle>
@@ -87,9 +88,9 @@ const LogInInput = () => {
           회원가입
         </StSignupBtn>
         <StLoginBtn
-          type="button"
-          onClick={() => {
-            loginHandler();
+          type="submit"
+          onClick={(e) => {
+            loginHandler(e);
           }}
         >
           로그인
