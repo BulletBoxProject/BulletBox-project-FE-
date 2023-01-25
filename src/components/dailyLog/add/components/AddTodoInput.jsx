@@ -54,8 +54,8 @@ const AddTodoInput = () => {
   };
   const submitTodoHandler = () => {
     postTodo(AddTodoInput);
-
-    navigate("/dailys");
+    // navigate("/dailys");
+    window.location.href = "/dailys";
   };
   useEffect(() => {
     loadAddTodoPage();
