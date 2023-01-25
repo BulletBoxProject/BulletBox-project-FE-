@@ -65,7 +65,7 @@ const DailyLogContainer = () => {
         {dailyLogs.length === 0 ? (
           <NoneTodo>할일을 추가해주세요.</NoneTodo>
         ) : (
-          <BulletTodoCard dailyLogs={dailyLogs} />
+          <BulletTodoCard dailyLogs={dailyLogs} setDailyLogs={setDailyLogs} />
         )}
 
         <AddTodoDiv>
@@ -158,7 +158,8 @@ const AddTodoButton = styled.button`
   align-items: center;
   justify-content: center;
   border: 0;
-  background-color: transparent;
+  background-color: white;
+  border-radius: 50%;
 `;
 const AddTodoIcon = styled(BsFillPlusCircleFill)`
   fill: var(--color-main);

@@ -50,27 +50,27 @@ export default BulletSwitchList;
 
 const TodoBullet = styled(todoBullet)`
   width: 24px;
-  height: 18px;
+  height: 24px;
 `;
 const CheckBullet = styled(checkBullet)`
   width: 24px;
-  height: 18px;
+  height: 24px;
 `;
 const PostphoneBullet = styled(postphoneBullet)`
   width: 24px;
-  height: 18px;
+  height: 24px;
 `;
 
 const ImportantBullet = styled(importantBullet)`
   width: 24px;
-  height: 18px;
+  height: 24px;
 `;
 const MemoBullet = styled(memoBullet)`
   width: 24px;
-  height: 18px;
+  height: 24px;
 `;
 
 const FavoriteBullet = styled(favoriteBullet)`
   width: 24px;
-  height: 18px;
+  height: 24px;
 `;

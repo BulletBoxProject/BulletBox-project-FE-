@@ -4,23 +4,39 @@ import styled from "styled-components";
 import { ReactComponent as editIcon } from "../../../img/dailyLog/edit.svg";
 import { ReactComponent as deleteIcon } from "../../../img/dailyLog/delete.svg";
 import { ReactComponent as moreIcon } from "../../../img/dailyLog/more.svg";
+import { baseURLApiV1 } from "../../../core/api";
 
-const Option = () => {
-  const selectDeleteHandler = () => {};
+const Option = ({ todoId, dailyLogs, setDailyLogs }) => {
+  console.log(todoId);
+  const deleteTodo = async (id) => {
+    try {
+      const data = await baseURLApiV1.delete(`/dailys/todo/${id}`);
+      if (data.data.httpStatusCode === 200) {
+        return console.log(data.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const selectDeleteHandler = (e) => {
+    const id = Number(e.target.value);
+    deleteTodo(id);
+    setDailyLogs(dailyLogs.filter((dailyLog) => dailyLog.todoId !== id));
+  };
 
   return (
     <div>
       <SelectDiv>
-        <div value="editTodo" onClick={() => alert("수정하기페이지 이동")}>
+        <Button id={todoId} onClick={() => alert("수정하기페이지 이동")}>
           수정하기 <EditIcon />
-        </div>
+        </Button>
         <SelectLine></SelectLine>
-        <div value="deleteTodo" onClick={selectDeleteHandler}>
+        <Button value={todoId} onClick={selectDeleteHandler}>
           <span>삭제하기</span>
           <span>
             <DeleteIcon />
           </span>
-        </div>
+        </Button>
       </SelectDiv>
     </div>
   );
@@ -44,7 +60,7 @@ const SelectDiv = styled.div`
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
   background-color: var(--color-default);
   z-index: 999;
-  & > div {
+  & > button {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -66,3 +82,11 @@ const SelectLine = styled.hr`
 `;
 const EditIcon = styled(editIcon)``;
 const DeleteIcon = styled(deleteIcon)``;
+const Button = styled.button`
+  border: 0;
+  background-color: var(--color-default);
+  & > svg,
+  span {
+    pointer-events: none;
+  }
+`;

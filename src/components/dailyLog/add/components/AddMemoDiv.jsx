@@ -1,75 +1,63 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import styled from "styled-components";
 
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
 import { ReactComponent as memoBullet } from "../../../../img/bullet/memo-5.svg";
 import { ReactComponent as memoAddIcon } from "../../../../img/dailyLog/edit.svg";
+import { ReactComponent as closeIcon } from "../../../../img/dailyLog/close.svg";
 
 const AddMemoDiv = ({ AddTodoInput, setAddTodoInput, memos }) => {
   const [showMemo, setShowMemo] = useState(false);
   const [memoInput, setMemoInput] = useState("");
+  const [memoList, setMemoList] = useState([]);
 
   const addMemoHanlder = () => {
-    setShowMemo(!showMemo);
-  };
-  const memoInputHandler = (e) => {
-    setMemoInput(e.target.value);
-  };
-
-  const memoSubmitHandler = () => {
     setAddTodoInput({
       ...AddTodoInput,
       memos: [
         ...memos,
         {
-          todoMemoContent: memoInput,
-          memoId: memos.length === 0 ? 1 : memos.pop().memoId + 1,
+          memoId: memos.length === 0 ? 0 : memos.pop().memoId + 1,
+          todoMemoContent: "",
         },
       ],
     });
-    setMemoInput("");
-    setShowMemo(false);
   };
-  const memoDeleteHanlder = (e) => {
-    memos = memos.filter((memo) => memo.memoId !== Number(e.target.id) + 1);
+  const memoInputHandler = (e, idx) => {
+    setMemoInput(e.target.value);
+    let memosCopy = [...memos];
+    memosCopy[idx].todoMemoContent = e.target.value;
+    setAddTodoInput({ ...AddTodoInput, memos: [...memosCopy] });
+  };
+  const memoDeleteHanlder = (id) => {
+    let memosCopy = [...memos];
     setAddTodoInput({
       ...AddTodoInput,
-      memos: memos,
+      memos: [...memosCopy.filter((memo) => memo.memoId !== id)],
     });
   };
 
   let num = 0;
   return (
     <Container>
-      <MemoList>
-        {memos.length === 0
-          ? null
-          : memos.map((memo, idx) => (
-              <MemoCard id={idx} key={num++}>
-                <MemoBullet>
-                  <MemoBulletIcon />
-                </MemoBullet>
-                <span>{memo.todoMemoContent}</span>
-              </MemoCard>
-            ))}
-      </MemoList>
-      {showMemo ? (
-        <AddMemoInputDiv>
+      {memos.map((memo, idx) => (
+        <AddMemoInputDiv key={num++}>
           <MemoBullet>
             <MemoBulletIcon />
           </MemoBullet>
           <AddMemoInput
+            id={memo.memoId}
             type="text"
             placeholder="불렛메모를 추가하세요"
-            onChange={memoInputHandler}
-            value={memoInput}
+            onChange={(e) => memoInputHandler(e, idx)}
+            value={memo.todoMemoContent}
           />
-          <MemoSubmitButton onClick={memoSubmitHandler} type="button">
-            <MemoAddIcon />
-          </MemoSubmitButton>
+          <DeleteButton onClick={() => memoDeleteHanlder(memo.memoId)}>
+            <DeleteIcon />
+          </DeleteButton>
         </AddMemoInputDiv>
-      ) : null}
+      ))}
       <AddTodoMemoButton type="button" onClick={addMemoHanlder}>
         <AddMemoIcon />
       </AddTodoMemoButton>
@@ -88,7 +76,7 @@ const MemoList = styled.div`
   display: flex;
   flex-direction: column;
   width: 80%;
-  margin-left: 5vw;
+  margin-left: 8vw;
   margin-top: 5px;
   gap: 5px;
 `;
@@ -119,7 +107,7 @@ const CancelMemoIcon = styled(IoMdClose)`
 const AddMemoInputDiv = styled.div`
   display: flex;
   width: 80%;
-  margin-left: 5vw;
+  margin-left: 8vw;
 `;
 const MemoBullet = styled.div``;
 
@@ -153,4 +141,15 @@ const MemoBulletIcon = styled(memoBullet)`
 const MemoAddIcon = styled(memoAddIcon)`
   width: 16px;
   height: 16px;
+`;
+const DeleteButton = styled.button`
+  width: 1.5rem;
+  height: 2.6vh;
+  border: none;
+  background-color: transparent;
+`;
+const DeleteIcon = styled(closeIcon)`
+  fill: var(--color-gray);
+  width: 1.5rem;
+  height: 2.5vh;
 `;

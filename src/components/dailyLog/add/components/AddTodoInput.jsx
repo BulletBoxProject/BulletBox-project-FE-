@@ -12,7 +12,7 @@ import CategorySelectDiv from "./CategorySelectDiv";
 const AddTodoInput = () => {
   const navigate = useNavigate();
   const [AddTodoInput, setAddTodoInput] = useState({
-    todoContent: "할 일 내용",
+    todoContent: "",
     todoBulletName: "불렛",
     time: "00:00",
     categoryId: null,
