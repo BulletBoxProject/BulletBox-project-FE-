@@ -178,7 +178,7 @@ const BtnContainer = styled.div`
 
 const CategoryBtnContainer = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   flex-wrap: wrap;
   height: 15vh;
 
