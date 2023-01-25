@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import CategoryUpdateBtn from "../components/CategoryUpdateBtn";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { __getCategory } from "../../../../../redux/modules/categorySlice";
-import { useSelector } from "react-redux";
 
 const CatergoryList = () => {
   const dispatch = useDispatch();
@@ -11,7 +10,6 @@ const CatergoryList = () => {
   const categoryList = useSelector(
     (state) => state?.category?.category?.categories
   );
-  console.log(categoryList, "23");
 
   useEffect(() => {
     dispatch(__getCategory());
@@ -50,7 +48,7 @@ const Container = styled.div`
   margin-top: 3%;
 `;
 const CategoryAddList = styled.div`
-  height: 4rem;
+  height: 55vh;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -58,7 +56,6 @@ const CategoryAddList = styled.div`
   gap: 0.8rem;
   flex-wrap: wrap;
   margin-left: 12%;
-  
 `;
 
 const CategoryAddPtag = styled.p`
