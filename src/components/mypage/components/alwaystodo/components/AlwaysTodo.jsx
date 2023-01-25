@@ -11,7 +11,7 @@ import { ReactComponent as deleteIcon } from "../../../../../img/myPage/delete.s
 import { ReactComponent as memoBullet } from "../../../../../img/myPage/memo-5.svg";
 import { ReactComponent as todoBullet } from "../../../../../img/myPage/todo-1.svg";
 
-const AlwaysTodo = () => {
+const AlwaysTodo = ({ id, backgroundColor, content, memo }) => {
   const [showSelectBox, setShowSelectBox] = useState(false);
   const [showTodoMemo, setShowTodoMemo] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -36,19 +36,17 @@ const AlwaysTodo = () => {
 
   return (
     <>
-      <CardContainer>
+      <CardContainer backgroundColor={backgroundColor}>
         <MainBulletTodo>
           <TodoBodyDiv>
             <span>
               <TodoBullet />
             </span>
-            <span>컨텐츠</span>
+            <span>{content}</span>
           </TodoBodyDiv>
           <TodoMoreViewDiv>
             <TodoMoreViewButton onClick={memoViewHandler}>
               {showTodoMemo ? <OnlyTitleIcon /> : <MoreIcon />}
-              {/* <OnlyTitleIcon />
-              <MoreIcon /> */}
             </TodoMoreViewButton>
           </TodoMoreViewDiv>
           <OptionSelectDiv>
@@ -76,42 +74,14 @@ const AlwaysTodo = () => {
         </MainBulletTodo>
         {showTodoMemo ? (
           <TodoMemoDiv>
-            <MemoContent>
-              <span>
-                <MemoBullet />
-              </span>
-              <span>메모</span>
-            </MemoContent>
-            <MemoContent>
-              <span>
-                <MemoBullet />
-              </span>
-              <span>메모</span>
-            </MemoContent>
-            <MemoContent>
-              <span>
-                <MemoBullet />
-              </span>
-              <span>메모</span>
-            </MemoContent>
-            <MemoContent>
-              <span>
-                <MemoBullet />
-              </span>
-              <span>메모</span>
-            </MemoContent>
-            <MemoContent>
-              <span>
-                <MemoBullet />
-              </span>
-              <span>메모</span>
-            </MemoContent>
-            <MemoContent>
-              <span>
-                <MemoBullet />
-              </span>
-              <span>메모</span>
-            </MemoContent>
+            {memo.map((value) => (
+              <MemoContent key={value.favoriteMemoId}>
+                <span>
+                  <MemoBullet />
+                </span>
+                <span>{value.favoriteMemoContent}</span>
+              </MemoContent>
+            ))}
           </TodoMemoDiv>
         ) : null}
       </CardContainer>
@@ -143,8 +113,9 @@ const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 95%;
-  background-color: var(--color-default);
+  width: 100%;
+  background-color: ${({ backgroundColor }) =>
+    backgroundColor || "var(--color-default)"};
   /* border: 1px solid rgba(240, 161, 59, 0.2); */
   /* box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.1); */
   padding: 12px;
@@ -199,13 +170,15 @@ const CancelButton = styled.div`
 const MainBulletTodo = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   width: 100%;
+  /* 
   & > input {
     width: 90%;
     padding: 0;
     margin: 0;
-  }
+  } */
 `;
 const TodoBodyDiv = styled.div`
   display: flex;

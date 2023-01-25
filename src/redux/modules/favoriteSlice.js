@@ -5,12 +5,23 @@ import { baseURLApiV1 } from "../../core/api";
 const initialState = {};
 
 // thunk
+export const __getFavorite = createAsyncThunk(
+  "favorite/getFavorite",
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await baseURLApiV1.get(`favorites`, payload);
+      console.log(data);
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 
 export const __postFavorite = createAsyncThunk(
   "favorite/addFavorite",
   async (payload, thunkAPI) => {
     try {
-      console.log(payload);
       const { data } = await baseURLApiV1.post(`favorites`, payload);
       alert(data.msg);
       return thunkAPI.fulfillWithValue(data);
@@ -27,12 +38,17 @@ const favoriteSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(__postFavorite.fulfilled, (state, action) => {
-      // state.category.categories = [
-      //   ...state.category.categories,
-      //   action.payload.data,
-      // ];
-    });
+    builder
+      .addCase(__getFavorite.fulfilled, (state, action) => {
+        state.favorite = action.payload.data;
+      })
+
+      .addCase(__postFavorite.fulfilled, (state, action) => {
+        // state.category.categories = [
+        //   ...state.category.categories,
+        //   action.payload.data,
+        // ];
+      });
   },
 });
 
