@@ -16,6 +16,8 @@ import BulletCalendar from "../../common/calendar/Calendar";
 const MainContainer = () => {
   const [date, setDate] = useState(new Date());
   const [todoList, setTodoList] = useState([]);
+  const [selectDate, setSelectDate] = useState("");
+  console.log(selectDate);
   console.log(todoList);
   const bulletList = useSelector((state) => state.bullet_main.bulletList);
   console.log("리듀서 상태 저장 값", bulletList);
@@ -30,34 +32,46 @@ const MainContainer = () => {
       console.log(error);
     }
   };
+
+  const getToday = () => {
+    const day = ["일", "월", "화", "수", "목", "금", "토"];
+    const today = `${String(new Date().getFullYear()).substr(2, 2)}/${
+      new Date().getMonth() + 1
+    }/${new Date().getDate()}(${day[new Date().getDay()]})`;
+    setSelectDate(today);
+  };
   useEffect(() => {
     loadMainPage();
+    getToday();
   }, []);
-  const day = ["일", "월", "화", "수", "목", "금", "토"];
-  const today = `${String(new Date().getFullYear()).substr(2, 2)}/${
-    new Date().getMonth() + 1
-  }/${new Date().getDate()}(${day[new Date().getDay()]})`;
+
   let num = 0;
   return (
     <Container>
       <CalendarDiv>
         <SelectDiv>Today</SelectDiv>
-        <BulletCalendar />
+        <BulletCalendar
+          selectDate={selectDate}
+          setSelectDate={setSelectDate}
+          setTodoList={setTodoList}
+        />
       </CalendarDiv>
       <TodoDiv>
-        <DateTitle>{today}</DateTitle>
-        {todoList.length === 0 ? (
-          <DailyTodoList>
-            <TodoTitle>할일을 추가해주세요.</TodoTitle>
-          </DailyTodoList>
-        ) : (
-          todoList.map((todo) => (
-            <DailyTodoList key={num++}>
-              <BulletSwitchList bulletName={todo.todoBulletName} />
-              <TodoTitle>{todo.todoContent}</TodoTitle>
+        <DateTitle>{selectDate}</DateTitle>
+        <DailyTodoDiv>
+          {todoList.length === 0 ? (
+            <DailyTodoList>
+              <TodoTitle>할일을 추가해주세요.</TodoTitle>
             </DailyTodoList>
-          ))
-        )}
+          ) : (
+            todoList.map((todo) => (
+              <DailyTodoList key={num++}>
+                <BulletSwitchList bulletName={todo.todoBulletName} />
+                <TodoTitle>{todo.todoContent}</TodoTitle>
+              </DailyTodoList>
+            ))
+          )}
+        </DailyTodoDiv>
       </TodoDiv>
     </Container>
   );
@@ -97,6 +111,9 @@ const TodoDiv = styled.div`
 `;
 const DateTitle = styled.h2`
   text-align: center;
+`;
+const DailyTodoDiv = styled.div`
+  overflow: auto;
 `;
 const DailyTodoList = styled.div`
   display: flex;
