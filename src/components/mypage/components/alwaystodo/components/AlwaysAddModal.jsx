@@ -54,7 +54,6 @@ const AlwaysAddModal = ({ onClose }) => {
       favoriteMemos: favoriteMemos.map((val) => ({
         favoriteMemoContent: val.memo,
       })),
-
       categoryId: categoryId,
       categoryName: categoryName,
       categoryColor: categoryColor,
