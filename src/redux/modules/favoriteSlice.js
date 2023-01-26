@@ -23,10 +23,23 @@ export const __postFavorite = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await baseURLApiV1.post(`favorites`, payload);
-      alert(data.msg);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       alert("루틴 추가를 실패했습니다.");
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const __deleteFavorite = createAsyncThunk(
+  "favorite/deleteFavorite",
+  async (payload, thunkAPI) => {
+    console.log(payload);
+    try {
+      const { data } = await baseURLApiV1.delete(`favorites/${payload}`);
+      return thunkAPI.fulfillWithValue(payload);
+    } catch (error) {
+      alert("루틴 삭제를 실패했습니다.");
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -44,10 +57,16 @@ const favoriteSlice = createSlice({
       })
 
       .addCase(__postFavorite.fulfilled, (state, action) => {
-        // state.category.categories = [
-        //   ...state.category.categories,
-        //   action.payload.data,
-        // ];
+        state.favorite.favorites = [
+          ...state.favorite.favorites,
+          action.payload.data,
+        ];
+      })
+      .addCase(__deleteFavorite.fulfilled, (state, action) => {
+        state.favorite.favorites = state.favorite.favorites.filter((value) => {
+          return value.favoriteId !== action.payload.data.favoriteId;
+        });
+        console.log(state.favorite.favorites, "delete");
       });
   },
 });

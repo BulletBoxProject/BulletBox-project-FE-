@@ -59,6 +59,7 @@ const AlwaysAddModal = ({ onClose }) => {
       categoryColor: categoryColor,
     };
     dispatch(__postFavorite(favoriteInfo));
+    onClose();
   };
 
   return (
@@ -242,13 +243,9 @@ const DeleteIcon = styled(closeIcon)`
 
 const AlwaysTodoInput = styled.input`
   border: none;
-  ::placeholder {
-  }
 `;
 
 const AlwaysMemoInput = styled.input`
   border: none;
   width: 65%;
-  ::placeholder {
-  }
 `;

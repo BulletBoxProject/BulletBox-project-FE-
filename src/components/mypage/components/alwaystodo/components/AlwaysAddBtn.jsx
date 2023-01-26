@@ -37,7 +37,8 @@ const AddButton = styled.button`
   align-items: center;
   justify-content: center;
   border: 0;
-  background-color: transparent;
+  background-color: white;
+  border-radius: 50px;
 `;
 
 const AddCategoryIcon = styled(BsFillPlusCircleFill)`

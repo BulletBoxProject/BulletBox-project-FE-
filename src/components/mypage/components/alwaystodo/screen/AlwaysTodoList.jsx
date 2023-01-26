@@ -26,7 +26,9 @@ const AlwaysTodoList = () => {
             return (
               <AlwaysTodo
                 key={val.favoriteId}
-                id={val.favoriteId}
+                favoriteId={val.favoriteId}
+                categoryId={val.categoryId}
+                categoryName={val.categoryName}
                 backgroundColor={val.categoryColor}
                 content={val.favoriteContent}
                 memo={val.favoriteMemos}
@@ -50,7 +52,6 @@ const AlwaysAddList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  height: 55vh;
 `;
 
 const AlwaysAddPtag = styled.p`

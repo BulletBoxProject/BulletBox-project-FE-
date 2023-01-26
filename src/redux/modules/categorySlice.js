@@ -24,7 +24,6 @@ export const __postCategory = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await baseURLApiV1.post(`categories`, payload);
-      alert(data.msg);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       alert("같은 이름의 카테고리가 존재합니다.");
@@ -46,7 +45,6 @@ export const __putCategory = createAsyncThunk(
         `categories/${payload.id}`,
         categoryInfo
       );
-      alert(data.msg);
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       alert("카테고리 수정 실패");
@@ -60,7 +58,6 @@ export const __deleteCategory = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await baseURLApiV1.delete(`categories/${payload}`);
-      alert(data.msg);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -97,7 +94,6 @@ const categorySlice = createSlice({
           }
           return value;
         });
-        console.log(action.payload);
       })
 
       .addCase(__deleteCategory.fulfilled, (state, action) => {
@@ -106,7 +102,6 @@ const categorySlice = createSlice({
             return value.categoryId !== action.payload.data.categoryId;
           }
         );
-        console.log(action.payload.data, "delete");
       });
   },
 });

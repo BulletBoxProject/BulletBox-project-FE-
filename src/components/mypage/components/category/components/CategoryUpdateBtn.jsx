@@ -7,7 +7,6 @@ const CategoryUpdateBtn = (props) => {
 
   const onClickButton = () => {
     setIsOpen(true);
-    console.log(props);
   };
   return (
     <>
@@ -44,6 +43,6 @@ const CategoryBtn = styled.button`
   border-radius: 10px;
   border: none;
   background-color: ${({ backgroundColor }) => backgroundColor || "white"};
-  /* {background-color= white ? box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2): null} */
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.8);
+
+  box-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.3);
 `;
