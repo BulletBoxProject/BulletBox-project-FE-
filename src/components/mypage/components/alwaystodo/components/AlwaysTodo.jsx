@@ -20,7 +20,6 @@ const AlwaysTodo = ({
   content,
   memo,
   categoryId,
-  onClose,
 }) => {
   const [showSelectBox, setShowSelectBox] = useState(false);
   const [showTodoMemo, setShowTodoMemo] = useState(false);

@@ -192,7 +192,8 @@ const SelectBtn = styled.button`
   font-weight: bold;
   border-radius: 8px;
   border: none;
-  background-color: ${({ backgroundColor }) => backgroundColor};
+  background-color: ${({ backgroundColor }) => backgroundColor || "white"};
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.4);
   &:active,
   &:hover {
     border: 5px solid white;

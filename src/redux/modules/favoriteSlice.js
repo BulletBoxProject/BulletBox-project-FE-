@@ -21,8 +21,8 @@ export const __postFavorite = createAsyncThunk(
   "favorite/addFavorite",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await baseURLApiV1.post(`favorites`, payload);
-      return thunkAPI.fulfillWithValue(data);
+      await baseURLApiV1.post(`favorites`, payload);
+      return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       alert("루틴 추가를 실패했습니다.");
       return thunkAPI.rejectWithValue(error);
@@ -34,7 +34,7 @@ export const __deleteFavorite = createAsyncThunk(
   "favorite/deleteFavorite",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await baseURLApiV1.delete(`favorites/${payload}`);
+      await baseURLApiV1.delete(`favorites/${payload}`);
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       alert("루틴 삭제를 실패했습니다.");
@@ -57,7 +57,7 @@ const favoriteSlice = createSlice({
       .addCase(__postFavorite.fulfilled, (state, action) => {
         state.favorite.favorites = [
           ...state.favorite.favorites,
-          action.payload.data,
+          action.payload,
         ];
       })
       .addCase(__deleteFavorite.fulfilled, (state, action) => {
