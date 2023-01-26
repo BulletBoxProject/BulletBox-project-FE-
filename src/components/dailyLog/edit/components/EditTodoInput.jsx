@@ -1,71 +1,56 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-import { baseURLApiV1 } from "../../../../core/api";
+import { __getEditTodo } from "../../../../redux/modules/todoSlice";
 
-import BulletTodoForm from "./BulletTodoForm";
-import AddMemoDiv from "./AddMemoDiv";
+import EditTodoForm from "./EditTodoForm";
+import EditMemoDiv from "./EditMemoDiv";
 import TimeSettingDiv from "./TimeSettingDiv";
 import CategorySelectDiv from "./CategorySelectDiv";
 
-const AddTodoInput = () => {
+const EditTodoInput = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const id = useParams();
+  const editTodoId = Number(id.id);
+
+  const todoList = useSelector((state) => state?.dailyTodo?.dailyTodo?.todo);
+  console.log("edit콘솔", todoList);
+  const categoryList = useSelector(
+    (state) => state?.dailyTodo?.dailyTodo?.categories
+  );
+
   const [AddTodoInput, setAddTodoInput] = useState({
     todoContent: "",
     todoBulletName: "불렛",
-    time: "00:00",
+    time: null,
     categoryId: null,
+    categoryColor: null,
     year: 2023,
     month: 1,
     day: 4,
     memos: [],
   });
-  const [categories, setCategories] = useState([]);
-  console.log("할일 추가", AddTodoInput);
-  const postTodo = async (AddTodoInput, setAddTodoInput) => {
-    let memos = AddTodoInput.memos;
-    memos = memos.map((memo) =>
-      delete memo.memoId === true
-        ? { ...memo, todoMemoContent: memo.todoMemoContent }
-        : null
-    );
-    try {
-      const data = await baseURLApiV1.post("/dailys/todo", AddTodoInput);
 
-      if (data.data.httpStatusCode === 200) {
-        return data;
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const loadAddTodoPage = async () => {
-    try {
-      const data = await baseURLApiV1.get(
-        "/dailys/todo?year=2023&month=1&day=21"
-      );
-      if (data.data.httpStatusCode === 200) {
-        return setCategories(data.data.data.categories);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  console.log("수정된 할일", AddTodoInput);
+  const [categories, setCategories] = useState([]);
+
   const submitTodoHandler = () => {
-    postTodo(AddTodoInput);
+    // console.log(newMemo);
     // navigate("/dailys");
     // window.location.href = "/dailys";
   };
   useEffect(() => {
-    loadAddTodoPage();
+    dispatch(__getEditTodo(editTodoId));
     const today = new Date();
-    setAddTodoInput({
-      ...AddTodoInput,
-      year: today.getFullYear(),
-      month: today.getMonth() + 1,
-      day: today.getDate(),
-    });
+    // setAddTodoInput({
+    //   ...AddTodoInput,
+    //   year: today.getFullYear(),
+    //   month: today.getMonth() + 1,
+    //   day: today.getDate(),
+    // });
   }, []);
   const day = ["일", "월", "화", "수", "목", "금", "토"];
   const today = `${String(new Date().getFullYear()).substr(2, 2)}/${
@@ -76,26 +61,30 @@ const AddTodoInput = () => {
       <DateDiv>
         <DateButton>{today}</DateButton>
       </DateDiv>
-      <TodoAndMemoDiv>
-        <BulletTodoForm
-          AddTodoInput={AddTodoInput}
-          setAddTodoInput={setAddTodoInput}
-        />
-        <AddMemoDiv
-          AddTodoInput={AddTodoInput}
-          setAddTodoInput={setAddTodoInput}
-          memos={AddTodoInput.memos}
-        />
-      </TodoAndMemoDiv>
+      {todoList && (
+        <TodoAndMemoDiv>
+          <EditTodoForm todoList={todoList} />
+          <EditMemoDiv
+            todoList={todoList}
+            AddTodoInput={AddTodoInput}
+            setAddTodoInput={setAddTodoInput}
+            memos={AddTodoInput.memos}
+            // newMemo={newMemo}
+            // setNewMemo={setNewMemo}
+          />
+        </TodoAndMemoDiv>
+      )}
       <TimeSettingDiv
         AddTodoInput={AddTodoInput}
         setAddTodoInput={setAddTodoInput}
       />
-      <CategorySelectDiv
-        categories={categories}
-        AddTodoInput={AddTodoInput}
-        setAddTodoInput={setAddTodoInput}
-      />
+      {categoryList && (
+        <CategorySelectDiv
+          categories={categoryList}
+          AddTodoInput={AddTodoInput}
+          setAddTodoInput={setAddTodoInput}
+        />
+      )}
 
       <AddInputButtonGroup>
         <SubmitButton type="button" onClick={submitTodoHandler}>
@@ -109,7 +98,7 @@ const AddTodoInput = () => {
   );
 };
 
-export default AddTodoInput;
+export default EditTodoInput;
 
 const Container = styled.div``;
 const DateDiv = styled.div`

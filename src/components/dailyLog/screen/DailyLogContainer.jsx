@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-
-import { baseURLApiV1 } from "../../../core/api";
-
-import NavigationMenu from "../../../layout/footer/components/NavigationMenu";
+import { useDispatch, useSelector } from "react-redux";
+import { __getDailyTodo } from "../../../redux/modules/dailysSlice";
 
 import SelectCategory from "../../common/SelectCategory";
 import BulletTodoCard from "../components/BulletTodoCard";
@@ -16,6 +14,7 @@ import { ReactComponent as oftenTodo } from "../../../img/dailyLog/often.svg";
 import { ReactComponent as newTodo } from "../../../img/dailyLog/new.svg";
 
 const DailyLogContainer = () => {
+  const dispatch = useDispatch();
   const [showSelectBox, setShowSelectBox] = useState(false);
   const [dailyLogs, setDailyLogs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -29,20 +28,22 @@ const DailyLogContainer = () => {
     console.log("clicked");
     setShowSelectBox(!showSelectBox);
   };
-  const loadDailyLog = async () => {
-    try {
-      const data = await baseURLApiV1.get("/dailys");
-      if (data.data.httpStatusCode === 200) {
-        return setDailyLogs(data.data.data.daily);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const loadDailyLog = async () => {
+  //   try {
+  //     const data = await baseURLApiV1.get("/dailys");
+  //     if (data.data.httpStatusCode === 200) {
+  //       return setDailyLogs(data.data.data.daily);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  const todoList = useSelector((state) => state?.dailyTodo?.dailyTodo?.daily);
+  console.log("셀럭터 값", todoList);
   useEffect(() => {
-    loadDailyLog();
+    dispatch(__getDailyTodo());
     setIsLoading(!isLoading);
-  }, []);
+  }, [dispatch]);
 
   if (isLoading) {
     <h1>Loading..</h1>;
@@ -62,10 +63,14 @@ const DailyLogContainer = () => {
         </SelectDiv>
       </DateAndSelectDiv>
       <TodoBulletDiv>
-        {dailyLogs.length === 0 ? (
+        {todoList && todoList.length === 0 ? (
           <NoneTodo>할일을 추가해주세요.</NoneTodo>
         ) : (
-          <BulletTodoCard dailyLogs={dailyLogs} setDailyLogs={setDailyLogs} />
+          <BulletTodoCard
+            todoList={todoList}
+            dailyLogs={dailyLogs}
+            setDailyLogs={setDailyLogs}
+          />
         )}
 
         <AddTodoDiv>

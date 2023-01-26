@@ -1,29 +1,20 @@
 import React, { useState } from "react";
 import Calendar from "react-calendar";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { __getMainCalendar } from "../../../redux/modules/mainSlice";
 
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 
-import { baseURLApiV1 } from "../../../core/api";
-
 const BulletCalendar = ({ selectDate, setSelectDate, setTodoList }) => {
-  // const [value, onChange] = useState(new Date());
+  const dispatch = useDispatch();
 
   const selectDateLog = async (e) => {
-    console.log("선택된 날짜", e.getFullYear());
-    try {
-      const data = await baseURLApiV1.get(
-        `/main/dailys?year=${e.getFullYear()}&month=${
-          e.getMonth() + 1
-        }&day=${e.getDate()}`
-      );
-      if (data.data.httpStatusCode === 200) {
-        return setTodoList(data.data.data.daily);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    const selectDateCalendar = `/main/dailys?year=${e.getFullYear()}&month=${
+      e.getMonth() + 1
+    }&day=${e.getDate()}`;
+    dispatch(__getMainCalendar(selectDateCalendar));
   };
   const dateChangeHandler = (e) => {
     const dateArr = ["일", "월", "화", "수", "목", "금", "토"];
