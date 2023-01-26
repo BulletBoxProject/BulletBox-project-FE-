@@ -39,7 +39,7 @@ const Container = styled.div`
 
 const MainLogo = styled(Logo)`
   fill: var(--color-main);
-  width: 15vw;
+  width: 150px;
   height: 50vh;
 `;
 
