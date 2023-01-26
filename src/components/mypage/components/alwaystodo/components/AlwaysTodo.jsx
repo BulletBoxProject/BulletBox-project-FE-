@@ -1,20 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
-
 import { ReactComponent as moreIcon } from "../../../../../img/myPage/more.svg";
-
 import { ReactComponent as editIcon } from "../../../../../img/myPage/edit.svg";
 import { ReactComponent as deleteIcon } from "../../../../../img/myPage/delete.svg";
 import { ReactComponent as memoBullet } from "../../../../../img/myPage/memo-5.svg";
 import { ReactComponent as todoBullet } from "../../../../../img/myPage/todo-1.svg";
 
-const AlwaysTodo = ({ id, backgroundColor, content, memo }) => {
+import AlwaysUpdateModal from "./AwaysUpdateModal";
+import useOutSideClick from "../../../../../hooks/useOutSideClick";
+import { __deleteFavorite } from "../../../../../redux/modules/favoriteSlice";
+
+const AlwaysTodo = ({
+  favoriteId,
+  backgroundColor,
+  content,
+  memo,
+  categoryId,
+}) => {
   const [showSelectBox, setShowSelectBox] = useState(false);
   const [showTodoMemo, setShowTodoMemo] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showUpdateMoal, setShowUpdateMoal] = useState(false);
+
+  const dispatch = useDispatch();
+  const selectRef = useRef(null);
+  const handleClose = () => {
+    setShowSelectBox(false);
+  };
+  useOutSideClick(selectRef, handleClose);
 
   const memoViewHandler = (e) => {
     setShowTodoMemo(!showTodoMemo);
@@ -29,9 +46,14 @@ const AlwaysTodo = ({ id, backgroundColor, content, memo }) => {
   };
   const deleteButtonHandler = () => {
     setShowDeleteModal(!showDeleteModal);
+    dispatch(__deleteFavorite(favoriteId));
   };
   const cancelButtonHandler = () => {
     setShowDeleteModal(!showDeleteModal);
+  };
+
+  const updateButtonHandler = () => {
+    setShowUpdateMoal(true);
   };
 
   return (
@@ -49,15 +71,17 @@ const AlwaysTodo = ({ id, backgroundColor, content, memo }) => {
               {showTodoMemo ? <OnlyTitleIcon /> : <MoreIcon />}
             </TodoMoreViewButton>
           </TodoMoreViewDiv>
-          <OptionSelectDiv>
+
+          <OptionSelectDiv ref={selectRef}>
             <OptionButton onClick={SelectOptionHandler}>
               <OptionIcon />
             </OptionButton>
             {showSelectBox ? (
               <SelectDiv>
                 <div
-                  value="editTodo"
-                  onClick={() => alert("수정하기페이지 이동")}
+                  onClick={() => {
+                    updateButtonHandler();
+                  }}
                 >
                   수정하기 <EditIcon />
                 </div>
@@ -86,6 +110,19 @@ const AlwaysTodo = ({ id, backgroundColor, content, memo }) => {
         ) : null}
       </CardContainer>
 
+      {showUpdateMoal && (
+        <AlwaysUpdateModal
+          favoriteId={favoriteId}
+          categoryId={categoryId}
+          backgroundColor={backgroundColor}
+          content={content}
+          memo={memo}
+          onClose={() => {
+            setShowUpdateMoal(false);
+          }}
+        />
+      )}
+
       {showDeleteModal ? (
         <ModalContainer>
           <ModalContent>
@@ -112,12 +149,11 @@ export default AlwaysTodo;
 const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
-  background-color: ${({ backgroundColor }) =>
-    backgroundColor || "var(--color-default)"};
-  /* border: 1px solid rgba(240, 161, 59, 0.2); */
-  /* box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.1); */
+  margin-left: 2%;
+  width: 94%;
+  border: none;
+  background-color: ${({ backgroundColor }) => backgroundColor || "white"};
+  box-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.3);
   padding: 12px;
   border-radius: 8px;
 `;
@@ -173,12 +209,6 @@ const MainBulletTodo = styled.div`
   justify-content: center;
   gap: 10px;
   width: 100%;
-  /* 
-  & > input {
-    width: 90%;
-    padding: 0;
-    margin: 0;
-  } */
 `;
 const TodoBodyDiv = styled.div`
   display: flex;

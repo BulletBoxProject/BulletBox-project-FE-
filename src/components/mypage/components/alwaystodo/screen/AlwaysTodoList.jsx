@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import AlwaysTodo from "../components/AlwaysTodo";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,7 +26,8 @@ const AlwaysTodoList = () => {
             return (
               <AlwaysTodo
                 key={val.favoriteId}
-                id={val.favoriteId}
+                favoriteId={val.favoriteId}
+                categoryId={val.categoryId}
                 backgroundColor={val.categoryColor}
                 content={val.favoriteContent}
                 memo={val.favoriteMemos}
@@ -50,7 +51,6 @@ const AlwaysAddList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  height: 55vh;
 `;
 
 const AlwaysAddPtag = styled.p`

@@ -27,7 +27,8 @@ const MypageInfoScreen = ({ showInfo }) => {
 export default MypageInfoScreen;
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
   min-height: 50vh;
-  overflow: auto;
   margin-top: 5%;
 `;

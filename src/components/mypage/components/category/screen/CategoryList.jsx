@@ -48,7 +48,6 @@ const Container = styled.div`
   margin-top: 3%;
 `;
 const CategoryAddList = styled.div`
-  height: 55vh;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
