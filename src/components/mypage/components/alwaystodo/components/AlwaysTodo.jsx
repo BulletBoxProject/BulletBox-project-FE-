@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 
@@ -11,6 +11,7 @@ import { ReactComponent as memoBullet } from "../../../../../img/myPage/memo-5.s
 import { ReactComponent as todoBullet } from "../../../../../img/myPage/todo-1.svg";
 
 import AlwaysUpdateModal from "./AwaysUpdateModal";
+import useOutSideClick from "../../../../../hooks/useOutSideClick";
 import { __deleteFavorite } from "../../../../../redux/modules/favoriteSlice";
 
 const AlwaysTodo = ({
@@ -19,6 +20,7 @@ const AlwaysTodo = ({
   content,
   memo,
   categoryId,
+  onClose,
 }) => {
   const [showSelectBox, setShowSelectBox] = useState(false);
   const [showTodoMemo, setShowTodoMemo] = useState(false);
@@ -26,6 +28,11 @@ const AlwaysTodo = ({
   const [showUpdateMoal, setShowUpdateMoal] = useState(false);
 
   const dispatch = useDispatch();
+  const selectRef = useRef(null);
+  const handleClose = () => {
+    setShowSelectBox(false);
+  };
+  useOutSideClick(selectRef, handleClose);
 
   const memoViewHandler = (e) => {
     setShowTodoMemo(!showTodoMemo);
@@ -65,7 +72,8 @@ const AlwaysTodo = ({
               {showTodoMemo ? <OnlyTitleIcon /> : <MoreIcon />}
             </TodoMoreViewButton>
           </TodoMoreViewDiv>
-          <OptionSelectDiv>
+
+          <OptionSelectDiv ref={selectRef}>
             <OptionButton onClick={SelectOptionHandler}>
               <OptionIcon />
             </OptionButton>
@@ -105,6 +113,11 @@ const AlwaysTodo = ({
 
       {showUpdateMoal && (
         <AlwaysUpdateModal
+          favoriteId={favoriteId}
+          categoryId={categoryId}
+          backgroundColor={backgroundColor}
+          content={content}
+          memo={memo}
           onClose={() => {
             setShowUpdateMoal(false);
           }}

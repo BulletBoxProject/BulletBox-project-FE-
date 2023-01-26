@@ -10,7 +10,6 @@ export const __getFavorite = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await baseURLApiV1.get(`favorites`, payload);
-      console.log(data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -34,7 +33,6 @@ export const __postFavorite = createAsyncThunk(
 export const __deleteFavorite = createAsyncThunk(
   "favorite/deleteFavorite",
   async (payload, thunkAPI) => {
-    console.log(payload);
     try {
       const { data } = await baseURLApiV1.delete(`favorites/${payload}`);
       return thunkAPI.fulfillWithValue(payload);
@@ -64,9 +62,8 @@ const favoriteSlice = createSlice({
       })
       .addCase(__deleteFavorite.fulfilled, (state, action) => {
         state.favorite.favorites = state.favorite.favorites.filter((value) => {
-          return value.favoriteId !== action.payload.data.favoriteId;
+          return value.favoriteId !== action.payload;
         });
-        console.log(state.favorite.favorites, "delete");
       });
   },
 });

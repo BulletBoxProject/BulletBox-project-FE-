@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import AlwaysTodo from "../components/AlwaysTodo";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,7 +28,6 @@ const AlwaysTodoList = () => {
                 key={val.favoriteId}
                 favoriteId={val.favoriteId}
                 categoryId={val.categoryId}
-                categoryName={val.categoryName}
                 backgroundColor={val.categoryColor}
                 content={val.favoriteContent}
                 memo={val.favoriteMemos}

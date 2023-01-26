@@ -9,14 +9,14 @@ import { ReactComponent as closeIcon } from "../../../../../img/myPage/close.svg
 
 import { __postFavorite } from "../../../../../redux/modules/favoriteSlice";
 
-const AlwaysUpdateModal = ({ onClose }) => {
+const AlwaysUpdateModal = ({ onClose, favoriteId, content, memo }) => {
   const dispatch = useDispatch();
   const categoryList = useSelector(
     (state) => state?.category?.category?.categories
   );
 
-  const [favoriteContent, setFavoriteContent] = useState("");
-  const [favoriteMemos, setFavoriteMemos] = useState([{ id: 0, memo: "" }]);
+  const [favoriteContent, setFavoriteContent] = useState(content);
+  const [favoriteMemos, setFavoriteMemos] = useState(memo);
   const [plusId, setPlusId] = useState(1);
 
   const [categoryId, setCategoryId] = useState(0);
@@ -69,7 +69,7 @@ const AlwaysUpdateModal = ({ onClose }) => {
           <TodoTitle>
             <TodoBullet />
             <AlwaysTodoInput
-              placeholder="루틴을 입력해주세요."
+              value={favoriteContent}
               onChange={(e) => {
                 onChaneTodoHandler(e);
               }}
@@ -81,7 +81,7 @@ const AlwaysUpdateModal = ({ onClose }) => {
                 <MemoBullet />
                 <AlwaysMemoInput
                   type="text"
-                  placeholder="메모을 입력해주세요."
+                  placeholder={value.favoriteMemoContent}
                   onChange={(e) => onChaneMemoHandler(e, index)}
                 ></AlwaysMemoInput>
                 <DeleteButton onClick={() => onDeleteHandler(value.id)}>
