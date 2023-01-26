@@ -34,8 +34,9 @@ export default Layout;
 
 const Container = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
-  justify-content: space-between;
   width: 100%;
   height: 100vh;
 `;

@@ -30,7 +30,6 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding-top: 50%;
   background-color: white;
   height: 100vh;
   font-size: 1.5rem;
@@ -40,8 +39,8 @@ const Container = styled.div`
 
 const MainLogo = styled(Logo)`
   fill: var(--color-main);
-  width: 50%;
-  height: 25vh;
+  width: 15vw;
+  height: 50vh;
 `;
 
 const StartBtn = styled.button`
