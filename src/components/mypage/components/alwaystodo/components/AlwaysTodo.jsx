@@ -103,7 +103,9 @@ const AlwaysTodo = ({
                 <span>
                   <MemoBullet />
                 </span>
-                <span>{value.favoriteMemoContent}</span>
+                <span key={value.favoriteMemoId}>
+                  {value.favoriteMemoContent}
+                </span>
               </MemoContent>
             ))}
           </TodoMemoDiv>
