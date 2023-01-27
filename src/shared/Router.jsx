@@ -10,6 +10,7 @@ import Start from "../pages/Start";
 import Mypage from "../pages/Mypage";
 import Search from "../pages/Search";
 import Diary from "../pages/Diary";
+import EditDailyLog from "../pages/EditDailyLog";
 
 const Router = () => {
   return (
@@ -25,6 +26,7 @@ const Router = () => {
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/search" element={<Search />} />
           <Route path="/diary" element={<Diary />} />
+          <Route path="/dailys/edit/:id" element={<EditDailyLog />} />
         </Route>
       </Routes>
     </BrowserRouter>

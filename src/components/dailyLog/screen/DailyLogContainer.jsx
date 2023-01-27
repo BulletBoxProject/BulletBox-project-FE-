@@ -57,6 +57,7 @@ const DailyLogContainer = () => {
         {todoList && todoList.length === 0 ? (
           <NoneTodo>할일을 추가해주세요.</NoneTodo>
         ) : (
+          todoList &&
           todoList.map((dailyLog) => (
             <BulletTodoCard
               dailyLog={dailyLog}

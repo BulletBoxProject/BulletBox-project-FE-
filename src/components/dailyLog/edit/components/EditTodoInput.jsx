@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { __getEditTodo } from "../../../../redux/modules/todoSlice";
+import { __getEditTodo } from "../../../../redux/modules/dailysSlice";
 
 import EditTodoForm from "./EditTodoForm";
 import EditMemoDiv from "./EditMemoDiv";

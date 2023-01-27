@@ -17,7 +17,6 @@ const BulletTodoCard = ({ dailyLog, dailyLogs, setDailyLogs }) => {
   const [showTodoMemo, setShowTodoMemo] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showSelectBox, setShowSelectBox] = useState(false);
-  console.log(showSelectBox);
   const selectOptionRef = useRef(null);
 
   const selectOptionClose = () => {

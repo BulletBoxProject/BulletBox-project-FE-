@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import BulletSwitchList from "../../components/BulletSwitchList";
 
-import { __getEditTodo } from "../../../../redux/modules/todoSlice";
+import { __getEditTodo } from "../../../../redux/modules/dailysSlice";
 
 import { ReactComponent as todoAddEditIcon } from "../../../../img/dailyLog/edit.svg";
 import { ReactComponent as todoBullet } from "../../../../img/bullet/todo-1.svg";

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import { ReactComponent as editIcon } from "../../../img/dailyLog/edit.svg";
 import { ReactComponent as deleteIcon } from "../../../img/dailyLog/delete.svg";
@@ -7,6 +8,7 @@ import { ReactComponent as moreIcon } from "../../../img/dailyLog/more.svg";
 import { baseURLApiV1 } from "../../../core/api";
 
 const Option = ({ todoId, dailyLogs, setDailyLogs }) => {
+  const navigate = useNavigate();
   console.log(todoId);
   const deleteTodo = async (id) => {
     try {
@@ -27,7 +29,7 @@ const Option = ({ todoId, dailyLogs, setDailyLogs }) => {
   return (
     <div>
       <SelectDiv>
-        <Button id={todoId} onClick={() => alert("수정하기페이지 이동")}>
+        <Button id={todoId} onClick={() => navigate(`/dailys/edit/${todoId}`)}>
           수정하기 <EditIcon />
         </Button>
         <SelectLine></SelectLine>
