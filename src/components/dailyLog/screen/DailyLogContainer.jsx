@@ -28,16 +28,7 @@ const DailyLogContainer = () => {
     console.log("clicked");
     setShowSelectBox(!showSelectBox);
   };
-  // const loadDailyLog = async () => {
-  //   try {
-  //     const data = await baseURLApiV1.get("/dailys");
-  //     if (data.data.httpStatusCode === 200) {
-  //       return setDailyLogs(data.data.data.daily);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+
   const todoList = useSelector((state) => state?.dailyTodo?.dailyTodo?.daily);
   console.log("셀럭터 값", todoList);
   useEffect(() => {
@@ -66,11 +57,13 @@ const DailyLogContainer = () => {
         {todoList && todoList.length === 0 ? (
           <NoneTodo>할일을 추가해주세요.</NoneTodo>
         ) : (
-          <BulletTodoCard
-            todoList={todoList}
-            dailyLogs={dailyLogs}
-            setDailyLogs={setDailyLogs}
-          />
+          todoList.map((dailyLog) => (
+            <BulletTodoCard
+              dailyLog={dailyLog}
+              dailyLogs={dailyLogs}
+              setDailyLogs={setDailyLogs}
+            />
+          ))
         )}
 
         <AddTodoDiv>
@@ -175,8 +168,6 @@ const AddSelectDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  /* width: 40vw;
-  height: 10vh; */
   gap: 3px;
   padding: 5px 14px;
   position: absolute;
