@@ -72,6 +72,7 @@ const BulletTodoCard = ({ dailyLog, dailyLogs, setDailyLogs }) => {
                 todoId={dailyLog.todoId}
                 dailyLogs={dailyLogs}
                 setDailyLogs={setDailyLogs}
+                setShowSelectBox={setShowSelectBox}
               />
             ) : null}
           </OptionSelectDiv>

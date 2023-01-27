@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { __postDailyTodo } from "../../../../redux/modules/dailysSlice";
 import { baseURLApiV1 } from "../../../../core/api";
 
 import BulletTodoForm from "./BulletTodoForm";
@@ -11,6 +12,7 @@ import CategorySelectDiv from "./CategorySelectDiv";
 
 const AddTodoInput = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [AddTodoInput, setAddTodoInput] = useState({
     todoContent: "",
     todoBulletName: "불렛",
@@ -23,23 +25,23 @@ const AddTodoInput = () => {
   });
   const [categories, setCategories] = useState([]);
   console.log("할일 추가", AddTodoInput);
-  const postTodo = async (AddTodoInput, setAddTodoInput) => {
-    let memos = AddTodoInput.memos;
-    memos = memos.map((memo) =>
-      delete memo.memoId === true
-        ? { ...memo, todoMemoContent: memo.todoMemoContent }
-        : null
-    );
-    try {
-      const data = await baseURLApiV1.post("/dailys/todo", AddTodoInput);
+  // const postTodo = async (AddTodoInput, setAddTodoInput) => {
+  //   let memos = AddTodoInput.memos;
+  //   memos = memos.map((memo) =>
+  //     delete memo.memoId === true
+  //       ? { ...memo, todoMemoContent: memo.todoMemoContent }
+  //       : null
+  //   );
+  //   try {
+  //     const data = await baseURLApiV1.post("/dailys/todo", AddTodoInput);
 
-      if (data.data.httpStatusCode === 200) {
-        return data;
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //     if (data.data.httpStatusCode === 200) {
+  //       return data;
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   const loadAddTodoPage = async () => {
     try {
       const data = await baseURLApiV1.get(
@@ -53,9 +55,8 @@ const AddTodoInput = () => {
     }
   };
   const submitTodoHandler = () => {
-    postTodo(AddTodoInput);
-    // navigate("/dailys");
-    // window.location.href = "/dailys";
+    dispatch(__postDailyTodo(AddTodoInput));
+    window.location.href = "/dailys";
   };
   useEffect(() => {
     loadAddTodoPage();

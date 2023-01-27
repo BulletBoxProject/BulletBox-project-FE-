@@ -27,7 +27,8 @@ const DailyLogContainer = () => {
     console.log("clicked");
     setShowSelectBox(!showSelectBox);
   };
-
+  const state = useSelector((state) => state);
+  console.log("전역 상태값", state);
   const todoList = useSelector((state) => state?.dailyTodo?.dailyTodo?.daily);
   console.log("셀럭터 값", todoList);
   useEffect(() => {

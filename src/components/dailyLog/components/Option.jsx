@@ -7,13 +7,14 @@ import { __deleteDailyTodo } from "../../../redux/modules/dailysSlice";
 import { ReactComponent as editIcon } from "../../../img/dailyLog/edit.svg";
 import { ReactComponent as deleteIcon } from "../../../img/dailyLog/delete.svg";
 
-const Option = ({ todoId, dailyLogs, setDailyLogs }) => {
+const Option = ({ todoId, setShowSelectBox, dailyLogs, setDailyLogs }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const selectDeleteHandler = (e) => {
     const id = Number(e.target.value);
     dispatch(__deleteDailyTodo(id));
+    setShowSelectBox(false);
   };
 
   return (
