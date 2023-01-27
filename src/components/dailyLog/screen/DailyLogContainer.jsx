@@ -17,7 +17,6 @@ const DailyLogContainer = () => {
   const dispatch = useDispatch();
   const [showSelectBox, setShowSelectBox] = useState(false);
   const [dailyLogs, setDailyLogs] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   console.log(dailyLogs);
   const navigate = useNavigate();
   const day = ["일", "월", "화", "수", "목", "금", "토"];
@@ -28,17 +27,15 @@ const DailyLogContainer = () => {
     console.log("clicked");
     setShowSelectBox(!showSelectBox);
   };
-
+  const state = useSelector((state) => state);
+  console.log("전역 상태값", state);
   const todoList = useSelector((state) => state?.dailyTodo?.dailyTodo?.daily);
   console.log("셀럭터 값", todoList);
   useEffect(() => {
     dispatch(__getDailyTodo());
-    setIsLoading(!isLoading);
   }, [dispatch]);
 
-  if (isLoading) {
-    <h1>Loading..</h1>;
-  }
+  let num = 0;
   return (
     <Container>
       <DateAndSelectDiv>
@@ -54,17 +51,20 @@ const DailyLogContainer = () => {
         </SelectDiv>
       </DateAndSelectDiv>
       <TodoBulletDiv>
-        {todoList && todoList.length === 0 ? (
+        {todoList && todoList?.length === 0 ? (
           <NoneTodo>할일을 추가해주세요.</NoneTodo>
         ) : (
           todoList &&
-          todoList.map((dailyLog) => (
-            <BulletTodoCard
-              dailyLog={dailyLog}
-              dailyLogs={dailyLogs}
-              setDailyLogs={setDailyLogs}
-            />
-          ))
+          todoList?.map((dailyLog) => {
+            return (
+              <BulletTodoCard
+                key={num++}
+                dailyLog={dailyLog}
+                dailyLogs={dailyLogs}
+                setDailyLogs={setDailyLogs}
+              />
+            );
+          })
         )}
 
         <AddTodoDiv>

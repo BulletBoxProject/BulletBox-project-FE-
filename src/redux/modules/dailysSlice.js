@@ -31,11 +31,40 @@ export const __getEditTodo = createAsyncThunk(
     }
   }
 );
+export const __postDailyTodo = createAsyncThunk(
+  "dailyLog/postDailyTodo",
+  async (payload, thunkAPI) => {
+    let memos = payload.memos;
+    memos = memos.map((memo) =>
+      delete memo.memoId === true
+        ? { ...memo, todoMemoContent: memo.todoMemoContent }
+        : null
+    );
+    try {
+      const { data } = await baseURLApiV1.post(`/dailys/todo`, payload);
+      return thunkAPI.fulfillWithValue(payload);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 export const __deleteDailyTodo = createAsyncThunk(
   "dailyLog/deleteDailyTodo",
   async (payload, thunkAPI) => {
     try {
       const { data } = await baseURLApiV1.delete(`dailys/todo/${payload}`);
+      return thunkAPI.fulfillWithValue(payload);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+export const __putDailyTodo = createAsyncThunk(
+  "dailyLog/putDailyTodo",
+  async (payload, thunkAPI) => {
+    console.log(payload);
+    try {
+      const { data } = await baseURLApiV1.put(`/dailys/todo`, payload);
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -56,10 +85,18 @@ const dailysSlice = createSlice({
       .addCase(__getEditTodo.fulfilled, (state, action) => {
         state.dailyTodo = action.payload.data;
       })
+      .addCase(__postDailyTodo.fulfilled, (state, action) => {
+        state.dailyTodo.daily = [...state.dailyTodo.daily, action.payload];
+      })
       .addCase(__deleteDailyTodo.fulfilled, (state, action) => {
         state.dailyTodo.daily = state.dailyTodo.daily.filter(
           (dailyLog) => dailyLog.todoId !== action.payload
         );
+      })
+      .addCase(__putDailyTodo.fulfilled, (state, action) => {
+        state.dailyTodo.daily = state.dailyTodo.daily.map((todo) => {
+          return todo.todoId === action.payload.todoId ? action.payload : todo;
+        });
       });
   },
 });
