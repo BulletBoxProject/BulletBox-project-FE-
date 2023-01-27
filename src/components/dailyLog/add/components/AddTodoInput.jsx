@@ -56,7 +56,13 @@ const AddTodoInput = () => {
   };
   const submitTodoHandler = () => {
     dispatch(__postDailyTodo(AddTodoInput));
-    window.location.href = "/dailys";
+
+    // postTodo(AddTodoInput);
+    setTimeout(() => {
+      navigate("/dailys");
+    }, 10);
+
+    // window.location.href = "/dailys";
   };
   useEffect(() => {
     loadAddTodoPage();

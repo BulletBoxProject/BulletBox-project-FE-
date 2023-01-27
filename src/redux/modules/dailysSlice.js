@@ -94,9 +94,9 @@ const dailysSlice = createSlice({
         );
       })
       .addCase(__putDailyTodo.fulfilled, (state, action) => {
-        state.dailyTodo.daily = state.dailyTodo.daily.map((todo) =>
-          todo.todoId === action.payload.todoId ? action.payload : todo
-        );
+        state.dailyTodo.daily = state.dailyTodo.daily.map((todo) => {
+          return todo.todoId === action.payload.todoId ? action.payload : todo;
+        });
       });
   },
 });

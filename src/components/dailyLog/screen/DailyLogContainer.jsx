@@ -51,18 +51,20 @@ const DailyLogContainer = () => {
         </SelectDiv>
       </DateAndSelectDiv>
       <TodoBulletDiv>
-        {todoList && todoList.length === 0 ? (
+        {todoList && todoList?.length === 0 ? (
           <NoneTodo>할일을 추가해주세요.</NoneTodo>
         ) : (
           todoList &&
-          todoList.map((dailyLog) => (
-            <BulletTodoCard
-              key={num++}
-              dailyLog={dailyLog}
-              dailyLogs={dailyLogs}
-              setDailyLogs={setDailyLogs}
-            />
-          ))
+          todoList?.map((dailyLog) => {
+            return (
+              <BulletTodoCard
+                key={num++}
+                dailyLog={dailyLog}
+                dailyLogs={dailyLogs}
+                setDailyLogs={setDailyLogs}
+              />
+            );
+          })
         )}
 
         <AddTodoDiv>

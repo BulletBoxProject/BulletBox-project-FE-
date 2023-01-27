@@ -33,7 +33,10 @@ const EditTodoInput = ({ todoList, categoryList }) => {
 
   const submitTodoHandler = () => {
     dispatch(__putDailyTodo(AddTodoInput));
-    navigate("/dailys");
+    setTimeout(() => {
+      navigate("/dailys");
+    }, 10);
+
     // console.log(newMemo);
     // navigate("/dailys");
     // window.location.href = "/dailys";
