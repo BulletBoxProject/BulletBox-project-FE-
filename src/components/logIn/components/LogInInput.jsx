@@ -125,8 +125,8 @@ const StForm = styled.form`
   align-items: center;
   padding-top: 10%;
   flex-direction: column;
-  width: 76%;
-  height: 45vh;
+  width: 100%;
+  height: 286px;
   background: white;
   border-radius: 8px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);

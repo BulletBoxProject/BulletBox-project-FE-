@@ -8,11 +8,13 @@ import Footer from "./footer/screen/Footer";
 const Layout = (props) => {
   return (
     <Container>
-      <Header />
       <PageContainer>
-        <Outlet>{props.children}</Outlet>
+        <Header />
+        <PageContainerBox>
+          <Outlet>{props.children}</Outlet>
+        </PageContainerBox>
+        <Footer />
       </PageContainer>
-      <Footer />
     </Container>
   );
 };
@@ -34,15 +36,25 @@ export default Layout;
 
 const Container = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
-  justify-content: space-between;
   width: 100%;
   height: 100vh;
+  background-color: var(--color-light-gray);
+`;
+const PageContainer = styled.div`
+  width: 360px;
+  height: 740px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+    rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+  background-color: white;
 `;
 
-const PageContainer = styled.div`
-  height: 85vh;
-  margin-top: 17%;
+const PageContainerBox = styled.div`
+  width: 360px;
+  height: 616px;
+  background-color: white;
   padding: 0 2% 4.05vh 2%;
   overflow: auto;
 `;
