@@ -14,34 +14,32 @@ const NavigationMenu = () => {
 
   return (
     <Container>
-      <ButtonGroup>
-        <Button onClick={() => navigate("/diary")}>
-          <span>
-            <DiaryBtn />
-          </span>
-        </Button>
-        <Button onClick={() => navigate("/dailys")}>
-          <span>
-            <DailylogBtn />
-          </span>
-        </Button>
-        <Button onClick={() => navigate("/home")}>
-          <span>
-            <HomeMenuBtn />
-          </span>
-        </Button>
-        <Button onClick={() => navigate("/search")}>
-          <span>
-            <SearchBtn />
-          </span>
-        </Button>
+      <Button onClick={() => navigate("/diary")}>
+        <span>
+          <DiaryBtn />
+        </span>
+      </Button>
+      <Button onClick={() => navigate("/dailys")}>
+        <span>
+          <DailylogBtn />
+        </span>
+      </Button>
+      <Button onClick={() => navigate("/home")}>
+        <span>
+          <HomeMenuBtn />
+        </span>
+      </Button>
+      <Button onClick={() => navigate("/search")}>
+        <span>
+          <SearchBtn />
+        </span>
+      </Button>
 
-        <Button onClick={() => navigate("/mypage")}>
-          <span>
-            <MyPageBtn />
-          </span>
-        </Button>
-      </ButtonGroup>
+      <Button onClick={() => navigate("/mypage")}>
+        <span>
+          <MyPageBtn />
+        </span>
+      </Button>
     </Container>
   );
 };
@@ -49,16 +47,13 @@ const NavigationMenu = () => {
 export default NavigationMenu;
 
 const Container = styled.div`
-  width: 100%;
-  height: 7.5vh;
-`;
-const ButtonGroup = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
-  height: 7.5vh;
+  height: 52px;
 `;
+
 const Button = styled.button`
   display: flex;
   flex-direction: column;

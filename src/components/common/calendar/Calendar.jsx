@@ -65,6 +65,7 @@ const Calendarcontainer = styled.div`
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.125em;
     margin-left: 3%;
+    height: 320px;
   }
   .eUWrDx .react-calendar__navigation {
     margin: 0.2rem;

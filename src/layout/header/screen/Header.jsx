@@ -44,17 +44,16 @@ const Header = () => {
 
 export default Header;
 const HeaderDiv = styled.div`
-  position: fixed;
   display: flex;
   align-items: center;
   justify-content: center;
   padding-top: 4vh;
-  margin-bottom: 1.5vh;
   background-color: white;
   top: 0px;
   left: 0px;
   right: 0px;
   width: 100%;
+  height: 72px;
 `;
 
 const HeaderBtn = styled.button`
@@ -73,7 +72,6 @@ const Question_Icon = styled(icon)`
 
 const Button = styled.button`
   border-radius: 60%;
-
   background-color: white;
   border: white;
   -webkit-tap-highlight-color: transparent !important;
