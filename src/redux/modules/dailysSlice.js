@@ -59,6 +59,18 @@ export const __deleteDailyTodo = createAsyncThunk(
     }
   }
 );
+export const __putDailyTodo = createAsyncThunk(
+  "dailyLog/putDailyTodo",
+  async (payload, thunkAPI) => {
+    console.log(payload);
+    try {
+      const { data } = await baseURLApiV1.put(`/dailys/todo`, payload);
+      return thunkAPI.fulfillWithValue(payload);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 
 //slice
 const dailysSlice = createSlice({
@@ -79,6 +91,11 @@ const dailysSlice = createSlice({
       .addCase(__deleteDailyTodo.fulfilled, (state, action) => {
         state.dailyTodo.daily = state.dailyTodo.daily.filter(
           (dailyLog) => dailyLog.todoId !== action.payload
+        );
+      })
+      .addCase(__putDailyTodo.fulfilled, (state, action) => {
+        state.dailyTodo.daily = state.dailyTodo.daily.map((todo) =>
+          todo.todoId === action.payload.todoId ? action.payload : todo
         );
       });
   },

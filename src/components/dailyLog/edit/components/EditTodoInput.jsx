@@ -3,55 +3,51 @@ import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { __getEditTodo } from "../../../../redux/modules/dailysSlice";
+import {
+  __getEditTodo,
+  __putDailyTodo,
+} from "../../../../redux/modules/dailysSlice";
 
 import EditTodoForm from "./EditTodoForm";
 import EditMemoDiv from "./EditMemoDiv";
 import TimeSettingDiv from "./TimeSettingDiv";
 import CategorySelectDiv from "./CategorySelectDiv";
 
-const EditTodoInput = () => {
+const EditTodoInput = ({ todoList, categoryList }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const id = useParams();
-  const editTodoId = Number(id.id);
-
-  const todoList = useSelector((state) => state?.dailyTodo?.dailyTodo?.todo);
-  console.log("edit콘솔", todoList);
-  const categoryList = useSelector(
-    (state) => state?.dailyTodo?.dailyTodo?.categories
-  );
-
   const [AddTodoInput, setAddTodoInput] = useState({
-    todoContent: "",
-    todoBulletName: "불렛",
-    time: null,
-    categoryId: null,
-    categoryColor: null,
-    year: 2023,
-    month: 1,
-    day: 4,
-    memos: [],
+    todoId: todoList?.todoId,
+    todoContent: todoList?.todoContent,
+    todoBulletName: todoList?.todoBulletName,
+    time: todoList?.time,
+    categoryId: todoList?.categoryId,
+    categoryColor: todoList?.categoryColor,
+    year: todoList?.year,
+    month: todoList?.month,
+    day: todoList?.day,
+    memos: todoList?.memos,
   });
-
   console.log("수정된 할일", AddTodoInput);
   const [categories, setCategories] = useState([]);
 
   const submitTodoHandler = () => {
+    dispatch(__putDailyTodo(AddTodoInput));
+    navigate("/dailys");
     // console.log(newMemo);
     // navigate("/dailys");
     // window.location.href = "/dailys";
   };
-  useEffect(() => {
-    dispatch(__getEditTodo(editTodoId));
-    const today = new Date();
-    // setAddTodoInput({
-    //   ...AddTodoInput,
-    //   year: today.getFullYear(),
-    //   month: today.getMonth() + 1,
-    //   day: today.getDate(),
-    // });
-  }, []);
+  // useEffect(() => {
+  //   dispatch(__getEditTodo(editTodoId));
+  //   const today = new Date();
+  //   // setAddTodoInput({
+  //   //   ...AddTodoInput,
+  //   //   year: today.getFullYear(),
+  //   //   month: today.getMonth() + 1,
+  //   //   day: today.getDate(),
+  //   // });
+  // }, []);
   const day = ["일", "월", "화", "수", "목", "금", "토"];
   const today = `${String(new Date().getFullYear()).substr(2, 2)}/${
     new Date().getMonth() + 1
@@ -63,7 +59,11 @@ const EditTodoInput = () => {
       </DateDiv>
       {todoList && (
         <TodoAndMemoDiv>
-          <EditTodoForm todoList={todoList} />
+          <EditTodoForm
+            AddTodoInput={AddTodoInput}
+            setAddTodoInput={setAddTodoInput}
+            todoList={todoList}
+          />
           <EditMemoDiv
             todoList={todoList}
             AddTodoInput={AddTodoInput}

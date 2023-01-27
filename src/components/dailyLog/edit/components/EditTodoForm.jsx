@@ -15,27 +15,27 @@ import { ReactComponent as memoBullet } from "../../../../img/bullet/memo-5.svg"
 import { ReactComponent as importantBullet } from "../../../../img/bullet/asterisk-6.svg";
 import { ReactComponent as favoriteBullet } from "../../../../img/bullet/star-7.svg";
 
-const EditTodoForm = ({ todoList }) => {
+const EditTodoForm = ({ todoList, AddTodoInput, setAddTodoInput }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [showBullet, setShowBullet] = useState(false);
-  const [todoInput, setTodoInput] = useState(todoList.todoContent);
-  console.log("수정된 내용", todoInput);
+  const [editTodoInput, setEditTodoInput] = useState(todoList.todoContent);
   const [todoBullet, setTodoBullet] = useState(
     todoList ? todoList.todoBulletName : ""
   );
-  console.log("수정된 불렛", todoBullet);
   const showBulletHandler = (e) => {
     setShowBullet(!showBullet);
   };
   const selectBulletHandler = (e) => {
-    setTodoBullet(e.target.value);
+    const editSelectBullet = e.target.value;
+    setTodoBullet(editSelectBullet);
     setShowBullet(!showBullet);
+    setAddTodoInput({ ...AddTodoInput, todoBulletName: editSelectBullet });
   };
   const todoInputHandler = (e) => {
-    setTodoInput(e.target.value);
+    setEditTodoInput(e.target.value);
+    const editTodoInput = e.target.value;
+    setAddTodoInput({ ...AddTodoInput, todoContent: editTodoInput });
   };
-
-  useEffect(() => {}, []);
 
   return (
     <Container>
@@ -68,7 +68,7 @@ const EditTodoForm = ({ todoList }) => {
       <TodoInput
         placeholder="할일을 입력해주세요"
         onChange={todoInputHandler}
-        value={todoInput}
+        value={editTodoInput}
       />
     </Container>
   );
