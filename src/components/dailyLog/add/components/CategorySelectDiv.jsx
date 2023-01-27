@@ -6,7 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 const CategorySelectDiv = ({ categories, AddTodoInput, setAddTodoInput }) => {
   const categorySelectHandler = (e) => {
-    setAddTodoInput({ ...AddTodoInput, categoryId: Number(e.target.id) });
+    setAddTodoInput({
+      ...AddTodoInput,
+      categoryId: Number(e.target.id),
+      categoryColor: e.target.value,
+    });
   };
   const categoryList = categories;
   let num = 0;
@@ -19,6 +23,7 @@ const CategorySelectDiv = ({ categories, AddTodoInput, setAddTodoInput }) => {
             key={num++}
             type="button"
             id={category.categoryId}
+            value={category.categoryColor}
             backgroundColor={category.categoryColor}
             onClick={categorySelectHandler}
           >

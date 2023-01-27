@@ -17,6 +17,7 @@ const BulletTodoCard = ({ dailyLog, dailyLogs, setDailyLogs }) => {
   const [showTodoMemo, setShowTodoMemo] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showSelectBox, setShowSelectBox] = useState(false);
+  const [showMemoBox, setShowMemoBox] = useState(false);
   const selectOptionRef = useRef(null);
 
   const selectOptionClose = () => {
@@ -31,6 +32,7 @@ const BulletTodoCard = ({ dailyLog, dailyLogs, setDailyLogs }) => {
     } else {
       setShowTodoMemo(showTodoMemo.filter((id) => id !== Number(e.target.id)));
     }
+    // setShowMemoBox(!showMemoBox);
   };
 
   const deleteButtonHandler = () => {
@@ -47,6 +49,7 @@ const BulletTodoCard = ({ dailyLog, dailyLogs, setDailyLogs }) => {
     <Container>
       <CardContainer key={num++}>
         <MainBulletTodo>
+          <CategoryColorDiv categoryColor={dailyLog.categoryColor} />
           <TodoBodyDiv>
             <span>
               <BulletSwitchList bulletName={dailyLog.todoBulletName} />
@@ -77,18 +80,21 @@ const BulletTodoCard = ({ dailyLog, dailyLogs, setDailyLogs }) => {
             ) : null}
           </OptionSelectDiv>
         </MainBulletTodo>
-        {showTodoMemo.find((id) => id === dailyLog.todoId) !== undefined
-          ? dailyLog.todoMemos.map((memo) => (
-              <TodoMemoDiv key={num++} id={memo.todoMemoId}>
-                <MemoContent>
-                  <span>
-                    <MemoBullet />
-                  </span>
-                  <span>{memo.todoMemoContent}</span>
-                </MemoContent>
-              </TodoMemoDiv>
-            ))
-          : null}
+        <MemoDiv>
+          <CategoryColorDiv categoryColor={dailyLog.categoryColor} />
+          {showTodoMemo.find((id) => id === dailyLog.todoId) !== undefined
+            ? dailyLog.todoMemos.map((memo) => (
+                <TodoMemoDiv key={num++} id={memo.todoMemoId}>
+                  <MemoContent>
+                    <span>
+                      <MemoBullet />
+                    </span>
+                    <span>{memo.todoMemoContent}</span>
+                  </MemoContent>
+                </TodoMemoDiv>
+              ))
+            : null}
+        </MemoDiv>
       </CardContainer>
       {showDeleteModal ? (
         <ModalContainer>
@@ -127,7 +133,6 @@ const CardContainer = styled.div`
   background-color: var(--color-default);
   /* border: 1px solid rgba(240, 161, 59, 0.2); */
   /* box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.1); */
-  padding: 12px;
   border-radius: 8px;
 `;
 const ModalContainer = styled.div`
@@ -181,11 +186,19 @@ const MainBulletTodo = styled.div`
   align-items: center;
   gap: 10px;
   width: 100%;
+  height: 42px;
+  padding: 0 13px 0 0;
   & > input {
     width: 90%;
     padding: 0;
     margin: 0;
   }
+`;
+const CategoryColorDiv = styled.div`
+  width: 2.5%;
+  height: 100%;
+  background-color: ${(props) => props.categoryColor};
+  border-radius: 8px 0 0 8px;
 `;
 const TodoBodyDiv = styled.div`
   display: flex;
@@ -195,9 +208,11 @@ const TodoBodyDiv = styled.div`
   font-weight: 600;
   gap: 10px;
 `;
+const MemoDiv = styled.div``;
 const TodoMemoDiv = styled.div`
   display: flex;
   flex-direction: column;
+  width: 90%;
   margin-left: 5vw;
   background-color: inherit;
   padding: 8px 0;
