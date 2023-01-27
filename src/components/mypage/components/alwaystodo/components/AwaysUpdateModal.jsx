@@ -7,7 +7,7 @@ import { ReactComponent as todoBullet } from "../../../../../img/myPage/todo-1.s
 import { ReactComponent as addIcon } from "../../../../../img/myPage/add.svg";
 import { ReactComponent as closeIcon } from "../../../../../img/myPage/close.svg";
 
-import { __postFavorite } from "../../../../../redux/modules/favoriteSlice";
+import { __putFavorite } from "../../../../../redux/modules/favoriteSlice";
 
 const AlwaysUpdateModal = ({ onClose, favoriteId, content, memo }) => {
   const dispatch = useDispatch();
@@ -16,7 +16,12 @@ const AlwaysUpdateModal = ({ onClose, favoriteId, content, memo }) => {
   );
 
   const [favoriteContent, setFavoriteContent] = useState(content);
+
   const [favoriteMemos, setFavoriteMemos] = useState(memo);
+  const [favoriteMemosCopy, setFavoriteMemosCopy] = useState(memo);
+  const [newFavoriteMemos, setNewFavoriteMemos] = useState([
+    { id: 0, favoriteMemoContent: "" },
+  ]);
   const [plusId, setPlusId] = useState(1);
 
   const [categoryId, setCategoryId] = useState(0);
@@ -24,22 +29,48 @@ const AlwaysUpdateModal = ({ onClose, favoriteId, content, memo }) => {
   const [categoryColor, setCategoryColor] = useState("");
 
   const onMemoAddHandler = () => {
-    const input = { id: plusId, memo: "" };
-    setFavoriteMemos([...favoriteMemos, input]);
+    const input = { id: plusId, favoriteMemoContent: "" };
+    setNewFavoriteMemos([...newFavoriteMemos, input]);
     setPlusId(plusId + 1);
   };
-  const onDeleteHandler = (index) => {
-    setFavoriteMemos(favoriteMemos.filter((value) => value.id !== index));
+
+  const onDeleteHandler = (id) => {
+    setFavoriteMemosCopy(
+      favoriteMemosCopy.filter((value) => value.favoriteMemoId !== id)
+    );
+
+    setFavoriteMemos(
+      favoriteMemos.map((value) => {
+        if (value.favoriteMemoId === id) {
+          return { ...value, favoriteMemoContent: null };
+        } else {
+          return value;
+        }
+      })
+    );
   };
 
-  const onChaneMemoHandler = (e, index) => {
-    let favoriteMemosCopy = [...favoriteMemos];
-    favoriteMemosCopy[index].memo = e.target.value;
-    setFavoriteMemos(favoriteMemosCopy);
+  const newDeleteHandler = (index) => {
+    setNewFavoriteMemos(newFavoriteMemos.filter((value) => value.id !== index));
   };
 
   const onChaneTodoHandler = (e) => {
     setFavoriteContent(e.target.value);
+  };
+
+  const onChaneMemoHandler = (e, index) => {
+    let favoriteMemosCopy = [];
+    favoriteMemos.forEach((device, index) => {
+      favoriteMemosCopy[index] = { ...device };
+    });
+    favoriteMemosCopy[index].favoriteMemoContent = e.target.value;
+    setFavoriteMemos(favoriteMemosCopy);
+  };
+
+  const onChaneNewMemoHandler = (e, index) => {
+    let newFavoriteMemosCopy = [...newFavoriteMemos];
+    newFavoriteMemosCopy[index].favoriteMemoContent = e.target.value;
+    setNewFavoriteMemos(newFavoriteMemosCopy);
   };
 
   const onCategoryHandler = (e) => {
@@ -49,16 +80,21 @@ const AlwaysUpdateModal = ({ onClose, favoriteId, content, memo }) => {
   };
 
   const onAddFavoriteHandler = () => {
+    const newFavoriteMemo = newFavoriteMemos.map((value) => {
+      if (delete value.id) {
+        return value;
+      }
+    });
+    const favoriteMemo = [...favoriteMemos, ...newFavoriteMemo];
     const favoriteInfo = {
+      favoriteId,
       favoriteContent: favoriteContent,
-      favoriteMemos: favoriteMemos.map((val) => ({
-        favoriteMemoContent: val.memo,
-      })),
+      favoriteMemos: favoriteMemo,
       categoryId: categoryId,
       categoryName: categoryName,
       categoryColor: categoryColor,
     };
-    dispatch(__postFavorite(favoriteInfo));
+    dispatch(__putFavorite(favoriteInfo));
     onClose();
   };
 
@@ -76,7 +112,7 @@ const AlwaysUpdateModal = ({ onClose, favoriteId, content, memo }) => {
             ></AlwaysTodoInput>
           </TodoTitle>
           <TodoMemoDiv>
-            {favoriteMemos.map((value, index) => (
+            {favoriteMemosCopy.map((value, index) => (
               <MemoContent key={index}>
                 <MemoBullet />
                 <AlwaysMemoInput
@@ -84,7 +120,22 @@ const AlwaysUpdateModal = ({ onClose, favoriteId, content, memo }) => {
                   placeholder={value.favoriteMemoContent}
                   onChange={(e) => onChaneMemoHandler(e, index)}
                 ></AlwaysMemoInput>
-                <DeleteButton onClick={() => onDeleteHandler(value.id)}>
+                <DeleteButton
+                  onClick={() => onDeleteHandler(value.favoriteMemoId)}
+                >
+                  <DeleteIcon />
+                </DeleteButton>
+              </MemoContent>
+            ))}
+            {newFavoriteMemos.map((value, index) => (
+              <MemoContent key={index}>
+                <MemoBullet />
+                <AlwaysMemoInput
+                  type="text"
+                  placeholder="메모를 작성해주세요"
+                  onChange={(e) => onChaneNewMemoHandler(e, index)}
+                ></AlwaysMemoInput>
+                <DeleteButton onClick={() => newDeleteHandler(value.id)}>
                   <DeleteIcon />
                 </DeleteButton>
               </MemoContent>
@@ -97,7 +148,7 @@ const AlwaysUpdateModal = ({ onClose, favoriteId, content, memo }) => {
           </IconDiv>
           <CategoryBtnContainer>
             {categoryList && categoryList.length === 0 ? (
-              <p>카테고리를 추가해보세요.</p>
+              <CategoryPtag>카테고리를 추가해보세요.</CategoryPtag>
             ) : (
               categoryList?.map((val) => {
                 return (
@@ -248,4 +299,12 @@ const AlwaysTodoInput = styled.input`
 const AlwaysMemoInput = styled.input`
   border: none;
   width: 65%;
+`;
+
+const CategoryPtag = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-size: 16px;
 `;

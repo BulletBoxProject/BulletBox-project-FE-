@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import { baseURLApiV1 } from "../../core/api";
 
 // 초기값 설정
@@ -30,6 +30,22 @@ export const __postFavorite = createAsyncThunk(
   }
 );
 
+export const __putFavorite = createAsyncThunk(
+  "favorite/putFavorite",
+  async (payload, thunkAPI) => {
+    try {
+      const id = payload.favoriteId;
+      delete payload.favoriteId;
+      await baseURLApiV1.put(`favorites/${id}`, payload);
+      const data = { favoriteId: id, ...payload };
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      alert("카테고리 수정 실패");
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const __deleteFavorite = createAsyncThunk(
   "favorite/deleteFavorite",
   async (payload, thunkAPI) => {
@@ -53,12 +69,25 @@ const favoriteSlice = createSlice({
       .addCase(__getFavorite.fulfilled, (state, action) => {
         state.favorite = action.payload.data;
       })
-
       .addCase(__postFavorite.fulfilled, (state, action) => {
         state.favorite.favorites = [
           ...state.favorite.favorites,
           action.payload,
         ];
+      })
+      .addCase(__putFavorite.fulfilled, (state, action) => {
+        state.favorite.favorites = state.favorite.favorites.map((value) => {
+          if (value.favoriteId === action.payload.favoriteId) {
+            return {
+              ...value,
+              favoriteContent: action.payload.favoriteContent,
+              favoriteMemos: action.payload.favoriteMemos,
+              categoryId: action.payload.categoryId,
+              categoryColor: action.payload.categoryColor,
+            };
+          }
+          return value;
+        });
       })
       .addCase(__deleteFavorite.fulfilled, (state, action) => {
         state.favorite.favorites = state.favorite.favorites.filter((value) => {
