@@ -17,7 +17,6 @@ const DailyLogContainer = () => {
   const dispatch = useDispatch();
   const [showSelectBox, setShowSelectBox] = useState(false);
   const [dailyLogs, setDailyLogs] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   console.log(dailyLogs);
   const navigate = useNavigate();
   const day = ["일", "월", "화", "수", "목", "금", "토"];
@@ -33,12 +32,9 @@ const DailyLogContainer = () => {
   console.log("셀럭터 값", todoList);
   useEffect(() => {
     dispatch(__getDailyTodo());
-    setIsLoading(!isLoading);
   }, [dispatch]);
 
-  if (isLoading) {
-    <h1>Loading..</h1>;
-  }
+  let num = 0;
   return (
     <Container>
       <DateAndSelectDiv>
@@ -60,6 +56,7 @@ const DailyLogContainer = () => {
           todoList &&
           todoList.map((dailyLog) => (
             <BulletTodoCard
+              key={num++}
               dailyLog={dailyLog}
               dailyLogs={dailyLogs}
               setDailyLogs={setDailyLogs}
