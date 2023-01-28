@@ -52,11 +52,14 @@ const CategoryAddList = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  width: 264px;
   gap: 0.8rem;
   flex-wrap: wrap;
   margin-left: 12%;
 `;
 
 const CategoryAddPtag = styled.p`
-  font-size: 1.2rem;
+  margin: 0 auto;
+  font-size: 20px;
+  font-weight: bold;
 `;

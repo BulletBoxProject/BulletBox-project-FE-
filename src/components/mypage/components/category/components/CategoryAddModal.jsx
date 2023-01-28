@@ -146,21 +146,29 @@ const CategoryInput = styled.input.attrs({ maxLength: 8 })`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 98%;
-  height: 5.4vh;
+  width: 232px;
+  height: 40px;
   border-radius: 10px;
-  border: 1px solid var(--color-gray);
+  border: 1px solid var(--color-defalut);
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
   font-size: 1rem;
+  font-weight: bold;
+  ::placeholder {
+    font-size: 16px;
+    color: var(--color-gray);
+  }
+  :focus {
+    outline: none;
+  }
 `;
 
 const AddModalBtn = styled.button`
-  width: 47.4%;
-  height: 7vh;
-  font-size: 1rem;
+  width: 104px;
+  height: 48px;
+  font-size: 14px;
   border-radius: 8px;
   border: none;
-  font-weight: 700;
+  font-weight: bold;
   color: white;
   background-color: var(--color-main);
   &:disabled {
@@ -170,12 +178,12 @@ const AddModalBtn = styled.button`
 `;
 
 const CancleModalBtn = styled.button`
-  width: 47.4%;
-  height: 7vh;
-  font-size: 1rem;
+  width: 104px;
+  height: 48px;
+  font-size: 14px;
   border-radius: 8px;
   border: none;
-  font-weight: 700;
+  font-weight: bold;
   background-color: var(--color-default);
 `;
 
@@ -183,7 +191,9 @@ const BtnContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 10%;
+  width: 224px;
+  height: 48px;
+  margin: 20px auto;
 `;
 
 const TitleLength = styled.span`
@@ -198,10 +208,10 @@ const CloseImg = styled(close)``;
 
 const CloseBtn = styled.button`
   position: absolute;
-  left: 18px;
+  right: 18px;
   top: 15px;
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   background-color: white;
   border: none;
 `;

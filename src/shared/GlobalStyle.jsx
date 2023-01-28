@@ -23,7 +23,7 @@ src: url('/fonts/NanumGothic.eot') format('embedded-opentype'),
 url('/fonts/NanumGothic.woff') format('woff');}
 
 *{
-  font-family: 'NanumSquare', serif;
+  font-family: 'NanumSquare';
 }
 
 body, div, button{

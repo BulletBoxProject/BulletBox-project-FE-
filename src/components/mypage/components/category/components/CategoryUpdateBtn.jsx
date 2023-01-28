@@ -36,10 +36,10 @@ const CategoryUpdateBtn = (props) => {
 export default CategoryUpdateBtn;
 
 const CategoryBtn = styled.button`
-  width: 34.5vw;
-  height: 6.5vh;
-  font-size: 0.9rem;
-  font-weight: 600;
+  width: 124px;
+  height: 48px;
+  font-size: 14px;
+  font-weight: bold;
   border-radius: 10px;
   border: none;
   background-color: ${({ backgroundColor }) => backgroundColor || "white"};

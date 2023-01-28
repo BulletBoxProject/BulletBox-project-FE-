@@ -31,13 +31,14 @@ const Container = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
+  margin: auto;
   background: rgba(0, 0, 0, 0.2);
   z-index: 9999;
 `;
 
 const ModalWrap = styled.div`
-  width: 80%;
-  height: 50%;
+  width: 294px;
+  height: 356px;
   border-radius: 15px;
   background-color: #fff;
   position: absolute;

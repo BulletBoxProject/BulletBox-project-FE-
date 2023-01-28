@@ -67,6 +67,7 @@ const MyDetailInfo = styled.div`
   height: 41px;
   margin-left: 14px;
   font-size: 14px;
+  letter-spacing: 0.4px;
 `;
 
 const LogoDiv = styled.div`
