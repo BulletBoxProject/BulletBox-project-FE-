@@ -64,62 +64,66 @@ const CategoryUpdateModal = ({ id, backgroundColor, name, onClose }) => {
   return (
     <>
       <Modal onClose={onClose}>
-        <CloseBtn onClick={onClose}>
-          <CloseImg />
-        </CloseBtn>
-        <CategoryInput
-          type="text"
-          maxlength="8"
-          value={categoryName}
-          onChange={(e) => {
-            CategoryNameHandler(e);
-          }}
-          placeholder="카테고리 이름을 입력하세요."
-        ></CategoryInput>
-        <TitleLength>({categoryName.length}/8)</TitleLength>
-        <SelectColorDiv>
-          <SelectWhiteBtn
-            onClick={(e) => {
-              CategoryColorHandler(e);
+        <Container>
+          <CloseBtn onClick={onClose}>
+            <CloseImg />
+          </CloseBtn>
+          <CategoryInput
+            type="text"
+            maxlength="8"
+            value={categoryName}
+            onChange={(e) => {
+              CategoryNameHandler(e);
             }}
-          ></SelectWhiteBtn>
-          {tagColorList.map((val) => {
-            return (
-              <SelectBtn
-                key={val.key}
-                backgroundColor={val.value}
-                value={val.value}
-                onClick={(e) => {
-                  CategoryColorHandler(e);
-                }}
-              ></SelectBtn>
-            );
-          })}
-        </SelectColorDiv>
-        <BtnContainer>
-          <DeleteModalBtn
-            onClick={() => {
-              deleteCategoryHandler(id);
-            }}
-          >
-            삭제하기
-          </DeleteModalBtn>
-          <UpdateModalBtn
-            disabled={!(isName && isColor)}
-            onClick={() => {
-              UpdateCategoryHandler();
-            }}
-          >
-            수정하기
-          </UpdateModalBtn>
-        </BtnContainer>
+            placeholder="카테고리 이름을 입력하세요."
+          ></CategoryInput>
+          <TitleLength>({categoryName.length}/8)</TitleLength>
+          <SelectColorDiv>
+            <SelectWhiteBtn
+              onClick={(e) => {
+                CategoryColorHandler(e);
+              }}
+            ></SelectWhiteBtn>
+            {tagColorList.map((val) => {
+              return (
+                <SelectBtn
+                  key={val.key}
+                  backgroundColor={val.value}
+                  value={val.value}
+                  onClick={(e) => {
+                    CategoryColorHandler(e);
+                  }}
+                ></SelectBtn>
+              );
+            })}
+          </SelectColorDiv>
+          <BtnContainer>
+            <DeleteModalBtn
+              onClick={() => {
+                deleteCategoryHandler(id);
+              }}
+            >
+              삭제하기
+            </DeleteModalBtn>
+            <UpdateModalBtn
+              disabled={!(isName && isColor)}
+              onClick={() => {
+                UpdateCategoryHandler();
+              }}
+            >
+              수정하기
+            </UpdateModalBtn>
+          </BtnContainer>
+        </Container>
       </Modal>
     </>
   );
 };
 
 export default CategoryUpdateModal;
-
+const Container = styled.div`
+  margin: 40px 30px;
+`;
 const SelectColorDiv = styled.div`
   width: 15rem;
   height: 10rem;

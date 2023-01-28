@@ -13,9 +13,7 @@ const useModal = ({ onClose, children }) => {
   return (
     <ModalContainer>
       <Container>
-        <ModalWrap ref={modalRef}>
-          <Contents>{children}</Contents>
-        </ModalWrap>
+        <ModalWrap ref={modalRef}>{children}</ModalWrap>
       </Container>
     </ModalContainer>
   );
@@ -50,8 +48,4 @@ const ModalWrap = styled.div`
     margin-left: 33%;
     font-size: 10px;
   }
-`;
-
-const Contents = styled.div`
-  margin: 40px 30px;
 `;

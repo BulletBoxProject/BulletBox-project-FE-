@@ -65,68 +65,70 @@ const AlwaysAddModal = ({ onClose }) => {
   return (
     <>
       <Modal onClose={onClose}>
-        <TodoBodyDiv>
-          <TodoTitle>
-            <TodoBullet />
-            <AlwaysTodoInput
-              placeholder="루틴을 입력해주세요."
-              onChange={(e) => {
-                onChaneTodoHandler(e);
-              }}
-            ></AlwaysTodoInput>
-          </TodoTitle>
-          <TodoMemoDiv>
-            {favoriteMemos.map((value, index) => (
-              <MemoContent key={index}>
-                <MemoBullet />
-                <AlwaysMemoInput
-                  type="text"
-                  placeholder="메모을 입력해주세요."
-                  onChange={(e) => onChaneMemoHandler(e, index)}
-                ></AlwaysMemoInput>
-                <DeleteButton onClick={() => onDeleteHandler(value.id)}>
-                  <DeleteIcon />
-                </DeleteButton>
-              </MemoContent>
-            ))}
-          </TodoMemoDiv>
-          <IconDiv>
-            <AddButton onClick={onMemoAddHandler}>
-              <AddIcon />
-            </AddButton>
-          </IconDiv>
-          <CategoryBtnContainer>
-            {categoryList && categoryList.length === 0 ? (
-              <p>카테고리를 추가해보세요.</p>
-            ) : (
-              categoryList?.map((val) => {
-                return (
-                  <SelectBtn
-                    key={val.categoryId}
-                    backgroundColor={val.categoryColor}
-                    value={val.categoryName}
-                    onClick={() => {
-                      onCategoryHandler(val);
-                    }}
-                  >
-                    {val.categoryName}
-                  </SelectBtn>
-                );
-              })
-            )}
-          </CategoryBtnContainer>
-        </TodoBodyDiv>
+        <Container>
+          <TodoBodyDiv>
+            <TodoTitle>
+              <TodoBullet />
+              <AlwaysTodoInput
+                placeholder="루틴을 입력해주세요."
+                onChange={(e) => {
+                  onChaneTodoHandler(e);
+                }}
+              ></AlwaysTodoInput>
+            </TodoTitle>
+            <TodoMemoDiv>
+              {favoriteMemos.map((value, index) => (
+                <MemoContent key={index}>
+                  <MemoBullet />
+                  <AlwaysMemoInput
+                    type="text"
+                    placeholder="메모을 입력해주세요."
+                    onChange={(e) => onChaneMemoHandler(e, index)}
+                  ></AlwaysMemoInput>
+                  <DeleteButton onClick={() => onDeleteHandler(value.id)}>
+                    <DeleteIcon />
+                  </DeleteButton>
+                </MemoContent>
+              ))}
+            </TodoMemoDiv>
+            <IconDiv>
+              <AddButton onClick={onMemoAddHandler}>
+                <AddIcon />
+              </AddButton>
+            </IconDiv>
+            <CategoryBtnContainer>
+              {categoryList && categoryList.length === 0 ? (
+                <CategoryPtag>카테고리를 추가해보세요.</CategoryPtag>
+              ) : (
+                categoryList?.map((val) => {
+                  return (
+                    <SelectBtn
+                      key={val.categoryId}
+                      backgroundColor={val.categoryColor}
+                      value={val.categoryName}
+                      onClick={() => {
+                        onCategoryHandler(val);
+                      }}
+                    >
+                      {val.categoryName}
+                    </SelectBtn>
+                  );
+                })
+              )}
+            </CategoryBtnContainer>
+          </TodoBodyDiv>
 
-        <BtnContainer>
-          <AddModalBtn
-            onClick={() => {
-              onAddFavoriteHandler();
-            }}
-          >
-            추가
-          </AddModalBtn>
-          <AddModalBtn onClick={onClose}>취소</AddModalBtn>
-        </BtnContainer>
+          <BtnContainer>
+            <AddModalBtn
+              onClick={() => {
+                onAddFavoriteHandler();
+              }}
+            >
+              추가
+            </AddModalBtn>
+            <AddModalBtn onClick={onClose}>취소</AddModalBtn>
+          </BtnContainer>
+        </Container>
       </Modal>
     </>
   );
@@ -134,11 +136,19 @@ const AlwaysAddModal = ({ onClose }) => {
 
 export default AlwaysAddModal;
 
-const TodoBodyDiv = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 25px;
+  margin-left: 22px;
   font-weight: bold;
-  height: 30vh;
+  width: 248px;
+  height: 321px;
+`;
+
+const TodoBodyDiv = styled.div`
+  width: 100%;
+  height: 247px;
   overflow: auto;
 `;
 
@@ -161,8 +171,8 @@ const MemoContent = styled.div`
 `;
 
 const AddModalBtn = styled.button`
-  width: 47.4%;
-  height: 7vh;
+  width: 104px;
+  height: 48px;
   font-size: 1rem;
   border-radius: 8px;
   border: none;
@@ -172,16 +182,17 @@ const AddModalBtn = styled.button`
 const BtnContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-top: 10%;
+  justify-content: space-around;
+  margin-top: 10px;
 `;
 
 const CategoryBtnContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
-  height: 15vh;
-  padding-top: 3%;
+  margin-left: 10px;
+  width: 100%;
 `;
 
 const SelectBtn = styled.button`
@@ -244,9 +255,23 @@ const DeleteIcon = styled(closeIcon)`
 
 const AlwaysTodoInput = styled.input`
   border: none;
+  :focus {
+    outline: none;
+  }
 `;
 
 const AlwaysMemoInput = styled.input`
   border: none;
   width: 65%;
+  :focus {
+    outline: none;
+  }
+`;
+
+const CategoryPtag = styled.span`
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  font-size: 14px;
 `;

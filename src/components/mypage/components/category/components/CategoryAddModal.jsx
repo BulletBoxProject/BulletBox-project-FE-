@@ -56,53 +56,59 @@ const CategoryModal = ({ onClose }) => {
   return (
     <>
       <Modal onClose={onClose}>
-        <CloseBtn onClick={onClose}>
-          <CloseImg />
-        </CloseBtn>
-        <CategoryInput
-          type="text"
-          onChange={(e) => {
-            CategoryNameHandler(e);
-          }}
-          placeholder="카테고리 이름을 입력하세요."
-        ></CategoryInput>
-        <TitleLength>({categoryName.length}/8)</TitleLength>
-        <SelectColorDiv>
-          <SelectWhiteBtn
-            onClick={(e) => {
-              CategoryColorHandler(e);
+        <Container>
+          <CloseBtn onClick={onClose}>
+            <CloseImg />
+          </CloseBtn>
+          <CategoryInput
+            type="text"
+            onChange={(e) => {
+              CategoryNameHandler(e);
             }}
-          ></SelectWhiteBtn>
-          {tagColorList.map((val) => {
-            return (
-              <SelectBtn
-                key={val.key}
-                backgroundColor={val.value}
-                value={val.value}
-                onClick={(e) => {
-                  CategoryColorHandler(e);
-                }}
-              ></SelectBtn>
-            );
-          })}
-        </SelectColorDiv>
-        <BtnContainer>
-          <AddModalBtn
-            disabled={!(isName && isColor)}
-            onClick={() => {
-              AddCategoryHandler();
-            }}
-          >
-            추가
-          </AddModalBtn>
-          <CancleModalBtn onClick={onClose}>취소</CancleModalBtn>
-        </BtnContainer>
+            placeholder="카테고리 이름을 입력하세요."
+          ></CategoryInput>
+          <TitleLength>({categoryName.length}/8)</TitleLength>
+          <SelectColorDiv>
+            <SelectWhiteBtn
+              onClick={(e) => {
+                CategoryColorHandler(e);
+              }}
+            ></SelectWhiteBtn>
+            {tagColorList.map((val) => {
+              return (
+                <SelectBtn
+                  key={val.key}
+                  backgroundColor={val.value}
+                  value={val.value}
+                  onClick={(e) => {
+                    CategoryColorHandler(e);
+                  }}
+                ></SelectBtn>
+              );
+            })}
+          </SelectColorDiv>
+          <BtnContainer>
+            <AddModalBtn
+              disabled={!(isName && isColor)}
+              onClick={() => {
+                AddCategoryHandler();
+              }}
+            >
+              추가
+            </AddModalBtn>
+            <CancleModalBtn onClick={onClose}>취소</CancleModalBtn>
+          </BtnContainer>
+        </Container>
       </Modal>
     </>
   );
 };
 
 export default CategoryModal;
+
+const Container = styled.div`
+  margin: 40px 30px;
+`;
 
 const SelectColorDiv = styled.div`
   width: 15.5rem;

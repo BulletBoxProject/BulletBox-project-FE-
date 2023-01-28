@@ -223,14 +223,15 @@ const TodoBodyDiv = styled.div`
 const TodoMemoDiv = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 5vw;
+  margin-left: 10px;
   background-color: inherit;
-  padding: 8px 0;
+  padding: 4px 0;
 `;
 const MemoContent = styled.div`
   display: flex;
   align-items: center;
   font-size: 12px;
+  font-weight: bold;
   gap: 5px;
 `;
 const TodoMoreViewDiv = styled.div``;
@@ -251,9 +252,9 @@ const SelectDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 35vw;
-  left: -28vw;
-  top: 5vh;
+  width: 120px;
+  height: 88px;
+  left: -80px;
   gap: 3px;
   padding: 5px 14px;
   position: absolute;
@@ -272,7 +273,7 @@ const SelectDiv = styled.div`
       color: var(--color-main);
     }
   }
-  z-index: 999;
+  z-index: 9999;
 `;
 const SelectLine = styled.hr`
   width: 100%;

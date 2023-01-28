@@ -54,5 +54,7 @@ const AlwaysAddList = styled.div`
 `;
 
 const AlwaysAddPtag = styled.p`
-  font-size: 1.2rem;
+  margin: 0 auto;
+  font-size: 20px;
+  font-weight: bold;
 `;
