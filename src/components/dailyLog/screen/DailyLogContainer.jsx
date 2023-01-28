@@ -7,6 +7,8 @@ import { __getDailyTodo } from "../../../redux/modules/dailysSlice";
 import SelectCategory from "../../common/SelectCategory";
 import BulletTodoCard from "../components/BulletTodoCard";
 import CategorySelector from "../components/CategorySelector";
+import AllTodoShow from "../components/AllTodoShow";
+import SelectCategoryTodoShow from "../components/SelectCategoryTodoShow";
 
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
@@ -18,14 +20,15 @@ const DailyLogContainer = () => {
   const dispatch = useDispatch();
   const [showSelectBox, setShowSelectBox] = useState(false);
   const [dailyLogs, setDailyLogs] = useState([]);
-  console.log(dailyLogs);
+  const [isSelectedCategory, isSetSelectedCategory] = useState(false);
+  const [selectedCategoryId, setSlectedCategoryId] = useState("");
+
   const navigate = useNavigate();
   const day = ["일", "월", "화", "수", "목", "금", "토"];
   const today = `${String(new Date().getFullYear()).substr(2, 2)}/${
     new Date().getMonth() + 1
   }/${new Date().getDate()}(${day[new Date().getDay()]})`;
   const showAddTodoSelect = () => {
-    console.log("clicked");
     setShowSelectBox(!showSelectBox);
   };
   const state = useSelector((state) => state);
@@ -34,8 +37,6 @@ const DailyLogContainer = () => {
   const categoryList = useSelector(
     (state) => state?.dailyTodo?.dailyTodo?.categories
   );
-  console.log("셀럭터 투두 값", todoList);
-  console.log("셀럭터 카테고리 값", categoryList);
   useEffect(() => {
     dispatch(__getDailyTodo());
   }, [dispatch]);
@@ -51,26 +52,28 @@ const DailyLogContainer = () => {
             <IoIosArrowDown />
           </SelectDateButton>
         </DateButtonDiv>
-        <CategorySelector categoryList={categoryList} />
-        {/* <SelectDiv>
-          <SelectCategory style={{ padding: "10px" }} />
-        </SelectDiv> */}
+        <CategorySelector
+          categoryList={categoryList}
+          isSetSelectedCategory={isSetSelectedCategory}
+          setSlectedCategoryId={setSlectedCategoryId}
+        />
       </DateAndSelectDiv>
       <TodoBulletDiv>
         {todoList && todoList?.length === 0 ? (
           <NoneTodo>할일을 추가해주세요.</NoneTodo>
+        ) : isSelectedCategory ? (
+          <SelectCategoryTodoShow
+            todoList={todoList}
+            dailyLogs={dailyLogs}
+            setDailyLogs={setDailyLogs}
+            selectedCategoryId={selectedCategoryId}
+          />
         ) : (
-          todoList &&
-          todoList?.map((dailyLog) => {
-            return (
-              <BulletTodoCard
-                key={num++}
-                dailyLog={dailyLog}
-                dailyLogs={dailyLogs}
-                setDailyLogs={setDailyLogs}
-              />
-            );
-          })
+          <AllTodoShow
+            todoList={todoList}
+            dailyLogs={dailyLogs}
+            setDailyLogs={setDailyLogs}
+          />
         )}
 
         <AddTodoDiv>
@@ -149,18 +152,16 @@ const NoneTodo = styled.div`
   color: var(--color-gray);
 `;
 const AddTodoDiv = styled.div`
-  position: absolute;
-  top: 84.5vh;
-  left: 84vw;
+  /* position: absolute; */
 `;
 const AddTodoButton = styled.button`
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 0;
   background-color: white;
   border-radius: 50%;
+  margin: 0 auto;
 `;
 const AddTodoIcon = styled(BsFillPlusCircleFill)`
   fill: var(--color-main);
@@ -171,11 +172,10 @@ const AddSelectDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  width: 42%;
   gap: 3px;
   padding: 5px 14px;
-  position: absolute;
-  top: -12.5vh;
-  left: -28vw;
+  margin-top: -40px;
   border-radius: 4px;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
   background-color: var(--color-default);

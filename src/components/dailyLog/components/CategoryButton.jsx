@@ -1,10 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
-const CategoryButton = ({ category }) => {
-  console.log("하위 컴포넌트", category);
+const CategoryButton = ({
+  category,
+  isSetSelectedCategory,
+  setSlectedCategoryId,
+  setShowCategory,
+}) => {
   const selectCategoryHandler = (e) => {
-    console.log(Number(e.target.id));
+    setSlectedCategoryId(Number(e.target.id));
+    isSetSelectedCategory(true);
+    setShowCategory(false);
   };
   return (
     <Category

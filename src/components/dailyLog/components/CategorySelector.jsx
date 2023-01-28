@@ -3,22 +3,34 @@ import styled from "styled-components";
 
 import CategoryButton from "./CategoryButton";
 
-const CategorySelector = ({ categoryList }) => {
+const CategorySelector = ({
+  categoryList,
+  isSetSelectedCategory,
+  setSlectedCategoryId,
+}) => {
   const [showCategory, setShowCategory] = useState(false);
   const showCategoryHandler = () => {
     setShowCategory(!showCategory);
+  };
+  const showAllCategoryHandler = () => {
+    isSetSelectedCategory(false);
+    setSlectedCategoryId("");
+    setShowCategory(false);
   };
   return (
     <Container>
       <SelectButton onClick={showCategoryHandler}>전체</SelectButton>
       {showCategory ? (
         <CategoryList>
-          <span>전체</span>
+          <ShowAllButton onClick={showAllCategoryHandler}>전체</ShowAllButton>
           {categoryList &&
             categoryList.map((category) => (
               <CategoryButton
                 category={category}
                 categoryColor={category.categoryColor}
+                setShowCategory={setShowCategory}
+                isSetSelectedCategory={isSetSelectedCategory}
+                setSlectedCategoryId={setSlectedCategoryId}
               />
             ))}
         </CategoryList>
@@ -49,9 +61,13 @@ const CategoryList = styled.div`
   margin-top: 16px;
   width: 112px;
   padding: 16px 8px;
-  & > span {
-    text-align: center;
-    font-size: 14px;
-    font-weight: 700;
-  }
+`;
+const ShowAllButton = styled.button`
+  font-size: 14px;
+  font-weight: 700;
+  border: 0;
+  background-color: inherit;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+  padding: 13px 0;
+  border-radius: 8px;
 `;
