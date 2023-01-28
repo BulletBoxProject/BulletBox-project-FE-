@@ -54,9 +54,6 @@ const LogoutBtnContainer = styled.div`
 const LogoutBtn = styled.button`
   background-color: white;
   border: none;
-  :focus {
-    outline: none;
-  }
 `;
 
 const LogoutImg = styled(Logout)`

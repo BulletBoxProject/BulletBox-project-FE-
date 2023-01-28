@@ -255,17 +255,11 @@ const DeleteIcon = styled(closeIcon)`
 
 const AlwaysTodoInput = styled.input`
   border: none;
-  :focus {
-    outline: none;
-  }
 `;
 
 const AlwaysMemoInput = styled.input`
   border: none;
   width: 65%;
-  :focus {
-    outline: none;
-  }
 `;
 
 const CategoryPtag = styled.span`

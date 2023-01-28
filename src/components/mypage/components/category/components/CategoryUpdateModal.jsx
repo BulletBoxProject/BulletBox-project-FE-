@@ -176,9 +176,6 @@ const CategoryInput = styled.input.attrs({ maxLength: 8 })`
     font-size: 16px;
     color: var(--color-gray);
   }
-  :focus {
-    outline: none;
-  }
 `;
 
 const UpdateModalBtn = styled.button`

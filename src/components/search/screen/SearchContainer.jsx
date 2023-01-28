@@ -28,9 +28,6 @@ const InputSearch = styled.input`
   border: transparent;
   padding: 10px;
   width: 70%;
-  :focus {
-    outline: none;
-  }
 `;
 
 const SearchImg = styled(HiSearch)`

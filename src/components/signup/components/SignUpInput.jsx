@@ -301,9 +301,6 @@ const StInput = styled.input`
   ::placeholder {
     color: var(--color-c1-gray);
   }
-  :focus {
-    outline: none;
-  }
 `;
 
 const EmailDiv = styled.div`

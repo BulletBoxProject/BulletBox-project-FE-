@@ -30,11 +30,15 @@ body, div, button{
   box-sizing: border-box;
   font-size: 10px;
   margin: 0, auto;
-
 }
 
 input {
   text-indent: 1em
+  
+}
+
+input:focus{
+  outline: none;
 }
 
 button {
