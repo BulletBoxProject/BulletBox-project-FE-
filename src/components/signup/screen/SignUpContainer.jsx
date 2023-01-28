@@ -18,23 +18,23 @@ const ContainerBox = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
-  background-color: var(--color-main);
+  width: 100%;
+  height: 740px;
 `;
 
 const BulletLogo = styled(Logo)`
   margin-top: 20%;
-  width: 4rem;
+  width: 4rem; 
   height: 3rem;
-  fill: white;
+  fill: var(--color-main);
 `;
 
 const BulletBold = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
-  font-size: 20px;
+  color: var(--color-main);
+  font-size: 14px;
   font-family: "HeirofLightBold";
   margin-top: 1vh;
   margin-bottom: 3vh;

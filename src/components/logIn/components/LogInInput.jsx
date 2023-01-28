@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { baseURLApiV1 } from "../../../core/api";
 import { setCookies } from "../../../core/cookieControler";
-import AlertModal from "../../common/modal/AlertModal";
 import { IoIosArrowBack } from "react-icons/io";
 
 const LogInInput = () => {
@@ -11,12 +10,14 @@ const LogInInput = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isEmail, setIsEmail] = useState(false);
+  const [isPassword, setIsPassword] = useState(false);
+
   const [message, setMessage] = useState("");
 
-  const onBackHandler = () => {
-    navigate("/");
-  };
+  // const onBackHandler = () => {
+  //   navigate("/");
+  // };
 
   const postLogin = async (post) => {
     try {
@@ -25,27 +26,18 @@ const LogInInput = () => {
         return data;
       }
     } catch (error) {
-      console.log(error);
       if (error.response.data.status === 500) {
-        setIsOpen(true);
-        setMessage("서버 요청에 실패했습니다.");
+        console.log("서버 요청에 실패했습니다.");
       } else if (error.response.data.httpStatusCode === 404) {
-        setIsOpen(true);
-        setMessage("아이디 또는 비밀번호를 확인해주세요.");
+        setMessage("* 아이디 또는 비밀번호를 틀렸습니다.");
       } else {
-        setIsOpen(true);
-        setMessage("알수없는 오류입니다.");
+        console.log("알수없는 오류입니다.");
       }
     }
   };
 
   const loginHandler = (e) => {
     e.preventDefault();
-    if (email === "" || password === "") {
-      setIsOpen(true);
-      setMessage("이메일과 비밀번호를 입력해주세요.");
-      return;
-    }
     postLogin({
       email,
       password,
@@ -64,40 +56,48 @@ const LogInInput = () => {
 
   return (
     <StForm>
-      <BackBtn type="button" onClick={onBackHandler}>
+      {/* <BackBtn type="button" onClick={onBackHandler}>
         <BackIcon />
-      </BackBtn>
+      </BackBtn> */}
       <StTitle>Login</StTitle>
       <StInput
-        placeholder="ID"
+        placeholder="이메일 주소"
         name="userid"
         type="email"
         onChange={(e) => {
           const { value } = e.target;
           setEmail(value);
+          setMessage("");
+          if (value.length !== 0) {
+            setIsEmail(true);
+          } else {
+            setIsEmail(false);
+          }
         }}
       ></StInput>
       <StInput
-        placeholder="PASSWORD"
+        placeholder="패스워드"
         type="password"
         name="password"
         onChange={(e) => {
           const { value } = e.target;
           setPassword(value);
+          setMessage("");
+          if (value.length !== 0) {
+            setIsPassword(true);
+          } else {
+            setIsPassword(false);
+          }
         }}
       ></StInput>
-      <br />
+      <StSpanDiv>
+        <StSpanTag style={{ dispaly: "hidden" }}>{message}</StSpanTag>
+      </StSpanDiv>
+
       <StButtonBox>
-        <StSignupBtn
-          type="button"
-          onClick={() => {
-            navigate("/signup");
-          }}
-        >
-          회원가입
-        </StSignupBtn>
         <StLoginBtn
           type="submit"
+          disabled={!(isEmail && isPassword)}
           onClick={(e) => {
             loginHandler(e);
           }}
@@ -105,16 +105,24 @@ const LogInInput = () => {
           로그인
         </StLoginBtn>
       </StButtonBox>
-      {isOpen && (
-        <AlertModal
-          open={isOpen}
-          onClose={() => {
-            setIsOpen(false);
-          }}
-        >
-          {message}
-        </AlertModal>
-      )}
+      <UserInfoBox>
+        <UserInfoDiv>
+          <UserInfoBtn>아이디찾기</UserInfoBtn>
+        </UserInfoDiv>
+        <UserInfoDiv>
+          <UserInfoBtn>비밀번호재설정</UserInfoBtn>
+        </UserInfoDiv>
+        <SignupDiv>
+          <StSignupBtn
+            type="button"
+            onClick={() => {
+              navigate("/signup");
+            }}
+          >
+            회원가입
+          </StSignupBtn>
+        </SignupDiv>
+      </UserInfoBox>
     </StForm>
   );
 };
@@ -123,93 +131,139 @@ export default LogInInput;
 const StForm = styled.form`
   display: flex;
   align-items: center;
-  padding-top: 10%;
   flex-direction: column;
+  margin-top: 80px;
   width: 100%;
   height: 286px;
   background: white;
   border-radius: 8px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 `;
 const StTitle = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 20px;
+  margin-bottom: 10px;
   width: 50%;
+  height: 22px;
   color: var(--color-main);
   font-family: "HeirofLightBold";
 `;
 
 const StInput = styled.input`
-  width: 74%;
-  height: 6.6vh;
-  margin-top: 7%;
+  width: 100%;
+  height: 48px;
+  margin-top: 15px;
   border: white;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-  font-family: "Oleo Script";
-  background: #d9d9d9;
+  font-size: 16px;
+  font-family: "NanumGothic";
+  font-weight: bold;
+  background: var(--color-default);
   border-radius: 8px;
   ::placeholder {
-    font-family: "Oleo Script";
-    font-style: normal;
-    font-weight: 800;
-    font-size: 1rem;
-    text-align: center;
-    color: #7c7c7c;
+    font-family: "NanumGothic";
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--color-c1-gray);
     padding-right: 1em;
   }
+`;
+
+const StSpanDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 12px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+`;
+
+const StSpanTag = styled.span`
+  font-size: 12px;
+  font-weight: bold;
+  font-family: "NanumGothic";
 `;
 
 const StButtonBox = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 74%;
-  margin-top: 6%;
+  width: 100%;
   font-size: 16px;
-`;
-
-const StSignupBtn = styled.button`
-  width: 46%;
-  height: 36px;
-  left: 84px;
-  top: 474px;
-  font-size: 16px;
-  font-weight: 800;
-  color: var(--color-gray);
-  border: white;
-  background: var(--color-light-gray);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-  border-radius: 8px;
 `;
 
 const StLoginBtn = styled.button`
-  width: 46%;
-  height: 36px;
-  left: 188px;
-  top: 474px;
+  width: 100%;
+  height: 48px;
+  font-family: "NanumGothic";
   font-size: 16px;
-  font-weight: 800;
+  font-weight: bold;
   color: white;
   border: white;
   background: var(--color-main);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
+  &:disabled {
+    color: white;
+    background-color: var(--color-c1-gray);
+  }
 `;
 
-const BackBtn = styled.button`
-  position: absolute;
-  left: 0;
-  margin-top: 1vh;
-  margin-left: 23vw;
-  border: none;
-  background-color: transparent;
-  width: 25px;
-  height: 20px;
-`;
-const BackIcon = styled(IoIosArrowBack)`
+// const BackBtn = styled.button`
+//   position: absolute;
+//   left: 0;
+//   top: 0;
+//   margin-left: 50px;
+//   margin-top: 170px;
+//   border: none;
+//   background-color: transparent;
+//   width: 25px;
+//   height: 20px;
+// `;
+// const BackIcon = styled(IoIosArrowBack)`
+//   color: var(--color-gray);
+//   width: 20px;
+//   height: 18px;
+// `;
+
+const UserInfoBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  width: 222px;
+  height: 11px;
   color: var(--color-gray);
-  width: 20px;
-  height: 18px;
+  font-weight: bold;
+`;
+
+const UserInfoDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 4px;
+  height: 11px;
+  border-right: 1px solid var(--color-gray);
+`;
+const UserInfoBtn = styled.button`
+  background-color: transparent;
+  border: none;
+  font-size: 10px;
+  font-family: "NanumGothic";
+  font-weight: bold;
+  color: var(--color-gray);
+`;
+
+const SignupDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 11px;
+`;
+
+const StSignupBtn = styled.button`
+  background-color: transparent;
+  border: none;
+  font-size: 10px;
+  font-family: "NanumGothic";
+  font-weight: bold;
+  color: var(--color-main);
 `;

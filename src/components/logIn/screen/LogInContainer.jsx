@@ -47,4 +47,5 @@ const BulletBold = styled.div`
   font-size: 14px;
   font-weight: bold;
   font-family: "HeirofLightBold";
+  margin-top: 5px;
 `;
