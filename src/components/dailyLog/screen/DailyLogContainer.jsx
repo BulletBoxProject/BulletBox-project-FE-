@@ -6,6 +6,7 @@ import { __getDailyTodo } from "../../../redux/modules/dailysSlice";
 
 import SelectCategory from "../../common/SelectCategory";
 import BulletTodoCard from "../components/BulletTodoCard";
+import CategorySelector from "../components/CategorySelector";
 
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
@@ -30,7 +31,11 @@ const DailyLogContainer = () => {
   const state = useSelector((state) => state);
   console.log("전역 상태값", state);
   const todoList = useSelector((state) => state?.dailyTodo?.dailyTodo?.daily);
-  console.log("셀럭터 값", todoList);
+  const categoryList = useSelector(
+    (state) => state?.dailyTodo?.dailyTodo?.categories
+  );
+  console.log("셀럭터 투두 값", todoList);
+  console.log("셀럭터 카테고리 값", categoryList);
   useEffect(() => {
     dispatch(__getDailyTodo());
   }, [dispatch]);
@@ -46,9 +51,10 @@ const DailyLogContainer = () => {
             <IoIosArrowDown />
           </SelectDateButton>
         </DateButtonDiv>
-        <SelectDiv>
+        <CategorySelector categoryList={categoryList} />
+        {/* <SelectDiv>
           <SelectCategory style={{ padding: "10px" }} />
-        </SelectDiv>
+        </SelectDiv> */}
       </DateAndSelectDiv>
       <TodoBulletDiv>
         {todoList && todoList?.length === 0 ? (
@@ -103,11 +109,7 @@ const DateAndSelectDiv = styled.div`
   align-items: center;
   padding: 10px 0;
 `;
-const SelectDiv = styled.div`
-  display: flex;
-  justify-self: flex-end;
-  padding: 5px 0;
-`;
+
 const DateButtonDiv = styled.div`
   display: flex;
   align-items: center;
