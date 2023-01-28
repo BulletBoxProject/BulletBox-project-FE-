@@ -56,7 +56,6 @@ const AddTodoInput = () => {
   };
   const submitTodoHandler = () => {
     dispatch(__postDailyTodo(AddTodoInput));
-
     // postTodo(AddTodoInput);
     setTimeout(() => {
       navigate("/dailys");
