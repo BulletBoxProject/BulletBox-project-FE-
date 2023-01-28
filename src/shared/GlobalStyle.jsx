@@ -47,7 +47,9 @@ a{
   color: inherit;
   cursor: pointer;
 }
-
+&::-webkit-scrollbar {
+    display: none;
+  }
 
 `;
 
