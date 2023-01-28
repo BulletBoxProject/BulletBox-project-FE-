@@ -29,6 +29,5 @@ export default MypageInfoScreen;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 50vh;
-  margin-top: 5%;
+  margin-top: 18px;
 `;

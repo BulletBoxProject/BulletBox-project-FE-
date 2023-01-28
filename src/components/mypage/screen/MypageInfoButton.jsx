@@ -31,9 +31,9 @@ const Container = styled.div`
 
 const Button = styled.button`
   flex: 1;
-  font-size: 0.9rem;
-  font-weight: 700;
-  padding: 0.5rem;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 8px 0;
   background: none;
   border: none;
   &:active,
