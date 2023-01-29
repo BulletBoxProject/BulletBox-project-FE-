@@ -35,7 +35,7 @@ const EditTodoInput = ({ todoList, categoryList }) => {
     dispatch(__putDailyTodo(AddTodoInput));
     setTimeout(() => {
       navigate("/dailys");
-    }, 10);
+    }, 15);
 
     // console.log(newMemo);
     // navigate("/dailys");

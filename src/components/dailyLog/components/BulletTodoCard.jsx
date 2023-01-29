@@ -13,7 +13,6 @@ import Option from "./Option";
 import useOutSideClick from "../../../hooks/useOutSideClick";
 
 const BulletTodoCard = ({ dailyLog, dailyLogs, setDailyLogs }) => {
-  console.log("데일리로그 할일", dailyLogs);
   const [showTodoMemo, setShowTodoMemo] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showSelectBox, setShowSelectBox] = useState(false);
