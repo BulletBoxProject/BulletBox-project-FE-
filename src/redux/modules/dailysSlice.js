@@ -31,6 +31,17 @@ export const __getEditTodo = createAsyncThunk(
     }
   }
 );
+export const __getFavoritesTodo = createAsyncThunk(
+  "DailyLog/getFavoritesTodo",
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await baseURLApiV1.get(`/favorites`);
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 export const __postDailyTodo = createAsyncThunk(
   "dailyLog/postDailyTodo",
   async (payload, thunkAPI) => {
@@ -84,6 +95,9 @@ const dailysSlice = createSlice({
       })
       .addCase(__getEditTodo.fulfilled, (state, action) => {
         state.dailyTodo = action.payload.data;
+      })
+      .addCase(__getFavoritesTodo.fulfilled, (state, action) => {
+        state.favorite = action.payload.data;
       })
       .addCase(__postDailyTodo.fulfilled, (state, action) => {
         state.dailyTodo.daily = [...state.dailyTodo.daily, action.payload];
