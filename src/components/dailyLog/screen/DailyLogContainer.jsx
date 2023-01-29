@@ -161,7 +161,7 @@ const AddTodoButton = styled.button`
   border: 0;
   background-color: white;
   border-radius: 50%;
-  margin: 0 auto;
+  margin-left: 82%;
 `;
 const AddTodoIcon = styled(BsFillPlusCircleFill)`
   fill: var(--color-main);
