@@ -94,5 +94,6 @@ const SearchBtn = styled.button`
 const SearchList = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 10px;
   gap: 10px;
 `;
