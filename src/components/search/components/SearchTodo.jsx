@@ -11,6 +11,9 @@ import { ReactComponent as memoBullet } from "../../../img/myPage/memo-5.svg";
 import { ReactComponent as todoBullet } from "../../../img/myPage/todo-1.svg";
 
 import useOutSideClick from "../../../hooks/useOutSideClick";
+import { useNavigate } from "react-router-dom";
+
+import { __deleteSearch } from "../../../redux/modules/searchSlice";
 
 const SearchTodo = ({
   search,
@@ -30,6 +33,8 @@ const SearchTodo = ({
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const selectRef = useRef(null);
   const handleClose = () => {
     setShowSelectBox(false);
@@ -47,10 +52,10 @@ const SearchTodo = ({
     setShowSelectBox(!showSelectBox);
     setShowDeleteModal(!showDeleteModal);
   };
-  //   const deleteButtonHandler = () => {
-  //     setShowDeleteModal(!showDeleteModal);
-  //     dispatch(__deleteFavorite(todoId));
-  //   };
+  const deleteButtonHandler = () => {
+    setShowDeleteModal(!showDeleteModal);
+    dispatch(__deleteSearch(search.todoId));
+  };
   const cancelButtonHandler = () => {
     setShowDeleteModal(!showDeleteModal);
   };
@@ -77,11 +82,7 @@ const SearchTodo = ({
             </OptionButton>
             {showSelectBox ? (
               <SelectDiv>
-                <div
-                //   onClick={() => {
-                //     updateButtonHandler();
-                //   }}
-                >
+                <div onClick={() => navigate(`/dailys/edit/${search.todoId}`)}>
                   수정하기 <EditIcon />
                 </div>
                 <SelectLine></SelectLine>
@@ -123,7 +124,7 @@ const SearchTodo = ({
             </DeleteMsg>
             <SelectLine></SelectLine>
             <ModalButtonGroup>
-              {/* <DeleteButton onClick={deleteButtonHandler}>삭제</DeleteButton> */}
+              <DeleteButton onClick={deleteButtonHandler}>삭제</DeleteButton>
               <CancelButton onClick={cancelButtonHandler}>취소</CancelButton>
             </ModalButtonGroup>
           </ModalContent>

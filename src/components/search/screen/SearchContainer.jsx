@@ -64,7 +64,7 @@ const SearchContainer = () => {
           <SearchImg />
         </SearchBtn>
       </SearchBox>
-      {iskeywordResult === true ? (
+      {searchList && iskeywordResult === true ? (
         <SearchMiddleDiv>
           <SearchResult>
             `{keywordResult}` 검색결과 총 {searchCount}건
@@ -82,13 +82,13 @@ const SearchContainer = () => {
         </SearchMiddleDiv>
       ) : null}
 
-      {iskeywordResult === true ? (
+      {searchList && iskeywordResult === true ? (
         <SearchList>
           {searchList && reverseDate === false
             ? searchList?.map((value) => {
                 return <SearchTodo key={value.todoId} search={value} />;
               })
-            : [...searchList].reverse().map((value) => {
+            : [...searchList]?.reverse().map((value) => {
                 return <SearchTodo key={value.todoId} search={value} />;
               })}
         </SearchList>
