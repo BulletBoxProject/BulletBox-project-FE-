@@ -5,9 +5,14 @@ import { HiSearch } from "react-icons/hi";
 import { __getSearch } from "../../../redux/modules/searchSlice";
 import SearchTodo from "../components/SearchTodo";
 import { ReactComponent as cancle } from "../../../img/search/close.svg";
+import { useEffect } from "react";
 
 const SearchContainer = () => {
   const [keyword, setKeyword] = useState("");
+  const [keywordResult, setKeywordResult] = useState("");
+  const [searchCount, setSearchCount] = useState(0);
+  const [iskeywordResult, setIsKeywordResult] = useState(false);
+
   const searchList = useSelector((state) => state?.search?.search?.searches);
   console.log(searchList);
 
@@ -18,7 +23,13 @@ const SearchContainer = () => {
     if (keyword.length !== 0) {
       dispatch(__getSearch(keyword));
     }
+    setKeywordResult(keyword);
+    setIsKeywordResult(true);
   };
+
+  useEffect(() => {
+    searchList && setSearchCount(searchList?.length);
+  }, [searchList]);
 
   return (
     <>
@@ -43,11 +54,19 @@ const SearchContainer = () => {
         >
           <CancleImg />
         </CancleBtn>
-
         <SearchBtn>
           <SearchImg />
         </SearchBtn>
       </SearchBox>
+      {iskeywordResult === true ? (
+        <SearchMiddleDiv>
+          <SearchResult>
+            `{keywordResult}` 검색결과 총 {searchCount}건
+          </SearchResult>
+          <div>최신순</div>
+        </SearchMiddleDiv>
+      ) : null}
+
       <SearchList>
         {searchList &&
           searchList?.map((value) => {
@@ -119,6 +138,20 @@ const CancleBtn = styled.button`
   :focus {
     outline: none;
   }
+`;
+
+const SearchMiddleDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  margin: 15px;
+  width: 316px;
+  height: 15px;
+  font-weight: bold;
+`;
+const SearchResult = styled.div`
+  color: var(--color-main);
 `;
 
 const SearchList = styled.div`

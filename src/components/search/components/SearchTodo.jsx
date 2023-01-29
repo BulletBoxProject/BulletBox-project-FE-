@@ -139,7 +139,7 @@ const CardContainer = styled.div`
   border: none;
   background-color: ${({ backgroundColor }) =>
     backgroundColor || `var(--color-default)`};
-  box-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.3);
+
   padding: 12px;
   border-radius: 8px;
 `;
