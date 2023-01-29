@@ -59,6 +59,18 @@ export const __postDailyTodo = createAsyncThunk(
     }
   }
 );
+export const __postFavoriteTodo = createAsyncThunk(
+  "dailyLog/postFavoriteTodo",
+  async (payload, thunkAPI) => {
+    console.log(payload);
+    try {
+      const { data } = await baseURLApiV1.post(`/dailys/favorites`, payload);
+      return thunkAPI.fulfillWithValue(payload);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 export const __deleteDailyTodo = createAsyncThunk(
   "dailyLog/deleteDailyTodo",
   async (payload, thunkAPI) => {
@@ -78,7 +90,8 @@ export const __putDailyTodo = createAsyncThunk(
       const { data } = await baseURLApiV1.put(`/dailys/todo`, payload);
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      console.log(error);
+      // return thunkAPI.rejectWithValue(error);
     }
   }
 );

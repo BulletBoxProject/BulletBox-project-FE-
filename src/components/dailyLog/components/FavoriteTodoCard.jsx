@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import BulletSwitchList from "./BulletSwitchList";
@@ -7,14 +7,13 @@ const FavoriteTodoCard = ({
   favoriteId,
   favoriteContent,
   categoryColor,
-  setShowFavoritesTodo,
+  setAddFavoriteTodo,
 }) => {
-  const addFavoriteTodoHandler = (e) => {
-    console.log(Number(e.target.id));
-    setShowFavoritesTodo(false);
+  const selectFavoriteTodo = (e) => {
+    setAddFavoriteTodo({ favoriteId: Number(e.target.id) });
   };
   return (
-    <FavoriteTodo id={favoriteId} onClick={addFavoriteTodoHandler}>
+    <FavoriteTodo id={favoriteId} onClick={selectFavoriteTodo}>
       <TodoCategoryColor categoryColor={categoryColor} />
       <TodoContent>
         <span>

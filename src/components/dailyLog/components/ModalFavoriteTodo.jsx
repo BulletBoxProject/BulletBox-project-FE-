@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+
+import { __postFavoriteTodo } from "../../../redux/modules/dailysSlice";
+
 import FavoriteTodoCard from "./FavoriteTodoCard";
 
 const ModalFavoriteTodo = ({ favoritesTodoList, setShowFavoritesTodo }) => {
+  const dispatch = useDispatch();
+  const [addFavoriteTodo, setAddFavoriteTodo] = useState({});
+  const postDate = {
+    year: new Date().getFullYear(),
+    month: new Date().getMonth() + 1,
+    day: new Date().getDate(),
+  };
   const cancelhandler = () => {
+    setShowFavoritesTodo(false);
+  };
+  const addFavoriteTodoHandler = () => {
+    const addFavoritePayload = { ...addFavoriteTodo, ...postDate };
+    dispatch(__postFavoriteTodo(addFavoritePayload));
     setShowFavoritesTodo(false);
   };
   let num = 0;
@@ -20,11 +36,12 @@ const ModalFavoriteTodo = ({ favoritesTodoList, setShowFavoritesTodo }) => {
                   favoriteContent={todo.favoriteContent}
                   categoryColor={todo.categoryColor}
                   setShowFavoritesTodo={setShowFavoritesTodo}
+                  setAddFavoriteTodo={setAddFavoriteTodo}
                 />
               ))}
             </FavoritesTodo>
             <ModalButtonGroup>
-              <AddButton>추가</AddButton>
+              <AddButton onClick={addFavoriteTodoHandler}>추가</AddButton>
               <CancelButton onClick={cancelhandler}>취소</CancelButton>
             </ModalButtonGroup>
           </ModalContents>
