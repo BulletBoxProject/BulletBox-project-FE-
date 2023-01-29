@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { ReactComponent as Logo } from "../../../img/logo/logo-graphic.svg";
+import { ReactComponent as Logo } from "../../../img/myPage/logo-graphic.svg";
 import { baseURLApiV1 } from "../../../core/api";
 import { useNavigate } from "react-router-dom";
 import MypageLogout from "./MypageLogout";
@@ -29,7 +29,9 @@ const MypageContainer = () => {
   return (
     <Container>
       <MyInfo>
-        <MainLogo />
+        <LogoDiv>
+          <MainLogo />
+        </LogoDiv>
         <MyDetailInfo>
           <NicknameTag>{nickname}</NicknameTag>
           <EmailTag>{email}</EmailTag>
@@ -50,31 +52,41 @@ const Container = styled.div`
 const MyInfo = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 6%;
-  margin-top: 4%;
-  padding-bottom: 5%;
+  margin-top: 14px;
+  padding-left: 27px;
+  padding-bottom: 20px;
+  width: 100%;
+  height: 75px;
   border-bottom: 1px solid var(--color-default);
 `;
 const MyDetailInfo = styled.div`
-  margin-left: 5%;
-  font-size: 0.8rem;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  width: 123px;
+  height: 41px;
+  margin-left: 14px;
+  font-size: 14px;
+  letter-spacing: 0.4px;
 `;
 
+const LogoDiv = styled.div`
+  width: 48px;
+  height: 48px;
+`;
 const MainLogo = styled(Logo)`
   fill: white;
-  width: 20.5%;
-  height: 8.66vh;
   background-color: var(--color-main);
   border-radius: 50%;
 `;
 
-const NicknameTag = styled.p`
-  font-size: 0.8rem;
+const NicknameTag = styled.span`
+  font-size: 14px;
   font-weight: bold;
 `;
 
-const EmailTag = styled.p`
-  font-size: 0.7rem;
+const EmailTag = styled.span`
+  font-size: 12px;
   color: #7c7c7c;
   font-weight: bold;
 `;

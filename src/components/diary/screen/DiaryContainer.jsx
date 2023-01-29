@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import BulletCalendar from "../../common/calendar/Calendar";
-import { ReactComponent as angry } from "../../../img/emotion/angry.svg";
-import { ReactComponent as excited } from "../../../img/emotion/excited.svg";
-import { ReactComponent as happy } from "../../../img/emotion/happy.svg";
-import { ReactComponent as sad } from "../../../img/emotion/sad.svg";
-import { ReactComponent as soso } from "../../../img/emotion/soso.svg";
-import { ReactComponent as check } from "../../../img/diary/check-2.svg";
+import { ReactComponent as angry } from "../../../img/emotion/angry-1.svg";
+import { ReactComponent as excited } from "../../../img/emotion/excited-1.svg";
+import { ReactComponent as happy } from "../../../img/emotion/happy-1.svg";
+import { ReactComponent as sad } from "../../../img/emotion/sad-1.svg";
+import { ReactComponent as soso } from "../../../img/emotion/soso-1.svg";
+
 import { ReactComponent as edit } from "../../../img/diary/edit.svg";
+import { ReactComponent as check } from "../../../img/diary/round-check.svg";
 
 const DiaryContainer = () => {
   const [diaryText, setDiaryText] = useState("");
@@ -36,33 +37,41 @@ const DiaryContainer = () => {
       <TodoDiv>
         <DateTitle>{today}</DateTitle>
         <EmotionDiv>
-          <EmotionBtn>
-            <ExcitedEmotion />
-          </EmotionBtn>
-          <EmotionBtn>
-            <HappyEmotion />
-          </EmotionBtn>
-          <EmotionBtn>
-            <SosoEmotion />
-          </EmotionBtn>
-          <EmotionBtn>
-            <SadEmotion />
-          </EmotionBtn>
-          <EmotionBtn>
-            <AngryEmotion />
-          </EmotionBtn>
+          <EmotionBox>
+            <EmotionBtn>
+              <ExcitedEmotion />
+            </EmotionBtn>
+            <EmotionBtn>
+              <HappyEmotion />
+            </EmotionBtn>
+            <EmotionBtn>
+              <SosoEmotion />
+            </EmotionBtn>
+            <EmotionBtn>
+              <SadEmotion />
+            </EmotionBtn>
+            <EmotionBtn>
+              <AngryEmotion />
+            </EmotionBtn>
+          </EmotionBox>
           {isEdit ? (
-            <EditCheckBox>
-              <EditBtn onClick={onEditHandler}>
-                <CheckImg />
-              </EditBtn>
-            </EditCheckBox>
+            <EditCheckDiv>
+              <EditCheckBox>
+                <EditBtn onClick={onEditHandler}>
+                  <EditImg />
+                </EditBtn>
+                수정
+              </EditCheckBox>
+            </EditCheckDiv>
           ) : (
-            <EditCheckBox>
-              <EditBtn onClick={onEditHandler}>
-                <EditImg />
-              </EditBtn>
-            </EditCheckBox>
+            <EditCheckDiv>
+              <EditCheckBox>
+                <EditBtn onClick={onEditHandler}>
+                  <CheckImg />
+                </EditBtn>
+                저장
+              </EditCheckBox>
+            </EditCheckDiv>
           )}
         </EmotionDiv>
         <DiaryText
@@ -85,24 +94,25 @@ const Container = styled.div`
 `;
 const CalendarDiv = styled.div`
   position: relative;
-  height: 48vh;
-  margin: 10px 0;
+  height: 310px;
   justify-content: center;
   align-items: center;
 `;
 const SelectDiv = styled.div`
   position: absolute;
-  top: 3%;
+  top: 5%;
   left: 88%;
   align-items: center;
-  padding: 5px 0;
+  padding-top: 5px;
   font-weight: bold;
 `;
 const TodoDiv = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 32vh;
+  width: 344px;
+  height: 232px;
+  margin-top: 50px;
+  margin-left: 1px;
   padding: 15px;
   border-radius: 16px;
   background-color: var(--color-default);
@@ -119,64 +129,88 @@ const EmotionDiv = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 5vh;
-  margin-top: 2%;
+  height: 28px;
+  margin-top: 5px;
 `;
+const EmotionBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  margin-left: 15px;
+`;
+
 const EmotionBtn = styled.button`
-  width: 10%;
-  height: 3.8vh;
+  width: 28px;
+  height: 28px;
   border: none;
   background-color: transparent;
 `;
 
 const ExcitedEmotion = styled(excited)`
-  height: 3.8vh;
+  fill: var(--color-gray);
+  height: 28px;
 `;
 const HappyEmotion = styled(happy)`
-  height: 3.8vh;
+  fill: var(--color-gray);
+  height: 28px;
 `;
 const SosoEmotion = styled(soso)`
   fill: var(--color-gray);
-  height: 3.8vh;
+  height: 28px;
 `;
 const SadEmotion = styled(sad)`
-  height: 3.8vh;
+  fill: var(--color-gray);
+  height: 28px;
 `;
 const AngryEmotion = styled(angry)`
-  height: 3.8vh;
+  fill: var(--color-gray);
+  height: 28px;
 `;
 
+const EditCheckDiv = styled.div`
+  display: flex;
+  width: 10%;
+`;
 const EditCheckBox = styled.div`
-  position: absolute;
-  right: 0;
-  margin-right: 8%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  flex-direction: column;
+  width: 100%;
+  height: 32px;
+  font-size: 10px;
+  font-weight: bold;
+  color: var(--color-gray);
 `;
 
 const EditBtn = styled.button`
-  width: 29px;
-  height: 3.8vh;
+  width: 20px;
+  height: 20px;
   border: none;
   background-color: transparent;
 `;
 
 const CheckImg = styled(check)`
-  width: 7vw;
-  height: 3.8vh;
+  width: 20px;
+  height: 20px;
+  fill: var(--color-gray);
 `;
 
 const EditImg = styled(edit)`
-  height: 2.8vh;
+  width: 20px;
+  height: 20px;
 `;
 
 const DiaryText = styled.textarea.attrs({ maxLength: 200 })`
-  margin-top: 5%;
+  margin-top: 10px;
   padding-left: 7px;
   border: none;
   background-color: var(--color-default);
   resize: none;
   font-size: 12px;
   font-weight: bold;
-  height: 15vh;
+  height: 120px;
   line-height: 17px;
   color: var(--color-dark-gray);
   ::placeholder {

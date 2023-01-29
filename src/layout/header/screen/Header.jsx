@@ -47,11 +47,8 @@ const HeaderDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 4vh;
   background-color: white;
-  top: 0px;
-  left: 0px;
-  right: 0px;
+  padding-top: 20px;
   width: 100%;
   height: 72px;
 `;

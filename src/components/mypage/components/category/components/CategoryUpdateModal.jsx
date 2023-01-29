@@ -64,61 +64,66 @@ const CategoryUpdateModal = ({ id, backgroundColor, name, onClose }) => {
   return (
     <>
       <Modal onClose={onClose}>
-        <CloseBtn onClick={onClose}>
-          <CloseImg />
-        </CloseBtn>
-        <CategoryInput
-          type="text"
-          maxlength="8"
-          value={categoryName}
-          onChange={(e) => {
-            CategoryNameHandler(e);
-          }}
-        ></CategoryInput>
-        <TitleLength>({categoryName.length}/8)</TitleLength>
-        <SelectColorDiv>
-          <SelectWhiteBtn
-            onClick={(e) => {
-              CategoryColorHandler(e);
+        <Container>
+          <CloseBtn onClick={onClose}>
+            <CloseImg />
+          </CloseBtn>
+          <CategoryInput
+            type="text"
+            maxlength="8"
+            value={categoryName}
+            onChange={(e) => {
+              CategoryNameHandler(e);
             }}
-          ></SelectWhiteBtn>
-          {tagColorList.map((val) => {
-            return (
-              <SelectBtn
-                key={val.key}
-                backgroundColor={val.value}
-                value={val.value}
-                onClick={(e) => {
-                  CategoryColorHandler(e);
-                }}
-              ></SelectBtn>
-            );
-          })}
-        </SelectColorDiv>
-        <BtnContainer>
-          <DeleteModalBtn
-            onClick={() => {
-              deleteCategoryHandler(id);
-            }}
-          >
-            삭제하기
-          </DeleteModalBtn>
-          <UpdateModalBtn
-            disabled={!(isName && isColor)}
-            onClick={() => {
-              UpdateCategoryHandler();
-            }}
-          >
-            수정하기
-          </UpdateModalBtn>
-        </BtnContainer>
+            placeholder="카테고리 이름을 입력하세요."
+          ></CategoryInput>
+          <TitleLength>({categoryName.length}/8)</TitleLength>
+          <SelectColorDiv>
+            <SelectWhiteBtn
+              onClick={(e) => {
+                CategoryColorHandler(e);
+              }}
+            ></SelectWhiteBtn>
+            {tagColorList.map((val) => {
+              return (
+                <SelectBtn
+                  key={val.key}
+                  backgroundColor={val.value}
+                  value={val.value}
+                  onClick={(e) => {
+                    CategoryColorHandler(e);
+                  }}
+                ></SelectBtn>
+              );
+            })}
+          </SelectColorDiv>
+          <BtnContainer>
+            <DeleteModalBtn
+              onClick={() => {
+                deleteCategoryHandler(id);
+              }}
+            >
+              삭제하기
+            </DeleteModalBtn>
+            <UpdateModalBtn
+              disabled={!(isName && isColor)}
+              onClick={() => {
+                UpdateCategoryHandler();
+              }}
+            >
+              수정하기
+            </UpdateModalBtn>
+          </BtnContainer>
+        </Container>
       </Modal>
     </>
   );
 };
 
 export default CategoryUpdateModal;
-
+const Container = styled.div`
+  margin: 40px 30px;
+`;
 const SelectColorDiv = styled.div`
   width: 15rem;
   height: 10rem;
@@ -160,18 +165,23 @@ const CategoryInput = styled.input.attrs({ maxLength: 8 })`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 98%;
-  height: 5.4vh;
+  width: 232px;
+  height: 40px;
   border-radius: 10px;
-  border: 1px solid var(--color-gray);
+  border: 1px solid var(--color-defalut);
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
   font-size: 1rem;
+  font-weight: bold;
+  ::placeholder {
+    font-size: 16px;
+    color: var(--color-gray);
+  }
 `;
 
 const UpdateModalBtn = styled.button`
-  width: 47.4%;
-  height: 7vh;
-  font-size: 1rem;
+  width: 104px;
+  height: 48px;
+  font-size: 14px;
   font-weight: bold;
   border-radius: 8px;
   border: none;
@@ -184,9 +194,9 @@ const UpdateModalBtn = styled.button`
 `;
 
 const DeleteModalBtn = styled.button`
-  width: 47.4%;
-  height: 7vh;
-  font-size: 1rem;
+  width: 104px;
+  height: 48px;
+  font-size: 14px;
   font-weight: bold;
   border-radius: 8px;
   border: none;
@@ -197,7 +207,9 @@ const BtnContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 10%;
+  width: 224px;
+  height: 48px;
+  margin: 20px auto;
 `;
 
 const TitleLength = styled.span`
@@ -212,10 +224,10 @@ const CloseImg = styled(close)``;
 
 const CloseBtn = styled.button`
   position: absolute;
-  left: 18px;
+  right: 18px;
   top: 15px;
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   background-color: white;
   border: none;
 `;

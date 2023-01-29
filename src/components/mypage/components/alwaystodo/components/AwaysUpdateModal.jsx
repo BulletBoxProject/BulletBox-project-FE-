@@ -101,95 +101,104 @@ const AlwaysUpdateModal = ({ onClose, favoriteId, content, memo }) => {
   return (
     <>
       <Modal onClose={onClose}>
-        <TodoBodyDiv>
-          <TodoTitle>
-            <TodoBullet />
-            <AlwaysTodoInput
-              value={favoriteContent}
-              onChange={(e) => {
-                onChaneTodoHandler(e);
-              }}
-            ></AlwaysTodoInput>
-          </TodoTitle>
-          <TodoMemoDiv>
-            {favoriteMemosCopy.map((value, index) => (
-              <MemoContent key={index}>
-                <MemoBullet />
-                <AlwaysMemoInput
-                  type="text"
-                  placeholder={value.favoriteMemoContent}
-                  onChange={(e) => onChaneMemoHandler(e, index)}
-                ></AlwaysMemoInput>
-                <DeleteButton
-                  onClick={() => onDeleteHandler(value.favoriteMemoId)}
-                >
-                  <DeleteIcon />
-                </DeleteButton>
-              </MemoContent>
-            ))}
-            {newFavoriteMemos.map((value, index) => (
-              <MemoContent key={index}>
-                <MemoBullet />
-                <AlwaysMemoInput
-                  type="text"
-                  placeholder="메모를 작성해주세요"
-                  onChange={(e) => onChaneNewMemoHandler(e, index)}
-                ></AlwaysMemoInput>
-                <DeleteButton onClick={() => newDeleteHandler(value.id)}>
-                  <DeleteIcon />
-                </DeleteButton>
-              </MemoContent>
-            ))}
-          </TodoMemoDiv>
-          <IconDiv>
-            <AddButton onClick={onMemoAddHandler}>
-              <AddIcon />
-            </AddButton>
-          </IconDiv>
-          <CategoryBtnContainer>
-            {categoryList && categoryList.length === 0 ? (
-              <CategoryPtag>카테고리를 추가해보세요.</CategoryPtag>
-            ) : (
-              categoryList?.map((val) => {
-                return (
-                  <SelectBtn
-                    key={val.categoryId}
-                    backgroundColor={val.categoryColor}
-                    value={val.categoryName}
-                    onClick={() => {
-                      onCategoryHandler(val);
-                    }}
+        <Container>
+          <TodoBodyDiv>
+            <TodoTitle>
+              <TodoBullet />
+              <AlwaysTodoInput
+                value={favoriteContent}
+                onChange={(e) => {
+                  onChaneTodoHandler(e);
+                }}
+              ></AlwaysTodoInput>
+            </TodoTitle>
+            <TodoMemoDiv>
+              {favoriteMemosCopy.map((value, index) => (
+                <MemoContent key={index}>
+                  <MemoBullet />
+                  <AlwaysMemoInput
+                    type="text"
+                    placeholder={value.favoriteMemoContent}
+                    onChange={(e) => onChaneMemoHandler(e, index)}
+                  ></AlwaysMemoInput>
+                  <DeleteButton
+                    onClick={() => onDeleteHandler(value.favoriteMemoId)}
                   >
-                    {val.categoryName}
-                  </SelectBtn>
-                );
-              })
-            )}
-          </CategoryBtnContainer>
-        </TodoBodyDiv>
+                    <DeleteIcon />
+                  </DeleteButton>
+                </MemoContent>
+              ))}
+              {newFavoriteMemos.map((value, index) => (
+                <MemoContent key={index}>
+                  <MemoBullet />
+                  <AlwaysMemoInput
+                    type="text"
+                    placeholder="메모를 작성해주세요"
+                    onChange={(e) => onChaneNewMemoHandler(e, index)}
+                  ></AlwaysMemoInput>
+                  <DeleteButton onClick={() => newDeleteHandler(value.id)}>
+                    <DeleteIcon />
+                  </DeleteButton>
+                </MemoContent>
+              ))}
+            </TodoMemoDiv>
+            <IconDiv>
+              <AddButton onClick={onMemoAddHandler}>
+                <AddIcon />
+              </AddButton>
+            </IconDiv>
+            <CategoryBtnContainer>
+              {categoryList && categoryList.length === 0 ? (
+                <CategoryPtag>카테고리를 추가해보세요.</CategoryPtag>
+              ) : (
+                categoryList?.map((val) => {
+                  return (
+                    <SelectBtn
+                      key={val.categoryId}
+                      backgroundColor={val.categoryColor}
+                      value={val.categoryName}
+                      onClick={() => {
+                        onCategoryHandler(val);
+                      }}
+                    >
+                      {val.categoryName}
+                    </SelectBtn>
+                  );
+                })
+              )}
+            </CategoryBtnContainer>
+          </TodoBodyDiv>
 
-        <BtnContainer>
-          <AddModalBtn
-            onClick={() => {
-              onAddFavoriteHandler();
-            }}
-          >
-            추가
-          </AddModalBtn>
-          <AddModalBtn onClick={onClose}>취소</AddModalBtn>
-        </BtnContainer>
+          <BtnContainer>
+            <AddModalBtn
+              onClick={() => {
+                onAddFavoriteHandler();
+              }}
+            >
+              수정
+            </AddModalBtn>
+            <AddModalBtn onClick={onClose}>취소</AddModalBtn>
+          </BtnContainer>
+        </Container>
       </Modal>
     </>
   );
 };
 
 export default AlwaysUpdateModal;
-
-const TodoBodyDiv = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 25px;
+  margin-left: 22px;
   font-weight: bold;
-  height: 30vh;
+  width: 248px;
+  height: 321px;
+`;
+
+const TodoBodyDiv = styled.div`
+  width: 100%;
+  height: 247px;
   overflow: auto;
 `;
 
@@ -212,8 +221,8 @@ const MemoContent = styled.div`
 `;
 
 const AddModalBtn = styled.button`
-  width: 47.4%;
-  height: 7vh;
+  width: 104px;
+  height: 48px;
   font-size: 1rem;
   border-radius: 8px;
   border: none;
@@ -223,16 +232,17 @@ const AddModalBtn = styled.button`
 const BtnContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-top: 10%;
+  justify-content: space-around;
+  margin-top: 10px;
 `;
 
 const CategoryBtnContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
-  height: 15vh;
-  padding-top: 3%;
+  margin-left: 10px;
+  width: 100%;
 `;
 
 const SelectBtn = styled.button`
@@ -303,8 +313,8 @@ const AlwaysMemoInput = styled.input`
 
 const CategoryPtag = styled.span`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   width: 100%;
-  font-size: 16px;
+  font-size: 14px;
 `;

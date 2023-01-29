@@ -4,27 +4,29 @@ import { useDispatch } from "react-redux";
 
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
-import { ReactComponent as moreIcon } from "../../../../../img/myPage/more.svg";
-import { ReactComponent as editIcon } from "../../../../../img/myPage/edit.svg";
-import { ReactComponent as deleteIcon } from "../../../../../img/myPage/delete.svg";
-import { ReactComponent as memoBullet } from "../../../../../img/myPage/memo-5.svg";
-import { ReactComponent as todoBullet } from "../../../../../img/myPage/todo-1.svg";
+import { ReactComponent as moreIcon } from "../../../img/myPage/more.svg";
+import { ReactComponent as editIcon } from "../../../img/myPage/edit.svg";
+import { ReactComponent as deleteIcon } from "../../../img/myPage/delete.svg";
+import { ReactComponent as memoBullet } from "../../../img/myPage/memo-5.svg";
+import { ReactComponent as todoBullet } from "../../../img/myPage/todo-1.svg";
 
-import AlwaysUpdateModal from "./AwaysUpdateModal";
-import useOutSideClick from "../../../../../hooks/useOutSideClick";
-import { __deleteFavorite } from "../../../../../redux/modules/favoriteSlice";
+import useOutSideClick from "../../../hooks/useOutSideClick";
 
-const AlwaysTodo = ({
-  favoriteId,
-  backgroundColor,
-  content,
-  memo,
+const SearchTodo = ({
+  todoId,
+  todoDay,
+  todoMemos,
+  todoContent,
+  todoBullet,
+  time,
   categoryId,
+  categoryColor,
+  todoMonth,
+  todoYear,
 }) => {
   const [showSelectBox, setShowSelectBox] = useState(false);
   const [showTodoMemo, setShowTodoMemo] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [showUpdateMoal, setShowUpdateMoal] = useState(false);
 
   const dispatch = useDispatch();
   const selectRef = useRef(null);
@@ -44,27 +46,23 @@ const AlwaysTodo = ({
     setShowSelectBox(!showSelectBox);
     setShowDeleteModal(!showDeleteModal);
   };
-  const deleteButtonHandler = () => {
-    setShowDeleteModal(!showDeleteModal);
-    dispatch(__deleteFavorite(favoriteId));
-  };
+  //   const deleteButtonHandler = () => {
+  //     setShowDeleteModal(!showDeleteModal);
+  //     dispatch(__deleteFavorite(todoId));
+  //   };
   const cancelButtonHandler = () => {
     setShowDeleteModal(!showDeleteModal);
   };
 
-  const updateButtonHandler = () => {
-    setShowUpdateMoal(true);
-  };
-
   return (
     <>
-      <CardContainer backgroundColor={backgroundColor}>
+      <CardContainer backgroundColor={categoryColor}>
         <MainBulletTodo>
           <TodoBodyDiv>
             <span>
               <TodoBullet />
             </span>
-            <span>{content}</span>
+            <span>{todoContent}</span>
           </TodoBodyDiv>
           <TodoMoreViewDiv>
             <TodoMoreViewButton onClick={memoViewHandler}>
@@ -79,9 +77,9 @@ const AlwaysTodo = ({
             {showSelectBox ? (
               <SelectDiv>
                 <div
-                  onClick={() => {
-                    updateButtonHandler();
-                  }}
+                //   onClick={() => {
+                //     updateButtonHandler();
+                //   }}
                 >
                   수정하기 <EditIcon />
                 </div>
@@ -98,32 +96,17 @@ const AlwaysTodo = ({
         </MainBulletTodo>
         {showTodoMemo ? (
           <TodoMemoDiv>
-            {memo.map((value) => (
-              <MemoContent key={value.favoriteMemoId}>
+            {todoMemos.map((value) => (
+              <MemoContent key={value.todoMemoId}>
                 <span>
                   <MemoBullet />
                 </span>
-                <span key={value.favoriteMemoId}>
-                  {value.favoriteMemoContent}
-                </span>
+                <span key={value.todoMemoId}>{value.todoMemoContent}</span>
               </MemoContent>
             ))}
           </TodoMemoDiv>
         ) : null}
       </CardContainer>
-
-      {showUpdateMoal && (
-        <AlwaysUpdateModal
-          favoriteId={favoriteId}
-          categoryId={categoryId}
-          backgroundColor={backgroundColor}
-          content={content}
-          memo={memo}
-          onClose={() => {
-            setShowUpdateMoal(false);
-          }}
-        />
-      )}
 
       {showDeleteModal ? (
         <ModalContainer>
@@ -136,7 +119,7 @@ const AlwaysTodo = ({
             </DeleteMsg>
             <SelectLine></SelectLine>
             <ModalButtonGroup>
-              <DeleteButton onClick={deleteButtonHandler}>삭제</DeleteButton>
+              {/* <DeleteButton onClick={deleteButtonHandler}>삭제</DeleteButton> */}
               <CancelButton onClick={cancelButtonHandler}>취소</CancelButton>
             </ModalButtonGroup>
           </ModalContent>
@@ -146,7 +129,7 @@ const AlwaysTodo = ({
   );
 };
 
-export default AlwaysTodo;
+export default SearchTodo;
 
 const CardContainer = styled.div`
   display: flex;
@@ -154,7 +137,8 @@ const CardContainer = styled.div`
   margin-left: 2%;
   width: 94%;
   border: none;
-  background-color: ${({ backgroundColor }) => backgroundColor || "white"};
+  background-color: ${({ backgroundColor }) =>
+    backgroundColor || `var(--color-default)`};
   box-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.3);
   padding: 12px;
   border-radius: 8px;

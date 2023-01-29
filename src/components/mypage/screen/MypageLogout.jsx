@@ -23,6 +23,7 @@ const MypageLogout = () => {
       <LogoutBtn onClick={onClickButton}>
         <LogoutImg />
       </LogoutBtn>
+      로그아웃
       {isOpen && (
         <ConfirmModal
           open={isOpen}
@@ -44,15 +45,15 @@ const LogoutBtnContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  margin-left: 33%;
+  flex-direction: column;
+  margin-left: 80px;
+  color: var(--color-main);
+  font-weight: bold;
 `;
 
 const LogoutBtn = styled.button`
   background-color: white;
   border: none;
-  :focus {
-    outline: none;
-  }
 `;
 
 const LogoutImg = styled(Logout)`

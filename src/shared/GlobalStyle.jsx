@@ -9,6 +9,7 @@ const GlobalStyle = createGlobalStyle`
   --color-dark-gray: #3E3E3E;
   --color-light-gray: #D9D9D9;
   --color-default: #F6F6F6;
+  --color-c1-gray: #C1C1C1
 }
 @import url('https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&display=swap');
 @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
@@ -16,20 +17,28 @@ const GlobalStyle = createGlobalStyle`
   font-family: 'HeirofLightBold';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/HeirofLightBold.woff') format('woff');
 }
+@font-face { font-family: 'NanumGothic';
+src: url('/fonts/NanumGothic.eot');
+src: url('/fonts/NanumGothic.eot') format('embedded-opentype'),
+url('/fonts/NanumGothic.woff') format('woff');}
 
 *{
-  font-family: 'NanumSquare', serif;
+  font-family: 'NanumSquare';
 }
 
 body, div, button{
   box-sizing: border-box;
   font-size: 10px;
   margin: 0, auto;
-
 }
 
 input {
   text-indent: 1em
+  
+}
+
+input:focus{
+  outline: none;
 }
 
 button {
@@ -42,7 +51,16 @@ a{
   color: inherit;
   cursor: pointer;
 }
-
+&::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.4);
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+  }
 
 `;
 

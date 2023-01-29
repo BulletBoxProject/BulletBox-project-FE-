@@ -1,13 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import SignUpInput from "../components/SignUpInput";
-import { ReactComponent as Logo } from "../../../img/logo/logo-graphic.svg";
+import { ReactComponent as Logo } from "../../../img/login/logo-graphic.svg";
 
 const SignUpContainer = () => {
   return (
     <ContainerBox>
-      <BulletLogo />
-      <BulletBold>Bullet Box</BulletBold>
+      <TopContainer>
+        <BulletLogo />
+        <BulletBold>Bullet Box</BulletBold>
+      </TopContainer>
+
       <SignUpInput />
     </ContainerBox>
   );
@@ -17,25 +20,34 @@ export default SignUpContainer;
 const ContainerBox = styled.div`
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   flex-direction: column;
-  height: 100vh;
-  background-color: var(--color-main);
+  width: 294px;
+  height: 525px;
+  margin-bottom: 60px;
+`;
+
+const TopContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  width: 72px;
+  height: 68.85px;
 `;
 
 const BulletLogo = styled(Logo)`
-  margin-top: 20%;
-  width: 4rem;
-  height: 3rem;
-  fill: white;
+  width: 39.27px;
+  height: 44.4px;
+  fill: var(--color-main);
 `;
 
 const BulletBold = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
-  font-size: 20px;
+  color: var(--color-main);
+  font-size: 14px;
   font-family: "HeirofLightBold";
-  margin-top: 1vh;
-  margin-bottom: 3vh;
+  margin-top: 5px;
 `;

@@ -16,7 +16,10 @@ const Mypage = () => {
         <MypageInfoButton showInfo={showInfo} setShowInfo={setShowInfo} />
         <MypageInfoScreen showInfo={showInfo} />
       </MypageInfoBox>
-      {showInfo === 1 ? <CategoryAddBtn /> : <AlwaysAddBtn />}
+      <AddBtnContainer>
+        {" "}
+        {showInfo === 1 ? <CategoryAddBtn /> : <AlwaysAddBtn />}
+      </AddBtnContainer>
     </>
   );
 };
@@ -24,5 +27,13 @@ const Mypage = () => {
 export default Mypage;
 
 const MypageInfoBox = styled.div`
-  margin-top: 5%;
+  margin-top: 10px;
+`;
+
+const AddBtnContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 16px;
 `;
