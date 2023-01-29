@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { HiSearch } from "react-icons/hi";
-import { __getSearch } from "../../../redux/modules/searchSlice";
 import SearchTodo from "../components/SearchTodo";
+import { __getSearch } from "../../../redux/modules/searchSlice";
+
 import { ReactComponent as cancle } from "../../../img/search/close.svg";
-import { useEffect } from "react";
+import { HiSearch } from "react-icons/hi";
+import { AiFillCaretDown } from "react-icons/ai";
 
 const SearchContainer = () => {
   const [keyword, setKeyword] = useState("");
   const [keywordResult, setKeywordResult] = useState("");
   const [searchCount, setSearchCount] = useState(0);
+  const [reverseDate, setReverseDate] = useState(false);
   const [iskeywordResult, setIsKeywordResult] = useState(false);
 
   const searchList = useSelector((state) => state?.search?.search?.searches);
@@ -25,6 +27,10 @@ const SearchContainer = () => {
     }
     setKeywordResult(keyword);
     setIsKeywordResult(true);
+  };
+
+  const reverseHandler = () => {
+    setReverseDate(!reverseDate);
   };
 
   useEffect(() => {
@@ -63,30 +69,30 @@ const SearchContainer = () => {
           <SearchResult>
             `{keywordResult}` 검색결과 총 {searchCount}건
           </SearchResult>
-          <div>최신순</div>
+          <div>
+            <DateReverseBtn
+              onClick={() => {
+                reverseHandler();
+              }}
+            >
+              {reverseDate === false ? "최신순" : "오래된순"}
+              <DownImg />
+            </DateReverseBtn>
+          </div>
         </SearchMiddleDiv>
       ) : null}
 
-      <SearchList>
-        {searchList &&
-          searchList?.map((value) => {
-            return (
-              <SearchTodo
-                key={value.todoId}
-                todoId={value.todoId}
-                todoDay={value.todoDay}
-                todoMemos={value.todoMemos}
-                todoContent={value.todoContent}
-                todoBullet={value.todoBullet}
-                time={value.time}
-                categoryId={value.categoryId}
-                categoryColor={value.categoryColor}
-                todoMonth={value.todoMonth}
-                todoYear={value.todoYear}
-              />
-            );
-          })}
-      </SearchList>
+      {iskeywordResult === true ? (
+        <SearchList>
+          {searchList && reverseDate === false
+            ? searchList?.map((value) => {
+                return <SearchTodo key={value.todoId} search={value} />;
+              })
+            : [...searchList].reverse().map((value) => {
+                return <SearchTodo key={value.todoId} search={value} />;
+              })}
+        </SearchList>
+      ) : null}
     </>
   );
 };
@@ -135,9 +141,9 @@ const CancleImg = styled(cancle)`
 const CancleBtn = styled.button`
   background-color: var(--color-default);
   border: 1px;
-  :focus {
+  /* :focus {
     outline: none;
-  }
+  } */
 `;
 
 const SearchMiddleDiv = styled.div`
@@ -152,6 +158,20 @@ const SearchMiddleDiv = styled.div`
 `;
 const SearchResult = styled.div`
   color: var(--color-main);
+`;
+
+const DateReverseBtn = styled.button`
+  border: none;
+  background-color: transparent;
+  font-weight: bold;
+  :focus {
+    outline: none;
+  }
+`;
+
+const DownImg = styled(AiFillCaretDown)`
+  width: 6px;
+  height: 6px;
 `;
 
 const SearchList = styled.div`

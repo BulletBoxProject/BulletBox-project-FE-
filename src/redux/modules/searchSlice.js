@@ -25,7 +25,9 @@ export const __getSearch = createAsyncThunk(
 const searchSlice = createSlice({
   name: "search",
   initialState,
-  reducers: {},
+  reducers: {
+    reset: () => initialState,
+  },
   extraReducers: (builder) => {
     builder.addCase(__getSearch.fulfilled, (state, action) => {
       console.log(action.payload);
