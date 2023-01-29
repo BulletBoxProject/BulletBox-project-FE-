@@ -1,18 +1,21 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import header from "../modules/headerSlice";
-import bullet_main from "../modules/bulletTodoSlice";
+import dailyTodo from "../modules/dailysSlice";
 import category from "../modules/categorySlice";
 import favorite from "../modules/favoriteSlice";
 import search from "../modules/searchSlice";
+import mainTodo from "../modules/mainSlice";
+
 
 const store = configureStore({
   reducer: {
     header,
-    bullet_main,
+    dailyTodo,
     category,
     favorite,
     search,
+    mainTodo,
   },
 });
 

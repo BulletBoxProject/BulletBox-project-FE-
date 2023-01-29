@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-
-import { baseURLApiV1 } from "../../../core/api";
-
-import NavigationMenu from "../../../layout/footer/components/NavigationMenu";
+import { useDispatch, useSelector } from "react-redux";
+import { __getDailyTodo } from "../../../redux/modules/dailysSlice";
 
 import SelectCategory from "../../common/SelectCategory";
 import BulletTodoCard from "../components/BulletTodoCard";
+import CategorySelector from "../components/CategorySelector";
+import AllTodoShow from "../components/AllTodoShow";
+import SelectCategoryTodoShow from "../components/SelectCategoryTodoShow";
 
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
@@ -16,37 +17,31 @@ import { ReactComponent as oftenTodo } from "../../../img/dailyLog/often.svg";
 import { ReactComponent as newTodo } from "../../../img/dailyLog/new.svg";
 
 const DailyLogContainer = () => {
+  const dispatch = useDispatch();
   const [showSelectBox, setShowSelectBox] = useState(false);
   const [dailyLogs, setDailyLogs] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  console.log(dailyLogs);
+  const [isSelectedCategory, isSetSelectedCategory] = useState(false);
+  const [selectedCategoryId, setSlectedCategoryId] = useState("");
+
   const navigate = useNavigate();
   const day = ["일", "월", "화", "수", "목", "금", "토"];
   const today = `${String(new Date().getFullYear()).substr(2, 2)}/${
     new Date().getMonth() + 1
   }/${new Date().getDate()}(${day[new Date().getDay()]})`;
   const showAddTodoSelect = () => {
-    console.log("clicked");
     setShowSelectBox(!showSelectBox);
   };
-  const loadDailyLog = async () => {
-    try {
-      const data = await baseURLApiV1.get("/dailys");
-      if (data.data.httpStatusCode === 200) {
-        return setDailyLogs(data.data.data.daily);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const state = useSelector((state) => state);
+  console.log("전역 상태값", state);
+  const todoList = useSelector((state) => state?.dailyTodo?.dailyTodo?.daily);
+  const categoryList = useSelector(
+    (state) => state?.dailyTodo?.dailyTodo?.categories
+  );
   useEffect(() => {
-    loadDailyLog();
-    setIsLoading(!isLoading);
-  }, []);
+    dispatch(__getDailyTodo());
+  }, [dispatch]);
 
-  if (isLoading) {
-    <h1>Loading..</h1>;
-  }
+  let num = 0;
   return (
     <Container>
       <DateAndSelectDiv>
@@ -57,15 +52,28 @@ const DailyLogContainer = () => {
             <IoIosArrowDown />
           </SelectDateButton>
         </DateButtonDiv>
-        <SelectDiv>
-          <SelectCategory style={{ padding: "10px" }} />
-        </SelectDiv>
+        <CategorySelector
+          categoryList={categoryList}
+          isSetSelectedCategory={isSetSelectedCategory}
+          setSlectedCategoryId={setSlectedCategoryId}
+        />
       </DateAndSelectDiv>
       <TodoBulletDiv>
-        {dailyLogs.length === 0 ? (
+        {todoList && todoList?.length === 0 ? (
           <NoneTodo>할일을 추가해주세요.</NoneTodo>
+        ) : isSelectedCategory ? (
+          <SelectCategoryTodoShow
+            todoList={todoList}
+            dailyLogs={dailyLogs}
+            setDailyLogs={setDailyLogs}
+            selectedCategoryId={selectedCategoryId}
+          />
         ) : (
-          <BulletTodoCard dailyLogs={dailyLogs} setDailyLogs={setDailyLogs} />
+          <AllTodoShow
+            todoList={todoList}
+            dailyLogs={dailyLogs}
+            setDailyLogs={setDailyLogs}
+          />
         )}
 
         <AddTodoDiv>
@@ -104,11 +112,7 @@ const DateAndSelectDiv = styled.div`
   align-items: center;
   padding: 10px 0;
 `;
-const SelectDiv = styled.div`
-  display: flex;
-  justify-self: flex-end;
-  padding: 5px 0;
-`;
+
 const DateButtonDiv = styled.div`
   display: flex;
   align-items: center;
@@ -148,18 +152,16 @@ const NoneTodo = styled.div`
   color: var(--color-gray);
 `;
 const AddTodoDiv = styled.div`
-  position: absolute;
-  top: 84.5vh;
-  left: 84vw;
+  /* position: absolute; */
 `;
 const AddTodoButton = styled.button`
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 0;
   background-color: white;
   border-radius: 50%;
+  margin: 0 auto;
 `;
 const AddTodoIcon = styled(BsFillPlusCircleFill)`
   fill: var(--color-main);
@@ -170,13 +172,10 @@ const AddSelectDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  /* width: 40vw;
-  height: 10vh; */
+  width: 42%;
   gap: 3px;
   padding: 5px 14px;
-  position: absolute;
-  top: -12.5vh;
-  left: -28vw;
+  margin-top: -40px;
   border-radius: 4px;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
   background-color: var(--color-default);

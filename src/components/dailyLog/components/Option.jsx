@@ -1,33 +1,26 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { __deleteDailyTodo } from "../../../redux/modules/dailysSlice";
 
 import { ReactComponent as editIcon } from "../../../img/dailyLog/edit.svg";
 import { ReactComponent as deleteIcon } from "../../../img/dailyLog/delete.svg";
-import { ReactComponent as moreIcon } from "../../../img/dailyLog/more.svg";
-import { baseURLApiV1 } from "../../../core/api";
 
-const Option = ({ todoId, dailyLogs, setDailyLogs }) => {
-  console.log(todoId);
-  const deleteTodo = async (id) => {
-    try {
-      const data = await baseURLApiV1.delete(`/dailys/todo/${id}`);
-      if (data.data.httpStatusCode === 200) {
-        return console.log(data.data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+const Option = ({ todoId, setShowSelectBox, dailyLogs, setDailyLogs }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const selectDeleteHandler = (e) => {
     const id = Number(e.target.value);
-    deleteTodo(id);
-    setDailyLogs(dailyLogs.filter((dailyLog) => dailyLog.todoId !== id));
+    dispatch(__deleteDailyTodo(id));
+    setShowSelectBox(false);
   };
 
   return (
     <div>
       <SelectDiv>
-        <Button id={todoId} onClick={() => alert("수정하기페이지 이동")}>
+        <Button id={todoId} onClick={() => navigate(`/dailys/edit/${todoId}`)}>
           수정하기 <EditIcon />
         </Button>
         <SelectLine></SelectLine>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 
 import { IoIosArrowDown } from "react-icons/io";
@@ -10,13 +10,20 @@ import { ReactComponent as memoBullet } from "../../../img/bullet/memo-5.svg";
 
 import BulletSwitchList from "./BulletSwitchList";
 import Option from "./Option";
+import useOutSideClick from "../../../hooks/useOutSideClick";
 
-const BulletTodoCard = ({ dailyLogs, setDailyLogs }) => {
-  console.log("데일리로그 할일", dailyLogs);
+const BulletTodoCard = ({ dailyLog, dailyLogs, setDailyLogs }) => {
   const [showTodoMemo, setShowTodoMemo] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [showOption, setShowOption] = useState(0);
   const [showSelectBox, setShowSelectBox] = useState(false);
+  const [showMemoBox, setShowMemoBox] = useState(false);
+  const selectOptionRef = useRef(null);
+
+  const selectOptionClose = () => {
+    setShowSelectBox(false);
+  };
+
+  useOutSideClick(selectOptionRef, selectOptionClose);
 
   const memoViewHandler = (e) => {
     if (showTodoMemo.find((id) => id === Number(e.target.id)) === undefined) {
@@ -24,6 +31,7 @@ const BulletTodoCard = ({ dailyLogs, setDailyLogs }) => {
     } else {
       setShowTodoMemo(showTodoMemo.filter((id) => id !== Number(e.target.id)));
     }
+    // setShowMemoBox(!showMemoBox);
   };
 
   const deleteButtonHandler = () => {
@@ -32,48 +40,47 @@ const BulletTodoCard = ({ dailyLogs, setDailyLogs }) => {
   const cancelButtonHandler = () => {
     setShowDeleteModal(!showDeleteModal);
   };
-  const SelectOptionHandler = (e) => {
-    setShowOption(Number(e.target.id));
+  const selectOptionHandler = () => {
     setShowSelectBox(!showSelectBox);
   };
   let num = 0;
   return (
     <Container>
-      {dailyLogs.map((dailyLog) => (
-        <CardContainer key={num++}>
-          <MainBulletTodo>
-            <TodoBodyDiv>
-              <span>
-                <BulletSwitchList bulletName={dailyLog.todoBulletName} />
-              </span>
-              <span>{dailyLog.todoContent}</span>
-            </TodoBodyDiv>
-            <TodoMoreViewDiv>
-              <TodoMoreViewButton
-                id={dailyLog.todoId}
-                onClick={memoViewHandler}
-              >
-                {showTodoMemo.find((id) => id === dailyLog.todoId) !==
-                undefined ? (
-                  <OnlyTitleIcon />
-                ) : (
-                  <MoreIcon />
-                )}
-              </TodoMoreViewButton>
-            </TodoMoreViewDiv>
-            <OptionSelectDiv>
-              <OptionButton id={dailyLog.todoId} onClick={SelectOptionHandler}>
-                <OptionIcon />
-              </OptionButton>
-              {showOption === dailyLog.todoId && showSelectBox ? (
-                <Option
-                  todoId={dailyLog.todoId}
-                  dailyLogs={dailyLogs}
-                  setDailyLogs={setDailyLogs}
-                />
-              ) : null}
-            </OptionSelectDiv>
-          </MainBulletTodo>
+      <CardContainer key={num++}>
+        <MainBulletTodo>
+          <CategoryColorDiv categoryColor={dailyLog.categoryColor} />
+          <TodoBodyDiv>
+            <span>
+              <BulletSwitchList bulletName={dailyLog.todoBulletName} />
+            </span>
+            <span>{dailyLog.todoContent}</span>
+          </TodoBodyDiv>
+          <TodoMoreViewDiv>
+            <TodoMoreViewButton id={dailyLog.todoId} onClick={memoViewHandler}>
+              {showTodoMemo.find((id) => id === dailyLog.todoId) !==
+              undefined ? (
+                <OnlyTitleIcon />
+              ) : (
+                <MoreIcon />
+              )}
+            </TodoMoreViewButton>
+          </TodoMoreViewDiv>
+          <OptionSelectDiv ref={selectOptionRef}>
+            <OptionButton id={dailyLog.todoId} onClick={selectOptionHandler}>
+              <OptionIcon />
+            </OptionButton>
+            {showSelectBox ? (
+              <Option
+                todoId={dailyLog.todoId}
+                dailyLogs={dailyLogs}
+                setDailyLogs={setDailyLogs}
+                setShowSelectBox={setShowSelectBox}
+              />
+            ) : null}
+          </OptionSelectDiv>
+        </MainBulletTodo>
+        <MemoDiv>
+          <CategoryColorDiv categoryColor={dailyLog.categoryColor} />
           {showTodoMemo.find((id) => id === dailyLog.todoId) !== undefined
             ? dailyLog.todoMemos.map((memo) => (
                 <TodoMemoDiv key={num++} id={memo.todoMemoId}>
@@ -86,9 +93,8 @@ const BulletTodoCard = ({ dailyLogs, setDailyLogs }) => {
                 </TodoMemoDiv>
               ))
             : null}
-        </CardContainer>
-      ))}
-
+        </MemoDiv>
+      </CardContainer>
       {showDeleteModal ? (
         <ModalContainer>
           <ModalContent>
@@ -126,7 +132,6 @@ const CardContainer = styled.div`
   background-color: var(--color-default);
   /* border: 1px solid rgba(240, 161, 59, 0.2); */
   /* box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.1); */
-  padding: 12px;
   border-radius: 8px;
 `;
 const ModalContainer = styled.div`
@@ -180,11 +185,19 @@ const MainBulletTodo = styled.div`
   align-items: center;
   gap: 10px;
   width: 100%;
+  height: 42px;
+  padding: 0 13px 0 0;
   & > input {
     width: 90%;
     padding: 0;
     margin: 0;
   }
+`;
+const CategoryColorDiv = styled.div`
+  width: 2.5%;
+  height: 100%;
+  background-color: ${(props) => props.categoryColor};
+  border-radius: 8px 0 0 8px;
 `;
 const TodoBodyDiv = styled.div`
   display: flex;
@@ -194,9 +207,11 @@ const TodoBodyDiv = styled.div`
   font-weight: 600;
   gap: 10px;
 `;
+const MemoDiv = styled.div``;
 const TodoMemoDiv = styled.div`
   display: flex;
   flex-direction: column;
+  width: 90%;
   margin-left: 5vw;
   background-color: inherit;
   padding: 8px 0;

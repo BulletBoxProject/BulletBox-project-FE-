@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
-import uuid from "react-uuid";
+import { useDispatch, useSelector } from "react-redux";
+import { __getMainTodo } from "../../../redux/modules/mainSlice";
 
 import { baseURLApiV1 } from "../../../core/api";
 
@@ -14,24 +14,14 @@ import BulletSwitchList from "../../dailyLog/components/BulletSwitchList";
 import BulletCalendar from "../../common/calendar/Calendar";
 
 const MainContainer = () => {
+  const dispatch = useDispatch();
   const [date, setDate] = useState(new Date());
   const [todoList, setTodoList] = useState([]);
   const [selectDate, setSelectDate] = useState("");
   console.log(selectDate);
-  console.log(todoList);
-  const bulletList = useSelector((state) => state.bullet_main.bulletList);
-  console.log("리듀서 상태 저장 값", bulletList);
 
-  const loadMainPage = async () => {
-    try {
-      const data = await baseURLApiV1.get("/main");
-      if (data.data.httpStatusCode === 200) {
-        return setTodoList(data.data.data.daily);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const mainTodoList = useSelector((state) => state?.mainTodo?.mainTodo?.daily);
+  console.log("셀럭터 값", mainTodoList);
 
   const getToday = () => {
     const day = ["일", "월", "화", "수", "목", "금", "토"];
@@ -41,7 +31,7 @@ const MainContainer = () => {
     setSelectDate(today);
   };
   useEffect(() => {
-    loadMainPage();
+    dispatch(__getMainTodo());
     getToday();
   }, []);
 
@@ -58,20 +48,22 @@ const MainContainer = () => {
       </CalendarDiv>
       <TodoDiv>
         <DateTitle>{selectDate}</DateTitle>
-        <DailyTodoDiv>
-          {todoList.length === 0 ? (
-            <DailyTodoList>
-              <TodoTitle>할일을 추가해주세요.</TodoTitle>
-            </DailyTodoList>
-          ) : (
-            todoList.map((todo) => (
-              <DailyTodoList key={num++}>
-                <BulletSwitchList bulletName={todo.todoBulletName} />
-                <TodoTitle>{todo.todoContent}</TodoTitle>
+        {mainTodoList && (
+          <DailyTodoDiv>
+            {mainTodoList.length === 0 ? (
+              <DailyTodoList>
+                <TodoTitle>할일을 추가해주세요.</TodoTitle>
               </DailyTodoList>
-            ))
-          )}
-        </DailyTodoDiv>
+            ) : (
+              mainTodoList.map((todo) => (
+                <DailyTodoList key={num++}>
+                  <BulletSwitchList bulletName={todo.todoBulletName} />
+                  <TodoTitle>{todo.todoContent}</TodoTitle>
+                </DailyTodoList>
+              ))
+            )}
+          </DailyTodoDiv>
+        )}
       </TodoDiv>
     </Container>
   );
