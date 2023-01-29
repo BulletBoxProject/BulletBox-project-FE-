@@ -14,6 +14,7 @@ const SearchContainer = () => {
   const [searchCount, setSearchCount] = useState(0);
   const [reverseDate, setReverseDate] = useState(false);
   const [iskeywordResult, setIsKeywordResult] = useState(false);
+  const [timer, setTimer] = useState(0);
 
   const searchList = useSelector((state) => state?.search?.search?.searches);
   console.log(searchList);
@@ -21,11 +22,16 @@ const SearchContainer = () => {
   const dispatch = useDispatch();
 
   const searchHandler = (e) => {
-    e.preventDefault();
-    if (keyword.length !== 0) {
-      dispatch(__getSearch(keyword));
+    const value = e.target.value;
+    setKeyword(value);
+    if (timer) {
+      clearTimeout(timer);
     }
-    setKeywordResult(keyword);
+    const newTimer = setTimeout(() => {
+      dispatch(__getSearch(value));
+    }, 300);
+    setTimer(newTimer);
+    setKeywordResult(value);
     setIsKeywordResult(true);
   };
 
@@ -39,17 +45,13 @@ const SearchContainer = () => {
 
   return (
     <>
-      <SearchBox
-        onSubmit={(e) => {
-          searchHandler(e);
-        }}
-      >
+      <SearchBox>
         <InputSearch
           type="text"
           value={keyword}
           placeholder="검색어를 입력하세요"
           onChange={(e) => {
-            setKeyword(e.target.value);
+            searchHandler(e);
           }}
         ></InputSearch>
         <CancleBtn
@@ -141,9 +143,6 @@ const CancleImg = styled(cancle)`
 const CancleBtn = styled.button`
   background-color: var(--color-default);
   border: 1px;
-  /* :focus {
-    outline: none;
-  } */
 `;
 
 const SearchMiddleDiv = styled.div`

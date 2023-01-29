@@ -34,7 +34,6 @@ body, div, button{
 
 input {
   text-indent: 1em
-  
 }
 
 input:focus{

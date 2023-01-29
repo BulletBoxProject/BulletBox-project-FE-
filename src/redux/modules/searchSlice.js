@@ -2,9 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { baseURLApiV1 } from "../../core/api";
 
 // 초기값 설정
-const initialState = {
-  isLoading: false,
-};
+const initialState = {};
 
 // thunk
 export const __getSearch = createAsyncThunk(
@@ -38,14 +36,9 @@ export const __deleteSearch = createAsyncThunk(
 const searchSlice = createSlice({
   name: "search",
   initialState,
-  reducers: {
-    reset: () => initialState,
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(__getSearch.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(__getSearch.fulfilled, (state, action) => {
         console.log(action.payload);
         state.isLoading = false;
