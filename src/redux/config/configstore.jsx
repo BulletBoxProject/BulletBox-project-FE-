@@ -4,6 +4,7 @@ import header from "../modules/headerSlice";
 import bullet_main from "../modules/bulletTodoSlice";
 import category from "../modules/categorySlice";
 import favorite from "../modules/favoriteSlice";
+import search from "../modules/searchSlice";
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
     bullet_main,
     category,
     favorite,
+    search,
   },
 });
 

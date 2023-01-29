@@ -1,20 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { HiSearch } from "react-icons/hi";
+import { __getSearch } from "../../../redux/modules/searchSlice";
+import SearchTodo from "../components/SearchTodo";
 
 const SearchContainer = () => {
+  const [keyword, setKeyword] = useState("");
+  const searchList = useSelector((state) => state?.search?.search?.searches);
+  console.log(searchList);
+
+  const dispatch = useDispatch();
+
+  const searchHandler = (e) => {
+    e.preventDefault();
+    dispatch(__getSearch(keyword));
+  };
+
   return (
-    <SearchBox>
-      <InputSearch type="text" placeholder="검색어를 입력하세요"></InputSearch>
-      <SearchBtn>
-        <SearchImg />
-      </SearchBtn>
-    </SearchBox>
+    <>
+      <SearchBox
+        onSubmit={(e) => {
+          searchHandler(e);
+        }}
+      >
+        <InputSearch
+          type="text"
+          value={keyword}
+          placeholder="검색어를 입력하세요"
+          onChange={(e) => {
+            setKeyword(e.target.value);
+          }}
+        ></InputSearch>
+        <SearchBtn>
+          <SearchImg />
+        </SearchBtn>
+      </SearchBox>
+      <SearchList>
+        {searchList &&
+          searchList?.map((value) => {
+            return (
+              <SearchTodo
+                key={value.todoId}
+                todoId={value.todoId}
+                todoDay={value.todoDay}
+                todoMemos={value.todoMemos}
+                todoContent={value.todoContent}
+                todoBullet={value.todoBullet}
+                time={value.time}
+                categoryId={value.categoryId}
+                categoryColor={value.categoryColor}
+                todoMonth={value.todoMonth}
+                todoYear={value.todoYear}
+              />
+            );
+          })}
+      </SearchList>
+    </>
   );
 };
 
 export default SearchContainer;
-const SearchBox = styled.div`
+const SearchBox = styled.form`
   margin: 5% auto 0;
   display: flex;
   align-items: center;
@@ -42,4 +89,10 @@ const SearchBtn = styled.button`
   :focus {
     outline: none;
   }
+`;
+
+const SearchList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `;
