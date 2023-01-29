@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { HiSearch } from "react-icons/hi";
 import { __getSearch } from "../../../redux/modules/searchSlice";
 import SearchTodo from "../components/SearchTodo";
+import { ReactComponent as cancle } from "../../../img/search/close.svg";
 
 const SearchContainer = () => {
   const [keyword, setKeyword] = useState("");
@@ -14,7 +15,9 @@ const SearchContainer = () => {
 
   const searchHandler = (e) => {
     e.preventDefault();
-    dispatch(__getSearch(keyword));
+    if (keyword.length !== 0) {
+      dispatch(__getSearch(keyword));
+    }
   };
 
   return (
@@ -32,6 +35,15 @@ const SearchContainer = () => {
             setKeyword(e.target.value);
           }}
         ></InputSearch>
+        <CancleBtn
+          type="button"
+          onClick={() => {
+            setKeyword("");
+          }}
+        >
+          <CancleImg />
+        </CancleBtn>
+
         <SearchBtn>
           <SearchImg />
         </SearchBtn>
@@ -62,29 +74,47 @@ const SearchContainer = () => {
 
 export default SearchContainer;
 const SearchBox = styled.form`
-  margin: 5% auto 0;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-light-gray);
+  background-color: var(--color-default);
+  border: 2px solid var(--color-light-gray);
   border-radius: 30px;
-  width: 90%;
+  width: 324px;
+  height: 40px;
+  margin-top: 5px;
 `;
 const InputSearch = styled.input`
-  background-color: var(--color-light-gray);
+  background-color: var(--color-default);
   border: transparent;
+  border-radius: 30px;
   padding: 10px;
-  width: 70%;
+  width: 68%;
+  font-size: 12px;
+  font-weight: bold;
 `;
 
 const SearchImg = styled(HiSearch)`
-  width: 95%;
-  height: 2vh;
-  background-color: var(--color-light-gray);
+  width: 22px;
+  height: 22px;
+  background-color: var(--color-default);
+  fill: var(--color-gray);
 `;
 
 const SearchBtn = styled.button`
-  background-color: var(--color-light-gray);
+  background-color: var(--color-default);
+  border: 1px;
+  :focus {
+    outline: none;
+  }
+`;
+const CancleImg = styled(cancle)`
+  width: 20px;
+  height: 20px;
+`;
+const CancleBtn = styled.button`
+  background-color: var(--color-default);
   border: 1px;
   :focus {
     outline: none;
