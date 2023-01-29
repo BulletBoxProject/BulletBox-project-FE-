@@ -37,35 +37,41 @@ const DiaryContainer = () => {
       <TodoDiv>
         <DateTitle>{today}</DateTitle>
         <EmotionDiv>
-          <EmotionBtn>
-            <ExcitedEmotion />
-          </EmotionBtn>
-          <EmotionBtn>
-            <HappyEmotion />
-          </EmotionBtn>
-          <EmotionBtn>
-            <SosoEmotion />
-          </EmotionBtn>
-          <EmotionBtn>
-            <SadEmotion />
-          </EmotionBtn>
-          <EmotionBtn>
-            <AngryEmotion />
-          </EmotionBtn>
+          <EmotionBox>
+            <EmotionBtn>
+              <ExcitedEmotion />
+            </EmotionBtn>
+            <EmotionBtn>
+              <HappyEmotion />
+            </EmotionBtn>
+            <EmotionBtn>
+              <SosoEmotion />
+            </EmotionBtn>
+            <EmotionBtn>
+              <SadEmotion />
+            </EmotionBtn>
+            <EmotionBtn>
+              <AngryEmotion />
+            </EmotionBtn>
+          </EmotionBox>
           {isEdit ? (
-            <EditCheckBox>
-              <EditBtn onClick={onEditHandler}>
-                <EditImg />
-              </EditBtn>
-              수정
-            </EditCheckBox>
+            <EditCheckDiv>
+              <EditCheckBox>
+                <EditBtn onClick={onEditHandler}>
+                  <EditImg />
+                </EditBtn>
+                수정
+              </EditCheckBox>
+            </EditCheckDiv>
           ) : (
-            <EditCheckBox>
-              <EditBtn onClick={onEditHandler}>
-                <CheckImg />
-              </EditBtn>
-              저장
-            </EditCheckBox>
+            <EditCheckDiv>
+              <EditCheckBox>
+                <EditBtn onClick={onEditHandler}>
+                  <CheckImg />
+                </EditBtn>
+                저장
+              </EditCheckBox>
+            </EditCheckDiv>
           )}
         </EmotionDiv>
         <DiaryText
@@ -88,16 +94,16 @@ const Container = styled.div`
 `;
 const CalendarDiv = styled.div`
   position: relative;
-  height: 320px;
+  height: 310px;
   justify-content: center;
   align-items: center;
 `;
 const SelectDiv = styled.div`
   position: absolute;
-  top: 3%;
+  top: 5%;
   left: 88%;
   align-items: center;
-  padding: 5px 0;
+  padding-top: 5px;
   font-weight: bold;
 `;
 const TodoDiv = styled.div`
@@ -105,7 +111,8 @@ const TodoDiv = styled.div`
   flex-direction: column;
   width: 344px;
   height: 232px;
-  margin-top: 70px;
+  margin-top: 50px;
+  margin-left: 1px;
   padding: 15px;
   border-radius: 16px;
   background-color: var(--color-default);
@@ -125,6 +132,14 @@ const EmotionDiv = styled.div`
   height: 28px;
   margin-top: 5px;
 `;
+const EmotionBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  margin-left: 15px;
+`;
+
 const EmotionBtn = styled.button`
   width: 28px;
   height: 28px;
@@ -153,16 +168,16 @@ const AngryEmotion = styled(angry)`
   height: 28px;
 `;
 
-const EditCheckBox = styled.div`
-  position: absolute;
+const EditCheckDiv = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 10%;
+`;
+const EditCheckBox = styled.div`
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
   flex-direction: column;
-  top: 50%;
-  right: 50%;
-  transform: translate(760%, 440%);
-  width: 19px;
+  width: 100%;
   height: 32px;
   font-size: 10px;
   font-weight: bold;

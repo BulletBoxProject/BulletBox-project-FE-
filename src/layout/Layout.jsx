@@ -55,6 +55,6 @@ const PageContainerBox = styled.div`
   width: 360px;
   height: 616px;
   background-color: white;
-  padding: 0 2% 4.05vh 2%;
+  padding: 0 2%;
   overflow: auto;
 `;
