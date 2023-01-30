@@ -38,8 +38,14 @@ const FavoriteTodo = styled.button`
   border-radius: 8px;
   width: 262px;
   padding: 0;
+  color: var(--color-gray);
+
+  &:focus {
+    color: var(--color-main);
+  }
   & > div {
     pointer-events: none;
+    color: inherit;
   }
   & > span {
     pointer-events: none;
@@ -55,7 +61,6 @@ const TodoContent = styled.div`
   display: flex;
   align-items: center;
   gap: 4px;
-  color: var(--color-gray);
   font-size: 14px;
   padding: 6px;
 `;

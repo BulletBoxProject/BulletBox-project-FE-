@@ -7,12 +7,11 @@ import {
   __getFavoritesTodo,
 } from "../../../redux/modules/dailysSlice";
 
-import SelectCategory from "../../common/SelectCategory";
-import BulletTodoCard from "../components/BulletTodoCard";
 import CategorySelector from "../components/CategorySelector";
 import AllTodoShow from "../components/AllTodoShow";
 import SelectCategoryTodoShow from "../components/SelectCategoryTodoShow";
 import ModalFavoriteTodo from "../components/ModalFavoriteTodo";
+import DailyLogCalendar from "../../common/calendar/DailyLogCalendar";
 
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
@@ -27,6 +26,7 @@ const DailyLogContainer = () => {
   const [isSelectedCategory, isSetSelectedCategory] = useState(false);
   const [selectedCategoryId, setSlectedCategoryId] = useState("");
   const [showFavoritesTodo, setShowFavoritesTodo] = useState(false);
+  const [showCalendar, setShowCalendar] = useState(false);
 
   const navigate = useNavigate();
   const day = ["일", "월", "화", "수", "목", "금", "토"];
@@ -51,7 +51,7 @@ const DailyLogContainer = () => {
     setShowFavoritesTodo(true);
   };
   const dateChangeHandler = () => {
-    console.log("데일리로그 날짜변경 클릭");
+    setShowCalendar(!showCalendar);
   };
   useEffect(() => {
     dispatch(__getDailyTodo());
@@ -75,6 +75,7 @@ const DailyLogContainer = () => {
           setSlectedCategoryId={setSlectedCategoryId}
         />
       </DateAndSelectDiv>
+      <CalendarDiv>{showCalendar ? <DailyLogCalendar /> : null}</CalendarDiv>
       <TodoBulletDiv>
         {todoList && todoList?.length === 0 ? (
           <NoneTodo>할일을 추가해주세요.</NoneTodo>
@@ -140,6 +141,12 @@ const DateButtonDiv = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
+`;
+const CalendarDiv = styled.div`
+  position: fixed;
+  display: flex;
+  width: 85%;
+  z-index: 999;
 `;
 const DateButton = styled.button`
   padding: 3px 0;

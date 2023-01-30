@@ -7,7 +7,7 @@ import { __getMainCalendar } from "../../../redux/modules/mainSlice";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 
-const BulletCalendar = ({ selectDate, setSelectDate, setTodoList }) => {
+const DailyLogCalendar = ({ selectDate, setSelectDate, setTodoList }) => {
   const dispatch = useDispatch();
 
   const selectDateLog = async (e) => {
@@ -46,13 +46,12 @@ const BulletCalendar = ({ selectDate, setSelectDate, setTodoList }) => {
   );
 };
 
-export default BulletCalendar;
+export default DailyLogCalendar;
 
 const Calendarcontainer = styled.div`
   .react-calendar {
-    width: 95%;
-    max-width: 100%;
-    background: transparent;
+    width: 80%;
+    background: var(--color-default);
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.125em;
     margin-left: 3%;
@@ -78,7 +77,8 @@ const Calendarcontainer = styled.div`
     margin-bottom: 5%;
   }
   .react-calendar__month-view__weekdays {
-    height: 25px !important;
+    visibility: hidden;
+    height: 0px !important;
   }
   .react-calendar__month-view__weekdays__weekday {
     background-color: white !important;
@@ -172,7 +172,7 @@ const Calendarcontainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.65em;
+    font-size: 14px !important;
     font-weight: bold;
   }
 
