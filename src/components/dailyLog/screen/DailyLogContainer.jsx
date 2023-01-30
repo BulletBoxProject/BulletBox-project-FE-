@@ -11,10 +11,11 @@ import CategorySelector from "../components/CategorySelector";
 import AllTodoShow from "../components/AllTodoShow";
 import SelectCategoryTodoShow from "../components/SelectCategoryTodoShow";
 import ModalFavoriteTodo from "../components/ModalFavoriteTodo";
-import DailyLogCalendar from "../../common/calendar/DailyLogCalendar";
+import CalendarModal from "../components/CalendarModal";
 
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowUp } from "react-icons/io";
 
 import { ReactComponent as oftenTodo } from "../../../img/dailyLog/often.svg";
 import { ReactComponent as newTodo } from "../../../img/dailyLog/new.svg";
@@ -64,9 +65,9 @@ const DailyLogContainer = () => {
       <DateAndSelectDiv>
         <div></div>
         <DateButtonDiv>
-          <DateButton>{today}</DateButton>
+          <DateButton onClick={dateChangeHandler}>{today}</DateButton>
           <SelectDateButton onClick={dateChangeHandler}>
-            <IoIosArrowDown />
+            {showCalendar ? <IoIosArrowUp /> : <IoIosArrowDown />}
           </SelectDateButton>
         </DateButtonDiv>
         <CategorySelector
@@ -75,7 +76,7 @@ const DailyLogContainer = () => {
           setSlectedCategoryId={setSlectedCategoryId}
         />
       </DateAndSelectDiv>
-      <CalendarDiv>{showCalendar ? <DailyLogCalendar /> : null}</CalendarDiv>
+      <CalendarDiv>{showCalendar ? <CalendarModal /> : null}</CalendarDiv>
       <TodoBulletDiv>
         {todoList && todoList?.length === 0 ? (
           <NoneTodo>할일을 추가해주세요.</NoneTodo>
@@ -93,7 +94,6 @@ const DailyLogContainer = () => {
             setDailyLogs={setDailyLogs}
           />
         )}
-
         <AddTodoDiv>
           <AddTodoButton type="button" onClick={showAddTodoSelect}>
             <AddTodoIcon />
@@ -145,7 +145,8 @@ const DateButtonDiv = styled.div`
 const CalendarDiv = styled.div`
   position: fixed;
   display: flex;
-  width: 85%;
+  justify-content: center;
+  width: 360px;
   z-index: 999;
 `;
 const DateButton = styled.button`

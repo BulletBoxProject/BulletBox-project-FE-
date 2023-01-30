@@ -39,7 +39,6 @@ const FavoriteTodo = styled.button`
   width: 262px;
   padding: 0;
   color: var(--color-gray);
-
   &:focus {
     color: var(--color-main);
   }
