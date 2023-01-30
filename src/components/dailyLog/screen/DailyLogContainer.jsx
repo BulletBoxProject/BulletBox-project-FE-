@@ -50,6 +50,9 @@ const DailyLogContainer = () => {
     setShowSelectBox(false);
     setShowFavoritesTodo(true);
   };
+  const dateChangeHandler = () => {
+    console.log("데일리로그 날짜변경 클릭");
+  };
   useEffect(() => {
     dispatch(__getDailyTodo());
     dispatch(__getFavoritesTodo());
@@ -62,7 +65,7 @@ const DailyLogContainer = () => {
         <div></div>
         <DateButtonDiv>
           <DateButton>{today}</DateButton>
-          <SelectDateButton>
+          <SelectDateButton onClick={dateChangeHandler}>
             <IoIosArrowDown />
           </SelectDateButton>
         </DateButtonDiv>
@@ -155,6 +158,7 @@ const SelectDateButton = styled.button`
     width: 18px;
     height: 18px;
     fill: var(--color-main);
+    pointer-events: none;
   }
 `;
 const TodoBulletDiv = styled.div`

@@ -19,6 +19,8 @@ const BulletTodoCard = ({ dailyLog, dailyLogs, setDailyLogs }) => {
   const [showMemoBox, setShowMemoBox] = useState(false);
   const selectOptionRef = useRef(null);
 
+  // console.log("메모 확인", dailyLog.todoMemos.length === 0);
+
   const selectOptionClose = () => {
     setShowSelectBox(false);
   };
@@ -55,16 +57,21 @@ const BulletTodoCard = ({ dailyLog, dailyLogs, setDailyLogs }) => {
             </span>
             <span>{dailyLog.todoContent}</span>
           </TodoBodyDiv>
-          <TodoMoreViewDiv>
-            <TodoMoreViewButton id={dailyLog.todoId} onClick={memoViewHandler}>
-              {showTodoMemo.find((id) => id === dailyLog.todoId) !==
-              undefined ? (
-                <OnlyTitleIcon />
-              ) : (
-                <MoreIcon />
-              )}
-            </TodoMoreViewButton>
-          </TodoMoreViewDiv>
+          {dailyLog && (
+            <TodoMoreViewDiv>
+              <TodoMoreViewButton
+                id={dailyLog.todoId}
+                onClick={memoViewHandler}
+              >
+                {showTodoMemo.find((id) => id === dailyLog.todoId) !==
+                undefined ? (
+                  <OnlyTitleIcon />
+                ) : dailyLog?.todoMemos?.length === 0 ? null : (
+                  <MoreIcon />
+                )}
+              </TodoMoreViewButton>
+            </TodoMoreViewDiv>
+          )}
           <OptionSelectDiv ref={selectOptionRef}>
             <OptionButton id={dailyLog.todoId} onClick={selectOptionHandler}>
               <OptionIcon />
