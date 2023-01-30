@@ -17,6 +17,7 @@ const CategorySelector = ({
     setSlectedCategoryId("");
     setShowCategory(false);
   };
+  let num = 0;
   return (
     <Container>
       <SelectButton onClick={showCategoryHandler}>전체</SelectButton>
@@ -26,6 +27,7 @@ const CategorySelector = ({
           {categoryList &&
             categoryList.map((category) => (
               <CategoryButton
+                key={num++}
                 category={category}
                 categoryColor={category.categoryColor}
                 setShowCategory={setShowCategory}

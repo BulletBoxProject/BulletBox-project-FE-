@@ -25,23 +25,7 @@ const AddTodoInput = () => {
   });
   const [categories, setCategories] = useState([]);
   console.log("할일 추가", AddTodoInput);
-  // const postTodo = async (AddTodoInput, setAddTodoInput) => {
-  //   let memos = AddTodoInput.memos;
-  //   memos = memos.map((memo) =>
-  //     delete memo.memoId === true
-  //       ? { ...memo, todoMemoContent: memo.todoMemoContent }
-  //       : null
-  //   );
-  //   try {
-  //     const data = await baseURLApiV1.post("/dailys/todo", AddTodoInput);
 
-  //     if (data.data.httpStatusCode === 200) {
-  //       return data;
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
   const loadAddTodoPage = async () => {
     try {
       const data = await baseURLApiV1.get(
@@ -60,8 +44,6 @@ const AddTodoInput = () => {
     setTimeout(() => {
       navigate("/dailys");
     }, 10);
-
-    // window.location.href = "/dailys";
   };
   useEffect(() => {
     loadAddTodoPage();

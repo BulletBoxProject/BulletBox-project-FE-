@@ -31,6 +31,17 @@ export const __getEditTodo = createAsyncThunk(
     }
   }
 );
+export const __getFavoritesTodo = createAsyncThunk(
+  "DailyLog/getFavoritesTodo",
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await baseURLApiV1.get(`/favorites`);
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 export const __postDailyTodo = createAsyncThunk(
   "dailyLog/postDailyTodo",
   async (payload, thunkAPI) => {
@@ -42,6 +53,18 @@ export const __postDailyTodo = createAsyncThunk(
     );
     try {
       const { data } = await baseURLApiV1.post(`/dailys/todo`, payload);
+      return thunkAPI.fulfillWithValue(payload);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+export const __postFavoriteTodo = createAsyncThunk(
+  "dailyLog/postFavoriteTodo",
+  async (payload, thunkAPI) => {
+    console.log(payload);
+    try {
+      const { data } = await baseURLApiV1.post(`/dailys/favorites`, payload);
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -67,7 +90,8 @@ export const __putDailyTodo = createAsyncThunk(
       const { data } = await baseURLApiV1.put(`/dailys/todo`, payload);
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      console.log(error);
+      // return thunkAPI.rejectWithValue(error);
     }
   }
 );
@@ -84,6 +108,9 @@ const dailysSlice = createSlice({
       })
       .addCase(__getEditTodo.fulfilled, (state, action) => {
         state.dailyTodo = action.payload.data;
+      })
+      .addCase(__getFavoritesTodo.fulfilled, (state, action) => {
+        state.favorite = action.payload.data;
       })
       .addCase(__postDailyTodo.fulfilled, (state, action) => {
         state.dailyTodo.daily = [...state.dailyTodo.daily, action.payload];

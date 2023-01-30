@@ -2,13 +2,17 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { __getDailyTodo } from "../../../redux/modules/dailysSlice";
+import {
+  __getDailyTodo,
+  __getFavoritesTodo,
+} from "../../../redux/modules/dailysSlice";
 
 import SelectCategory from "../../common/SelectCategory";
 import BulletTodoCard from "../components/BulletTodoCard";
 import CategorySelector from "../components/CategorySelector";
 import AllTodoShow from "../components/AllTodoShow";
 import SelectCategoryTodoShow from "../components/SelectCategoryTodoShow";
+import ModalFavoriteTodo from "../components/ModalFavoriteTodo";
 
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
@@ -22,6 +26,7 @@ const DailyLogContainer = () => {
   const [dailyLogs, setDailyLogs] = useState([]);
   const [isSelectedCategory, isSetSelectedCategory] = useState(false);
   const [selectedCategoryId, setSlectedCategoryId] = useState("");
+  const [showFavoritesTodo, setShowFavoritesTodo] = useState(false);
 
   const navigate = useNavigate();
   const day = ["일", "월", "화", "수", "목", "금", "토"];
@@ -37,8 +42,17 @@ const DailyLogContainer = () => {
   const categoryList = useSelector(
     (state) => state?.dailyTodo?.dailyTodo?.categories
   );
+  const favoritesTodoList = useSelector(
+    (state) => state?.dailyTodo?.favorite?.favorites
+  );
+  const favoritesTodoHandler = () => {
+    console.log("자주쓰는 할일 추가 핸들러", favoritesTodoList);
+    setShowSelectBox(false);
+    setShowFavoritesTodo(true);
+  };
   useEffect(() => {
     dispatch(__getDailyTodo());
+    dispatch(__getFavoritesTodo());
   }, [dispatch]);
 
   let num = 0;
@@ -82,7 +96,7 @@ const DailyLogContainer = () => {
           </AddTodoButton>
           {showSelectBox ? (
             <AddSelectDiv>
-              <div value="favoriteTodo" onClick={() => alert("자주쓰는할일")}>
+              <div value="favoriteTodo" onClick={favoritesTodoHandler}>
                 자주쓰는할일 <OftenTodo />
               </div>
               <SelectLine></SelectLine>
@@ -96,6 +110,12 @@ const DailyLogContainer = () => {
           ) : null}
         </AddTodoDiv>
       </TodoBulletDiv>
+      {showFavoritesTodo ? (
+        <ModalFavoriteTodo
+          favoritesTodoList={favoritesTodoList}
+          setShowFavoritesTodo={setShowFavoritesTodo}
+        />
+      ) : null}
     </Container>
   );
 };
@@ -161,7 +181,7 @@ const AddTodoButton = styled.button`
   border: 0;
   background-color: white;
   border-radius: 50%;
-  margin: 0 auto;
+  margin-left: 82%;
 `;
 const AddTodoIcon = styled(BsFillPlusCircleFill)`
   fill: var(--color-main);
@@ -175,7 +195,7 @@ const AddSelectDiv = styled.div`
   width: 42%;
   gap: 3px;
   padding: 5px 14px;
-  margin-top: -40px;
+  margin: -40px 0 0 132px;
   border-radius: 4px;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
   background-color: var(--color-default);
