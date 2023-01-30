@@ -11,24 +11,30 @@ import { ReactComponent as memoBullet } from "../../../img/myPage/memo-5.svg";
 import { ReactComponent as todoBullet } from "../../../img/myPage/todo-1.svg";
 
 import useOutSideClick from "../../../hooks/useOutSideClick";
+import { useNavigate } from "react-router-dom";
+
+import { __deleteSearch } from "../../../redux/modules/searchSlice";
 
 const SearchTodo = ({
-  todoId,
-  todoDay,
-  todoMemos,
-  todoContent,
-  todoBullet,
-  time,
-  categoryId,
-  categoryColor,
-  todoMonth,
-  todoYear,
+  search,
+  // todoId,
+  // todoDay,
+  // todoMemos,
+  // todoContent,
+  // todoBullet,
+  // time,
+  // categoryId,
+  // categoryColor,
+  // todoMonth,
+  // todoYear,
 }) => {
   const [showSelectBox, setShowSelectBox] = useState(false);
   const [showTodoMemo, setShowTodoMemo] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const selectRef = useRef(null);
   const handleClose = () => {
     setShowSelectBox(false);
@@ -46,23 +52,23 @@ const SearchTodo = ({
     setShowSelectBox(!showSelectBox);
     setShowDeleteModal(!showDeleteModal);
   };
-  //   const deleteButtonHandler = () => {
-  //     setShowDeleteModal(!showDeleteModal);
-  //     dispatch(__deleteFavorite(todoId));
-  //   };
+  const deleteButtonHandler = () => {
+    setShowDeleteModal(!showDeleteModal);
+    dispatch(__deleteSearch(search.todoId));
+  };
   const cancelButtonHandler = () => {
     setShowDeleteModal(!showDeleteModal);
   };
 
   return (
     <>
-      <CardContainer backgroundColor={categoryColor}>
+      <CardContainer backgroundColor={search.categoryColor}>
         <MainBulletTodo>
           <TodoBodyDiv>
             <span>
               <TodoBullet />
             </span>
-            <span>{todoContent}</span>
+            <span>{search.todoContent}</span>
           </TodoBodyDiv>
           <TodoMoreViewDiv>
             <TodoMoreViewButton onClick={memoViewHandler}>
@@ -76,11 +82,7 @@ const SearchTodo = ({
             </OptionButton>
             {showSelectBox ? (
               <SelectDiv>
-                <div
-                //   onClick={() => {
-                //     updateButtonHandler();
-                //   }}
-                >
+                <div onClick={() => navigate(`/dailys/edit/${search.todoId}`)}>
                   수정하기 <EditIcon />
                 </div>
                 <SelectLine></SelectLine>
@@ -94,9 +96,12 @@ const SearchTodo = ({
             ) : null}
           </OptionSelectDiv>
         </MainBulletTodo>
+        <TodoDateDiv>
+          {search.todoYear}/{search.todoMonth}/{search.todoDay}
+        </TodoDateDiv>
         {showTodoMemo ? (
           <TodoMemoDiv>
-            {todoMemos.map((value) => (
+            {search.todoMemos.map((value) => (
               <MemoContent key={value.todoMemoId}>
                 <span>
                   <MemoBullet />
@@ -119,7 +124,7 @@ const SearchTodo = ({
             </DeleteMsg>
             <SelectLine></SelectLine>
             <ModalButtonGroup>
-              {/* <DeleteButton onClick={deleteButtonHandler}>삭제</DeleteButton> */}
+              <DeleteButton onClick={deleteButtonHandler}>삭제</DeleteButton>
               <CancelButton onClick={cancelButtonHandler}>취소</CancelButton>
             </ModalButtonGroup>
           </ModalContent>
@@ -139,8 +144,7 @@ const CardContainer = styled.div`
   border: none;
   background-color: ${({ backgroundColor }) =>
     backgroundColor || `var(--color-default)`};
-  box-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.3);
-  padding: 12px;
+  padding: 6px;
   border-radius: 8px;
 `;
 const ModalContainer = styled.div`
@@ -199,11 +203,21 @@ const MainBulletTodo = styled.div`
 const TodoBodyDiv = styled.div`
   display: flex;
   align-items: center;
-  width: 85%;
-  font-size: 14px;
-  font-weight: 600;
-  gap: 10px;
+  width: 80%;
+  font-size: 12px;
+  font-weight: bold;
+  gap: 3px;
 `;
+
+const TodoDateDiv = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+  font-size: 10px;
+  font-weight: bold;
+  color: var(--color-gray);
+`;
+
 const TodoMemoDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -218,9 +232,14 @@ const MemoContent = styled.div`
   font-weight: bold;
   gap: 5px;
 `;
-const TodoMoreViewDiv = styled.div``;
+const TodoMoreViewDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  padding-left: 20px;
+`;
 const TodoMoreViewButton = styled.button`
-  position: relative;
   border: 0;
   background-color: inherit;
 `;
@@ -270,25 +289,25 @@ const EditIcon = styled(editIcon)``;
 const DeleteIcon = styled(deleteIcon)``;
 const OptionIcon = styled(moreIcon)`
   width: 24px;
-  height: 24px;
+  height: 20px;
 `;
 const MoreIcon = styled(IoIosArrowDown)`
   width: 24px;
-  height: 24px;
+  height: 20px;
   pointer-events: none;
 `;
 const OnlyTitleIcon = styled(IoIosArrowUp)`
   width: 24px;
-  height: 24px;
+  height: 20px;
   pointer-events: none;
 `;
 
 const MemoBullet = styled(memoBullet)`
-  width: 24px;
-  height: 18px;
+  width: 20px;
+  height: 14px;
 `;
 
 const TodoBullet = styled(todoBullet)`
-  width: 24px;
-  height: 18px;
+  width: 20px;
+  height: 14px;
 `;
