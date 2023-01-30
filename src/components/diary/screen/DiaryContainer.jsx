@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 import BulletCalendar from "../../common/calendar/Calendar";
@@ -10,25 +11,46 @@ import { ReactComponent as soso } from "../../../img/emotion/soso-1.svg";
 
 import { ReactComponent as edit } from "../../../img/diary/edit.svg";
 import { ReactComponent as check } from "../../../img/diary/round-check.svg";
-
-import { baseURLApiV1 } from "../../../core/api";
+import { __getDiary } from "../../../redux/modules/diarySlice";
+import { __postDiary } from "../../../redux/modules/diarySlice";
 
 const DiaryContainer = () => {
-  const [diaryText, setDiaryText] = useState("");
+  const diaryList = useSelector((state) => state?.diary?.diary?.diary);
+  const emotions = useSelector((state) => state?.diary?.diary?.emotions);
+  // const TodayEmotion =
 
+  const [diaryContent, setDiaryContent] = useState(diaryList?.diaryContent);
+  const [diaryId, setDiaryId] = useState(diaryList?.diaryId);
   const [isEdit, setIsEdit] = useState(false);
+  const dispatch = useDispatch();
+
+  const DiaryInfo = {
+    diaryId: diaryId,
+    diaryContent: diaryContent,
+    year: diaryList?.year,
+    month: diaryList?.month,
+    day: diaryList?.day,
+    emotion: emotions,
+  };
 
   const onEditHandler = () => {
     setIsEdit(!isEdit);
+    console.log(diaryList, "2");
   };
 
   const onAddHandler = () => {
+    dispatch(__postDiary(DiaryInfo));
+
     setIsEdit(!isEdit);
   };
 
   const onDiaryHandler = (e) => {
-    setDiaryText(e.target.value);
+    setDiaryContent(e.target.value);
   };
+
+  useEffect(() => {
+    dispatch(__getDiary());
+  }, [dispatch]);
 
   const day = ["일", "월", "화", "수", "목", "금", "토"];
   const today = `${String(new Date().getFullYear()).substr(2, 2)}/${
@@ -82,10 +104,11 @@ const DiaryContainer = () => {
           )}
         </EmotionDiv>
         <DiaryText
+          value={diaryContent}
           placeholder="일기를 입력해주세요."
           onChange={(e) => onDiaryHandler(e)}
         />
-        <DiaryLength>({diaryText.length}/200)</DiaryLength>
+        <DiaryLength>({diaryContent?.length}/200)</DiaryLength>
       </TodoDiv>
     </Container>
   );
