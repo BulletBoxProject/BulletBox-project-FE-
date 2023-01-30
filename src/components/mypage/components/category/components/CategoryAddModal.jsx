@@ -128,7 +128,7 @@ const SelectWhiteBtn = styled.button`
   border: none;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.8);
   &:active,
-  &:hover {
+  &:focus {
     border: 1px solid black;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.8);
   }
@@ -142,7 +142,7 @@ const SelectBtn = styled.button`
   border: none;
   background-color: ${({ backgroundColor }) => backgroundColor};
   &:active,
-  &:hover {
+  &:focus {
     border: 5px solid white;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.8);
   }
