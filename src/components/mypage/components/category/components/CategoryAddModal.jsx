@@ -89,7 +89,7 @@ const CategoryModal = ({ onClose }) => {
           </SelectColorDiv>
           <BtnContainer>
             <AddModalBtn
-              disabled={!(isName && isColor)}
+              disabled={!isName}
               onClick={() => {
                 AddCategoryHandler();
               }}
@@ -125,12 +125,11 @@ const SelectWhiteBtn = styled.button`
   margin-right: 0.8rem;
   border-radius: 4px;
   background-color: white;
-  border: none;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.8);
+  border: 1px solid black;
   &:active,
   &:focus {
-    border: 1px solid black;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.8);
+    border: none;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.8);
   }
 `;
 
