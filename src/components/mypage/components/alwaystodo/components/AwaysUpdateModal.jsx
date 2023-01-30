@@ -23,6 +23,7 @@ const AlwaysUpdateModal = ({ onClose, favoriteId, content, memo }) => {
     { id: 0, favoriteMemoContent: "" },
   ]);
   const [plusId, setPlusId] = useState(1);
+  const [isName, setIsName] = useState(true);
 
   const [categoryId, setCategoryId] = useState(0);
   const [categoryName, setCategoryName] = useState("");
@@ -55,7 +56,13 @@ const AlwaysUpdateModal = ({ onClose, favoriteId, content, memo }) => {
   };
 
   const onChaneTodoHandler = (e) => {
+    const value = e.target.value;
     setFavoriteContent(e.target.value);
+    if (value.length !== 0) {
+      setIsName(true);
+    } else {
+      setIsName(false);
+    }
   };
 
   const onChaneMemoHandler = (e, index) => {
@@ -171,13 +178,14 @@ const AlwaysUpdateModal = ({ onClose, favoriteId, content, memo }) => {
 
           <BtnContainer>
             <AddModalBtn
+              disabled={!isName}
               onClick={() => {
                 onAddFavoriteHandler();
               }}
             >
               수정
             </AddModalBtn>
-            <AddModalBtn onClick={onClose}>취소</AddModalBtn>
+            <CancleModalBtn onClick={onClose}>취소</CancleModalBtn>
           </BtnContainer>
         </Container>
       </Modal>
@@ -223,7 +231,22 @@ const MemoContent = styled.div`
 const AddModalBtn = styled.button`
   width: 104px;
   height: 48px;
-  font-size: 1rem;
+  font-size: 14px;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  color: white;
+  background-color: var(--color-main);
+  &:disabled {
+    color: black;
+    background-color: var(--color-default);
+  }
+`;
+
+const CancleModalBtn = styled.button`
+  width: 104px;
+  height: 48px;
+  font-size: 14px;
   border-radius: 8px;
   border: none;
   font-weight: 700;
