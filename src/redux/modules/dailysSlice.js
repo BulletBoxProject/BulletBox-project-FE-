@@ -115,6 +115,9 @@ const dailysSlice = createSlice({
       .addCase(__postDailyTodo.fulfilled, (state, action) => {
         state.dailyTodo.daily = [...state.dailyTodo.daily, action.payload];
       })
+      .addCase(__postFavoriteTodo.fulfilled, (state, action) => {
+        state.dailyTodo.daily = [...state.dailyTodo.daily, action.payload];
+      })
       .addCase(__deleteDailyTodo.fulfilled, (state, action) => {
         state.dailyTodo.daily = state.dailyTodo.daily.filter(
           (dailyLog) => dailyLog.todoId !== action.payload
