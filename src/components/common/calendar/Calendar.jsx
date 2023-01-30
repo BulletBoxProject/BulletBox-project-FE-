@@ -6,16 +6,28 @@ import { __getMainCalendar } from "../../../redux/modules/mainSlice";
 
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
+import { notInitialized } from "react-redux/es/utils/useSyncExternalStore";
 
-const BulletCalendar = ({ selectDate, setSelectDate, setTodoList }) => {
+const BulletCalendar = ({
+  nowMonthView,
+  selectDate,
+  setSelectDate,
+  setTodoList,
+}) => {
   const dispatch = useDispatch();
+  const [isTodo, setIsTodo] = useState({});
 
-  const selectDateLog = async (e) => {
-    const selectDateCalendar = `/main/dailys?year=${e.getFullYear()}&month=${
-      e.getMonth() + 1
-    }&day=${e.getDate()}`;
-    dispatch(__getMainCalendar(selectDateCalendar));
-  };
+  const calendarCountList = useSelector(
+    (state) => state?.mainTodo?.mainTodo?.calendar
+  );
+  console.log("셀럭터 값", calendarCountList);
+
+  // const selectDateLog = async (e) => {
+  //   const selectDateCalendar = `/main/dailys?year=${e.getFullYear()}&month=${
+  //     e.getMonth() + 1
+  //   }&day=${e.getDate()}`;
+  //   dispatch(__getMainCalendar(selectDateCalendar));
+  // };
   const dateChangeHandler = (e) => {
     const dateArr = ["일", "월", "화", "수", "목", "금", "토"];
     setSelectDate(
@@ -23,25 +35,34 @@ const BulletCalendar = ({ selectDate, setSelectDate, setTodoList }) => {
         e.getMonth() + 1
       }/${e.getDate()}(${dateArr[e.getDay()]})`
     );
-    selectDateLog(e);
+    // selectDateLog(e);
   };
-
   return (
     <Calendarcontainer>
-      <Calendar
-        calendarType="US"
-        onChange={dateChangeHandler}
-        nextLabel={<NextIcon />}
-        prevLabel={<PrevIcon />}
-        next2Label={null}
-        prev2Label={null}
-        formatDay={(locale, date) =>
-          date.toLocaleString("en", { day: "numeric" })
-        }
-        formatShortWeekday={(locale, date) =>
-          ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][date.getDay()]
-        }
-      />
+      {calendarCountList && (
+        <Calendar
+          calendarType="US"
+          onChange={dateChangeHandler}
+          nextLabel={<NextIcon />}
+          prevLabel={<PrevIcon />}
+          next2Label={null}
+          prev2Label={null}
+          formatDay={(locale, date) =>
+            date.toLocaleString("en", { day: "numeric" })
+          }
+          formatShortWeekday={(locale, date) =>
+            ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][date.getDay()]
+          }
+          tileContent={({ activeStartDate, date, view }) =>
+            date.getMonth() + 1 === nowMonthView &&
+            calendarCountList.map((todo) =>
+              todo.day === date.getDate() ? (
+                <p key={todo.day}>{todo.count}</p>
+              ) : null
+            )
+          }
+        />
+      )}
     </Calendarcontainer>
   );
 };

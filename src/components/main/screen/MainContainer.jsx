@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { __getMainTodo } from "../../../redux/modules/mainSlice";
+import {
+  __getCalendarTodoCount,
+  __getMainTodo,
+} from "../../../redux/modules/mainSlice";
 
 import { baseURLApiV1 } from "../../../core/api";
 
@@ -18,7 +21,12 @@ const MainContainer = () => {
   const [date, setDate] = useState(new Date());
   const [todoList, setTodoList] = useState([]);
   const [selectDate, setSelectDate] = useState("");
-  console.log(selectDate);
+  const [nowMonthView, setNowMonthView] = useState({
+    year: new Date().getFullYear(),
+    month: new Date().getMonth() + 1,
+  });
+
+  console.log("선택된 달력 날짜", nowMonthView);
 
   const mainTodoList = useSelector((state) => state?.mainTodo?.mainTodo?.daily);
   console.log("셀럭터 값", mainTodoList);
@@ -32,8 +40,9 @@ const MainContainer = () => {
   };
   useEffect(() => {
     dispatch(__getMainTodo());
+    dispatch(__getCalendarTodoCount(nowMonthView));
     getToday();
-  }, []);
+  }, [dispatch]);
 
   let num = 0;
   return (
@@ -41,6 +50,7 @@ const MainContainer = () => {
       <CalendarDiv>
         <SelectDiv>Today</SelectDiv>
         <BulletCalendar
+          nowMonthView={nowMonthView.month}
           selectDate={selectDate}
           setSelectDate={setSelectDate}
           setTodoList={setTodoList}
