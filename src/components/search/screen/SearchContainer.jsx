@@ -10,10 +10,8 @@ import { AiFillCaretDown } from "react-icons/ai";
 
 const SearchContainer = () => {
   const [keyword, setKeyword] = useState("");
-  const [keywordResult, setKeywordResult] = useState("");
   const [searchCount, setSearchCount] = useState(0);
   const [reverseDate, setReverseDate] = useState(false);
-  const [iskeywordResult, setIsKeywordResult] = useState(false);
   const [timer, setTimer] = useState(0);
 
   const searchList = useSelector((state) => state?.search?.search?.searches);
@@ -32,8 +30,6 @@ const SearchContainer = () => {
       }
     }, 300);
     setTimer(newTimer);
-    setKeywordResult(value);
-    setIsKeywordResult(true);
   };
 
   const reverseHandler = () => {
