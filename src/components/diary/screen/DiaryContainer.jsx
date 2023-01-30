@@ -11,6 +11,8 @@ import { ReactComponent as soso } from "../../../img/emotion/soso-1.svg";
 import { ReactComponent as edit } from "../../../img/diary/edit.svg";
 import { ReactComponent as check } from "../../../img/diary/round-check.svg";
 
+import { baseURLApiV1 } from "../../../core/api";
+
 const DiaryContainer = () => {
   const [diaryText, setDiaryText] = useState("");
 
@@ -19,6 +21,11 @@ const DiaryContainer = () => {
   const onEditHandler = () => {
     setIsEdit(!isEdit);
   };
+
+  const onAddHandler = () => {
+    setIsEdit(!isEdit);
+  };
+
   const onDiaryHandler = (e) => {
     setDiaryText(e.target.value);
   };
@@ -66,7 +73,7 @@ const DiaryContainer = () => {
           ) : (
             <EditCheckDiv>
               <EditCheckBox>
-                <EditBtn onClick={onEditHandler}>
+                <EditBtn onClick={onAddHandler}>
                   <CheckImg />
                 </EditBtn>
                 저장
