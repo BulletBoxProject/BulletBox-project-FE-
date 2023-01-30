@@ -17,7 +17,6 @@ const SearchContainer = () => {
   const [timer, setTimer] = useState(0);
 
   const searchList = useSelector((state) => state?.search?.search?.searches);
-  console.log(searchList);
 
   const dispatch = useDispatch();
 
@@ -28,7 +27,9 @@ const SearchContainer = () => {
       clearTimeout(timer);
     }
     const newTimer = setTimeout(() => {
-      dispatch(__getSearch(value));
+      if (value.length !== 0) {
+        dispatch(__getSearch(value));
+      }
     }, 300);
     setTimer(newTimer);
     setKeywordResult(value);
@@ -66,10 +67,10 @@ const SearchContainer = () => {
           <SearchImg />
         </SearchBtn>
       </SearchBox>
-      {searchList && iskeywordResult === true ? (
+      {searchList && keyword.length !== 0 ? (
         <SearchMiddleDiv>
           <SearchResult>
-            `{keywordResult}` 검색결과 총 {searchCount}건
+            `{keyword}` 검색결과 총 {searchCount}건
           </SearchResult>
           <div>
             <DateReverseBtn
@@ -84,7 +85,7 @@ const SearchContainer = () => {
         </SearchMiddleDiv>
       ) : null}
 
-      {searchList && iskeywordResult === true ? (
+      {searchList && keyword.length !== 0 ? (
         <SearchList>
           {searchList && reverseDate === false
             ? searchList?.map((value) => {
