@@ -8,7 +8,7 @@ import { ReactComponent as moreIcon } from "../../../../../img/myPage/more.svg";
 import { ReactComponent as editIcon } from "../../../../../img/myPage/edit.svg";
 import { ReactComponent as deleteIcon } from "../../../../../img/myPage/delete.svg";
 import { ReactComponent as memoBullet } from "../../../../../img/myPage/memo-5.svg";
-import { ReactComponent as todoBullet } from "../../../../../img/myPage/todo-1.svg";
+import { ReactComponent as star } from "../../../../../img/myPage/round-star-outline.svg";
 
 import AlwaysUpdateModal from "./AwaysUpdateModal";
 import useOutSideClick from "../../../../../hooks/useOutSideClick";
@@ -62,7 +62,7 @@ const AlwaysTodo = ({
         <MainBulletTodo>
           <TodoBodyDiv>
             <span>
-              <TodoBullet />
+              <StarBullet />
             </span>
             <span>{content}</span>
           </TodoBodyDiv>
@@ -304,7 +304,7 @@ const MemoBullet = styled(memoBullet)`
   height: 18px;
 `;
 
-const TodoBullet = styled(todoBullet)`
+const StarBullet = styled(star)`
   width: 24px;
   height: 18px;
 `;
