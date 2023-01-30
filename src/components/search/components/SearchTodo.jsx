@@ -18,15 +18,8 @@ import { __deleteSearch } from "../../../redux/modules/searchSlice";
 const SearchTodo = ({
   search,
   // todoId,
-  // todoDay,
-  // todoMemos,
-  // todoContent,
   // todoBullet,
   // time,
-  // categoryId,
-  // categoryColor,
-  // todoMonth,
-  // todoYear,
 }) => {
   const [showSelectBox, setShowSelectBox] = useState(false);
   const [showTodoMemo, setShowTodoMemo] = useState(false);
