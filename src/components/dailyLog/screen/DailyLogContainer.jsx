@@ -28,6 +28,7 @@ const DailyLogContainer = () => {
   const [selectedCategoryId, setSlectedCategoryId] = useState("");
   const [showFavoritesTodo, setShowFavoritesTodo] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
+  const [showDate, setShowDate] = useState("");
 
   const navigate = useNavigate();
   const day = ["일", "월", "화", "수", "목", "금", "토"];
@@ -57,6 +58,7 @@ const DailyLogContainer = () => {
   useEffect(() => {
     dispatch(__getDailyTodo());
     dispatch(__getFavoritesTodo());
+    setShowDate(today);
   }, [dispatch]);
 
   let num = 0;
@@ -65,7 +67,7 @@ const DailyLogContainer = () => {
       <DateAndSelectDiv>
         <div></div>
         <DateButtonDiv>
-          <DateButton onClick={dateChangeHandler}>{today}</DateButton>
+          <DateButton onClick={dateChangeHandler}>{showDate}</DateButton>
           <SelectDateButton onClick={dateChangeHandler}>
             {showCalendar ? <IoIosArrowUp /> : <IoIosArrowDown />}
           </SelectDateButton>
@@ -78,7 +80,10 @@ const DailyLogContainer = () => {
       </DateAndSelectDiv>
       <CalendarDiv>
         {showCalendar ? (
-          <CalendarModal setShowCalendar={setShowCalendar} />
+          <CalendarModal
+            setShowDate={setShowDate}
+            setShowCalendar={setShowCalendar}
+          />
         ) : null}
       </CalendarDiv>
       <TodoBulletDiv>

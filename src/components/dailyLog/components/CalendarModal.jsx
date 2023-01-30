@@ -1,21 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+
+import { __getSelectDateTodo } from "../../../redux/modules/dailysSlice";
 
 import DailyLogCalendar from "../../common/calendar/DailyLogCalendar";
 
-const CalendarModal = ({ setShowCalendar }) => {
+const CalendarModal = ({ setShowCalendar, setShowDate }) => {
+  const [selectedDate, setSelectedDate] = useState({
+    year: new Date().getFullYear(),
+    month: new Date().getMonth() + 1,
+    day: new Date().getDate(),
+    dayOfDate: "",
+  });
+
+  const dipatch = useDispatch();
   const focusTodayHandler = () => {
     console.log("today Clicked");
   };
   const cancelHandler = () => {
     setShowCalendar(false);
   };
+  const selectDateHandler = () => {
+    console.log(selectedDate);
+    setShowDate(
+      `${String(selectedDate.year).substr(2, 2)}/${selectedDate.month}/${
+        selectedDate.day
+      }/(${selectedDate.dayOfDate})`
+    );
+    dipatch(
+      __getSelectDateTodo(
+        `${selectedDate.year}/${selectedDate.month}/${selectedDate.day}`
+      )
+    );
+    setShowCalendar(false);
+  };
   return (
     <CalendarContents>
       <TodayButton onClick={focusTodayHandler}>Today</TodayButton>
-      <DailyLogCalendar />
+      <DailyLogCalendar
+        selectedDate={selectedDate}
+        setSelectedDate={setSelectedDate}
+      />
       <CalendarButtonGroup>
-        <ComfirmButton>
+        <ComfirmButton onClick={selectDateHandler}>
           <span>확인</span>
         </ComfirmButton>
         <CancelButton onClick={cancelHandler}>

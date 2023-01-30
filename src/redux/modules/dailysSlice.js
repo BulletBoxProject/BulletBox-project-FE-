@@ -17,6 +17,17 @@ export const __getDailyTodo = createAsyncThunk(
     }
   }
 );
+export const __getSelectDateTodo = createAsyncThunk(
+  "DailyLog/getSelectDateTodo",
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await baseURLApiV1.get(`/dailys/${payload}`);
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 export const __getEditTodo = createAsyncThunk(
   "editDailyLog/getDailyTodo",
   async (payload, thunkAPI) => {
@@ -105,6 +116,9 @@ const dailysSlice = createSlice({
     builder
       .addCase(__getDailyTodo.fulfilled, (state, action) => {
         state.dailyTodo = action.payload;
+      })
+      .addCase(__getSelectDateTodo.fulfilled, (state, action) => {
+        state.dailyTodo = action.payload.data;
       })
       .addCase(__getEditTodo.fulfilled, (state, action) => {
         state.dailyTodo = action.payload.data;

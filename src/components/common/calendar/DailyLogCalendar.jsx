@@ -7,28 +7,16 @@ import { __getMainCalendar } from "../../../redux/modules/mainSlice";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 
-const DailyLogCalendar = ({ selectDate, setSelectDate, setTodoList }) => {
-  const dispatch = useDispatch();
-
-  const selectDateLog = async (e) => {
-    const selectDateCalendar = `/main/dailys?year=${e.getFullYear()}&month=${
-      e.getMonth() + 1
-    }&day=${e.getDate()}`;
-    dispatch(__getMainCalendar(selectDateCalendar));
-  };
+const DailyLogCalendar = ({ selectedDate, setSelectedDate }) => {
+  const dayArray = ["일", "월", "화", "수", "목", "금", "토"];
   const dateChangeHandler = (e) => {
-    const dateArr = ["일", "월", "화", "수", "목", "금", "토"];
-    // setSelectDate(
-    //   `${String(e.getFullYear()).substr(2, 2)}/${
-    //     e.getMonth() + 1
-    //   }/${e.getDate()}(${dateArr[e.getDay()]})`
-    // );
-    console.log(
-      `${String(e.getFullYear()).substr(2, 2)}/${
-        e.getMonth() + 1
-      }/${e.getDate()}(${dateArr[e.getDay()]})`
-    );
-    // selectDateLog(e);
+    setSelectedDate({
+      ...selectedDate,
+      year: e.getFullYear(),
+      month: e.getMonth() + 1,
+      day: e.getDate(),
+      dayOfDate: dayArray[e.getDay()],
+    });
   };
 
   return (
