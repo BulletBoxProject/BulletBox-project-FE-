@@ -65,7 +65,7 @@ export const __postFavoriteTodo = createAsyncThunk(
     console.log(payload);
     try {
       const { data } = await baseURLApiV1.post(`/dailys/favorites`, payload);
-      return thunkAPI.fulfillWithValue(payload);
+      return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -116,7 +116,7 @@ const dailysSlice = createSlice({
         state.dailyTodo.daily = [...state.dailyTodo.daily, action.payload];
       })
       .addCase(__postFavoriteTodo.fulfilled, (state, action) => {
-        state.dailyTodo.daily = [...state.dailyTodo.daily, action.payload];
+        state.dailyTodo.daily = [...state.dailyTodo.daily, action.payload.data];
       })
       .addCase(__deleteDailyTodo.fulfilled, (state, action) => {
         state.dailyTodo.daily = state.dailyTodo.daily.filter(

@@ -107,11 +107,15 @@ const Calendarcontainer = styled.div`
     display: flex !important;
     flex-basis: 40px !important;
     align-items: center !important;
+    justify-content: center;
     height: 40px !important;
     padding: 0 !important;
     font-size: 12px;
     font-weight: bold;
     & > abbr {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       width: 24.64px;
       height: 24.64px;
       padding: 5px;

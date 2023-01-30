@@ -3,9 +3,12 @@ import styled from "styled-components";
 
 import DailyLogCalendar from "../../common/calendar/DailyLogCalendar";
 
-const CalendarModal = () => {
+const CalendarModal = ({ setShowCalendar }) => {
   const focusTodayHandler = () => {
     console.log("today Clicked");
+  };
+  const cancelHandler = () => {
+    setShowCalendar(false);
   };
   return (
     <CalendarContents>
@@ -15,7 +18,7 @@ const CalendarModal = () => {
         <ComfirmButton>
           <span>확인</span>
         </ComfirmButton>
-        <CancelButton>
+        <CancelButton onClick={cancelHandler}>
           <span>취소</span>
         </CancelButton>
       </CalendarButtonGroup>

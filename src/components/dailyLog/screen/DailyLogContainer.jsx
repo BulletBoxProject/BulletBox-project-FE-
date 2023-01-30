@@ -76,7 +76,11 @@ const DailyLogContainer = () => {
           setSlectedCategoryId={setSlectedCategoryId}
         />
       </DateAndSelectDiv>
-      <CalendarDiv>{showCalendar ? <CalendarModal /> : null}</CalendarDiv>
+      <CalendarDiv>
+        {showCalendar ? (
+          <CalendarModal setShowCalendar={setShowCalendar} />
+        ) : null}
+      </CalendarDiv>
       <TodoBulletDiv>
         {todoList && todoList?.length === 0 ? (
           <NoneTodo>할일을 추가해주세요.</NoneTodo>
