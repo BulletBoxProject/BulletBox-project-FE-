@@ -7,15 +7,15 @@ import {
   __getFavoritesTodo,
 } from "../../../redux/modules/dailysSlice";
 
-import SelectCategory from "../../common/SelectCategory";
-import BulletTodoCard from "../components/BulletTodoCard";
 import CategorySelector from "../components/CategorySelector";
 import AllTodoShow from "../components/AllTodoShow";
 import SelectCategoryTodoShow from "../components/SelectCategoryTodoShow";
 import ModalFavoriteTodo from "../components/ModalFavoriteTodo";
+import CalendarModal from "../components/CalendarModal";
 
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowUp } from "react-icons/io";
 
 import { ReactComponent as oftenTodo } from "../../../img/dailyLog/often.svg";
 import { ReactComponent as newTodo } from "../../../img/dailyLog/new.svg";
@@ -27,6 +27,8 @@ const DailyLogContainer = () => {
   const [isSelectedCategory, isSetSelectedCategory] = useState(false);
   const [selectedCategoryId, setSlectedCategoryId] = useState("");
   const [showFavoritesTodo, setShowFavoritesTodo] = useState(false);
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [showDate, setShowDate] = useState("");
 
   const navigate = useNavigate();
   const day = ["일", "월", "화", "수", "목", "금", "토"];
@@ -50,9 +52,13 @@ const DailyLogContainer = () => {
     setShowSelectBox(false);
     setShowFavoritesTodo(true);
   };
+  const dateChangeHandler = () => {
+    setShowCalendar(!showCalendar);
+  };
   useEffect(() => {
     dispatch(__getDailyTodo());
     dispatch(__getFavoritesTodo());
+    setShowDate(today);
   }, [dispatch]);
 
   let num = 0;
@@ -61,9 +67,9 @@ const DailyLogContainer = () => {
       <DateAndSelectDiv>
         <div></div>
         <DateButtonDiv>
-          <DateButton>{today}</DateButton>
-          <SelectDateButton>
-            <IoIosArrowDown />
+          <DateButton onClick={dateChangeHandler}>{showDate}</DateButton>
+          <SelectDateButton onClick={dateChangeHandler}>
+            {showCalendar ? <IoIosArrowUp /> : <IoIosArrowDown />}
           </SelectDateButton>
         </DateButtonDiv>
         <CategorySelector
@@ -72,6 +78,14 @@ const DailyLogContainer = () => {
           setSlectedCategoryId={setSlectedCategoryId}
         />
       </DateAndSelectDiv>
+      <CalendarDiv>
+        {showCalendar ? (
+          <CalendarModal
+            setShowDate={setShowDate}
+            setShowCalendar={setShowCalendar}
+          />
+        ) : null}
+      </CalendarDiv>
       <TodoBulletDiv>
         {todoList && todoList?.length === 0 ? (
           <NoneTodo>할일을 추가해주세요.</NoneTodo>
@@ -89,7 +103,6 @@ const DailyLogContainer = () => {
             setDailyLogs={setDailyLogs}
           />
         )}
-
         <AddTodoDiv>
           <AddTodoButton type="button" onClick={showAddTodoSelect}>
             <AddTodoIcon />
@@ -138,6 +151,13 @@ const DateButtonDiv = styled.div`
   align-items: center;
   gap: 5px;
 `;
+const CalendarDiv = styled.div`
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  width: 360px;
+  z-index: 999;
+`;
 const DateButton = styled.button`
   padding: 3px 0;
   margin-left: 20%;
@@ -155,6 +175,7 @@ const SelectDateButton = styled.button`
     width: 18px;
     height: 18px;
     fill: var(--color-main);
+    pointer-events: none;
   }
 `;
 const TodoBulletDiv = styled.div`

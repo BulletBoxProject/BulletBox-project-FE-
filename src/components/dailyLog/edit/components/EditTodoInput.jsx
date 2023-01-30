@@ -35,22 +35,9 @@ const EditTodoInput = ({ todoList, categoryList }) => {
     dispatch(__putDailyTodo(AddTodoInput));
     setTimeout(() => {
       navigate("/dailys");
-    }, 15);
-
-    // console.log(newMemo);
-    // navigate("/dailys");
-    // window.location.href = "/dailys";
+    }, 20);
   };
-  // useEffect(() => {
-  //   dispatch(__getEditTodo(editTodoId));
-  //   const today = new Date();
-  //   // setAddTodoInput({
-  //   //   ...AddTodoInput,
-  //   //   year: today.getFullYear(),
-  //   //   month: today.getMonth() + 1,
-  //   //   day: today.getDate(),
-  //   // });
-  // }, []);
+
   const day = ["일", "월", "화", "수", "목", "금", "토"];
   const today = `${String(new Date().getFullYear()).substr(2, 2)}/${
     new Date().getMonth() + 1

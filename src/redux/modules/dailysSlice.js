@@ -17,6 +17,17 @@ export const __getDailyTodo = createAsyncThunk(
     }
   }
 );
+export const __getSelectDateTodo = createAsyncThunk(
+  "DailyLog/getSelectDateTodo",
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await baseURLApiV1.get(`/dailys/${payload}`);
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 export const __getEditTodo = createAsyncThunk(
   "editDailyLog/getDailyTodo",
   async (payload, thunkAPI) => {
@@ -65,7 +76,7 @@ export const __postFavoriteTodo = createAsyncThunk(
     console.log(payload);
     try {
       const { data } = await baseURLApiV1.post(`/dailys/favorites`, payload);
-      return thunkAPI.fulfillWithValue(payload);
+      return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -106,6 +117,9 @@ const dailysSlice = createSlice({
       .addCase(__getDailyTodo.fulfilled, (state, action) => {
         state.dailyTodo = action.payload;
       })
+      .addCase(__getSelectDateTodo.fulfilled, (state, action) => {
+        state.dailyTodo = action.payload.data;
+      })
       .addCase(__getEditTodo.fulfilled, (state, action) => {
         state.dailyTodo = action.payload.data;
       })
@@ -116,7 +130,7 @@ const dailysSlice = createSlice({
         state.dailyTodo.daily = [...state.dailyTodo.daily, action.payload];
       })
       .addCase(__postFavoriteTodo.fulfilled, (state, action) => {
-        state.dailyTodo.daily = [...state.dailyTodo.daily, action.payload];
+        state.dailyTodo.daily = [...state.dailyTodo.daily, action.payload.data];
       })
       .addCase(__deleteDailyTodo.fulfilled, (state, action) => {
         state.dailyTodo.daily = state.dailyTodo.daily.filter(

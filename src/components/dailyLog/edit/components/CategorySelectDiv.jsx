@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-
-// import { BsFillPlusCircleFill } from "react-icons/bs";
 
 const CategorySelectDiv = ({ categories, AddTodoInput, setAddTodoInput }) => {
   const categorySelectHandler = (e) => {
-    setAddTodoInput({ ...AddTodoInput, categoryId: Number(e.target.id) });
+    setAddTodoInput({
+      ...AddTodoInput,
+      categoryId: Number(e.target.id),
+      categoryColor: e.target.value,
+    });
   };
   const categoryList = categories;
   let num = 0;
@@ -19,6 +20,7 @@ const CategorySelectDiv = ({ categories, AddTodoInput, setAddTodoInput }) => {
             key={num++}
             type="button"
             id={category.categoryId}
+            value={category.categoryColor}
             backgroundColor={category.categoryColor}
             onClick={categorySelectHandler}
           >
@@ -61,6 +63,7 @@ const CategoryButton = styled.button`
   height: 3em;
   border: 0;
   border-radius: 8px;
+  &:focus,
   &:hover {
     border: 3px solid var(--color-light-gray);
   }
