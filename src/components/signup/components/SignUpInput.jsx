@@ -24,7 +24,6 @@ const SignUpInput = () => {
   const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
   const [isConfirmEmail, setIsConfirmEamail] = useState(false);
   const [readonly, setReadOnly] = useState(false);
-  const [confirmReadOnly, setConfirmReadOnly] = useState(false);
 
   const onChangeEmail = useCallback((e) => {
     const emailRegex =
@@ -36,7 +35,6 @@ const SignUpInput = () => {
       setIsEmail(false);
     } else {
       setEmailMessage("");
-      setIsEmail(true);
     }
   }, []);
 
@@ -128,7 +126,7 @@ const SignUpInput = () => {
         return data;
       }
     } catch (error) {
-      console.log(error);
+      alert(error.response.data.msg);
     }
   };
 
@@ -138,7 +136,6 @@ const SignUpInput = () => {
       email,
     }).then((res) => {
       if (res === undefined) {
-        alert("인증요청실패 했습니다.");
         setReadOnly(false);
       } else {
         setReadOnly(true);
@@ -167,16 +164,15 @@ const SignUpInput = () => {
   };
 
   const emailConfirmHandler = () => {
-    setConfirmReadOnly(true);
     emailconfirm({
+      email,
       verifyCode,
     }).then((res) => {
       if (res === undefined) {
         alert("인증실패 했습니다.");
-        setConfirmReadOnly(false);
       } else {
-        setConfirmReadOnly(true);
         setIsEmail(true);
+        setIsConfirmEamail(false);
       }
     });
   };
@@ -184,42 +180,40 @@ const SignUpInput = () => {
   return (
     <StForm>
       <StTitle>Sign up</StTitle>
-      {/* <EmailDiv> */}
-      <StInput
-        placeholder="이메일 주소를 입력하세요."
-        onChange={onChangeEmail}
-        readOnly={readonly}
-      ></StInput>
-      {/* <EmailBtn
+      <EmailDiv>
+        <StInput
+          placeholder="이메일 주소를 입력하세요."
+          onChange={onChangeEmail}
+          readOnly={readonly}
+        ></StInput>
+        <EmailBtn
           type="button"
           onClick={() => {
             confirmHendler();
           }}
           disabled={readonly}
         >
-          인증
-        </EmailBtn> */}
-      {/* </EmailDiv> */}
+          {isEmail === false ? "인증" : "인증완료"}
+        </EmailBtn>
+      </EmailDiv>
       <AlarmSpan>{email.length > 0 && <span>{emailMessage}</span>}</AlarmSpan>
       {isConfirmEmail && (
-        <ComfirmDiv>
-          <StEmailConfirm
-            readOnly={confirmReadOnly}
+        <EmailConfirmDiv>
+          <StInput
             placeholder="인증번호"
             onChange={(e) => {
               onChangeEmailConfirm(e);
             }}
-          ></StEmailConfirm>
-          <EmailConfrimBtn
-            disabled={confirmReadOnly}
+          ></StInput>
+          <EmailBtn
             type="button"
             onClick={() => {
               emailConfirmHandler();
             }}
           >
             확인
-          </EmailConfrimBtn>
-        </ComfirmDiv>
+          </EmailBtn>
+        </EmailConfirmDiv>
       )}
       <StInput
         placeholder="닉네임을 입력하세요."
@@ -273,7 +267,7 @@ const StForm = styled.form`
   flex-direction: column;
   background-color: white;
   width: 294px;
-  height: 406px;
+  height: 506px;
   border-radius: 8px;
   margin-top: 46px;
 `;
@@ -291,10 +285,11 @@ const StTitle = styled.div`
 const StInput = styled.input`
   width: 100%;
   height: 48px;
+
   font-size: 14px;
   font-weight: bold;
-  margin-top: 8px;
   border: white;
+  /* color: var(--color-gray); */
   background: var(--color-default);
   border-radius: 8px;
   font-family: "NanumGothic";
@@ -308,25 +303,20 @@ const EmailDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background: var(--color-default);
+  font-size: 14px;
+  border-radius: 8px;
 `;
 
-const StInputEmail = styled.input`
-  width: 74%;
-  height: 6.6vh;
-  font-size: 1rem;
-  font-family: "Oleo Script";
-  border: white;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-  background: #d9d9d9;
+const EmailConfirmDiv = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-default);
+  font-size: 14px;
   border-radius: 8px;
-  ::placeholder {
-    font-family: "Oleo Script";
-    font-style: normal;
-    font-weight: 800;
-    font-size: 1rem;
-    text-align: center;
-    color: #7c7c7c;
-  }
+  margin-bottom: 12px;
 `;
 
 const StButtonBox = styled.div`
@@ -337,17 +327,15 @@ const StButtonBox = styled.div`
 `;
 
 const EmailBtn = styled.button`
-  margin-left: 0.5rem;
-  width: 11vw;
-  height: 6.8vh;
-  font-size: 1rem;
-  background-color: var(--color-main);
+  width: 85px;
+  height: 16px;
+  margin-right: 3px;
+  font-size: 14px;
+  background: var(--color-default);
   border: none;
   border-radius: 8px;
-  color: white;
+  color: var(--color-main);
   font-weight: bold;
-  font-size: 1rem;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 `;
 
 const StSignupBtn = styled.button`
@@ -375,46 +363,6 @@ const CancelBtn = styled.button`
   color: var(--color-gray);
   border: none;
   background-color: transparent;
-`;
-
-const StEmailConfirm = styled.input`
-  width: 74%;
-  height: 4.6vh;
-  font-family: "Oleo Script";
-  border: white;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-  background: #d9d9d9;
-  border-radius: 8px;
-  ::placeholder {
-    font-family: "Oleo Script";
-    font-style: normal;
-    font-weight: 800;
-    font-size: 1rem;
-    text-align: center;
-    color: #7c7c7c;
-  }
-`;
-
-const EmailConfrimBtn = styled.button`
-  margin-left: 0.5rem;
-  width: 11vw;
-  height: 4.8vh;
-  background-color: var(--color-main);
-  border: none;
-  border-radius: 8px;
-  color: white;
-  font-weight: bold;
-  font-size: 1rem;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-`;
-
-const ComfirmDiv = styled.div`
-  width: 74%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 5%;
-  font-size: 1rem;
 `;
 
 const AlarmSpan = styled.span`
