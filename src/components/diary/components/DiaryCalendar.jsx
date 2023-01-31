@@ -52,7 +52,6 @@ const DiaryCalendar = ({ setYear, setMonth, setDate, setSelectDate }) => {
         //     )
         //   }
       />
-      }
     </Calendarcontainer>
   );
 };

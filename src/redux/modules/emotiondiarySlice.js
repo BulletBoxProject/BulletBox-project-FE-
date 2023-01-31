@@ -2,7 +2,9 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { baseURLApiV1 } from "../../core/api";
 
 // 초기값 설정
-const initialState = {};
+const initialState = {
+  emotiondiary: {},
+};
 
 // thunk
 export const __getDiary = createAsyncThunk(
