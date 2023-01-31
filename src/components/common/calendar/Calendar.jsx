@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import Calendar from "react-calendar";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { __getMainCalendar } from "../../../redux/modules/mainSlice";
+
+import {
+  __getMainCalendar,
+  __getSelectDateTodo,
+} from "../../../redux/modules/mainSlice";
 
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
@@ -11,8 +15,9 @@ import { notInitialized } from "react-redux/es/utils/useSyncExternalStore";
 const BulletCalendar = ({
   nowMonthView,
   selectDate,
-  setSelectDate,
+  setSelectDateTitle,
   setTodoList,
+  setSelectTodoDate,
 }) => {
   const dispatch = useDispatch();
   const [isTodo, setIsTodo] = useState({});
@@ -30,12 +35,19 @@ const BulletCalendar = ({
   // };
   const dateChangeHandler = (e) => {
     const dateArr = ["일", "월", "화", "수", "목", "금", "토"];
-    setSelectDate(
+    setSelectDateTitle(
       `${String(e.getFullYear()).substr(2, 2)}/${
         e.getMonth() + 1
       }/${e.getDate()}(${dateArr[e.getDay()]})`
     );
     // selectDateLog(e);
+    console.log(e.getFullYear());
+    const selectDataPayload = {
+      year: e.getFullYear(),
+      month: e.getMonth() + 1,
+      day: e.getDate(),
+    };
+    dispatch(__getSelectDateTodo(selectDataPayload));
   };
   return (
     <Calendarcontainer>
@@ -83,7 +95,7 @@ const Calendarcontainer = styled.div`
   }
   .react-calendar__navigation {
     display: flex;
-    width: 35%;
+    width: 42%;
     margin: 0 auto !important;
     margin-bottom: 10px !important;
     background-color: transparent !important;
@@ -157,6 +169,7 @@ const Calendarcontainer = styled.div`
       color: var(--color-gray);
       background-color: var(--color-default);
       margin: 5px 0 0 0;
+      pointer-events: none;
     }
   }
   .react-calendar--doubleView {
