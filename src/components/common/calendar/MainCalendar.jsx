@@ -2,40 +2,44 @@ import React, { useState } from "react";
 import Calendar from "react-calendar";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { __getMainCalendar } from "../../../redux/modules/mainSlice";
 
+import {
+  __getMainCalendar,
+  __getMonthTodoCount,
+  __getSelectDateTodo,
+} from "../../../redux/modules/mainSlice";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { notInitialized } from "react-redux/es/utils/useSyncExternalStore";
 
-const BulletCalendar = ({
-  nowMonthView,
-  selectDate,
-  setSelectDate,
-  setTodoList,
-}) => {
+const MainCalendar = ({ nowMonthView, setSelectDateTitle }) => {
   const dispatch = useDispatch();
-  const [isTodo, setIsTodo] = useState({});
 
   const calendarCountList = useSelector(
     (state) => state?.mainTodo?.mainTodo?.calendar
   );
   console.log("셀럭터 값", calendarCountList);
-
-  // const selectDateLog = async (e) => {
-  //   const selectDateCalendar = `/main/dailys?year=${e.getFullYear()}&month=${
-  //     e.getMonth() + 1
-  //   }&day=${e.getDate()}`;
-  //   dispatch(__getMainCalendar(selectDateCalendar));
-  // };
   const dateChangeHandler = (e) => {
     const dateArr = ["일", "월", "화", "수", "목", "금", "토"];
-    setSelectDate(
+    setSelectDateTitle(
       `${String(e.getFullYear()).substr(2, 2)}/${
         e.getMonth() + 1
       }/${e.getDate()}(${dateArr[e.getDay()]})`
     );
-    // selectDateLog(e);
+    const selectDataPayload = {
+      year: e.getFullYear(),
+      month: e.getMonth() + 1,
+      day: e.getDate(),
+    };
+    dispatch(__getSelectDateTodo(selectDataPayload));
+  };
+  const monthChangeHandler = ({ action, activeStartDate, value, view }) => {
+    const monthChangePayload = {
+      year: activeStartDate.getFullYear(),
+      month: activeStartDate.getMonth() + 1,
+    };
+
+    dispatch(__getMonthTodoCount(monthChangePayload));
   };
   return (
     <Calendarcontainer>
@@ -43,6 +47,7 @@ const BulletCalendar = ({
         <Calendar
           calendarType="US"
           onChange={dateChangeHandler}
+          onActiveStartDateChange={monthChangeHandler}
           nextLabel={<NextIcon />}
           prevLabel={<PrevIcon />}
           next2Label={null}
@@ -67,7 +72,7 @@ const BulletCalendar = ({
   );
 };
 
-export default BulletCalendar;
+export default MainCalendar;
 
 const DateTodoCount = styled.p`
   font-size: 14px;
@@ -83,7 +88,7 @@ const Calendarcontainer = styled.div`
   }
   .react-calendar__navigation {
     display: flex;
-    width: 35%;
+    width: 45%;
     margin: 0 auto !important;
     margin-bottom: 10px !important;
     background-color: transparent !important;
@@ -127,6 +132,10 @@ const Calendarcontainer = styled.div`
       color: black;
       border: 0 !important;
     }
+    & > :focus {
+      color: white;
+      border: 0 !important;
+    }
   }
   .react-calendar__month-view__days__day {
     display: flex !important;
@@ -136,6 +145,10 @@ const Calendarcontainer = styled.div`
     padding-top: 10px;
     font-size: 10px;
     font-weight: bold;
+    & :active {
+      color: black;
+      border: 0 !important;
+    }
     & > abbr {
       padding: 8px 7px;
       font-size: 10px;
@@ -149,6 +162,7 @@ const Calendarcontainer = styled.div`
       color: var(--color-gray);
       background-color: var(--color-default);
       margin: 5px 0 0 0;
+      pointer-events: none;
     }
   }
   .react-calendar--doubleView {
