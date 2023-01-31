@@ -6,7 +6,7 @@ import category from "../modules/categorySlice";
 import favorite from "../modules/favoriteSlice";
 import search from "../modules/searchSlice";
 import mainTodo from "../modules/mainSlice";
-import diary from "../modules/diarySlice";
+import emotiondiary from "../modules/emotiondiarySlice";
 
 const store = configureStore({
   reducer: {
@@ -16,7 +16,7 @@ const store = configureStore({
     favorite,
     search,
     mainTodo,
-    diary,
+    emotiondiary,
   },
 });
 

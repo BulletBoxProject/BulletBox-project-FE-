@@ -6,7 +6,7 @@ const initialState = {};
 
 // thunk
 export const __getDiary = createAsyncThunk(
-  "diary/getDiary",
+  "emotiondiary/getDiary",
   async (payload, thunkAPI) => {
     try {
       console.log(payload, "post");
@@ -20,7 +20,7 @@ export const __getDiary = createAsyncThunk(
 );
 
 export const __postDiary = createAsyncThunk(
-  "diary/postDiary",
+  "emotiondiary/postDiary",
   async (payload, thunkAPI) => {
     try {
       console.log(payload);
@@ -34,23 +34,21 @@ export const __postDiary = createAsyncThunk(
 );
 
 //slice
-const diarySlice = createSlice({
-  name: "diary",
+const emotiondiarySlice = createSlice({
+  name: "emotiondiary",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(__getDiary.fulfilled, (state, action) => {
         console.log(action.payload);
-        state.diary = action.payload.data;
+        state.emotiondiary = action.payload.data;
       })
       .addCase(__postDiary.fulfilled, (state, action) => {
-        console.log(action.payload);
-        // state.diary = action.payload.data;
-        // state.diary.diary = [...state.diary.diary, action.payload];
+        state.emotiondiary.emotiondiary = action.payload.data;
       });
   },
 });
 
-export const {} = diarySlice.actions;
-export default diarySlice.reducer;
+export const {} = emotiondiarySlice.actions;
+export default emotiondiarySlice.reducer;
