@@ -38,6 +38,7 @@ const EmotionBtn = styled.button`
   height: 28px;
   border: none;
   background-color: transparent;
+  fill: var(--color-gray);
   :focus {
     fill: var(--color-main);
   }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
-import BulletCalendar from "../../common/calendar/Calendar";
+import DiaryCalendar from "../components/DiaryCalendar";
 import EmotionButton from "../components/EmotionButton";
 
 import { ReactComponent as edit } from "../../../img/diary/edit.svg";
@@ -19,10 +19,11 @@ const DiaryContainer = () => {
   // );
   const dispatch = useDispatch();
 
-  const [diaryContent, setDiaryContent] = useState(diaryList?.diaryContent);
+  const [diaryContent, setDiaryContent] = useState("");
   const [diaryId, setDiaryId] = useState(diaryList?.diaryId);
   const [emotion, setEmotin] = useState(diaryList?.emotion);
   const [disabled, setDisabled] = useState(true);
+  const [selectDate, setSelectDate] = useState("");
   const [year, setYear] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth() + 1);
   const [date, setDate] = useState(new Date().getDate());
@@ -43,7 +44,6 @@ const DiaryContainer = () => {
 
   const onAddHandler = () => {
     dispatch(__postDiary(DiaryInfo));
-    console.log(DiaryInfo);
     setDisabled(true);
   };
 
@@ -51,23 +51,33 @@ const DiaryContainer = () => {
     setDiaryContent(e.target.value);
   };
 
+  const onDateHandler = () => {
+    const day = ["일", "월", "화", "수", "목", "금", "토"];
+    const today = `${String(year).substr(2, 2)}/${
+      month < 9 ? `0${month}` : month
+    }/${date}(${day[new Date().getDay()]})`;
+    setSelectDate(today);
+  };
+
   useEffect(() => {
     dispatch(__getDiary());
+    onDateHandler();
   }, [dispatch]);
-
-  const day = ["일", "월", "화", "수", "목", "금", "토"];
-  const today = `${String(new Date().getFullYear()).substr(2, 2)}/${
-    new Date().getMonth() + 1
-  }/${new Date().getDate()}(${day[new Date().getDay()]})`;
 
   return (
     <Container>
       <CalendarDiv>
         <SelectDiv>Today</SelectDiv>
-        <BulletCalendar />
+        <DiaryCalendar
+          setYear={setYear}
+          setMonth={setMonth}
+          setDate={setDate}
+          setSelectDate={setSelectDate}
+          setDiaryContent={setDiaryContent}
+        />
       </CalendarDiv>
       <TodoDiv>
-        <DateTitle>{today}</DateTitle>
+        <DateTitle>{selectDate}</DateTitle>
         <EmotionDiv>
           <EmotionBox>
             <EmotionButton setEmotin={setEmotin} />
@@ -100,7 +110,6 @@ const DiaryContainer = () => {
             onChange={(e) => onDiaryHandler(e)}
           />
         )}
-
         {diaryList && <DiaryLength>({diaryContent?.length}/200)</DiaryLength>}
       </TodoDiv>
     </Container>
