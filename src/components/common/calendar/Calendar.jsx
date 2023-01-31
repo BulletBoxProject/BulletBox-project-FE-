@@ -254,7 +254,8 @@ const Calendarcontainer = styled.div`
   .react-calendar__tile--now:enabled:hover,
   .react-calendar__tile--now:enabled:focus {
     border-radius: 5px;
-    color: white;
+    border: 3px solid #e6e6e6 !important;
+    /* color: white; */
   }
   .react-calendar__tile--hasActive {
     background: white;
