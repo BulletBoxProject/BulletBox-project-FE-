@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import BulletCalendar from "../../common/calendar/Calendar";
+import MainCalendar from "../../common/calendar/MainCalendar";
 import { ReactComponent as angry } from "../../../img/emotion/angry-1.svg";
 import { ReactComponent as excited } from "../../../img/emotion/excited-1.svg";
 import { ReactComponent as happy } from "../../../img/emotion/happy-1.svg";
@@ -32,7 +32,7 @@ const DiaryContainer = () => {
     <Container>
       <CalendarDiv>
         <SelectDiv>Today</SelectDiv>
-        <BulletCalendar />
+        <MainCalendar />
       </CalendarDiv>
       <TodoDiv>
         <DateTitle>{today}</DateTitle>

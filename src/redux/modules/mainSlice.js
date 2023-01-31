@@ -16,16 +16,14 @@ export const __getMainTodo = createAsyncThunk(
     }
   }
 );
-export const __getCalendarTodoCount = createAsyncThunk(
-  "main/getCalendarTodoCount",
+export const __getMonthTodoCount = createAsyncThunk(
+  "main/getMonthTodoCount",
   async (payload, thunkAPI) => {
-    console.log(payload);
     try {
       const { data } = await baseURLApiV1.get(
         `/main/calendars?year=${payload.year}&month=${Number(payload.month)}`
       );
-      console.log(data.data);
-      return thunkAPI.fulfillWithValue(data?.data);
+      return thunkAPI.fulfillWithValue(data?.data?.calendar);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -57,8 +55,8 @@ const mainSlice = createSlice({
       .addCase(__getMainTodo.fulfilled, (state, action) => {
         state.mainTodo = action.payload;
       })
-      .addCase(__getCalendarTodoCount.fulfilled, (state, action) => {
-        state.mainTodo.calendar = action.payload.data;
+      .addCase(__getMonthTodoCount.fulfilled, (state, action) => {
+        state.mainTodo.calendar = action.payload;
       })
       .addCase(__getSelectDateTodo.fulfilled, (state, action) => {
         state.mainTodo.daily = action.payload;

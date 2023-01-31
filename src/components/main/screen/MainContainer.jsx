@@ -1,20 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  __getCalendarTodoCount,
-  __getMainTodo,
-} from "../../../redux/modules/mainSlice";
-
-import { baseURLApiV1 } from "../../../core/api";
-
-import NavigationMenu from "../../../layout/footer/components/NavigationMenu";
+import { __getMainTodo } from "../../../redux/modules/mainSlice";
 
 import SelectCategory from "../../common/SelectCategory";
 import BulletDiv from "../components/BulletDiv";
 import BulletSwitchList from "../../dailyLog/components/BulletSwitchList";
 
-import BulletCalendar from "../../common/calendar/Calendar";
+import MainCalendar from "../../common/calendar/MainCalendar";
 
 const MainContainer = () => {
   const dispatch = useDispatch();
@@ -41,7 +34,6 @@ const MainContainer = () => {
   };
   useEffect(() => {
     dispatch(__getMainTodo());
-    dispatch(__getCalendarTodoCount(nowMonthView));
     getToday();
   }, [dispatch]);
 
@@ -50,7 +42,7 @@ const MainContainer = () => {
     <Container>
       <CalendarDiv>
         <SelectTodayButton>Today</SelectTodayButton>
-        <BulletCalendar
+        <MainCalendar
           nowMonthView={nowMonthView.month}
           selectDateTitle={selectDateTitle}
           setSelectDateTitle={setSelectDateTitle}
