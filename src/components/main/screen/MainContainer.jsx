@@ -48,7 +48,7 @@ const MainContainer = () => {
   return (
     <Container>
       <CalendarDiv>
-        <SelectDiv>Today</SelectDiv>
+        <SelectTodayButton>Today</SelectTodayButton>
         <BulletCalendar
           nowMonthView={nowMonthView.month}
           selectDate={selectDate}
@@ -88,13 +88,16 @@ const Container = styled.div`
 `;
 const CalendarDiv = styled.div`
   position: relative;
-  height: 315px;
+  height: 360px;
   margin: 10px 0;
   justify-content: center;
   align-items: center;
 `;
-const SelectDiv = styled.div`
+const SelectTodayButton = styled.button`
   position: absolute;
+  border: 0;
+  background-color: transparent;
+  font-weight: 700;
   top: 3%;
   left: 88%;
   align-items: center;
@@ -110,6 +113,7 @@ const TodoDiv = styled.div`
   padding: 15px;
   border-radius: 16px;
   background-color: var(--color-default);
+  margin-top: 15px;
 `;
 const DateTitle = styled.h2`
   text-align: center;
