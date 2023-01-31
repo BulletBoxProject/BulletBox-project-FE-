@@ -8,7 +8,7 @@ import { ReactComponent as moreIcon } from "../../../../../img/myPage/more.svg";
 import { ReactComponent as editIcon } from "../../../../../img/myPage/edit.svg";
 import { ReactComponent as deleteIcon } from "../../../../../img/myPage/delete.svg";
 import { ReactComponent as memoBullet } from "../../../../../img/myPage/memo-5.svg";
-import { ReactComponent as todoBullet } from "../../../../../img/myPage/todo-1.svg";
+import { ReactComponent as star } from "../../../../../img/myPage/round-star-outline.svg";
 
 import AlwaysUpdateModal from "./AwaysUpdateModal";
 import useOutSideClick from "../../../../../hooks/useOutSideClick";
@@ -58,11 +58,12 @@ const AlwaysTodo = ({
 
   return (
     <>
-      <CardContainer backgroundColor={backgroundColor}>
+      <CardContainer>
         <MainBulletTodo>
+          <CategoryColorDiv categoryColor={backgroundColor} />
           <TodoBodyDiv>
             <span>
-              <TodoBullet />
+              <StarBullet />
             </span>
             <span>{content}</span>
           </TodoBodyDiv>
@@ -150,15 +151,21 @@ export default AlwaysTodo;
 
 const CardContainer = styled.div`
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
-  margin-left: 2%;
-  width: 94%;
+  width: 100%;
   border: none;
-  background-color: ${({ backgroundColor }) => backgroundColor || "white"};
-  box-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.3);
-  padding: 12px;
+  background-color: var(--color-default);
+  gap: 10px;
   border-radius: 8px;
 `;
+const CategoryColorDiv = styled.div`
+  width: 2.5%;
+  height: 100%;
+  background-color: ${(props) => props.categoryColor};
+  border-radius: 8px 0 0 8px;
+`;
+
 const ModalContainer = styled.div`
   position: absolute;
   top: 0;
@@ -208,9 +215,15 @@ const CancelButton = styled.div`
 const MainBulletTodo = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 10px;
   width: 100%;
+  height: 42px;
+  padding: 0 13px 0 0;
+  & > input {
+    width: 90%;
+    padding: 0;
+    margin: 0;
+  }
 `;
 const TodoBodyDiv = styled.div`
   display: flex;
@@ -304,7 +317,7 @@ const MemoBullet = styled(memoBullet)`
   height: 18px;
 `;
 
-const TodoBullet = styled(todoBullet)`
+const StarBullet = styled(star)`
   width: 24px;
   height: 18px;
 `;

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Modal from "../../../../common/modal/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { ReactComponent as memoBullet } from "../../../../../img/myPage/memo-5.svg";
-import { ReactComponent as todoBullet } from "../../../../../img/myPage/todo-1.svg";
+import { ReactComponent as star } from "../../../../../img/myPage/round-star-outline.svg";
 import { ReactComponent as addIcon } from "../../../../../img/myPage/add.svg";
 import { ReactComponent as closeIcon } from "../../../../../img/myPage/close.svg";
 
@@ -111,7 +111,7 @@ const AlwaysUpdateModal = ({ onClose, favoriteId, content, memo }) => {
         <Container>
           <TodoBodyDiv>
             <TodoTitle>
-              <TodoBullet />
+              <StarBullet />
               <AlwaysTodoInput
                 value={favoriteContent}
                 onChange={(e) => {
@@ -278,7 +278,8 @@ const SelectBtn = styled.button`
   border: none;
   background-color: ${({ backgroundColor }) => backgroundColor};
   &:active,
-  &:hover {
+  &:hover,
+  &:focus {
     border: 5px solid white;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.8);
   }
@@ -289,7 +290,7 @@ const MemoBullet = styled(memoBullet)`
   height: 18px;
 `;
 
-const TodoBullet = styled(todoBullet)`
+const StarBullet = styled(star)`
   width: 24px;
   height: 18px;
 `;

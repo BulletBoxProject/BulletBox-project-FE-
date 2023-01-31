@@ -39,32 +39,39 @@ const BulletTodoForm = ({ AddTodoInput, setAddTodoInput }) => {
 
   return (
     <Container>
-      <BulletSelectButton type="button" onClick={showBulletHandler}>
-        {AddTodoInput.todoBulletName === "불렛" ? (
-          <span>선택</span>
-        ) : (
-          <BulletSwitchList bulletName={AddTodoInput.todoBulletName} />
-        )}
-      </BulletSelectButton>
-      {showBullet ? (
-        <BulletList>
-          <button type="button" onClick={selectBulletHandler} value={"할 일"}>
-            <TodoBullet />
-          </button>
-          <button type="button" onClick={selectBulletHandler} value={"완료"}>
-            <CheckBullet />
-          </button>
-          <button type="button" onClick={selectBulletHandler} value={"미룬 일"}>
-            <PostphoneBullet />
-          </button>
-          <button type="button" onClick={selectBulletHandler} value={"중요"}>
-            <ImportantBullet />
-          </button>
-          <button type="button" onClick={selectBulletHandler} value={"메모"}>
-            <MemoBullet />
-          </button>
-        </BulletList>
-      ) : null}
+      <BulletSelectDiv>
+        <BulletSelectButton type="button" onClick={showBulletHandler}>
+          {AddTodoInput.todoBulletName === "불렛" ? (
+            <span>선택</span>
+          ) : (
+            <BulletSwitchList bulletName={AddTodoInput.todoBulletName} />
+          )}
+        </BulletSelectButton>
+        {showBullet ? (
+          <BulletList>
+            <button type="button" onClick={selectBulletHandler} value={"할 일"}>
+              <TodoBullet />
+            </button>
+            <button type="button" onClick={selectBulletHandler} value={"완료"}>
+              <CheckBullet />
+            </button>
+            <button
+              type="button"
+              onClick={selectBulletHandler}
+              value={"미룬 일"}
+            >
+              <PostphoneBullet />
+            </button>
+            <button type="button" onClick={selectBulletHandler} value={"중요"}>
+              <ImportantBullet />
+            </button>
+            <button type="button" onClick={selectBulletHandler} value={"메모"}>
+              <MemoBullet />
+            </button>
+          </BulletList>
+        ) : null}
+      </BulletSelectDiv>
+
       <TodoInput
         placeholder="할일을 입력해주세요"
         onChange={todoInputHandler}
@@ -79,16 +86,20 @@ export default BulletTodoForm;
 
 const Container = styled.div`
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   align-items: center;
+`;
+const BulletSelectDiv = styled.div`
+  position: relative;
 `;
 const BulletSelectButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  width: 12%;
+  width: 45px;
   background-color: inherit;
   border: 0;
+  padding: 0;
   & > span {
     font-size: 12px;
     padding: 4px;
@@ -101,8 +112,7 @@ const BulletList = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
-  left: 6.5vw;
-  top: 15vh;
+  left: 10px;
   border: 1px solid gray;
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.85);

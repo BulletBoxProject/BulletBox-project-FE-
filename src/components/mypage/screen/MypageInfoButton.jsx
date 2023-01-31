@@ -36,8 +36,10 @@ const Button = styled.button`
   padding: 8px 0;
   background: none;
   border: none;
+  border-bottom: 1px solid var(--color-default);
   &:active,
-  &:hover {
+  &:hover,
+  &:focus {
     border: none;
     border-bottom: 4px solid var(--color-main);
     border-radius: 4px;
