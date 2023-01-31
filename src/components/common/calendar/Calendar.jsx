@@ -127,6 +127,10 @@ const Calendarcontainer = styled.div`
       color: black;
       border: 0 !important;
     }
+    & > :focus {
+      color: white;
+      border: 0 !important;
+    }
   }
   .react-calendar__month-view__days__day {
     display: flex !important;
@@ -136,6 +140,10 @@ const Calendarcontainer = styled.div`
     padding-top: 10px;
     font-size: 10px;
     font-weight: bold;
+    & :active {
+      color: black;
+      border: 0 !important;
+    }
     & > abbr {
       padding: 8px 7px;
       font-size: 10px;
