@@ -41,9 +41,9 @@ const SelectDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 35vw;
-  left: -28vw;
-  top: 5vh;
+  width: 144px;
+  left: -150px;
+  top: 0;
   gap: 3px;
   padding: 5px 14px;
   position: absolute;
