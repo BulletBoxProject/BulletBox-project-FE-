@@ -43,8 +43,8 @@ const Container = styled.div`
 `;
 
 const ModalWrap = styled.div`
-  width: 82%;
-  height: 26%;
+  width: 294px;
+  height: 192px;
   border-radius: 15px;
   background-color: #fff;
   position: absolute;

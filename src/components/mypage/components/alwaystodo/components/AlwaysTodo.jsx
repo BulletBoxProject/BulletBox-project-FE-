@@ -151,12 +151,10 @@ export default AlwaysTodo;
 const CardContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
   flex-direction: column;
   width: 100%;
   border: none;
-  /* background-color: ${(props) => props.categoryColor}; */
-  background-color: var(--color-default);
+  background-color: ${(props) => props.categoryColor};
   border-radius: 8px;
   padding-left: 10px;
 `;
@@ -167,7 +165,8 @@ const ModalContainer = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
 `;
 const ModalContent = styled.div`
   position: fixed;
@@ -210,10 +209,9 @@ const CancelButton = styled.div`
 const MainBulletTodo = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
   width: 100%;
   height: 42px;
-  padding: 0 13px 0 0;
+  border-radius: 8px;
   & > input {
     width: 90%;
     padding: 0;
@@ -253,10 +251,10 @@ const TodoMoreViewDiv = styled.div`
   justify-content: center;
   width: 15%;
   height: 100%;
+
   background-color: var(--color-default);
 `;
 const TodoMoreViewButton = styled.button`
-  position: relative;
   border: 0;
   background-color: inherit;
 `;
@@ -264,10 +262,10 @@ const OptionSelectDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
   background-color: var(--color-default);
   width: 15%;
   height: 100%;
+  border-radius: 0 6 0 6px;
 `;
 
 const OptionButton = styled.button`
