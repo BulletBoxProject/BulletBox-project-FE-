@@ -10,7 +10,8 @@ import { ReactComponent as checkBullet } from "../../../../img/bullet/check-2.sv
 import { ReactComponent as postphoneBullet } from "../../../../img/bullet/postpone-3.svg";
 import { ReactComponent as memoBullet } from "../../../../img/bullet/memo-5.svg";
 import { ReactComponent as importantBullet } from "../../../../img/bullet/asterisk-6.svg";
-import { ReactComponent as favoriteBullet } from "../../../../img/bullet/star-7.svg";
+import { ReactComponent as undefinedBullet } from "../../../../img/bullet/triangle.svg";
+import { ReactComponent as highLightBullet } from "../../../../img/bullet/circle-double.svg";
 
 const BulletTodoForm = ({ AddTodoInput, setAddTodoInput }) => {
   const [showBullet, setShowBullet] = useState(false);
@@ -65,8 +66,11 @@ const BulletTodoForm = ({ AddTodoInput, setAddTodoInput }) => {
             <button type="button" onClick={selectBulletHandler} value={"중요"}>
               <ImportantBullet />
             </button>
-            <button type="button" onClick={selectBulletHandler} value={"메모"}>
-              <MemoBullet />
+            <button type="button" onClick={selectBulletHandler} value={"미정"}>
+              <UndefinedBullet />
+            </button>
+            <button type="button" onClick={selectBulletHandler} value={"강조"}>
+              <HighLightBullet />
             </button>
           </BulletList>
         ) : null}
@@ -192,11 +196,11 @@ const MemoBullet = styled(memoBullet)`
     pointer-events: none;
   }
 `;
-
-const FavoriteBullet = styled(favoriteBullet)`
+const UndefinedBullet = styled(undefinedBullet)`
   width: 24px;
-  height: 18px;
-  & > svg {
-    pointer-events: none;
-  }
+  height: 24px;
+`;
+const HighLightBullet = styled(highLightBullet)`
+  width: 24px;
+  height: 24px;
 `;

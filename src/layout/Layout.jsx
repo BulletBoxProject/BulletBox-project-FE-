@@ -19,19 +19,6 @@ const Layout = (props) => {
   );
 };
 
-// const Layout = () => {
-//   const scrollPosition = useScrollPosition();
-//   return (
-//     <Container>
-//       <Header />
-//       <StLayout marginTop={scrollPosition <= 36 && "7.7rem"}>
-//         <Outlet />
-//       </StLayout>
-//       <Footer />
-//     </Container>
-//   );
-// };
-
 export default Layout;
 
 const Container = styled.div`
@@ -40,7 +27,7 @@ const Container = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: var(--color-light-gray);
 `;
 const PageContainer = styled.div`

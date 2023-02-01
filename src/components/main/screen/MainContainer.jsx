@@ -6,6 +6,7 @@ import { __getMainTodo } from "../../../redux/modules/mainSlice";
 import SelectCategory from "../../common/SelectCategory";
 import BulletDiv from "../components/BulletDiv";
 import BulletSwitchList from "../../dailyLog/components/BulletSwitchList";
+import MainTodoCard from "../components/MainTodoCard";
 
 import MainCalendar from "../../common/calendar/MainCalendar";
 
@@ -59,12 +60,16 @@ const MainContainer = () => {
                 <TodoTitle>할일을 추가해주세요.</TodoTitle>
               </DailyTodoList>
             ) : (
-              mainTodoList.map((todo) => (
-                <DailyTodoList key={num++}>
-                  <BulletSwitchList bulletName={todo.todoBulletName} />
-                  <TodoTitle>{todo.todoContent}</TodoTitle>
-                </DailyTodoList>
-              ))
+              <MainTodoDiv>
+                {mainTodoList.map((todo) => (
+                  <MainTodoCard
+                    todoContent={todo.todoContent}
+                    categoryColor={todo.categoryColor}
+                    todoBulletName={todo.todoBulletName}
+                    time={todo.time}
+                  />
+                ))}
+              </MainTodoDiv>
             )}
           </DailyTodoDiv>
         )}
@@ -92,7 +97,6 @@ const SelectTodayButton = styled.button`
   border: 0;
   background-color: transparent;
   font-weight: 700;
-  top: 3%;
   left: 88%;
   align-items: center;
   padding: 5px 0;
@@ -110,13 +114,21 @@ const TodoDiv = styled.div`
   margin-top: 15px;
   overflow: visible;
 `;
-const DateTitle = styled.h2`
+const DateTitle = styled.div`
+  font-size: 14px;
+  font-weight: 900;
+  padding: 6px 0;
   text-align: center;
 `;
 const DailyTodoDiv = styled.div``;
 const DailyTodoList = styled.div`
   display: flex;
   justify-content: center;
+`;
+const MainTodoDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 `;
 const TodoTitle = styled.div`
   font-size: 14px;
