@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,6 +6,8 @@ import {
   __getDailyTodo,
   __getFavoritesTodo,
 } from "../../../redux/modules/dailysSlice";
+
+import useOutSideClick from "../../../hooks/useOutSideClick";
 
 import CategorySelector from "../components/CategorySelector";
 import AllTodoShow from "../components/AllTodoShow";
@@ -21,6 +23,7 @@ import { ReactComponent as oftenTodo } from "../../../img/dailyLog/often.svg";
 import { ReactComponent as newTodo } from "../../../img/dailyLog/new.svg";
 
 const DailyLogContainer = () => {
+  const addTodoRef = useRef(null);
   const dispatch = useDispatch();
   const [showSelectBox, setShowSelectBox] = useState(false);
   const [dailyLogs, setDailyLogs] = useState([]);
@@ -69,6 +72,10 @@ const DailyLogContainer = () => {
     showDate.month
   }/${showDate.day}/(${showDate.dayOfDate})`;
 
+  useOutSideClick(addTodoRef, () => {
+    setShowSelectBox(false);
+  });
+
   let num = 0;
   return (
     <Container>
@@ -111,7 +118,7 @@ const DailyLogContainer = () => {
             setDailyLogs={setDailyLogs}
           />
         )}
-        <AddTodoDiv>
+        <AddTodoDiv ref={addTodoRef}>
           <AddTodoButton type="button" onClick={showAddTodoSelect}>
             <AddTodoIcon />
           </AddTodoButton>
