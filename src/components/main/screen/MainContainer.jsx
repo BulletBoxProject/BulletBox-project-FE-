@@ -113,10 +113,12 @@ const TodoDiv = styled.div`
   flex-direction: column;
   gap: 15px;
   width: 100%;
-  min-height: 300px;
-  padding: 15px;
+  min-height: 210px;
+  margin-bottom: 5px;
+  padding: 15px 15px 20px 15px;
   border-radius: 16px;
   background-color: var(--color-default);
+  /* box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3); */
   margin-top: 15px;
   overflow: visible;
 `;
