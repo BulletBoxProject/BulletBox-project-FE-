@@ -59,13 +59,20 @@ const DiaryContents = ({
           </EditCheckDiv>
         )}
       </EmotionDiv>
-
-      <DiaryText
-        disabled={disabled}
-        value={diaryContent}
-        placeholder="일기를 작성해보세요."
-        onChange={(e) => onDiaryHandler(e)}
-      />
+      {diaryContent && diaryContent === null ? (
+        <DiaryText
+          disabled={disabled}
+          placeholder="일기를 작성해보세요."
+          onChange={(e) => onDiaryHandler(e)}
+        />
+      ) : (
+        <DiaryText
+          disabled={disabled}
+          value={diaryContent}
+          placeholder="일기를 작성해보세요."
+          onChange={(e) => onDiaryHandler(e)}
+        />
+      )}
 
       <DiaryLength>({diaryContent?.length}/200)</DiaryLength>
     </TodoDiv>

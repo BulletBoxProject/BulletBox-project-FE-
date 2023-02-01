@@ -20,9 +20,11 @@ const DiaryContainer = () => {
   const diaryEmotion = useSelector(
     (state) => state?.emotionDiary?.emotionDiary?.diary?.emotion
   );
-  // const emotions = useSelector(
-  //   (state) => state?.emotiondiary?.emotiondiary?.emotions
-  // );
+  // useSelector((state) => {
+  //   console.log("전역상태값", state);
+  // });
+
+
   const dispatch = useDispatch();
 
   const [diaryContent, setDiaryContent] = useState("");
@@ -56,13 +58,17 @@ const DiaryContainer = () => {
   useEffect(() => {
     dispatch(__getDiary());
     onDateHandler();
-    // if (diaryContents === null) {
-    //   setDiaryContent("");
-    // } else {
-    setDiaryContent(diaryContents);
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (diaryContents === null) {
+      setDiaryContent("");
+    } else {
+      setDiaryContent(diaryContents);
+    }
     setDiaryId(diaryID);
     setEmotin(diaryEmotion);
-  }, [dispatch, diaryContents]);
+  }, [diaryContents]);
 
   return (
     <Container>
