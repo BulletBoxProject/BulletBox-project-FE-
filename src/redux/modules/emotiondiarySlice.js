@@ -8,7 +8,7 @@ const initialState = {
 
 // thunk
 export const __getDiary = createAsyncThunk(
-  "emotionDiary/getDiary",
+  "emotionDiary/getEmotionDiary",
   async (payload, thunkAPI) => {
     try {
       const { data } = await baseURLApiV1.get(`diaries`, payload);
@@ -20,7 +20,7 @@ export const __getDiary = createAsyncThunk(
 );
 
 export const __getDiaryDate = createAsyncThunk(
-  "emotionDiary/getDiaryDate",
+  "emotionDiary/getEmotionDiaryDate",
   async (payload, thunkAPI) => {
     try {
       console.log(payload);
@@ -35,7 +35,7 @@ export const __getDiaryDate = createAsyncThunk(
 );
 
 export const __postDiary = createAsyncThunk(
-  "emotionDiary/postDiary",
+  "emotionDiary/postEmotionDiary",
   async (payload, thunkAPI) => {
     try {
       console.log(payload);
