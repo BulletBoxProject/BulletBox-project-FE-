@@ -54,7 +54,7 @@ export default CalendarModal;
 const CalendarContents = styled.div``;
 const TodayButton = styled.button`
   position: absolute;
-  transform: translate(660%, 180%);
+  transform: translate(680%, 155%);
   border: 0;
   background-color: transparent;
   font-weight: bolder;

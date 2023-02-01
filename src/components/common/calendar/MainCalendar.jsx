@@ -73,6 +73,7 @@ const MainCalendar = ({
               ) : null
             )
           }
+          view={"month"}
         />
       )}
     </Calendarcontainer>
