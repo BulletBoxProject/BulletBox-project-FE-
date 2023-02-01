@@ -70,6 +70,7 @@ const favoriteSlice = createSlice({
         state.favorite = action.payload.data;
       })
       .addCase(__postFavorite.fulfilled, (state, action) => {
+        console.log(action.payload);
         state.favorite.favorites = [
           ...state.favorite.favorites,
           action.payload,

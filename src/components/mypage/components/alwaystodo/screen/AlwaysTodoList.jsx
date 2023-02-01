@@ -20,7 +20,7 @@ const AlwaysTodoList = () => {
     <Container>
       <AlwaysAddList>
         {favoriteList && favoriteList.length === 0 ? (
-          <AlwaysAddPtag>루틴을 추가해보세요.</AlwaysAddPtag>
+          <AlwaysAddTag>내 루틴을 추가해주세요</AlwaysAddTag>
         ) : (
           favoriteList?.map((val) => {
             return (
@@ -53,8 +53,10 @@ const AlwaysAddList = styled.div`
   gap: 10px;
 `;
 
-const AlwaysAddPtag = styled.p`
+const AlwaysAddTag = styled.span`
   margin: 0 auto;
-  font-size: 20px;
+  color: var(--color-main);
+  font-size: 16px;
   font-weight: bold;
+  margin-top: 20px;
 `;

@@ -281,7 +281,7 @@ const SelectBtn = styled.button`
   &:hover,
   &:focus {
     border: 5px solid white;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.8);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
   }
 `;
 

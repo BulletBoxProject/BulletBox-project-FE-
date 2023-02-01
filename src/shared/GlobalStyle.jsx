@@ -27,11 +27,18 @@ url('/fonts/NanumGothic.woff') format('woff');}
 *{
   font-family: 'NanumSquare';
 }
-
-body, div, button{
+body{    
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center !important;
+      justify-content: center;
+      background-color: #d9d9d9;
+    }
+  
+ div, button{
   box-sizing: border-box;
   font-size: 10px;
-  margin: 0, auto;
 }
 
 input {
