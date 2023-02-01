@@ -19,19 +19,6 @@ const Layout = (props) => {
   );
 };
 
-// const Layout = () => {
-//   const scrollPosition = useScrollPosition();
-//   return (
-//     <Container>
-//       <Header />
-//       <StLayout marginTop={scrollPosition <= 36 && "7.7rem"}>
-//         <Outlet />
-//       </StLayout>
-//       <Footer />
-//     </Container>
-//   );
-// };
-
 export default Layout;
 
 const Container = styled.div`
