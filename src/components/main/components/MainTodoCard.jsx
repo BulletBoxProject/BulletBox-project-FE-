@@ -3,16 +3,16 @@ import styled from "styled-components";
 
 import BulletSwitchList from "../../dailyLog/components/BulletSwitchList";
 
-const MainTodoCard = () => {
+const MainTodoCard = ({ todoContent, categoryColor, todoBulletName, time }) => {
   return (
-    <Container backgroundColor={"#F4BCB8"}>
+    <Container backgroundColor={categoryColor}>
       <CategoryColorDiv></CategoryColorDiv>
       <BulletDiv>
-        <BulletSwitchList bulletName={"완료"} />
+        <BulletSwitchList bulletName={todoBulletName} />
       </BulletDiv>
       <TodoContentDiv>
-        <TodoTitle>요가 취소하기</TodoTitle>
-        <TodoSetTime>14:00</TodoSetTime>
+        <TodoTitle>{todoContent}</TodoTitle>
+        {time === null ? null : <TodoSetTime>{time}</TodoSetTime>}
       </TodoContentDiv>
     </Container>
   );
