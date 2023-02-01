@@ -150,6 +150,7 @@ const CardContainer = styled.div`
   background-color: ${(props) => props.categoryColor};
   border-radius: 8px;
   padding-left: 8px;
+  margin-left: 8px;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
 `;
 const TodoContainer = styled.div`

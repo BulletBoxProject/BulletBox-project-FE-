@@ -99,8 +99,8 @@ const CloseImg = styled(close)``;
 
 const CloseBtn = styled.button`
   position: absolute;
-  margin-left: 7%;
-  margin-top: 7%;
+  right: 7%;
+  top: 7%;
   width: 16px;
   height: 16px;
   background-color: white;
