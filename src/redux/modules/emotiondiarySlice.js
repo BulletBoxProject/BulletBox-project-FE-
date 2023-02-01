@@ -10,7 +10,7 @@ export const __getDiary = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await baseURLApiV1.get(`diaries`, payload);
-      return thunkAPI.fulfillWithValue(data);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -31,12 +31,27 @@ export const __getDiaryDate = createAsyncThunk(
   }
 );
 
+export const __getDiaryMonth = createAsyncThunk(
+  "emotionDiary/getEmotionDiaryMonth",
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await baseURLApiV1.get(
+        `diaries/calendars?year=${payload.year}&month=${payload.month}`
+      );
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const __postDiary = createAsyncThunk(
   "emotionDiary/postEmotionDiary",
   async (payload, thunkAPI) => {
     try {
+      console.log(payload, "보내는값");
       const { data } = await baseURLApiV1.post(`diaries`, payload);
-      return thunkAPI.fulfillWithValue(data);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -51,21 +66,17 @@ const emotionDiarySlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(__getDiary.fulfilled, (state, action) => {
-        state.emotionDiary = action.payload.data;
+        state.emotionDiary = action.payload;
       })
       .addCase(__getDiaryDate.fulfilled, (state, action) => {
         state.emotionDiary.diary = action.payload;
-        // console.log(state.emotionDiary.diary);
-        // console.log(action.payload.data, "페이로드");
-        // state.emotionDiary = action.payload.data;
-        // state.emotionDiary = {
-        //   ...state.emotionDiary,
-        //   diaryContent: "1",
-        // };
-        // console.log(state.emotionDiary, "받아온 날짜 데이터");
+      })
+      .addCase(__getDiaryMonth.fulfilled, (state, action) => {
+        console.log(action.payload);
+        state.emotionDiary.emotions = action.payload.emotions;
       })
       .addCase(__postDiary.fulfilled, (state, action) => {
-        state.emotionDiary.emotionDiary = action.payload.data;
+        state.emotionDiary.diary = action.payload;
       });
   },
 });

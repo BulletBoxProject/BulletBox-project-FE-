@@ -3,17 +3,27 @@ import Calendar from "react-calendar";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { __getDiaryDate } from "../../../redux/modules/emotionDiarySlice";
+import { __getDiaryMonth } from "../../../redux/modules/emotionDiarySlice";
+import Emotions from "./Emotions";
 
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 
 const DiaryCalendar = ({ setYear, setMonth, setDate, setSelectDate }) => {
+  const emotions = useSelector(
+    (state) => state?.emotionDiary?.emotionDiary?.emotions
+  );
+  console.log(emotions, "이모티콘");
+  const [nowMonthView, setNowMonthView] = useState({
+    year: new Date().getFullYear(),
+    month: new Date().getMonth() + 1,
+  });
+
   const dispatch = useDispatch();
-  const [isTodo, setIsTodo] = useState({});
 
   const dateChangeHandler = (e) => {
     const dateArr = ["일", "월", "화", "수", "목", "금", "토"];
-    setYear(String(e.getFullYear()).substr(2, 2));
+    setYear(e.getFullYear());
     setMonth(e.getMonth() + 1);
     setDate(e.getDate());
     setSelectDate(
@@ -28,39 +38,49 @@ const DiaryCalendar = ({ setYear, setMonth, setDate, setSelectDate }) => {
     };
     dispatch(__getDiaryDate(DateInfo));
   };
+
+  const monthChangeHandler = ({ activeStartDate }) => {
+    const monthChangePayload = {
+      year: activeStartDate.getFullYear(),
+      month: activeStartDate.getMonth() + 1,
+    };
+    setNowMonthView(monthChangePayload);
+
+    dispatch(__getDiaryMonth(monthChangePayload));
+  };
+
   return (
     <Calendarcontainer>
-      <Calendar
-        calendarType="US"
-        onChange={dateChangeHandler}
-        nextLabel={<NextIcon />}
-        prevLabel={<PrevIcon />}
-        next2Label={null}
-        prev2Label={null}
-        formatDay={(locale, date) =>
-          date.toLocaleString("en", { day: "numeric" })
-        }
-        formatShortWeekday={(locale, date) =>
-          ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][date.getDay()]
-        }
-        //   tileContent={({ activeStartDate, date, view }) =>
-        //     date.getMonth() + 1 === nowMonthView &&
-        //     calendarCountList.map((todo) =>
-        //       todo.day === date.getDate() ? (
-        //         <DateTodoCount key={todo.day}>+{todo.count}</DateTodoCount>
-        //       ) : null
-        //     )
-        //   }
-      />
+      {emotions && (
+        <Calendar
+          calendarType="US"
+          onChange={dateChangeHandler}
+          onActiveStartDateChange={monthChangeHandler}
+          nextLabel={<NextIcon />}
+          prevLabel={<PrevIcon />}
+          next2Label={null}
+          prev2Label={null}
+          formatDay={(locale, date) =>
+            date.toLocaleString("en", { day: "numeric" })
+          }
+          formatShortWeekday={(locale, date) =>
+            ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][date.getDay()]
+          }
+          tileContent={({ date }) =>
+            date.getMonth() + 1 === nowMonthView.month &&
+            emotions?.map((data) =>
+              data.day === date.getDate() ? (
+                <Emotions key={data.day} emotion={data.emotion} />
+              ) : null
+            )
+          }
+        />
+      )}
     </Calendarcontainer>
   );
 };
 
 export default DiaryCalendar;
-
-const DateTodoCount = styled.p`
-  font-size: 14px;
-`;
 
 const Calendarcontainer = styled.div`
   .react-calendar {

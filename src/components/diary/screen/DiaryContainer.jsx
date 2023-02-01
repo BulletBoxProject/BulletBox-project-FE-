@@ -20,13 +20,11 @@ const DiaryContainer = () => {
   const diaryEmotion = useSelector(
     (state) => state?.emotionDiary?.emotionDiary?.diary?.emotion
   );
-  useSelector((state) => {
-    console.log("전역상태값", state);
-  });
+  // useSelector((state) => {
+  //   console.log("전역상태값", state);
+  // });
 
-  // const emotions = useSelector(
-  //   (state) => state?.emotiondiary?.emotiondiary?.emotions
-  // );
+
   const dispatch = useDispatch();
 
   const [diaryContent, setDiaryContent] = useState("");

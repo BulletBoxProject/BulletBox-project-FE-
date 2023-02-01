@@ -59,7 +59,6 @@ const DiaryContents = ({
           </EditCheckDiv>
         )}
       </EmotionDiv>
-      {console.log(diaryContent === null)}
       {diaryContent && diaryContent === null ? (
         <DiaryText
           disabled={disabled}
