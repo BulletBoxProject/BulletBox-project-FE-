@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import LogInInput from "../components/LogInInput";
+import SocialLogin from "../components/SocialLogin";
 import { ReactComponent as Logo } from "../../../img/login/logo-graphic.svg";
 
 const LogInContainer = () => {
@@ -10,8 +11,8 @@ const LogInContainer = () => {
         <BulletLogo />
         <BulletBold>Bullet Box</BulletBold>
       </TopContainer>
-
       <LogInInput />
+      <SocialLogin />
     </Container>
   );
 };

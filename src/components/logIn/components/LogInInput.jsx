@@ -93,7 +93,6 @@ const LogInInput = () => {
       <StSpanDiv>
         <StSpanTag style={{ dispaly: "hidden" }}>{message}</StSpanTag>
       </StSpanDiv>
-
       <StButtonBox>
         <StLoginBtn
           type="submit"
