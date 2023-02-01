@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { __postDailyTodo } from "../../../../redux/modules/dailysSlice";
 import { baseURLApiV1 } from "../../../../core/api";
@@ -11,6 +11,9 @@ import TimeSettingDiv from "./TimeSettingDiv";
 import CategorySelectDiv from "./CategorySelectDiv";
 
 const AddTodoInput = () => {
+  const selectDate = useParams().date;
+  const dateArray = selectDate.split("_");
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [AddTodoInput, setAddTodoInput] = useState({
@@ -18,9 +21,9 @@ const AddTodoInput = () => {
     todoBulletName: "불렛",
     time: "00:00",
     categoryId: null,
-    year: 2023,
-    month: 1,
-    day: 4,
+    year: Number(dateArray[0]),
+    month: Number(dateArray[1]),
+    day: Number(dateArray[2]),
     memos: [],
   });
   const [categories, setCategories] = useState([]);
@@ -40,29 +43,24 @@ const AddTodoInput = () => {
   };
   const submitTodoHandler = () => {
     dispatch(__postDailyTodo(AddTodoInput));
-    // postTodo(AddTodoInput);
+    alert(
+      `${AddTodoInput.year}년 ${AddTodoInput.month}월 ${AddTodoInput.day}일에 할 일이 추가되었습니다.`
+    );
     setTimeout(() => {
       navigate("/dailys");
     }, 10);
   };
   useEffect(() => {
     loadAddTodoPage();
-    const today = new Date();
-    setAddTodoInput({
-      ...AddTodoInput,
-      year: today.getFullYear(),
-      month: today.getMonth() + 1,
-      day: today.getDate(),
-    });
   }, []);
-  const day = ["일", "월", "화", "수", "목", "금", "토"];
-  const today = `${String(new Date().getFullYear()).substr(2, 2)}/${
-    new Date().getMonth() + 1
-  }/${new Date().getDate()}(${day[new Date().getDay()]})`;
+  const dateTitle = `${dateArray[0].substr(2, 2)}/${dateArray[1]}/${
+    dateArray[2]
+  }(${dateArray[3]})`;
+  console.log(dateTitle);
   return (
     <Container>
       <DateDiv>
-        <DateButton>{today}</DateButton>
+        <DateButton>{dateTitle}</DateButton>
       </DateDiv>
       <TodoAndMemoDiv>
         <BulletTodoForm

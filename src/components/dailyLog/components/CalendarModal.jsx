@@ -22,12 +22,7 @@ const CalendarModal = ({ setShowCalendar, setShowDate }) => {
     setShowCalendar(false);
   };
   const selectDateHandler = () => {
-    console.log(selectedDate);
-    setShowDate(
-      `${String(selectedDate.year).substr(2, 2)}/${selectedDate.month}/${
-        selectedDate.day
-      }/(${selectedDate.dayOfDate})`
-    );
+    setShowDate(selectedDate);
     dipatch(
       __getSelectDateTodo(
         `${selectedDate.year}/${selectedDate.month}/${selectedDate.day}`

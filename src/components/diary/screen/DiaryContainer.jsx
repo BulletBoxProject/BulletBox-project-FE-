@@ -8,9 +8,9 @@ import DiaryContents from "../components/DiaryContents";
 import { __getDiary } from "../../../redux/modules/emotionDiarySlice";
 
 const DiaryContainer = () => {
-  const diaryList = useSelector(
-    (state) => state?.emotionDiary?.emotionDiary?.diary
-  );
+  // const diaryList = useSelector(
+  //   (state) => state?.emotionDiary?.emotionDiary?.diary
+  // );
   const diaryContents = useSelector(
     (state) => state?.emotionDiary?.emotionDiary?.diary?.diaryContent
   );
@@ -43,13 +43,13 @@ const DiaryContainer = () => {
     emotion: emotion,
   };
 
-  console.log(diaryList);
+  // console.log(diaryList, "list");
 
   const onDateHandler = () => {
     const day = ["일", "월", "화", "수", "목", "금", "토"];
     const today = `${String(year).substr(2, 2)}/${
-      month < 9 ? `0${month}` : month
-    }/${date < 9 ? `0${date}` : date}(${day[new Date().getDay()]})`;
+      month < 10 ? `0${month}` : month
+    }/${date < 10 ? `0${date}` : date}(${day[new Date().getDay()]})`;
     setSelectDate(today);
   };
 
