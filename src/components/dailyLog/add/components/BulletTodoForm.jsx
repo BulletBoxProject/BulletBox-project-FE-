@@ -17,6 +17,7 @@ const BulletTodoForm = ({ AddTodoInput, setAddTodoInput }) => {
   const [showBullet, setShowBullet] = useState(false);
   const [todoInput, setTodoInput] = useState("");
   const [isTodoInputDone, setIsTodoInputDone] = useState(false);
+  const [inputLimit, setInputLimit] = useState("");
   const showBulletHandler = (e) => {
     e.preventDefault();
     setShowBullet(!showBullet);
@@ -32,6 +33,7 @@ const BulletTodoForm = ({ AddTodoInput, setAddTodoInput }) => {
   const todoInputHandler = (e) => {
     e.preventDefault();
     setTodoInput(e.target.value);
+    setInputLimit(e.target.value);
     setAddTodoInput({
       ...AddTodoInput,
       todoContent: e.target.value,
@@ -75,13 +77,19 @@ const BulletTodoForm = ({ AddTodoInput, setAddTodoInput }) => {
           </BulletList>
         ) : null}
       </BulletSelectDiv>
-
-      <TodoInput
-        placeholder="할일을 입력해주세요"
-        onChange={todoInputHandler}
-        value={todoInput}
-        disabled={isTodoInputDone}
-      />
+      <InputDiv>
+        <TodoInput
+          placeholder="할일을 입력해주세요"
+          onChange={todoInputHandler}
+          value={todoInput}
+          maxLength={32}
+          disabled={isTodoInputDone}
+        />
+        <InputLimitDiv>
+          <span>{inputLimit.length}</span>
+          <span>/32</span>
+        </InputLimitDiv>
+      </InputDiv>
     </Container>
   );
 };
@@ -136,8 +144,14 @@ const BulletList = styled.div`
     }
   }
 `;
-const TodoInput = styled.input`
+const InputDiv = styled.div`
+  display: flex;
+  align-items: center;
   width: 85%;
+  gap: 5px;
+`;
+const TodoInput = styled.input`
+  width: 88%;
   border: 0;
   background-color: inherit;
   padding-left: 0;
@@ -150,7 +164,12 @@ const TodoInput = styled.input`
     outline: none;
   }
 `;
-
+const InputLimitDiv = styled.div`
+  width: 12%;
+  & > span {
+    color: var(--color-gray);
+  }
+`;
 const AddTodoButton = styled.button`
   width: 10%;
   background-color: inherit;
