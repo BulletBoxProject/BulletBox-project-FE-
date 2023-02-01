@@ -96,13 +96,27 @@ export const __deleteDailyTodo = createAsyncThunk(
 export const __putDailyTodo = createAsyncThunk(
   "dailyLog/putDailyTodo",
   async (payload, thunkAPI) => {
-    console.log(payload);
+    const modifiedMemo = payload.memos.map((memo) =>
+      delete memo.renderId === true
+        ? {
+            todoMemoId: memo.todoMemoId,
+            todoMemoContent: memo.todoMemoContent,
+          }
+        : memo
+    );
+    console.log("페이로드", payload);
+    console.log("수정된 메모", modifiedMemo);
     try {
-      const { data } = await baseURLApiV1.put(`/dailys/todo`, payload);
-      return thunkAPI.fulfillWithValue(payload);
+      const { data } = await baseURLApiV1.put(`/dailys/todo`, {
+        ...payload,
+        memos: modifiedMemo,
+      });
+      return thunkAPI.fulfillWithValue({
+        ...payload,
+        memos: modifiedMemo,
+      });
     } catch (error) {
       console.log(error);
-      // return thunkAPI.rejectWithValue(error);
     }
   }
 );
@@ -138,7 +152,7 @@ const dailysSlice = createSlice({
         );
       })
       .addCase(__putDailyTodo.fulfilled, (state, action) => {
-        state.dailyTodo.daily = state.dailyTodo.daily.map((todo) => {
+        state.dailyTodo.daily = state?.dailyTodo?.daily?.map((todo) => {
           return todo.todoId === action.payload.todoId ? action.payload : todo;
         });
       });
