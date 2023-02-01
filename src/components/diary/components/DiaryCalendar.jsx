@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Calendar from "react-calendar";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { __getDiaryDate } from "../../../redux/modules/emotiondiarySlice";
+import { __getDiaryDate } from "../../../redux/modules/emotionDiarySlice";
 
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";

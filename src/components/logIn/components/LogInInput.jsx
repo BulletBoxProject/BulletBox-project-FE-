@@ -106,12 +106,6 @@ const LogInInput = () => {
         </StLoginBtn>
       </StButtonBox>
       <UserInfoBox>
-        <UserInfoDiv>
-          <UserInfoBtn>아이디찾기</UserInfoBtn>
-        </UserInfoDiv>
-        <UserInfoDiv>
-          <UserInfoBtn>비밀번호재설정</UserInfoBtn>
-        </UserInfoDiv>
         <SignupDiv>
           <StSignupBtn
             type="button"
@@ -227,7 +221,7 @@ const StLoginBtn = styled.button`
 const UserInfoBox = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   margin-top: 20px;
   width: 222px;
   height: 11px;

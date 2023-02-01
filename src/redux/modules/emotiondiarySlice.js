@@ -3,12 +3,12 @@ import { baseURLApiV1 } from "../../core/api";
 
 // 초기값 설정
 const initialState = {
-  emotiondiary: {},
+  emotionDiary: {},
 };
 
 // thunk
 export const __getDiary = createAsyncThunk(
-  "emotiondiary/getDiary",
+  "emotionDiary/getEmotionDiary",
   async (payload, thunkAPI) => {
     try {
       const { data } = await baseURLApiV1.get(`diaries`, payload);
@@ -20,7 +20,7 @@ export const __getDiary = createAsyncThunk(
 );
 
 export const __getDiaryDate = createAsyncThunk(
-  "emotiondiary/getDiaryDate",
+  "emotionDiary/getEmotionDiaryDate",
   async (payload, thunkAPI) => {
     try {
       console.log(payload);
@@ -35,7 +35,7 @@ export const __getDiaryDate = createAsyncThunk(
 );
 
 export const __postDiary = createAsyncThunk(
-  "emotiondiary/postDiary",
+  "emotionDiary/postEmotionDiary",
   async (payload, thunkAPI) => {
     try {
       console.log(payload);
@@ -48,27 +48,28 @@ export const __postDiary = createAsyncThunk(
 );
 
 //slice
-const emotiondiarySlice = createSlice({
-  name: "emotiondiary",
+const emotionDiarySlice = createSlice({
+  name: "emotionDiary",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(__getDiary.fulfilled, (state, action) => {
         console.log(action.payload);
-        state.emotiondiary = action.payload.data;
+        state.emotionDiary = action.payload.data;
+        console.log(state.emotionDiary, "222");
       })
       .addCase(__getDiaryDate.fulfilled, (state, action) => {
         console.log(action.payload);
-        state.emotiondiary.emotiondiary = action.payload.data;
-        console.log(state.emotiondiary.emotiondiary);
+        state.emotionDiary.emotionDiary = action.payload.data;
+        console.log(state.emotionDiary.emotionDiary, "받아온 날짜 데이터");
       })
       .addCase(__postDiary.fulfilled, (state, action) => {
         console.log(action.payload.data);
-        state.emotiondiary.emotiondiary = action.payload.data;
+        state.emotionDiary.emotionDiary = action.payload.data;
       });
   },
 });
 
-export const {} = emotiondiarySlice.actions;
-export default emotiondiarySlice.reducer;
+export const {} = emotionDiarySlice.actions;
+export default emotionDiarySlice.reducer;
