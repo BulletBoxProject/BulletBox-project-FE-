@@ -69,8 +69,10 @@ const DailyLogContainer = () => {
   }, [dispatch]);
 
   const dailyLogTitle = `${String(showDate.year).substr(2, 2)}/${
-    showDate.month
-  }/${showDate.day}/(${showDate.dayOfDate})`;
+    showDate.month < 10 ? "0" + showDate.month : showDate.month
+  }/${showDate.day < 10 ? "0" + showDate.day : showDate.day}/(${
+    showDate.dayOfDate
+  })`;
 
   useOutSideClick(addTodoRef, () => {
     setShowSelectBox(false);
