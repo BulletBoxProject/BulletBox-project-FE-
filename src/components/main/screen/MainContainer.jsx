@@ -92,7 +92,6 @@ const SelectTodayButton = styled.button`
   border: 0;
   background-color: transparent;
   font-weight: 700;
-  top: 3%;
   left: 88%;
   align-items: center;
   padding: 5px 0;
