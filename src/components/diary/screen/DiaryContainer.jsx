@@ -50,8 +50,8 @@ const DiaryContainer = () => {
   const onDateHandler = () => {
     const day = ["일", "월", "화", "수", "목", "금", "토"];
     const today = `${String(year).substr(2, 2)}/${
-      month < 9 ? `0${month}` : month
-    }/${date < 9 ? `0${date}` : date}(${day[new Date().getDay()]})`;
+      month < 10 ? `0${month}` : month
+    }/${date < 10 ? `0${date}` : date}(${day[new Date().getDay()]})`;
     setSelectDate(today);
   };
 
