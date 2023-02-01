@@ -5,20 +5,20 @@ import styled from "styled-components";
 import DiaryCalendar from "../components/DiaryCalendar";
 import DiaryContents from "../components/DiaryContents";
 
-import { __getDiary } from "../../../redux/modules/emotiondiarySlice";
+import { __getDiary } from "../../../redux/modules/emotionDiarySlice";
 
 const DiaryContainer = () => {
   const diaryList = useSelector(
-    (state) => state?.emotiondiary?.emotiondiary?.diary
+    (state) => state?.emotionDiary?.emotionDiary?.diary
   );
   const diaryContents = useSelector(
-    (state) => state?.emotiondiary?.emotiondiary?.diary?.diaryContent
+    (state) => state?.emotionDiary?.emotionDiary?.diary?.diaryContent
   );
   const diaryID = useSelector(
-    (state) => state?.emotiondiary?.emotiondiary?.diary?.diaryId
+    (state) => state?.emotionDiary?.emotionDiary?.diary?.diaryId
   );
   const diaryEmotion = useSelector(
-    (state) => state?.emotiondiary?.emotiondiary?.diary?.emotion
+    (state) => state?.emotionDiary?.emotionDiary?.diary?.emotion
   );
   // const emotions = useSelector(
   //   (state) => state?.emotiondiary?.emotiondiary?.emotions
@@ -62,7 +62,6 @@ const DiaryContainer = () => {
     setDiaryContent(diaryContents);
     setDiaryId(diaryID);
     setEmotin(diaryEmotion);
-    // }
   }, [dispatch, diaryContents]);
 
   return (
