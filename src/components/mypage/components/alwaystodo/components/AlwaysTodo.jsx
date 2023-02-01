@@ -58,9 +58,8 @@ const AlwaysTodo = ({
 
   return (
     <>
-      <CardContainer>
+      <CardContainer categoryColor={backgroundColor}>
         <MainBulletTodo>
-          <CategoryColorDiv categoryColor={backgroundColor} />
           <TodoBodyDiv>
             <span>
               <StarBullet />
@@ -151,19 +150,15 @@ export default AlwaysTodo;
 
 const CardContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: space-evenly;
   flex-direction: column;
   width: 100%;
   border: none;
+  /* background-color: ${(props) => props.categoryColor}; */
   background-color: var(--color-default);
-  gap: 10px;
   border-radius: 8px;
-`;
-const CategoryColorDiv = styled.div`
-  width: 2.5%;
-  height: 100%;
-  background-color: ${(props) => props.categoryColor};
-  border-radius: 8px 0 0 8px;
+  padding-left: 10px;
 `;
 
 const ModalContainer = styled.div`
@@ -228,33 +223,51 @@ const MainBulletTodo = styled.div`
 const TodoBodyDiv = styled.div`
   display: flex;
   align-items: center;
-  width: 85%;
+  width: 100%;
+  height: 100%;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: bold;
   gap: 10px;
+  background-color: var(--color-default);
 `;
+
 const TodoMemoDiv = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 10px;
-  background-color: inherit;
-  padding: 4px 0;
+  background-color: var(--color-default);
+  padding-left: 10px;
+  width: 100%;
 `;
 const MemoContent = styled.div`
   display: flex;
   align-items: center;
+  background-color: var(--color-default);
   font-size: 12px;
   font-weight: bold;
-  gap: 5px;
+  gap: 10px;
+  padding-left: 18px;
 `;
-const TodoMoreViewDiv = styled.div``;
+const TodoMoreViewDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15%;
+  height: 100%;
+  background-color: var(--color-default);
+`;
 const TodoMoreViewButton = styled.button`
   position: relative;
   border: 0;
   background-color: inherit;
 `;
 const OptionSelectDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
+  background-color: var(--color-default);
+  width: 15%;
+  height: 100%;
 `;
 
 const OptionButton = styled.button`

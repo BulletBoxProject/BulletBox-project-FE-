@@ -38,12 +38,14 @@ export default CategoryUpdateBtn;
 const CategoryBtn = styled.button`
   width: 124px;
   height: 48px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
+  color: #3e3e3e;
   border-radius: 10px;
   border: none;
   background-color: ${({ backgroundColor }) =>
     backgroundColor || "var(--color-default)"};
 
-  box-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+  /* filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.3)); */
 `;

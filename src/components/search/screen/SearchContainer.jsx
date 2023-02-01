@@ -15,7 +15,6 @@ const SearchContainer = () => {
   const [timer, setTimer] = useState(0);
 
   const searchList = useSelector((state) => state?.search?.search?.searches);
-
   const dispatch = useDispatch();
 
   const searchHandler = (e) => {
@@ -85,7 +84,13 @@ const SearchContainer = () => {
         <SearchList>
           {searchList && reverseDate === false
             ? searchList?.map((value) => {
-                return <SearchTodo key={value.todoId} search={value} />;
+                return (
+                  <SearchTodo
+                    key={value.todoId}
+                    search={value}
+                    todoBullet={value.todoBullet}
+                  />
+                );
               })
             : [...searchList]?.reverse().map((value) => {
                 return <SearchTodo key={value.todoId} search={value} />;

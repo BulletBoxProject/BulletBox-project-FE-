@@ -9,8 +9,9 @@ const GlobalStyle = createGlobalStyle`
   --color-dark-gray: #3E3E3E;
   --color-light-gray: #D9D9D9;
   --color-default: #F6F6F6;
-  --color-likeWhite: #EBEBEB;
+  --color-likeWhite: #EBEBEB; 
   --color-c1-gray: #C1C1C1;
+  --shadow-box-shadow: box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
 }
 @import url('https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&display=swap');
 @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');

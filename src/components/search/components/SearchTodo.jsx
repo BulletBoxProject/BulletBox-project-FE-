@@ -8,8 +8,8 @@ import { ReactComponent as moreIcon } from "../../../img/myPage/more.svg";
 import { ReactComponent as editIcon } from "../../../img/myPage/edit.svg";
 import { ReactComponent as deleteIcon } from "../../../img/myPage/delete.svg";
 import { ReactComponent as memoBullet } from "../../../img/myPage/memo-5.svg";
-import { ReactComponent as todoBullet } from "../../../img/myPage/todo-1.svg";
 
+import SearchTodoBullet from "./SearchTodoBullet";
 import useOutSideClick from "../../../hooks/useOutSideClick";
 import { useNavigate } from "react-router-dom";
 
@@ -18,7 +18,7 @@ import { __deleteSearch } from "../../../redux/modules/searchSlice";
 const SearchTodo = ({
   search,
   // todoId,
-  // todoBullet,
+  todoBullet,
   // time,
 }) => {
   const [showSelectBox, setShowSelectBox] = useState(false);
@@ -59,7 +59,7 @@ const SearchTodo = ({
         <MainBulletTodo>
           <TodoBodyDiv>
             <span>
-              <TodoBullet />
+              <SearchTodoBullet bulletName={todoBullet} />
             </span>
             <span>{search.todoContent}</span>
           </TodoBodyDiv>
@@ -296,11 +296,6 @@ const OnlyTitleIcon = styled(IoIosArrowUp)`
 `;
 
 const MemoBullet = styled(memoBullet)`
-  width: 20px;
-  height: 14px;
-`;
-
-const TodoBullet = styled(todoBullet)`
   width: 20px;
   height: 14px;
 `;
