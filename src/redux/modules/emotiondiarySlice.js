@@ -38,6 +38,7 @@ export const __postDiary = createAsyncThunk(
   "emotiondiary/postDiary",
   async (payload, thunkAPI) => {
     try {
+      console.log(payload);
       const { data } = await baseURLApiV1.post(`diaries`, payload);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
@@ -63,6 +64,7 @@ const emotiondiarySlice = createSlice({
         console.log(state.emotiondiary.emotiondiary);
       })
       .addCase(__postDiary.fulfilled, (state, action) => {
+        console.log(action.payload.data);
         state.emotiondiary.emotiondiary = action.payload.data;
       });
   },

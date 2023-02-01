@@ -11,14 +11,23 @@ const DiaryContainer = () => {
   const diaryList = useSelector(
     (state) => state?.emotiondiary?.emotiondiary?.diary
   );
+  const diaryContents = useSelector(
+    (state) => state?.emotiondiary?.emotiondiary?.diary?.diaryContent
+  );
+  const diaryID = useSelector(
+    (state) => state?.emotiondiary?.emotiondiary?.diary?.diaryId
+  );
+  const diaryEmotion = useSelector(
+    (state) => state?.emotiondiary?.emotiondiary?.diary?.emotion
+  );
   // const emotions = useSelector(
   //   (state) => state?.emotiondiary?.emotiondiary?.emotions
   // );
   const dispatch = useDispatch();
 
-  const [diaryContent, setDiaryContent] = useState(diaryList?.diaryContent);
-  const [diaryId, setDiaryId] = useState(diaryList?.diaryId);
-  const [emotion, setEmotin] = useState(diaryList?.emotion);
+  const [diaryContent, setDiaryContent] = useState("");
+  const [diaryId, setDiaryId] = useState(null);
+  const [emotion, setEmotin] = useState("");
 
   const [selectDate, setSelectDate] = useState("");
   const [year, setYear] = useState(new Date().getFullYear());
@@ -40,14 +49,21 @@ const DiaryContainer = () => {
     const day = ["일", "월", "화", "수", "목", "금", "토"];
     const today = `${String(year).substr(2, 2)}/${
       month < 9 ? `0${month}` : month
-    }/${date}(${day[new Date().getDay()]})`;
+    }/${date < 9 ? `0${date}` : date}(${day[new Date().getDay()]})`;
     setSelectDate(today);
   };
 
   useEffect(() => {
     dispatch(__getDiary());
     onDateHandler();
-  }, [dispatch]);
+    // if (diaryContents === null) {
+    //   setDiaryContent("");
+    // } else {
+    setDiaryContent(diaryContents);
+    setDiaryId(diaryID);
+    setEmotin(diaryEmotion);
+    // }
+  }, [dispatch, diaryContents]);
 
   return (
     <Container>
@@ -68,7 +84,7 @@ const DiaryContainer = () => {
         emotion={emotion}
         setEmotin={setEmotin}
         selectDate={selectDate}
-      />
+      ></DiaryContents>
     </Container>
   );
 };
