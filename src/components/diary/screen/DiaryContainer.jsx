@@ -20,10 +20,9 @@ const DiaryContainer = () => {
   const diaryEmotion = useSelector(
     (state) => state?.emotionDiary?.emotionDiary?.diary?.emotion
   );
-  // useSelector((state) => {
-  //   console.log("전역상태값", state);
-  // });
-
+  useSelector((state) => {
+    console.log("전역상태값", state);
+  });
 
   const dispatch = useDispatch();
 
@@ -80,6 +79,7 @@ const DiaryContainer = () => {
           setDate={setDate}
           setSelectDate={setSelectDate}
           setDiaryContent={setDiaryContent}
+          emotion={emotion}
         />
       </CalendarDiv>
       <DiaryContents

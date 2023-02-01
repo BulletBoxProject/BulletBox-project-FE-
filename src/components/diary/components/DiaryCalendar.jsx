@@ -9,7 +9,13 @@ import Emotions from "./Emotions";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 
-const DiaryCalendar = ({ setYear, setMonth, setDate, setSelectDate }) => {
+const DiaryCalendar = ({
+  setYear,
+  setMonth,
+  setDate,
+  setSelectDate,
+  emotion,
+}) => {
   const emotions = useSelector(
     (state) => state?.emotionDiary?.emotionDiary?.emotions
   );

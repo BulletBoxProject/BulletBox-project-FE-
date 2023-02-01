@@ -12,7 +12,6 @@ const DiaryContents = ({
   DiaryInfo,
   diaryContent,
   setDiaryContent,
-  emotion,
   setEmotin,
   selectDate,
 }) => {
