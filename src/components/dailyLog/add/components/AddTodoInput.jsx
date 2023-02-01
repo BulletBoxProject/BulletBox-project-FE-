@@ -27,7 +27,7 @@ const AddTodoInput = () => {
     memos: [],
   });
   const [categories, setCategories] = useState([]);
-  console.log("할일 추가", AddTodoInput);
+  console.log("할일 추가 길이", AddTodoInput.todoContent.length);
 
   const loadAddTodoPage = async () => {
     try {

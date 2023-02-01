@@ -29,8 +29,14 @@ const MainContainer = () => {
   const getToday = () => {
     const day = ["일", "월", "화", "수", "목", "금", "토"];
     const today = `${String(new Date().getFullYear()).substr(2, 2)}/${
-      new Date().getMonth() + 1
-    }/${new Date().getDate()}(${day[new Date().getDay()]})`;
+      new Date().getMonth() + 1 < 10
+        ? "0" + (new Date().getMonth() + 1)
+        : new Date().getMonth() + 1
+    }/${
+      new Date().getDate() < 10
+        ? "0" + new Date().getDate()
+        : new Date().getDate()
+    }(${day[new Date().getDay()]})`;
     setSelectDateTitle(today);
   };
   useEffect(() => {
@@ -107,10 +113,12 @@ const TodoDiv = styled.div`
   flex-direction: column;
   gap: 15px;
   width: 100%;
-  min-height: 300px;
-  padding: 15px;
+  min-height: 210px;
+  margin-bottom: 5px;
+  padding: 15px 15px 20px 15px;
   border-radius: 16px;
   background-color: var(--color-default);
+  /* box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3); */
   margin-top: 15px;
   overflow: visible;
 `;
