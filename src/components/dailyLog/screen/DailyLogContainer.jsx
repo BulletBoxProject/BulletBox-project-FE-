@@ -29,6 +29,7 @@ const DailyLogContainer = () => {
   const [showFavoritesTodo, setShowFavoritesTodo] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const [showDate, setShowDate] = useState("");
+  console.log("캘린더 선택 날짜", showDate);
 
   const navigate = useNavigate();
   const day = ["일", "월", "화", "수", "목", "금", "토"];
@@ -120,7 +121,14 @@ const DailyLogContainer = () => {
                 자주쓰는할일 <OftenTodo />
               </div>
               <SelectLine></SelectLine>
-              <div value="newTodo" onClick={() => navigate("/dailys/add")}>
+              <div
+                value="newTodo"
+                onClick={() =>
+                  navigate(
+                    `/dailys/add/${showDate.year}_${showDate.month}_${showDate.day}_${showDate.dayOfDate}`
+                  )
+                }
+              >
                 <span>새 일정 추가</span>
                 <span>
                   <NewTodo />
