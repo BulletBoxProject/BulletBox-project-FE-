@@ -29,12 +29,16 @@ const DailyLogContainer = () => {
   const [showFavoritesTodo, setShowFavoritesTodo] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const [showDate, setShowDate] = useState("");
+  console.log("캘린더 선택 날짜", showDate);
 
   const navigate = useNavigate();
   const day = ["일", "월", "화", "수", "목", "금", "토"];
-  const today = `${String(new Date().getFullYear()).substr(2, 2)}/${
-    new Date().getMonth() + 1
-  }/${new Date().getDate()}(${day[new Date().getDay()]})`;
+  const today = {
+    year: new Date().getFullYear(),
+    month: new Date().getMonth() + 1,
+    day: new Date().getDate(),
+    dayOfDate: day[new Date().getDay()],
+  };
   const showAddTodoSelect = () => {
     setShowSelectBox(!showSelectBox);
   };
@@ -61,13 +65,17 @@ const DailyLogContainer = () => {
     setShowDate(today);
   }, [dispatch]);
 
+  const dailyLogTitle = `${String(showDate.year).substr(2, 2)}/${
+    showDate.month
+  }/${showDate.day}/(${showDate.dayOfDate})`;
+
   let num = 0;
   return (
     <Container>
       <DateAndSelectDiv>
         <div></div>
         <DateButtonDiv>
-          <DateButton onClick={dateChangeHandler}>{showDate}</DateButton>
+          <DateButton onClick={dateChangeHandler}>{dailyLogTitle}</DateButton>
           <SelectDateButton onClick={dateChangeHandler}>
             {showCalendar ? <IoIosArrowUp /> : <IoIosArrowDown />}
           </SelectDateButton>
@@ -113,7 +121,14 @@ const DailyLogContainer = () => {
                 자주쓰는할일 <OftenTodo />
               </div>
               <SelectLine></SelectLine>
-              <div value="newTodo" onClick={() => navigate("/dailys/add")}>
+              <div
+                value="newTodo"
+                onClick={() =>
+                  navigate(
+                    `/dailys/add/${showDate.year}_${showDate.month}_${showDate.day}_${showDate.dayOfDate}`
+                  )
+                }
+              >
                 <span>새 일정 추가</span>
                 <span>
                   <NewTodo />
@@ -125,6 +140,7 @@ const DailyLogContainer = () => {
       </TodoBulletDiv>
       {showFavoritesTodo ? (
         <ModalFavoriteTodo
+          showDate={showDate}
           favoritesTodoList={favoritesTodoList}
           setShowFavoritesTodo={setShowFavoritesTodo}
         />

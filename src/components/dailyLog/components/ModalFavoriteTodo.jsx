@@ -6,14 +6,15 @@ import { __postFavoriteTodo } from "../../../redux/modules/dailysSlice";
 
 import FavoriteTodoCard from "./FavoriteTodoCard";
 
-const ModalFavoriteTodo = ({ favoritesTodoList, setShowFavoritesTodo }) => {
+const ModalFavoriteTodo = ({
+  favoritesTodoList,
+  setShowFavoritesTodo,
+  showDate,
+}) => {
   const dispatch = useDispatch();
   const [addFavoriteTodo, setAddFavoriteTodo] = useState({});
-  const postDate = {
-    year: new Date().getFullYear(),
-    month: new Date().getMonth() + 1,
-    day: new Date().getDate(),
-  };
+  const postDate = { ...showDate };
+  delete postDate.dayOfDate;
   const cancelhandler = () => {
     setShowFavoritesTodo(false);
   };

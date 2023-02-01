@@ -10,9 +10,12 @@ import {
 } from "../../../redux/modules/mainSlice";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
-import { notInitialized } from "react-redux/es/utils/useSyncExternalStore";
 
-const MainCalendar = ({ nowMonthView, setSelectDateTitle }) => {
+const MainCalendar = ({
+  nowMonthView,
+  setNowMonthView,
+  setSelectDateTitle,
+}) => {
   const dispatch = useDispatch();
 
   const calendarCountList = useSelector(
@@ -34,10 +37,12 @@ const MainCalendar = ({ nowMonthView, setSelectDateTitle }) => {
     dispatch(__getSelectDateTodo(selectDataPayload));
   };
   const monthChangeHandler = ({ action, activeStartDate, value, view }) => {
+    console.log("이동한 월", activeStartDate);
     const monthChangePayload = {
       year: activeStartDate.getFullYear(),
       month: activeStartDate.getMonth() + 1,
     };
+    setNowMonthView(monthChangePayload);
 
     dispatch(__getMonthTodoCount(monthChangePayload));
   };

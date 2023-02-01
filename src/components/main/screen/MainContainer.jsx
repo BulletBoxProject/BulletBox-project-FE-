@@ -47,6 +47,7 @@ const MainContainer = () => {
           selectDateTitle={selectDateTitle}
           setSelectDateTitle={setSelectDateTitle}
           setTodoList={setTodoList}
+          setNowMonthView={setNowMonthView}
         />
       </CalendarDiv>
       <TodoDiv>
