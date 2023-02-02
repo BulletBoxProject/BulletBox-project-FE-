@@ -148,7 +148,7 @@ const MainBulletTodo = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 42px;
+  height: 40px;
   border-radius: ${(props) =>
     props.showMemoBox === true ? `8px 8px 0 0` : `8px`};
   background-color: var(--color-default);
@@ -158,7 +158,7 @@ const CategoryColorDiv = styled.div`
   height: 100%;
   background-color: ${(props) => props.categoryColor};
   border-radius: ${(props) =>
-    props.showMemoBox === true ? `8px 0 0 0` : `8px 0 0 8px`};
+    props.showMemoBox === true ? `8px 0 0 0` : `8px 0 0 0`};
 `;
 const TodoBodyDiv = styled.div`
   display: flex;
@@ -236,13 +236,14 @@ const MemoLsitDiv = styled.div`
   display: flex;
   flex-direction: column;
   width: 95%;
+  padding-bottom: 5px;
 `;
 const TodoMemoDiv = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   background-color: inherit;
-  padding: 8px 0;
+  padding-bottom: 4px;
 `;
 const MemoContent = styled.div`
   display: flex;
@@ -250,6 +251,7 @@ const MemoContent = styled.div`
   width: 90%;
   padding-left: 24px;
   font-size: 12px;
+  font-weight: bold;
   gap: 5px;
 `;
 const TodoMoreViewDiv = styled.div``;

@@ -29,7 +29,6 @@ const EditTodoInput = ({ todoList, categoryList }) => {
     memos: todoList?.memos,
   });
   console.log("수정된 할일", AddTodoInput);
-  const [categories, setCategories] = useState([]);
 
   const submitTodoHandler = () => {
     dispatch(__putDailyTodo(AddTodoInput));
@@ -59,8 +58,6 @@ const EditTodoInput = ({ todoList, categoryList }) => {
             AddTodoInput={AddTodoInput}
             setAddTodoInput={setAddTodoInput}
             memos={AddTodoInput.memos}
-            // newMemo={newMemo}
-            // setNewMemo={setNewMemo}
           />
         </TodoAndMemoDiv>
       )}
