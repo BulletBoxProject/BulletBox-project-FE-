@@ -49,7 +49,6 @@ export const __postDiary = createAsyncThunk(
   "emotionDiary/postEmotionDiary",
   async (payload, thunkAPI) => {
     try {
-      console.log(payload, "보내는값");
       const { data } = await baseURLApiV1.post(`diaries`, payload);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
@@ -72,11 +71,11 @@ const emotionDiarySlice = createSlice({
         state.emotionDiary.diary = action.payload;
       })
       .addCase(__getDiaryMonth.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.emotionDiary.emotions = action.payload.emotions;
       })
       .addCase(__postDiary.fulfilled, (state, action) => {
-        state.emotionDiary.diary = action.payload;
+        state.emotionDiary.diary = action.payload.diary;
+        state.emotionDiary.emotions = action.payload.emotions;
       });
   },
 });
