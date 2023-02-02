@@ -78,44 +78,12 @@ export default AddMemoDiv;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 3px;
-`;
-const MemoList = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  margin-left: 8vw;
-  margin-top: 5px;
-  gap: 5px;
-`;
-const MemoCard = styled.div`
-  display: flex;
-  /* justify-content: space-between; */
-  width: 100%;
-  font-size: 12px;
-  gap: 5px;
-  & > span {
-    display: flex;
-    align-items: center;
-    height: 20px;
-  }
-`;
-const MemoDeleteButton = styled.button`
-  display: flex;
-  align-items: center;
-  border: 0;
-  background-color: white;
-`;
-const CancelMemoIcon = styled(IoMdClose)`
-  width: 13px;
-  height: 13px;
-  fill: var(--color-dark-gary);
-  pointer-events: none;
 `;
 const AddMemoInputDiv = styled.div`
   display: flex;
+  align-items: center;
   width: 80%;
-  margin-left: 8vw;
+  margin-left: 20px;
 `;
 const MemoBullet = styled.div``;
 const InputDiv = styled.div`
@@ -128,6 +96,7 @@ const AddMemoInput = styled.input`
   width: 80%;
   border: 0;
   font-size: 12px;
+  font-weight: bold;
   background-color: inherit;
   &:focus {
     outline: none;
@@ -138,10 +107,6 @@ const InputLimitDiv = styled.div`
   & > span {
     color: var(--color-gray);
   }
-`;
-const MemoSubmitButton = styled.button`
-  border: 0;
-  background-color: inherit;
 `;
 const AddTodoMemoButton = styled.button`
   margin-top: 5px;
@@ -156,10 +121,6 @@ const AddMemoIcon = styled(BsFillPlusCircleFill)`
 const MemoBulletIcon = styled(memoBullet)`
   width: 24px;
   height: 18px;
-`;
-const MemoAddIcon = styled(memoAddIcon)`
-  width: 16px;
-  height: 16px;
 `;
 const DeleteButton = styled.button`
   width: 1.5rem;
