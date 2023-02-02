@@ -5,12 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 // import { BsFillPlusCircleFill } from "react-icons/bs";
 
 const CategorySelectDiv = ({ categories, AddTodoInput, setAddTodoInput }) => {
+  const [selectCategoryId, setSelectCategoryId] = useState(null);
+  console.log("선택된 카테고리", selectCategoryId);
   const categorySelectHandler = (e) => {
     setAddTodoInput({
       ...AddTodoInput,
       categoryId: Number(e.target.id),
       categoryColor: e.target.value,
     });
+    setSelectCategoryId(Number(e.target.id));
   };
   const categoryList = categories;
   let num = 0;
@@ -23,6 +26,7 @@ const CategorySelectDiv = ({ categories, AddTodoInput, setAddTodoInput }) => {
             key={num++}
             type="button"
             id={category.categoryId}
+            selectCategoryId={selectCategoryId}
             value={category.categoryColor}
             backgroundColor={category.categoryColor}
             onClick={categorySelectHandler}
@@ -66,7 +70,14 @@ const CategoryButton = styled.button`
   height: 3em;
   border: 0;
   border-radius: 8px;
+  border-width: ${(props) =>
+    props.id === props.selectCategoryId ? "5px" : "0px"};
+  border-style: solid;
+  border-color: ${(props) =>
+    props.id === props.selectCategoryId ? "#ffffff" : "var(--color-default)"};
+  box-shadow: ${(props) =>
+    props.id === props.selectCategoryId ? "var(--shadow-box-shadow)" : null};
   &:hover {
-    border: 3px solid var(--color-light-gray);
+    border: 5px solid #ffffff;
   }
 `;

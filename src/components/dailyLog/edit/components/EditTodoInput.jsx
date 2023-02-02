@@ -38,13 +38,19 @@ const EditTodoInput = ({ todoList, categoryList }) => {
   };
 
   const day = ["일", "월", "화", "수", "목", "금", "토"];
-  const today = `${String(new Date().getFullYear()).substr(2, 2)}/${
-    new Date().getMonth() + 1
-  }/${new Date().getDate()}(${day[new Date().getDay()]})`;
+  const editTodoDate = `${String(new Date().getFullYear()).substr(2, 2)}/${
+    new Date().getMonth() + 1 < 10
+      ? "0" + (new Date().getMonth() + 1)
+      : new Date().getMonth() + 1
+  }/${
+    new Date().getDate() < 10
+      ? "0" + new Date().getDate()
+      : new Date().getDate()
+  }/(${day[new Date().getDay()]})`;
   return (
     <Container>
       <DateDiv>
-        <DateButton>{today}</DateButton>
+        <DateButton>{editTodoDate}</DateButton>
       </DateDiv>
       {todoList && (
         <TodoAndMemoDiv>

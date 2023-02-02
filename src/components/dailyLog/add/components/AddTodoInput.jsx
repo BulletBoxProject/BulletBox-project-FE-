@@ -58,14 +58,13 @@ const AddTodoInput = () => {
   useEffect(() => {
     loadAddTodoPage();
   }, []);
-  const dateTitle = `${dateArray[0].substr(2, 2)}/${dateArray[1]}/${
-    dateArray[2]
-  }(${dateArray[3]})`;
-  console.log(dateTitle);
+  const dailyLogTitle = `${dateArray[0].substr(2, 2)}/${
+    dateArray[1] < 10 ? "0" + dateArray[1] : dateArray[1]
+  }/${dateArray[2] < 10 ? "0" + dateArray[2] : dateArray[2]}/(${dateArray[3]})`;
   return (
     <Container>
       <DateDiv>
-        <DateButton>{dateTitle}</DateButton>
+        <DateButton>{dailyLogTitle}</DateButton>
       </DateDiv>
       <TodoAndMemoDiv>
         <BulletTodoForm
