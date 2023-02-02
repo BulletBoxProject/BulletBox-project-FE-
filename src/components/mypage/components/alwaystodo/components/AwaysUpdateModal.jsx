@@ -9,7 +9,13 @@ import { ReactComponent as closeIcon } from "../../../../../img/myPage/close.svg
 
 import { __putFavorite } from "../../../../../redux/modules/favoriteSlice";
 
-const AlwaysUpdateModal = ({ onClose, favoriteId, content, memo }) => {
+const AlwaysUpdateModal = ({
+  onClose,
+  favoriteId,
+  content,
+  memo,
+  backgroundColor,
+}) => {
   const dispatch = useDispatch();
   const categoryList = useSelector(
     (state) => state?.category?.category?.categories
@@ -27,7 +33,7 @@ const AlwaysUpdateModal = ({ onClose, favoriteId, content, memo }) => {
 
   const [categoryId, setCategoryId] = useState(null);
   const [categoryName, setCategoryName] = useState(null);
-  const [categoryColor, setCategoryColor] = useState(null);
+  const [categoryColor, setCategoryColor] = useState(backgroundColor);
 
   const onMemoAddHandler = () => {
     const input = { id: plusId, favoriteMemoContent: "" };
@@ -164,6 +170,7 @@ const AlwaysUpdateModal = ({ onClose, favoriteId, content, memo }) => {
                       key={val.categoryId}
                       backgroundColor={val.categoryColor}
                       value={val.categoryName}
+                      categoryColor={categoryColor}
                       onClick={() => {
                         onCategoryHandler(val);
                       }}
@@ -275,14 +282,14 @@ const SelectBtn = styled.button`
   font-size: 12px;
   font-weight: bold;
   border-radius: 8px;
-  border: none;
-  background-color: ${({ backgroundColor }) => backgroundColor};
-  &:active,
-  &:hover,
-  &:focus {
-    border: 5px solid white;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
-  }
+  border: ${({ backgroundColor, categoryColor }) =>
+    backgroundColor === categoryColor ? "5px solid white" : "none"};
+  background-color: ${({ backgroundColor }) =>
+    backgroundColor || "var(--color-default)"};
+  box-shadow: ${({ backgroundColor, categoryColor }) =>
+    backgroundColor === categoryColor
+      ? "0px 0px 4px rgba(0, 0, 0, 0.3)"
+      : "none"};
 `;
 
 const MemoBullet = styled(memoBullet)`
