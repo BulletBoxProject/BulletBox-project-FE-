@@ -43,7 +43,7 @@ const SignUpInput = () => {
     const nickname = e.target.value;
     setNickName(nickname);
     if (!nickNameRegex.test(nickname)) {
-      setNickNameMessage(`* 올바른 닉네임 형식이 아닙니다.`);
+      setNickNameMessage(`* 2자이상 16자이하로 입력해주세요.`);
       setIsNickName(false);
     } else {
       setNickNameMessage(``);
@@ -371,7 +371,7 @@ const AlarmSpan = styled.span`
   justify-content: flex-start;
   width: 100%;
   height: 10px;
-  margin-top: 2px;
+  margin: 6px;
   font-size: 8px;
   font-weight: bold;
   font-family: "NanumGothic";
