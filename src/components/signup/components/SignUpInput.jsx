@@ -2,7 +2,6 @@ import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
 import { instanceApiV1 } from "../../../core/api";
-// import { encrypt } from "../../../core/encrypt";
 
 const SignUpInput = () => {
   const navigate = useNavigate();
@@ -82,10 +81,6 @@ const SignUpInput = () => {
 
   const postSignup = async (post) => {
     try {
-      // console.log(post, "1");
-      // const password = encrypt(post.password);
-      // const userInfo = { email, password };
-      // console.log(password);
       const data = await instanceApiV1.post("/members/signup", post);
       if (data.data.httpStatusCode === 201) {
         alert(data.data.msg);

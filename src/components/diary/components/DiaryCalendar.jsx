@@ -98,7 +98,7 @@ const Calendarcontainer = styled.div`
   }
   .react-calendar__navigation {
     display: flex;
-    width: 35%;
+    width: 45%;
     margin: 0 auto !important;
     margin-bottom: 10px !important;
     background-color: transparent !important;

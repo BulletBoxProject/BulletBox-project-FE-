@@ -10,13 +10,14 @@ import { ReactComponent as soso } from "../../../img/emotion/soso-1.svg";
 const EmotionButton = ({ setEmotin }) => {
   const onEmotionHandler = (e) => {
     setEmotin(e.target.value);
+    console.log(e.target.value, "이모티콘 클릭");
   };
   return (
     <>
       <EmotionBtn value={"excited"} onClick={(e) => onEmotionHandler(e)}>
         <ExcitedEmotion />
       </EmotionBtn>
-      <EmotionBtn value={"happy"} onlick={(e) => onEmotionHandler(e)}>
+      <EmotionBtn value={"happy"} onClick={(e) => onEmotionHandler(e)}>
         <HappyEmotion />
       </EmotionBtn>
       <EmotionBtn value={"soso"} onClick={(e) => onEmotionHandler(e)}>

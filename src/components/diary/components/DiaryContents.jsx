@@ -44,7 +44,7 @@ const DiaryContents = ({
               <EditBtn onClick={() => onEditHandler()}>
                 <EditImg />
               </EditBtn>
-              수정
+              작성
             </EditCheckBox>
           </EditCheckDiv>
         ) : (
