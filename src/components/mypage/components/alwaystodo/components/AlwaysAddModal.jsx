@@ -19,9 +19,9 @@ const AlwaysAddModal = ({ onClose }) => {
   const [favoriteMemos, setFavoriteMemos] = useState([{ id: 0, memo: "" }]);
   const [plusId, setPlusId] = useState(1);
 
-  const [categoryId, setCategoryId] = useState(0);
-  const [categoryName, setCategoryName] = useState("");
-  const [categoryColor, setCategoryColor] = useState("");
+  const [categoryId, setCategoryId] = useState(null);
+  const [categoryName, setCategoryName] = useState(null);
+  const [categoryColor, setCategoryColor] = useState(null);
   const [isName, setIsName] = useState(false);
 
   const onMemoAddHandler = () => {
