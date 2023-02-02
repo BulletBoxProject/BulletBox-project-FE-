@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { instanceApiV1 } from "../../../core/api";
-import { baseURLApiV1 } from "../../../core/api";
 import { setCookies } from "../../../core/cookieControler";
 
 const KakaoLogin = () => {
@@ -11,7 +10,7 @@ const KakaoLogin = () => {
   const kakao = async () => {
     try {
       const data = await instanceApiV1.get(`/members/login/kakao?code=${code}`);
-      setCookies("id", data.headers.authorization, {
+      setCookies("Authorization", data.headers.authorization, {
         path: "/",
         maxAge: 17500,
       });
