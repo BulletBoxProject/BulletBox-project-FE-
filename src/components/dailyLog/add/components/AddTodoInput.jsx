@@ -19,7 +19,7 @@ const AddTodoInput = () => {
   const [AddTodoInput, setAddTodoInput] = useState({
     todoContent: "",
     todoBulletName: "불렛",
-    time: "00:00",
+    time: null,
     categoryId: null,
     year: Number(dateArray[0]),
     month: Number(dateArray[1]),
@@ -42,7 +42,12 @@ const AddTodoInput = () => {
     }
   };
   const submitTodoHandler = () => {
-    dispatch(__postDailyTodo(AddTodoInput));
+    console.log(AddTodoInput, { ...AddTodoInput, time: null });
+    if (
+      AddTodoInput.time.split(":")[0] === "null"
+        ? dispatch(__postDailyTodo({ ...AddTodoInput, time: null }))
+        : dispatch(__postDailyTodo(AddTodoInput))
+    );
     alert(
       `${AddTodoInput.year}년 ${AddTodoInput.month}월 ${AddTodoInput.day}일에 할 일이 추가되었습니다.`
     );
