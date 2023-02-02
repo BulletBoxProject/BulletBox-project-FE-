@@ -55,6 +55,7 @@ const AlwaysTodo = ({
   const updateButtonHandler = () => {
     setShowUpdateMoal(true);
   };
+  console.log(memo);
 
   return (
     <>
@@ -66,11 +67,13 @@ const AlwaysTodo = ({
               {content}
             </TodoContainer>
           </TodoBodyDiv>
-          <TodoMoreViewDiv>
-            <TodoMoreViewButton onClick={memoViewHandler}>
-              {showTodoMemo ? <OnlyTitleIcon /> : <MoreIcon />}
-            </TodoMoreViewButton>
-          </TodoMoreViewDiv>
+          {memo.length === 0 ? null : (
+            <TodoMoreViewDiv>
+              <TodoMoreViewButton onClick={memoViewHandler}>
+                {showTodoMemo ? <OnlyTitleIcon /> : <MoreIcon />}
+              </TodoMoreViewButton>
+            </TodoMoreViewDiv>
+          )}
 
           <OptionSelectDiv ref={selectRef}>
             <OptionButton onClick={SelectOptionHandler}>
