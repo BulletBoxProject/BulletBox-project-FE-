@@ -82,7 +82,7 @@ const BulletTodoForm = ({ AddTodoInput, setAddTodoInput }) => {
           placeholder="할일을 입력해주세요"
           onChange={todoInputHandler}
           value={todoInput}
-          maxLength={32}
+          maxLength={31}
           disabled={isTodoInputDone}
         />
         <InputLimitDiv>
@@ -99,7 +99,7 @@ export default BulletTodoForm;
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 `;
 const BulletSelectDiv = styled.div`
   position: relative;
@@ -146,15 +146,21 @@ const BulletList = styled.div`
 `;
 const InputDiv = styled.div`
   display: flex;
-  align-items: center;
+  justify-content: flex-end;
+  align-items: flex-start;
   width: 85%;
   gap: 5px;
 `;
-const TodoInput = styled.input`
-  width: 88%;
+const TodoInput = styled.textarea`
+  width: 210px;
+  margin-top: 2px;
   border: 0;
+  word-break: break-all;
+  resize: none;
   background-color: inherit;
-  padding-left: 0;
+  ::placeholder {
+    transform: translate(0, 0);
+  }
   :disabled {
     background-color: inherit;
     border: 0;
@@ -166,6 +172,7 @@ const TodoInput = styled.input`
 `;
 const InputLimitDiv = styled.div`
   width: 12%;
+  padding-top: 5px;
   & > span {
     color: var(--color-gray);
   }

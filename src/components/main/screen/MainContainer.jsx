@@ -67,8 +67,9 @@ const MainContainer = () => {
               </DailyTodoList>
             ) : (
               <MainTodoDiv>
-                {mainTodoList.map((todo) => (
+                {mainTodoList.map((todo, idx) => (
                   <MainTodoCard
+                    key={idx}
                     todoContent={todo.todoContent}
                     categoryColor={todo.categoryColor}
                     todoBulletName={todo.todoBulletName}
