@@ -82,7 +82,7 @@ const BulletTodoForm = ({ AddTodoInput, setAddTodoInput }) => {
           placeholder="할일을 입력해주세요"
           onChange={todoInputHandler}
           value={todoInput}
-          maxLength={32}
+          maxLength={31}
           disabled={isTodoInputDone}
         />
         <InputLimitDiv>
