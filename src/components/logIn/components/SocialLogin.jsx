@@ -1,13 +1,48 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { baseURLApiV1 } from "../../../core/api";
+import { setCookies } from "../../../core/cookieControler";
 
 import { ReactComponent as BulletBox } from "../../../img/login/logo-graphic copy.svg";
 
 const SocialLogin = () => {
+  const navigate = useNavigate();
+
+  const GuestLogin = async () => {
+    try {
+      const data = await baseURLApiV1.post("/members/login/test");
+      if (data.data.httpStatusCode === 200) {
+        return data;
+      }
+    } catch (error) {
+      if (error.response.data.status === 500) {
+        console.log("서버 요청에 실패했습니다.");
+      } else if (error.response.data.httpStatusCode === 404) {
+        // setMessage("* 아이디 또는 비밀번호를 틀렸습니다.");
+      } else {
+        console.log(error);
+      }
+    }
+  };
+
+  const GuestLoginHandler = (e) => {
+    GuestLogin().then((res) => {
+      if (res === undefined) {
+        navigate(`/login`);
+      } else {
+        navigate(`/home`);
+        setCookies("Authorization", res.headers.authorization, {
+          path: "/",
+          maxAge: 17500,
+        });
+      }
+    });
+  };
   return (
     <SocialContainer>
       <SocialBtnBox>
-        <GuestBtn>
+        <GuestBtn type="button" onClick={GuestLoginHandler}>
           <Bullet />
         </GuestBtn>
         <SocialKakaoBtn></SocialKakaoBtn>

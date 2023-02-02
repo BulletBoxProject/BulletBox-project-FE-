@@ -21,8 +21,9 @@ export const __postFavorite = createAsyncThunk(
   "favorite/addFavorite",
   async (payload, thunkAPI) => {
     try {
-      await baseURLApiV1.post(`favorites`, payload);
-      return thunkAPI.fulfillWithValue(payload);
+      const { data } = await baseURLApiV1.post(`favorites`, payload);
+      console.log(data);
+      return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       alert("루틴 추가를 실패했습니다.");
       return thunkAPI.rejectWithValue(error);
