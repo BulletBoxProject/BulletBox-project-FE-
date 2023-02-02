@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { baseURLApiV1 } from "../../../core/api";
 import { setCookies } from "../../../core/cookieControler";
+import { KAKAO_AUTH_URL } from "../../../core/kakaoLogin";
 
 import { ReactComponent as BulletBox } from "../../../img/login/logo-graphic copy.svg";
 import { ReactComponent as kakao } from "../../../img/login/kakao.svg";
@@ -41,13 +42,18 @@ const SocialLogin = () => {
       }
     });
   };
+
+  const KakaoLoginHandler = () => {
+    window.location.href = KAKAO_AUTH_URL;
+  };
+
   return (
     <SocialContainer>
       <SocialBtnBox>
         <GuestBtn type="button" onClick={GuestLoginHandler}>
           <Bullet />
         </GuestBtn>
-        <SocialKakaoBtn>
+        <SocialKakaoBtn type="button" onClick={KakaoLoginHandler}>
           <Kakao />
         </SocialKakaoBtn>
         <SocialGoogleBtn>

@@ -12,6 +12,7 @@ import Mypage from "../pages/Mypage";
 import Search from "../pages/Search";
 import Diary from "../pages/Diary";
 import EditDailyLog from "../pages/EditDailyLog";
+import KakaoLoginPage from "../pages/KakaoLoginPage";
 
 const Router = () => {
   return (
@@ -21,6 +22,7 @@ const Router = () => {
           <Route path="/login" element={<LogIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/" element={<Start />} />
+          <Route path="/kakao/login" element={<KakaoLoginPage />} />
         </Route>
 
         <Route element={<Layout />}>
