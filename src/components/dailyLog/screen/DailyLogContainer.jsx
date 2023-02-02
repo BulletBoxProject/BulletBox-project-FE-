@@ -126,12 +126,17 @@ const DailyLogContainer = () => {
           </AddTodoButton>
           {showSelectBox ? (
             <AddSelectDiv>
-              <div value="favoriteTodo" onClick={favoritesTodoHandler}>
-                루틴 불러오기
-                <OftenTodo />
-              </div>
+              <AddRoutineButton
+                value="favoriteTodo"
+                onClick={favoritesTodoHandler}
+              >
+                <span>루틴 불러오기</span>
+                <span>
+                  <OftenTodo />
+                </span>
+              </AddRoutineButton>
               <SelectLine></SelectLine>
-              <div
+              <AddNewTodoButton
                 value="newTodo"
                 onClick={() =>
                   navigate(
@@ -143,7 +148,7 @@ const DailyLogContainer = () => {
                 <span>
                   <NewTodo />
                 </span>
-              </div>
+              </AddNewTodoButton>
             </AddSelectDiv>
           ) : null}
         </AddTodoDiv>
@@ -239,9 +244,9 @@ const AddSelectDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 42%;
+  width: 144px;
   gap: 3px;
-  padding: 5px 14px;
+  padding: 5px 12px;
   margin: -40px 0 0 132px;
   border-radius: 4px;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
@@ -256,12 +261,40 @@ const AddSelectDiv = styled.div`
     padding: 5px 0;
   }
 `;
+const AddRoutineButton = styled.button`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--color-gray);
+  padding: 5px 0;
+  border: 0;
+  background-color: inherit;
+  &:hover {
+    color: var(--color-main);
+  }
+`;
 const SelectLine = styled.hr`
   width: 100%;
   border: 0;
   height: 1px;
   background-color: #ebebeb;
   margin: 2px 0;
+`;
+const AddNewTodoButton = styled.button`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--color-gray);
+  padding: 5px 0;
+  border: 0;
+  background-color: inherit;
+  &:hover {
+    color: var(--color-main);
+  }
 `;
 const NewTodo = styled(newTodo)`
   width: 20px;
