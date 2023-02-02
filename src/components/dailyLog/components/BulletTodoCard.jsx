@@ -139,6 +139,7 @@ const Container = styled.div`
 const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   width: 100%;
   background-color: var(--color-default);
   border-radius: 8px;
@@ -158,10 +159,11 @@ const CategoryColorDiv = styled.div`
   height: 100%;
   background-color: ${(props) => props.categoryColor};
   border-radius: ${(props) =>
-    props.showMemoBox === true ? `8px 0 0 0` : `8px 0 0 0`};
+    props.showMemoBox === true ? `8px 0 0 0` : `8px 0 0 8px`};
 `;
 const TodoBodyDiv = styled.div`
   display: flex;
+  justify-content: flex-start;
   align-items: center;
   padding-left: 5px;
   width: 75%;
@@ -236,7 +238,6 @@ const MemoLsitDiv = styled.div`
   display: flex;
   flex-direction: column;
   width: 95%;
-  padding-bottom: 5px;
 `;
 const TodoMemoDiv = styled.div`
   display: flex;
@@ -254,7 +255,12 @@ const MemoContent = styled.div`
   font-weight: bold;
   gap: 5px;
 `;
-const TodoMoreViewDiv = styled.div``;
+const TodoMoreViewDiv = styled.div`
+  display: flex;
+  align-items: center;
+  width: 36px;
+  height: 100%;
+`;
 const TodoMoreViewButton = styled.button`
   position: relative;
   border: 0;
