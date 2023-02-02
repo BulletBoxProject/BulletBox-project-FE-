@@ -127,7 +127,8 @@ const DailyLogContainer = () => {
           {showSelectBox ? (
             <AddSelectDiv>
               <div value="favoriteTodo" onClick={favoritesTodoHandler}>
-                루틴 불러오기 <OftenTodo />
+                루틴 불러오기
+                <OftenTodo />
               </div>
               <SelectLine></SelectLine>
               <div
