@@ -147,7 +147,7 @@ const CardContainer = styled.div`
   flex-direction: column;
   width: 328px;
   border: none;
-  background-color: ${(props) => props.categoryColor};
+  background-color: ${(props) => props.categoryColor || "var(--color-default)"};
   border-radius: 8px;
   padding-left: 8px;
   margin-left: 8px;
