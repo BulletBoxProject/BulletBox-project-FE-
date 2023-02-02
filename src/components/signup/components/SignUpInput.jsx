@@ -2,7 +2,6 @@ import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
 import { instanceApiV1 } from "../../../core/api";
-// import { encrypt } from "../../../core/encrypt";
 
 const SignUpInput = () => {
   const navigate = useNavigate();
@@ -43,7 +42,7 @@ const SignUpInput = () => {
     const nickname = e.target.value;
     setNickName(nickname);
     if (!nickNameRegex.test(nickname)) {
-      setNickNameMessage(`* 올바른 닉네임 형식이 아닙니다.`);
+      setNickNameMessage(`* 2자이상 16자이하로 입력해주세요.`);
       setIsNickName(false);
     } else {
       setNickNameMessage(``);
@@ -82,10 +81,6 @@ const SignUpInput = () => {
 
   const postSignup = async (post) => {
     try {
-      // console.log(post, "1");
-      // const password = encrypt(post.password);
-      // const userInfo = { email, password };
-      // console.log(password);
       const data = await instanceApiV1.post("/members/signup", post);
       if (data.data.httpStatusCode === 201) {
         alert(data.data.msg);
@@ -371,7 +366,7 @@ const AlarmSpan = styled.span`
   justify-content: flex-start;
   width: 100%;
   height: 10px;
-  margin-top: 2px;
+  margin: 6px;
   font-size: 8px;
   font-weight: bold;
   font-family: "NanumGothic";

@@ -16,7 +16,7 @@ const EmotionButton = ({ setEmotin }) => {
       <EmotionBtn value={"excited"} onClick={(e) => onEmotionHandler(e)}>
         <ExcitedEmotion />
       </EmotionBtn>
-      <EmotionBtn value={"happy"} onlick={(e) => onEmotionHandler(e)}>
+      <EmotionBtn value={"happy"} onClick={(e) => onEmotionHandler(e)}>
         <HappyEmotion />
       </EmotionBtn>
       <EmotionBtn value={"soso"} onClick={(e) => onEmotionHandler(e)}>

@@ -228,22 +228,6 @@ const UserInfoBox = styled.div`
   font-weight: bold;
 `;
 
-const UserInfoDiv = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-right: 4px;
-  height: 11px;
-  border-right: 1px solid var(--color-gray);
-`;
-const UserInfoBtn = styled.button`
-  background-color: transparent;
-  border: none;
-  font-size: 10px;
-  font-family: "NanumGothic";
-  font-weight: bold;
-  color: var(--color-gray);
-`;
 
 const SignupDiv = styled.div`
   display: flex;
