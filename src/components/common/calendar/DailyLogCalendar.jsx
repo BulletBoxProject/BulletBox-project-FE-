@@ -34,6 +34,7 @@ const DailyLogCalendar = ({ selectedDate, setSelectedDate }) => {
         formatShortWeekday={(locale, date) =>
           ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][date.getDay()]
         }
+        view={"month"}
       />
     </Calendarcontainer>
   );
@@ -55,12 +56,12 @@ const Calendarcontainer = styled.div`
   .react-calendar__navigation {
     display: flex;
     justify-content: center !important;
-    width: 45%;
+    width: 50%;
     margin-top: 15px;
   }
   .react-calendar__navigation__label {
     width: 100% !important;
-    margin: 0 15px !important;
+    margin: 0 !important;
   }
   .react-calendar__navigation__label > span {
     display: flex;
@@ -78,9 +79,6 @@ const Calendarcontainer = styled.div`
   }
   .react-calendar__month-view__weekdays__weekday {
     background-color: white !important;
-    /* border-top: 1px solid rgba(240, 161, 59, 0.5);
-    border-left: 1px solid rgba(240, 161, 59, 0.5); */
-    /* box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.1); */
     padding: 5px 4px !important;
     font-size: 12px;
   }
@@ -145,11 +143,9 @@ const Calendarcontainer = styled.div`
   .react-calendar__navigation {
   }
   .navigation__next-button {
-    margin: 0;
+    /* margin: 0; */
+    min-width: 24px;
     padding: 0 !important;
-    & > svg {
-      margin: 0 !important;
-    }
   }
   .react-calendar__navigation button {
     min-width: 24px;
@@ -160,6 +156,11 @@ const Calendarcontainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    & > svg {
+      width: 2rem !important;
+      height: 2.5vh !important;
+      color: var(--color-gray) !important;
+    }
   }
   .react-calendar__navigation button:disabled {
     /* background-color: #f0f0f0; */

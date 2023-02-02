@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 
 import CategoryButton from "./CategoryButton";
+
+import useOutSideClick from "../../../hooks/useOutSideClick";
 
 const CategorySelector = ({
   categoryList,
   isSetSelectedCategory,
   setSlectedCategoryId,
 }) => {
+  const categorySelectRef = useRef(null);
   const [showCategory, setShowCategory] = useState(false);
   const showCategoryHandler = () => {
     setShowCategory(!showCategory);
@@ -17,9 +20,12 @@ const CategorySelector = ({
     setSlectedCategoryId("");
     setShowCategory(false);
   };
+  useOutSideClick(categorySelectRef, () => {
+    setShowCategory(false);
+  });
   let num = 0;
   return (
-    <Container>
+    <Container ref={categorySelectRef}>
       <SelectButton onClick={showCategoryHandler}>전체</SelectButton>
       {showCategory ? (
         <CategoryList>

@@ -10,6 +10,7 @@ import { ReactComponent as closeIcon } from "../../../../img/dailyLog/close.svg"
 const AddMemoDiv = ({ AddTodoInput, setAddTodoInput, memos }) => {
   const [showMemo, setShowMemo] = useState(false);
   const [memoInput, setMemoInput] = useState("");
+  console.log("할일 메모 길이", memoInput.length);
   const [memoList, setMemoList] = useState([]);
 
   const addMemoHanlder = () => {
@@ -46,13 +47,20 @@ const AddMemoDiv = ({ AddTodoInput, setAddTodoInput, memos }) => {
           <MemoBullet>
             <MemoBulletIcon />
           </MemoBullet>
-          <AddMemoInput
-            id={memo.memoId}
-            type="text"
-            placeholder="불렛메모를 추가하세요"
-            onChange={(e) => memoInputHandler(e, idx)}
-            value={memo.todoMemoContent}
-          />
+          <InputDiv>
+            <AddMemoInput
+              id={memo.memoId}
+              type="text"
+              placeholder="불렛메모를 추가하세요"
+              maxLength={43}
+              onChange={(e) => memoInputHandler(e, idx)}
+              value={memo.todoMemoContent}
+            />
+            <InputLimitDiv>
+              <span>{memoInput.length}</span>
+              <span>/43</span>
+            </InputLimitDiv>
+          </InputDiv>
           <DeleteButton onClick={() => memoDeleteHanlder(memo.memoId)}>
             <DeleteIcon />
           </DeleteButton>
@@ -110,7 +118,12 @@ const AddMemoInputDiv = styled.div`
   margin-left: 8vw;
 `;
 const MemoBullet = styled.div``;
-
+const InputDiv = styled.div`
+  display: flex;
+  align-items: center;
+  width: 85%;
+  gap: 5px;
+`;
 const AddMemoInput = styled.input`
   width: 80%;
   border: 0;
@@ -118,6 +131,12 @@ const AddMemoInput = styled.input`
   background-color: inherit;
   &:focus {
     outline: none;
+  }
+`;
+const InputLimitDiv = styled.div`
+  width: 12%;
+  & > span {
+    color: var(--color-gray);
   }
 `;
 const MemoSubmitButton = styled.button`

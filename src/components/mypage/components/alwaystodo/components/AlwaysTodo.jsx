@@ -61,10 +61,10 @@ const AlwaysTodo = ({
       <CardContainer categoryColor={backgroundColor}>
         <MainBulletTodo>
           <TodoBodyDiv>
-            <span>
+            <TodoContainer>
               <StarBullet />
-            </span>
-            <span>{content}</span>
+              {content}
+            </TodoContainer>
           </TodoBodyDiv>
           <TodoMoreViewDiv>
             <TodoMoreViewButton onClick={memoViewHandler}>
@@ -78,19 +78,16 @@ const AlwaysTodo = ({
             </OptionButton>
             {showSelectBox ? (
               <SelectDiv>
-                <div
+                <UpdateDiv
                   onClick={() => {
                     updateButtonHandler();
                   }}
                 >
                   수정하기 <EditIcon />
-                </div>
-                <SelectLine></SelectLine>
+                </UpdateDiv>
                 <div value="deleteTodo" onClick={selectDeleteHandler}>
-                  <span>삭제하기</span>
-                  <span>
-                    <DeleteIcon />
-                  </span>
+                  삭제하기
+                  <DeleteIcon />
                 </div>
               </SelectDiv>
             ) : null}
@@ -100,12 +97,8 @@ const AlwaysTodo = ({
           <TodoMemoDiv>
             {memo.map((value) => (
               <MemoContent key={value.favoriteMemoId}>
-                <span>
-                  <MemoBullet />
-                </span>
-                <span key={value.favoriteMemoId}>
-                  {value.favoriteMemoContent}
-                </span>
+                <MemoBullet />
+                {value.favoriteMemoContent}
               </MemoContent>
             ))}
           </TodoMemoDiv>
@@ -151,14 +144,22 @@ export default AlwaysTodo;
 const CardContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
   flex-direction: column;
-  width: 100%;
+  width: 328px;
   border: none;
-  /* background-color: ${(props) => props.categoryColor}; */
-  background-color: var(--color-default);
+  background-color: ${(props) => props.categoryColor};
   border-radius: 8px;
-  padding-left: 10px;
+  padding-left: 8px;
+  margin-left: 8px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+`;
+const TodoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  margin-left: 8px;
+  height: 30px;
+  gap: 5px;
 `;
 
 const ModalContainer = styled.div`
@@ -167,10 +168,11 @@ const ModalContainer = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 999;
 `;
 const ModalContent = styled.div`
-  position: fixed;
+  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -210,10 +212,9 @@ const CancelButton = styled.div`
 const MainBulletTodo = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
   width: 100%;
-  height: 42px;
-  padding: 0 13px 0 0;
+  height: 40px;
+  border-radius: 8px;
   & > input {
     width: 90%;
     padding: 0;
@@ -235,8 +236,9 @@ const TodoMemoDiv = styled.div`
   display: flex;
   flex-direction: column;
   background-color: var(--color-default);
-  padding-left: 10px;
+  padding-left: 14px;
   width: 100%;
+  padding-bottom: 5px;
 `;
 const MemoContent = styled.div`
   display: flex;
@@ -245,18 +247,17 @@ const MemoContent = styled.div`
   font-size: 12px;
   font-weight: bold;
   gap: 10px;
-  padding-left: 18px;
+  padding-left: 20px;
 `;
 const TodoMoreViewDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 15%;
+  width: 5%;
   height: 100%;
   background-color: var(--color-default);
 `;
 const TodoMoreViewButton = styled.button`
-  position: relative;
   border: 0;
   background-color: inherit;
 `;
@@ -276,21 +277,24 @@ const OptionButton = styled.button`
 `;
 const SelectDiv = styled.div`
   display: flex;
+  align-items: center;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
+  position: absolute;
   width: 120px;
   height: 88px;
-  left: -80px;
   gap: 3px;
-  padding: 5px 14px;
-  position: absolute;
+  font-weight: bold;
+  top: 100%;
+  right: 0;
   border-radius: 4px;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
   background-color: var(--color-default);
   & > div {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    margin-top: 2px;
     gap: 10px;
     font-size: 14px;
     color: var(--color-gray);
@@ -301,6 +305,12 @@ const SelectDiv = styled.div`
   }
   z-index: 9999;
 `;
+const UpdateDiv = styled.div`
+  width: 100%;
+  margin-bottom: 3px;
+  border-bottom: 1px solid #ebebeb;
+`;
+
 const SelectLine = styled.hr`
   width: 100%;
   border: 0;
@@ -315,19 +325,19 @@ const OptionIcon = styled(moreIcon)`
   height: 24px;
 `;
 const MoreIcon = styled(IoIosArrowDown)`
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   pointer-events: none;
 `;
 const OnlyTitleIcon = styled(IoIosArrowUp)`
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   pointer-events: none;
 `;
 
 const MemoBullet = styled(memoBullet)`
   width: 24px;
-  height: 18px;
+  height: 24px;
 `;
 
 const StarBullet = styled(star)`

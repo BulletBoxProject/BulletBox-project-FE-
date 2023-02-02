@@ -33,7 +33,7 @@ const BulletTodoCard = ({ dailyLog, dailyLogs, setDailyLogs }) => {
     } else {
       setShowTodoMemo(showTodoMemo.filter((id) => id !== Number(e.target.id)));
     }
-    // setShowMemoBox(!showMemoBox);
+    setShowMemoBox(!showMemoBox);
   };
 
   const deleteButtonHandler = () => {
@@ -50,12 +50,15 @@ const BulletTodoCard = ({ dailyLog, dailyLogs, setDailyLogs }) => {
     <Container>
       <CardContainer key={num++}>
         <MainBulletTodo>
-          <CategoryColorDiv categoryColor={dailyLog.categoryColor} />
+          <CategoryColorDiv
+            showMemoBox={showMemoBox}
+            categoryColor={dailyLog.categoryColor}
+          />
           <TodoBodyDiv>
-            <span>
+            <BulletDiv>
               <BulletSwitchList bulletName={dailyLog.todoBulletName} />
-            </span>
-            <span>{dailyLog.todoContent}</span>
+            </BulletDiv>
+            <TodoTitle>{dailyLog.todoContent}</TodoTitle>
           </TodoBodyDiv>
           {dailyLog && (
             <TodoMoreViewDiv>
@@ -87,19 +90,21 @@ const BulletTodoCard = ({ dailyLog, dailyLogs, setDailyLogs }) => {
           </OptionSelectDiv>
         </MainBulletTodo>
         <MemoDiv>
-          <CategoryColorDiv categoryColor={dailyLog.categoryColor} />
-          {showTodoMemo.find((id) => id === dailyLog.todoId) !== undefined
-            ? dailyLog.todoMemos.map((memo) => (
-                <TodoMemoDiv key={num++} id={memo.todoMemoId}>
-                  <MemoContent>
-                    <span>
-                      <MemoBullet />
-                    </span>
-                    <span>{memo.todoMemoContent}</span>
-                  </MemoContent>
-                </TodoMemoDiv>
-              ))
-            : null}
+          <MomoCategoryColor categoryColor={dailyLog.categoryColor} />
+          <MemoLsitDiv>
+            {showTodoMemo.find((id) => id === dailyLog.todoId) !== undefined
+              ? dailyLog.todoMemos.map((memo) => (
+                  <TodoMemoDiv key={num++} id={memo.todoMemoId}>
+                    <MemoContent>
+                      <span>
+                        <MemoBullet />
+                      </span>
+                      <span>{memo.todoMemoContent}</span>
+                    </MemoContent>
+                  </TodoMemoDiv>
+                ))
+              : null}
+          </MemoLsitDiv>
         </MemoDiv>
       </CardContainer>
       {showDeleteModal ? (
@@ -134,12 +139,41 @@ const Container = styled.div`
 const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   width: 100%;
   background-color: var(--color-default);
-  /* border: 1px solid rgba(240, 161, 59, 0.2); */
-  /* box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.1); */
   border-radius: 8px;
+`;
+const MainBulletTodo = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 42px;
+  border-radius: ${(props) =>
+    props.showMemoBox === true ? `8px 8px 0 0` : `8px`};
+  background-color: var(--color-default);
+`;
+const CategoryColorDiv = styled.div`
+  width: 8px;
+  height: 100%;
+  background-color: ${(props) => props.categoryColor};
+  border-radius: ${(props) =>
+    props.showMemoBox === true ? `8px 0 0 0` : `8px 0 0 8px`};
+`;
+const TodoBodyDiv = styled.div`
+  display: flex;
+  align-items: center;
+  padding-left: 5px;
+  width: 75%;
+  font-size: 14px;
+  font-weight: 600;
+  gap: 10px;
+`;
+const BulletDiv = styled.span`
+  width: 24px;
+`;
+const TodoTitle = styled.span`
+  width: 80%;
 `;
 const ModalContainer = styled.div`
   position: absolute;
@@ -187,45 +221,34 @@ const DeleteButton = styled.div`
 const CancelButton = styled.div`
   font-size: 14px;
 `;
-const MainBulletTodo = styled.div`
+const MemoDiv = styled.div`
+  background-color: var(--color-default);
   display: flex;
-  align-items: center;
-  gap: 10px;
+  border-radius: 0 0 8px 8px;
   width: 100%;
-  height: 42px;
-  padding: 0 13px 0 0;
-  & > input {
-    width: 90%;
-    padding: 0;
-    margin: 0;
-  }
 `;
-const CategoryColorDiv = styled.div`
-  width: 2.5%;
-  height: 100%;
+const MomoCategoryColor = styled.div`
+  width: 8px;
   background-color: ${(props) => props.categoryColor};
-  border-radius: 8px 0 0 8px;
+  border-radius: 0 0 0 8px;
 `;
-const TodoBodyDiv = styled.div`
+const MemoLsitDiv = styled.div`
   display: flex;
-  align-items: center;
-  width: 85%;
-  font-size: 14px;
-  font-weight: 600;
-  gap: 10px;
+  flex-direction: column;
+  width: 95%;
 `;
-const MemoDiv = styled.div``;
 const TodoMemoDiv = styled.div`
   display: flex;
   flex-direction: column;
-  width: 90%;
-  margin-left: 5vw;
+  width: 100%;
   background-color: inherit;
   padding: 8px 0;
 `;
 const MemoContent = styled.div`
   display: flex;
   align-items: center;
+  width: 90%;
+  padding-left: 24px;
   font-size: 12px;
   gap: 5px;
 `;

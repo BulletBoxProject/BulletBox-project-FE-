@@ -227,12 +227,12 @@ const SelectBtn = styled.button`
   border-radius: 8px;
   border: none;
   background-color: ${({ backgroundColor }) => backgroundColor || "white"};
-  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
   &:active,
   &:hover,
   &:focus {
     border: 5px solid white;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.8);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
   }
 `;
 

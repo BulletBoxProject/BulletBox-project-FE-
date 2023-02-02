@@ -44,8 +44,8 @@ const Container = styled.div`
 `;
 
 const ModalWrap = styled.div`
-  width: 82%;
-  height: 26%;
+  width: 294px;
+  height: 192px;
   border-radius: 15px;
   background-color: #fff;
   position: absolute;
@@ -99,8 +99,8 @@ const CloseImg = styled(close)``;
 
 const CloseBtn = styled.button`
   position: absolute;
-  margin-left: 7%;
-  margin-top: 7%;
+  right: 7%;
+  top: 7%;
   width: 16px;
   height: 16px;
   background-color: white;

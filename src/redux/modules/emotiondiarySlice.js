@@ -2,9 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { baseURLApiV1 } from "../../core/api";
 
 // 초기값 설정
-const initialState = {
-  emotionDiary: {},
-};
+const initialState = {};
 
 // thunk
 export const __getDiary = createAsyncThunk(
@@ -12,7 +10,7 @@ export const __getDiary = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await baseURLApiV1.get(`diaries`, payload);
-      return thunkAPI.fulfillWithValue(data);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -23,11 +21,24 @@ export const __getDiaryDate = createAsyncThunk(
   "emotionDiary/getEmotionDiaryDate",
   async (payload, thunkAPI) => {
     try {
-      console.log(payload);
       const { data } = await baseURLApiV1.get(
         `diaries/date?year=${payload.year}&month=${payload.month}&day=${payload.day}`
       );
-      return thunkAPI.fulfillWithValue(data);
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const __getDiaryMonth = createAsyncThunk(
+  "emotionDiary/getEmotionDiaryMonth",
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await baseURLApiV1.get(
+        `diaries/calendars?year=${payload.year}&month=${payload.month}`
+      );
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -38,9 +49,9 @@ export const __postDiary = createAsyncThunk(
   "emotionDiary/postEmotionDiary",
   async (payload, thunkAPI) => {
     try {
-      console.log(payload);
+      console.log(payload, "보내는값");
       const { data } = await baseURLApiV1.post(`diaries`, payload);
-      return thunkAPI.fulfillWithValue(data);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -55,18 +66,17 @@ const emotionDiarySlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(__getDiary.fulfilled, (state, action) => {
-        console.log(action.payload);
-        state.emotionDiary = action.payload.data;
-        console.log(state.emotionDiary, "222");
+        state.emotionDiary = action.payload;
       })
       .addCase(__getDiaryDate.fulfilled, (state, action) => {
+        state.emotionDiary.diary = action.payload;
+      })
+      .addCase(__getDiaryMonth.fulfilled, (state, action) => {
         console.log(action.payload);
-        state.emotionDiary.emotionDiary = action.payload.data;
-        console.log(state.emotionDiary.emotionDiary, "받아온 날짜 데이터");
+        state.emotionDiary.emotions = action.payload.emotions;
       })
       .addCase(__postDiary.fulfilled, (state, action) => {
-        console.log(action.payload.data);
-        state.emotionDiary.emotionDiary = action.payload.data;
+        state.emotionDiary.diary = action.payload;
       });
   },
 });

@@ -37,7 +37,7 @@ const BulletSwitchList = ({ bulletName }) => {
             <ImportantBullet />
           </div>
         );
-      case "자주":
+      case "루틴":
         return (
           <div>
             <FavoriteBullet />

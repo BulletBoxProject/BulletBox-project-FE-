@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { memo, useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { BsFillPlusCircleFill } from "react-icons/bs";
@@ -7,91 +7,82 @@ import { ReactComponent as memoBullet } from "../../../../img/bullet/memo-5.svg"
 import { ReactComponent as memoAddIcon } from "../../../../img/dailyLog/edit.svg";
 import { ReactComponent as closeIcon } from "../../../../img/dailyLog/close.svg";
 
-const EditMemoDiv = ({
-  todoList,
-  AddTodoInput,
-  setAddTodoInput,
-
-  memos,
-}) => {
+const EditMemoDiv = ({ todoList, AddTodoInput, setAddTodoInput, memos }) => {
   const [memoOrigin, setMemoOrigin] = useState(todoList.memos);
   console.log("오리진 메모", memoOrigin);
+
   // const [deleteMemo, setDeleteMemo] = useState([]);
   // console.log("삭제된 메모", deleteMemo);
   const [newMemo, setNewMemo] = useState(todoList.memos);
-  console.log("새로운 메모", newMemo);
-  const [memoInput, setMemoInput] = useState("");
-
+  // console.log("새로운 메모", newMemo);
+  const [renderMemo, setRenderMemo] = useState(
+    todoList?.memos?.map((memo, idx) => ({ ...memo, renderId: idx }))
+  );
+  console.log("렌더링 객체", renderMemo);
   const addMemoHanlder = () => {
+    setRenderMemo([
+      ...renderMemo,
+      {
+        todoMemoId: null,
+        todoMemoContent: "할 일 메모를 추가하세요.",
+        renderId:
+          renderMemo.length === 0
+            ? 0
+            : renderMemo[renderMemo.length - 1].renderId + 1,
+      },
+    ]);
+  };
+  const memoInputHandler = (e, index) => {
+    let copyRenderMemo = [];
+    renderMemo.forEach((memo, index) => {
+      copyRenderMemo[index] = { ...memo };
+    });
+    copyRenderMemo[index].todoMemoContent = e.target.value;
+    setRenderMemo(copyRenderMemo);
+
+    setAddTodoInput({ ...AddTodoInput, memos: copyRenderMemo });
+  };
+  const memoDeleteHanlder = ({ renderId, todoId }) => {
+    let renderMemoCopy = [...renderMemo];
+    setRenderMemo(renderMemoCopy.filter((memo) => memo.renderId !== renderId));
+    console.log(renderMemo);
     setAddTodoInput({
       ...AddTodoInput,
-      memos: [
-        ...memos,
-        {
-          memoId: memos.length === 0 ? 0 : memos.pop().memoId + 1,
-          todoMemoContent: "",
-        },
-      ],
-    });
-  };
-  const memoInputHandler = (e, idx) => {
-    // setMemoInput(e.target.value);
-    let memoOriginCopy = [];
-    memoOrigin.forEach((memo, index) => {
-      memoOriginCopy[index] = { ...memo };
-    });
-    memoOriginCopy[idx].todoMemoContent = e.target.value;
-    setMemoOrigin(memoOriginCopy);
-    // setMemoOrigin([
-    //   ...memoOrigin,
-    //   { ...memoOrigin[idx], todoMemoContent: e.target.value },
-    // ]);
-    console
-      .log
-      // memoOrigin.map((memo, index) =>
-      //   index === idx
-      //     ? { ...memo, todoMemoContent: e.target.value + e.nativeEvent.data }
-      //     : memo
-      // )
-      ();
-    // memoOrigin[idx].todoMemoContent = e.target.value;
-    // setAddTodoInput({ ...AddTodoInput, memos: [...memosCopy] });
-  };
-  const memoDeleteHanlder = (id) => {
-    let memosCopy = [...memoOrigin];
-    const renderMemo = memosCopy.filter((memo) => memo.todoMemoId !== id);
-    setMemoOrigin(renderMemo);
-    setNewMemo(
-      newMemo.map((memo) => {
-        return memo.todoMemoId === id
-          ? { memoId: id, todoMemoContent: null }
+      memos: AddTodoInput.memos.map((memo) => {
+        return memo.todoMemoId === todoId
+          ? { todoMemoId: todoId, todoMemoContent: null }
           : memo;
-      })
-    );
-    setAddTodoInput({ ...AddTodoInput, memos: newMemo });
+      }),
+    });
   };
 
   let num = 0;
   return (
     <Container>
-      {memoOrigin.map((memo, idx) => (
-        <AddMemoInputDiv key={num++}>
-          <MemoBullet>
-            <MemoBulletIcon />
-          </MemoBullet>
-          <AddMemoInput
-            id={memo.memoId}
-            type="text"
-            // placeholder="불렛메모를 추가하세요"
-            onChange={(e) => memoInputHandler(e, idx)}
-            placeholder={memo.todoMemoContent}
-            // value={memoInput}
-          />
-          <DeleteButton onClick={() => memoDeleteHanlder(memo.todoMemoId)}>
-            <DeleteIcon />
-          </DeleteButton>
-        </AddMemoInputDiv>
-      ))}
+      {renderMemo &&
+        renderMemo?.map((memo, idx) => (
+          <AddMemoInputDiv key={num++}>
+            <MemoBullet>
+              <MemoBulletIcon />
+            </MemoBullet>
+            <AddMemoInput
+              id={memo.renderId}
+              type="text"
+              onChange={(e) => memoInputHandler(e, idx)}
+              placeholder={memo.todoMemoContent}
+            />
+            <DeleteButton
+              onClick={() =>
+                memoDeleteHanlder({
+                  renderId: memo.renderId,
+                  todoId: memo.todoMemoId,
+                })
+              }
+            >
+              <DeleteIcon />
+            </DeleteButton>
+          </AddMemoInputDiv>
+        ))}
       <AddTodoMemoButton type="button" onClick={addMemoHanlder}>
         <AddMemoIcon />
       </AddTodoMemoButton>

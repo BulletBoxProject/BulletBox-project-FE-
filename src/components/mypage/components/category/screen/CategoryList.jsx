@@ -19,7 +19,7 @@ const CatergoryList = () => {
     <Container>
       <CategoryAddList>
         {categoryList && categoryList.length === 0 ? (
-          <CategoryAddPtag>카테고리를 추가해보세요.</CategoryAddPtag>
+          <CategoryAddPtag>내 카테고리를 추가해주세요</CategoryAddPtag>
         ) : (
           categoryList?.map((val) => {
             return (
@@ -60,6 +60,8 @@ const CategoryAddList = styled.div`
 
 const CategoryAddPtag = styled.p`
   margin: 0 auto;
-  font-size: 20px;
+  color: var(--color-main);
+  font-size: 16px;
   font-weight: bold;
+  margin-top: 20px;
 `;

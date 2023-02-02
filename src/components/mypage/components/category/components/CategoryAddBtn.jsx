@@ -38,6 +38,7 @@ const AddButton = styled.button`
   border: 0;
   background-color: white;
   border-radius: 50px;
+  margin-right: 5px;
 `;
 
 const AddCategoryIcon = styled(BsFillPlusCircleFill)`

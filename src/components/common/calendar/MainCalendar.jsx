@@ -26,8 +26,10 @@ const MainCalendar = ({
     const dateArr = ["일", "월", "화", "수", "목", "금", "토"];
     setSelectDateTitle(
       `${String(e.getFullYear()).substr(2, 2)}/${
-        e.getMonth() + 1
-      }/${e.getDate()}(${dateArr[e.getDay()]})`
+        e.getMonth() + 1 < 10 ? "0" + (e.getMonth() + 1) : e.getMonth() + 1
+      }/${e.getDate() < 10 ? "0" + e.getDate() : e.getDate()}(${
+        dateArr[e.getDay()]
+      })`
     );
     const selectDataPayload = {
       year: e.getFullYear(),
@@ -71,6 +73,7 @@ const MainCalendar = ({
               ) : null
             )
           }
+          view={"month"}
         />
       )}
     </Calendarcontainer>
