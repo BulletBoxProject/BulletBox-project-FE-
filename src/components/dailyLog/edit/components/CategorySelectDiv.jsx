@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const CategorySelectDiv = ({ categories, AddTodoInput, setAddTodoInput }) => {
+const CategorySelectDiv = ({
+  selectedCategoryId,
+  categories,
+  AddTodoInput,
+  setAddTodoInput,
+}) => {
   const categorySelectHandler = (e) => {
     setAddTodoInput({
       ...AddTodoInput,
@@ -23,6 +28,7 @@ const CategorySelectDiv = ({ categories, AddTodoInput, setAddTodoInput }) => {
             value={category.categoryColor}
             backgroundColor={category.categoryColor}
             onClick={categorySelectHandler}
+            selectedCategoryId={selectedCategoryId}
           >
             {category.categoryName}
           </CategoryButton>
@@ -63,8 +69,14 @@ const CategoryButton = styled.button`
   height: 3em;
   border: 0;
   border-radius: 8px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: ${(props) =>
+    props.id === props.selectedCategoryId ? "#ffffff" : "var(--color-default)"};
+  box-shadow: ${(props) =>
+    props.id === props.selectedCategoryId ? "var(--shadow-box-shadow)" : null};
   &:focus,
   &:hover {
-    border: 3px solid var(--color-light-gray);
+    border: 5px solid #ffffff;
   }
 `;

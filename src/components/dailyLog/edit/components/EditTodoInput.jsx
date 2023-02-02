@@ -73,6 +73,7 @@ const EditTodoInput = ({ todoList, categoryList }) => {
           categories={categoryList}
           AddTodoInput={AddTodoInput}
           setAddTodoInput={setAddTodoInput}
+          selectedCategoryId={AddTodoInput.categoryId}
         />
       )}
 
