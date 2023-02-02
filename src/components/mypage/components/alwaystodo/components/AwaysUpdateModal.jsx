@@ -25,9 +25,9 @@ const AlwaysUpdateModal = ({ onClose, favoriteId, content, memo }) => {
   const [plusId, setPlusId] = useState(1);
   const [isName, setIsName] = useState(true);
 
-  const [categoryId, setCategoryId] = useState(0);
-  const [categoryName, setCategoryName] = useState("");
-  const [categoryColor, setCategoryColor] = useState("");
+  const [categoryId, setCategoryId] = useState(null);
+  const [categoryName, setCategoryName] = useState(null);
+  const [categoryColor, setCategoryColor] = useState(null);
 
   const onMemoAddHandler = () => {
     const input = { id: plusId, favoriteMemoContent: "" };
