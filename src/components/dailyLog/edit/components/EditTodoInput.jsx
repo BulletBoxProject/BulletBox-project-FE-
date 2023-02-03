@@ -8,6 +8,10 @@ import {
   __putDailyTodo,
 } from "../../../../redux/modules/dailysSlice";
 
+import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowUp } from "react-icons/io";
+
+import EditCalendarModal from "../../components/EditCalendarModal";
 import EditTodoForm from "./EditTodoForm";
 import EditMemoDiv from "./EditMemoDiv";
 import TimeSettingDiv from "./TimeSettingDiv";
@@ -28,6 +32,8 @@ const EditTodoInput = ({ todoList, categoryList }) => {
     day: todoList?.day,
     memos: todoList?.memos,
   });
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [showDate, setShowDate] = useState("");
   console.log("수정된 할일", AddTodoInput);
 
   const submitTodoHandler = () => {
@@ -36,22 +42,43 @@ const EditTodoInput = ({ todoList, categoryList }) => {
       navigate("/dailys");
     }, 20);
   };
-
   const day = ["일", "월", "화", "수", "목", "금", "토"];
-  const editTodoDate = `${String(new Date().getFullYear()).substr(2, 2)}/${
-    new Date().getMonth() + 1 < 10
-      ? "0" + (new Date().getMonth() + 1)
-      : new Date().getMonth() + 1
-  }/${
-    new Date().getDate() < 10
-      ? "0" + new Date().getDate()
-      : new Date().getDate()
-  }/(${day[new Date().getDay()]})`;
+  const today = {
+    year: new Date().getFullYear(),
+    month: new Date().getMonth() + 1,
+    day: new Date().getDate(),
+    dayOfDate: day[new Date().getDay()],
+  };
+  useEffect(() => {
+    setShowDate(today);
+  }, []);
+
+  const dateChangeHandler = () => {
+    setShowCalendar(!showCalendar);
+  };
+  const dailyLogTitle = `${String(showDate.year).substr(2, 2)}/${
+    showDate.month < 10 ? "0" + showDate.month : showDate.month
+  }/${showDate.day < 10 ? "0" + showDate.day : showDate.day}/(${
+    showDate.dayOfDate
+  })`;
   return (
     <Container>
-      <DateDiv>
-        <DateButton>{editTodoDate}</DateButton>
-      </DateDiv>
+      <DateButtonDiv>
+        <DateButton onClick={dateChangeHandler}>{dailyLogTitle}</DateButton>
+        <SelectDateButton onClick={dateChangeHandler}>
+          {showCalendar ? <IoIosArrowUp /> : <IoIosArrowDown />}
+        </SelectDateButton>
+        <CalendarDiv>
+          {showCalendar ? (
+            <EditCalendarModal
+              setShowDate={setShowDate}
+              setShowCalendar={setShowCalendar}
+              AddTodoInput={AddTodoInput}
+              setAddTodoInput={setAddTodoInput}
+            />
+          ) : null}
+        </CalendarDiv>
+      </DateButtonDiv>
       {todoList && (
         <TodoAndMemoDiv>
           <EditTodoForm
@@ -95,11 +122,12 @@ const EditTodoInput = ({ todoList, categoryList }) => {
 export default EditTodoInput;
 
 const Container = styled.div``;
-const DateDiv = styled.div`
-  display: flex;
+const DateButtonDiv = styled.div`
   width: 100%;
+  display: flex;
   justify-content: center;
-  margin-top: 10px;
+  align-items: center;
+  gap: 5px;
 `;
 const DateButton = styled.button`
   padding: 3px 0;
@@ -108,8 +136,27 @@ const DateButton = styled.button`
   font-weight: bold;
   background-color: white;
   border: 0;
+  margin-left: 30px;
 `;
-
+const SelectDateButton = styled.button`
+  border: 0;
+  background-color: inherit;
+  margin-top: 3px;
+  & > svg {
+    width: 18px;
+    height: 18px;
+    fill: var(--color-main);
+    pointer-events: none;
+  }
+`;
+const CalendarDiv = styled.div`
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  top: 90px;
+  width: 360px;
+  z-index: 999;
+`;
 const TodoAndMemoDiv = styled.div`
   padding: 15px 20px 20px 20px;
   background-color: var(--color-default);
