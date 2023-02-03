@@ -15,7 +15,7 @@ const SocialLogin = () => {
   const GuestLogin = async () => {
     try {
       const data = await baseURLApiV1.post("/members/login/test");
-      if (data.data.httpStatusCode === 200) {
+      if (data.data.httpStatusCode === 201) {
         return data;
       }
     } catch (error) {

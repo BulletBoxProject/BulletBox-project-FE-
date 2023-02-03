@@ -3,7 +3,7 @@ import styled from "styled-components";
 import useOutSideClick from "../../../hooks/useOutSideClick";
 import ModalContainer from "./ModalContainer";
 
-const useModal = ({ onClose, children }) => {
+const useModal = ({ onClose, children, height }) => {
   const modalRef = useRef(null);
   const handleClose = () => {
     onClose?.();
@@ -13,7 +13,9 @@ const useModal = ({ onClose, children }) => {
   return (
     <ModalContainer>
       <Container>
-        <ModalWrap ref={modalRef}>{children}</ModalWrap>
+        <ModalWrap ref={modalRef} height={height}>
+          {children}
+        </ModalWrap>
       </Container>
     </ModalContainer>
   );
@@ -36,7 +38,7 @@ const Container = styled.div`
 
 const ModalWrap = styled.div`
   width: 294px;
-  height: 356px;
+  height: ${({ height }) => height || "356px"};
   border-radius: 15px;
   background-color: #fff;
   position: absolute;
