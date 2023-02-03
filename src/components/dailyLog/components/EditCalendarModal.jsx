@@ -6,13 +6,19 @@ import { __getSelectDateTodo } from "../../../redux/modules/dailysSlice";
 
 import DailyLogCalendar from "../../common/calendar/DailyLogCalendar";
 
-const CalendarModal = ({ setShowCalendar, setShowDate }) => {
+const EditCalendarModal = ({
+  AddTodoInput,
+  setAddTodoInput,
+  setShowCalendar,
+  setShowDate,
+}) => {
   const [selectedDate, setSelectedDate] = useState({
     year: new Date().getFullYear(),
     month: new Date().getMonth() + 1,
     day: new Date().getDate(),
     dayOfDate: "",
   });
+  console.log("선택된 날짜", selectedDate);
 
   const dipatch = useDispatch();
   const focusTodayHandler = () => {
@@ -23,11 +29,17 @@ const CalendarModal = ({ setShowCalendar, setShowDate }) => {
   };
   const selectDateHandler = () => {
     setShowDate(selectedDate);
-    dipatch(
-      __getSelectDateTodo(
-        `${selectedDate.year}/${selectedDate.month}/${selectedDate.day}`
-      )
-    );
+    setAddTodoInput({
+      ...AddTodoInput,
+      year: selectedDate.year,
+      month: selectedDate.month,
+      day: selectedDate.day,
+    });
+    // dipatch(
+    //   __getSelectDateTodo(
+    //     `${selectedDate.year}/${selectedDate.month}/${selectedDate.day}`
+    //   )
+    // );
     setShowCalendar(false);
   };
   return (
@@ -49,7 +61,7 @@ const CalendarModal = ({ setShowCalendar, setShowDate }) => {
   );
 };
 
-export default CalendarModal;
+export default EditCalendarModal;
 
 const CalendarContents = styled.div`
   /* margin-right: 10px; */

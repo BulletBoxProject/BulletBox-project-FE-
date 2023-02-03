@@ -20,6 +20,7 @@ const Header = () => {
 
   return (
     <HeaderDiv>
+      <SpaceDiv></SpaceDiv>
       <HeaderBtn
         onClick={() => {
           onClickHandler();
@@ -43,10 +44,14 @@ const Header = () => {
 };
 
 export default Header;
+const SpaceDiv = styled.div`
+  width: 36px;
+  margin-left: 20px;
+`;
 const HeaderDiv = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   background-color: white;
   padding-top: 20px;
   width: 100%;
@@ -56,10 +61,10 @@ const HeaderDiv = styled.div`
 const HeaderBtn = styled.button`
   background-color: transparent;
   border: none;
+  width: 108px;
 `;
 const Logo = styled(logoIcon)`
-  width: 36%;
-  margin-left: 6%;
+  width: 100%;
 `;
 
 const Question_Icon = styled(icon)`
@@ -68,6 +73,7 @@ const Question_Icon = styled(icon)`
 `;
 
 const Button = styled.button`
+  margin-right: 20px;
   border-radius: 60%;
   background-color: white;
   border: white;

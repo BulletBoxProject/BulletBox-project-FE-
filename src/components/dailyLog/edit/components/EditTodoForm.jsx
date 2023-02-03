@@ -22,6 +22,7 @@ const EditTodoForm = ({ todoList, AddTodoInput, setAddTodoInput }) => {
   const [todoBullet, setTodoBullet] = useState(
     todoList ? todoList.todoBulletName : ""
   );
+  const [inputLimit, setInputLimit] = useState("");
   const showBulletHandler = (e) => {
     setShowBullet(!showBullet);
   };
@@ -33,43 +34,55 @@ const EditTodoForm = ({ todoList, AddTodoInput, setAddTodoInput }) => {
   };
   const todoInputHandler = (e) => {
     setEditTodoInput(e.target.value);
+    setInputLimit(e.target.value);
     const editTodoInput = e.target.value;
     setAddTodoInput({ ...AddTodoInput, todoContent: editTodoInput });
   };
-
   return (
     <Container>
-      <BulletSelectButton type="button" onClick={showBulletHandler}>
-        {todoList && todoList.todoBulletName === "불렛" ? (
-          <span>선택</span>
-        ) : (
-          <BulletSwitchList bulletName={todoBullet} />
-        )}
-      </BulletSelectButton>
-      {showBullet ? (
-        <BulletList>
-          <button type="button" onClick={selectBulletHandler} value={"할 일"}>
-            <TodoBullet />
-          </button>
-          <button type="button" onClick={selectBulletHandler} value={"완료"}>
-            <CheckBullet />
-          </button>
-          <button type="button" onClick={selectBulletHandler} value={"미룬 일"}>
-            <PostphoneBullet />
-          </button>
-          <button type="button" onClick={selectBulletHandler} value={"중요"}>
-            <ImportantBullet />
-          </button>
-          <button type="button" onClick={selectBulletHandler} value={"메모"}>
-            <MemoBullet />
-          </button>
-        </BulletList>
-      ) : null}
+      <BulletSelectDiv>
+        <BulletSelectButton type="button" onClick={showBulletHandler}>
+          {todoList && todoList.todoBulletName === "불렛" ? (
+            <span>선택</span>
+          ) : (
+            <BulletSwitchList bulletName={todoBullet} />
+          )}
+        </BulletSelectButton>
+        {showBullet ? (
+          <BulletList>
+            <button type="button" onClick={selectBulletHandler} value={"할 일"}>
+              <TodoBullet />
+            </button>
+            <button type="button" onClick={selectBulletHandler} value={"완료"}>
+              <CheckBullet />
+            </button>
+            <button
+              type="button"
+              onClick={selectBulletHandler}
+              value={"미룬 일"}
+            >
+              <PostphoneBullet />
+            </button>
+            <button type="button" onClick={selectBulletHandler} value={"중요"}>
+              <ImportantBullet />
+            </button>
+            <button type="button" onClick={selectBulletHandler} value={"메모"}>
+              <MemoBullet />
+            </button>
+          </BulletList>
+        ) : null}
+      </BulletSelectDiv>
       <TodoInput
         placeholder="할일을 입력해주세요"
         onChange={todoInputHandler}
         value={editTodoInput}
+        maxLength={31}
+        rows="2"
       />
+      <InputLimitDiv>
+        <span>{inputLimit.length}</span>
+        <span>/32</span>
+      </InputLimitDiv>
     </Container>
   );
 };
@@ -78,13 +91,16 @@ export default EditTodoForm;
 
 const Container = styled.div`
   display: flex;
-  /* justify-content: space-between; */
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-start;
+`;
+const BulletSelectDiv = styled.div`
+  position: relative;
 `;
 const BulletSelectButton = styled.button`
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  align-items: flex-start;
+  /* justify-content: flex-end; */
   width: 12%;
   background-color: inherit;
   border: 0;
@@ -100,8 +116,7 @@ const BulletList = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
-  left: 6.5vw;
-  top: 15vh;
+  left: -2px;
   border: 1px solid gray;
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.85);
@@ -121,29 +136,26 @@ const BulletList = styled.div`
     }
   }
 `;
-const TodoInput = styled.input`
-  width: 85%;
+const TodoInput = styled.textarea`
+  width: 210px;
+  margin-top: 2px;
   border: 0;
+  word-break: break-all;
+  resize: none;
   background-color: inherit;
-  padding-left: 0;
-  :disabled {
-    background-color: inherit;
-    border: 0;
-    color: black;
+  ::placeholder {
+    transform: translate(0, 0);
   }
   :focus {
     outline: none;
   }
 `;
-
-const AddTodoButton = styled.button`
-  width: 10%;
-  background-color: inherit;
-  border: 0;
-`;
-const TodoAddEditIcon = styled(todoAddEditIcon)`
-  width: 16px;
-  height: 16px;
+const InputLimitDiv = styled.div`
+  width: 12%;
+  padding-top: 5px;
+  & > span {
+    color: var(--color-gray);
+  }
 `;
 const TodoBullet = styled(todoBullet)`
   width: 24px;

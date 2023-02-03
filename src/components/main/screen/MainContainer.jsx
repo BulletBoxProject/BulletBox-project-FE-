@@ -141,4 +141,6 @@ const MainTodoDiv = styled.div`
 `;
 const TodoTitle = styled.div`
   font-size: 14px;
+  font-weight: bold;
+  color: var(--color-gray);
 `;
