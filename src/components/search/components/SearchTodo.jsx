@@ -15,11 +15,7 @@ import { useNavigate } from "react-router-dom";
 
 import { __deleteSearch } from "../../../redux/modules/searchSlice";
 
-const SearchTodo = ({
-  search,
-  // todoId,
-  todoBullet,
-}) => {
+const SearchTodo = ({ search, todoBullet }) => {
   const [showSelectBox, setShowSelectBox] = useState(false);
   const [showTodoMemo, setShowTodoMemo] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);

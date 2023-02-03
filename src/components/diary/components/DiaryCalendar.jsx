@@ -66,6 +66,7 @@ const DiaryCalendar = ({
           prevLabel={<PrevIcon />}
           next2Label={null}
           prev2Label={null}
+          view={"month"}
           formatDay={(locale, date) =>
             date.toLocaleString("en", { day: "numeric" })
           }
@@ -95,6 +96,7 @@ const Calendarcontainer = styled.div`
     background: transparent;
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.125em;
+    margin-top: 10px;
   }
   .react-calendar__navigation {
     display: flex;
@@ -142,6 +144,10 @@ const Calendarcontainer = styled.div`
       color: black;
       border: 0 !important;
     }
+    & > :focus {
+      color: white;
+      border: 0 !important;
+    }
   }
   .react-calendar__month-view__days__day {
     display: flex !important;
@@ -151,6 +157,10 @@ const Calendarcontainer = styled.div`
     padding-top: 10px;
     font-size: 10px;
     font-weight: bold;
+    & :active {
+      color: black;
+      border: 0 !important;
+    }
     & > abbr {
       padding: 8px 7px;
       font-size: 10px;
@@ -164,6 +174,7 @@ const Calendarcontainer = styled.div`
       color: var(--color-gray);
       background-color: var(--color-default);
       margin: 5px 0 0 0;
+      pointer-events: none;
     }
   }
   .react-calendar--doubleView {
@@ -241,7 +252,7 @@ const Calendarcontainer = styled.div`
     padding: 2em 0.5em;
   }
   .react-calendar__tile {
-    height: 60px !important;
+    height: 50px !important;
     background: none;
     display: flex;
     align-items: center;

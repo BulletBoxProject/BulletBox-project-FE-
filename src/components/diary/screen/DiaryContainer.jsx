@@ -110,7 +110,7 @@ const CalendarDiv = styled.div`
 `;
 const SelectDiv = styled.div`
   position: absolute;
-  top: 5%;
+  top: 3.2%;
   left: 88%;
   align-items: center;
   padding-top: 5px;

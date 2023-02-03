@@ -85,7 +85,7 @@ const TodoDiv = styled.div`
   flex-direction: column;
   width: 344px;
   height: 232px;
-  margin-top: 50px;
+  margin-top: 70px;
   margin-left: 1px;
   padding: 15px;
   border-radius: 16px;
