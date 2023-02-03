@@ -29,7 +29,6 @@ const EditTodoInput = ({ todoList, categoryList }) => {
     memos: todoList?.memos,
   });
   console.log("수정된 할일", AddTodoInput);
-  const [categories, setCategories] = useState([]);
 
   const submitTodoHandler = () => {
     dispatch(__putDailyTodo(AddTodoInput));
@@ -39,13 +38,19 @@ const EditTodoInput = ({ todoList, categoryList }) => {
   };
 
   const day = ["일", "월", "화", "수", "목", "금", "토"];
-  const today = `${String(new Date().getFullYear()).substr(2, 2)}/${
-    new Date().getMonth() + 1
-  }/${new Date().getDate()}(${day[new Date().getDay()]})`;
+  const editTodoDate = `${String(new Date().getFullYear()).substr(2, 2)}/${
+    new Date().getMonth() + 1 < 10
+      ? "0" + (new Date().getMonth() + 1)
+      : new Date().getMonth() + 1
+  }/${
+    new Date().getDate() < 10
+      ? "0" + new Date().getDate()
+      : new Date().getDate()
+  }/(${day[new Date().getDay()]})`;
   return (
     <Container>
       <DateDiv>
-        <DateButton>{today}</DateButton>
+        <DateButton>{editTodoDate}</DateButton>
       </DateDiv>
       {todoList && (
         <TodoAndMemoDiv>
@@ -59,8 +64,6 @@ const EditTodoInput = ({ todoList, categoryList }) => {
             AddTodoInput={AddTodoInput}
             setAddTodoInput={setAddTodoInput}
             memos={AddTodoInput.memos}
-            // newMemo={newMemo}
-            // setNewMemo={setNewMemo}
           />
         </TodoAndMemoDiv>
       )}

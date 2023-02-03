@@ -10,11 +10,6 @@ import { ReactComponent as closeIcon } from "../../../../img/dailyLog/close.svg"
 const EditMemoDiv = ({ todoList, AddTodoInput, setAddTodoInput, memos }) => {
   const [memoOrigin, setMemoOrigin] = useState(todoList.memos);
   console.log("오리진 메모", memoOrigin);
-
-  // const [deleteMemo, setDeleteMemo] = useState([]);
-  // console.log("삭제된 메모", deleteMemo);
-  const [newMemo, setNewMemo] = useState(todoList.memos);
-  // console.log("새로운 메모", newMemo);
   const [renderMemo, setRenderMemo] = useState(
     todoList?.memos?.map((memo, idx) => ({ ...memo, renderId: idx }))
   );
@@ -97,42 +92,12 @@ const Container = styled.div`
   flex-direction: column;
   gap: 3px;
 `;
-const MemoList = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  margin-left: 8vw;
-  margin-top: 5px;
-  gap: 5px;
-`;
-const MemoCard = styled.div`
-  display: flex;
-  /* justify-content: space-between; */
-  width: 100%;
-  font-size: 12px;
-  gap: 5px;
-  & > span {
-    display: flex;
-    align-items: center;
-    height: 20px;
-  }
-`;
-const MemoDeleteButton = styled.button`
-  display: flex;
-  align-items: center;
-  border: 0;
-  background-color: white;
-`;
-const CancelMemoIcon = styled(IoMdClose)`
-  width: 13px;
-  height: 13px;
-  fill: var(--color-dark-gary);
-  pointer-events: none;
-`;
 const AddMemoInputDiv = styled.div`
   display: flex;
+  align-items: center;
   width: 80%;
-  margin-left: 8vw;
+  gap: 10px;
+  padding-left: 20px;
 `;
 const MemoBullet = styled.div``;
 
@@ -144,10 +109,6 @@ const AddMemoInput = styled.input`
   &:focus {
     outline: none;
   }
-`;
-const MemoSubmitButton = styled.button`
-  border: 0;
-  background-color: inherit;
 `;
 const AddTodoMemoButton = styled.button`
   margin-top: 5px;
@@ -162,10 +123,6 @@ const AddMemoIcon = styled(BsFillPlusCircleFill)`
 const MemoBulletIcon = styled(memoBullet)`
   width: 24px;
   height: 18px;
-`;
-const MemoAddIcon = styled(memoAddIcon)`
-  width: 16px;
-  height: 16px;
 `;
 const DeleteButton = styled.button`
   width: 1.5rem;

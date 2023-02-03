@@ -12,7 +12,7 @@ const TimeSettingDiv = ({ AddTodoInput, setAddTodoInput }) => {
     hour: false,
     minute: false,
   });
-  const [selectTime, setSelectTime] = useState({ hour: 0, minute: 0 });
+  const [selectTime, setSelectTime] = useState({ hour: null, minute: null });
   console.log("입력된 시간", selectTime);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const TimeSettingDiv = ({ AddTodoInput, setAddTodoInput }) => {
 
   const showSetTimeHandler = () => {
     setShowTimeSet(!showTimeSet);
-    setSelectTime({ hour: 0, minute: 0 });
+    setSelectTime({ hour: null, minute: null });
   };
   const showSelectHourHandler = () => {
     setShowSelectTime({
@@ -58,7 +58,7 @@ const TimeSettingDiv = ({ AddTodoInput, setAddTodoInput }) => {
                   onClick={showSelectHourHandler}
                 >
                   <span>
-                    {selectTime.hour === 0 ? (
+                    {selectTime.hour === null ? (
                       <SelectDownIcon />
                     ) : (
                       selectTime.hour
@@ -84,7 +84,7 @@ const TimeSettingDiv = ({ AddTodoInput, setAddTodoInput }) => {
                   onClick={showSelectMinuteHandler}
                 >
                   <span>
-                    {selectTime.minute === 0 ? (
+                    {selectTime.minute === null ? (
                       <SelectDownIcon />
                     ) : (
                       selectTime.minute

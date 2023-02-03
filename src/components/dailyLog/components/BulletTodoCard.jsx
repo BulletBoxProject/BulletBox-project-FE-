@@ -49,7 +49,7 @@ const BulletTodoCard = ({ dailyLog, dailyLogs, setDailyLogs }) => {
   return (
     <Container>
       <CardContainer key={num++}>
-        <MainBulletTodo>
+        <MainBulletTodo todoContent={dailyLog.todoContent}>
           <CategoryColorDiv
             showMemoBox={showMemoBox}
             categoryColor={dailyLog.categoryColor}
@@ -58,7 +58,14 @@ const BulletTodoCard = ({ dailyLog, dailyLogs, setDailyLogs }) => {
             <BulletDiv>
               <BulletSwitchList bulletName={dailyLog.todoBulletName} />
             </BulletDiv>
-            <TodoTitle>{dailyLog.todoContent}</TodoTitle>
+            <TodoContentDiv>
+              <TodoTitle>{dailyLog.todoContent}</TodoTitle>
+              <TimeDiv>
+                {dailyLog.time === null ? null : (
+                  <TodoSetTime>{dailyLog.time}</TodoSetTime>
+                )}
+              </TimeDiv>
+            </TodoContentDiv>
           </TodoBodyDiv>
           {dailyLog && (
             <TodoMoreViewDiv>
@@ -139,6 +146,7 @@ const Container = styled.div`
 const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   width: 100%;
   background-color: var(--color-default);
   border-radius: 8px;
@@ -148,7 +156,7 @@ const MainBulletTodo = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 42px;
+  height: ${({ todoContent }) => (todoContent.length > 19 ? "60px" : "40px")};
   border-radius: ${(props) =>
     props.showMemoBox === true ? `8px 8px 0 0` : `8px`};
   background-color: var(--color-default);
@@ -162,9 +170,10 @@ const CategoryColorDiv = styled.div`
 `;
 const TodoBodyDiv = styled.div`
   display: flex;
+  justify-content: flex-start;
   align-items: center;
   padding-left: 5px;
-  width: 75%;
+  width: 80%;
   font-size: 14px;
   font-weight: 600;
   gap: 10px;
@@ -172,8 +181,27 @@ const TodoBodyDiv = styled.div`
 const BulletDiv = styled.span`
   width: 24px;
 `;
+const TodoContentDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  padding-right: 3%;
+  height: 100%;
+  padding-left: 6px;
+  border-radius: 0 8px 8px 0;
+  background-color: var(--color-default);
+`;
+const TimeDiv = styled.span`
+  padding-top: 2px;
+  font-size: 12px;
+`;
+const TodoSetTime = styled.span`
+  color: var(--color-gray);
+`;
 const TodoTitle = styled.span`
-  width: 80%;
+  font-size: 12px;
+  width: 90%;
 `;
 const ModalContainer = styled.div`
   position: absolute;
@@ -242,7 +270,7 @@ const TodoMemoDiv = styled.div`
   flex-direction: column;
   width: 100%;
   background-color: inherit;
-  padding: 8px 0;
+  padding-bottom: 4px;
 `;
 const MemoContent = styled.div`
   display: flex;
@@ -250,9 +278,15 @@ const MemoContent = styled.div`
   width: 90%;
   padding-left: 24px;
   font-size: 12px;
+  font-weight: bold;
   gap: 5px;
 `;
-const TodoMoreViewDiv = styled.div``;
+const TodoMoreViewDiv = styled.div`
+  display: flex;
+  align-items: center;
+  width: 36px;
+  height: 100%;
+`;
 const TodoMoreViewButton = styled.button`
   position: relative;
   border: 0;
