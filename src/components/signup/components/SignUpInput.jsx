@@ -155,14 +155,11 @@ const SignUpInput = () => {
 
   const emailconfirm = async (post) => {
     try {
-      console.log(post);
       const data = await instanceApiV1.post(`/members/signup/verifycode`, post);
-
       if (data.data.httpStatusCode === 200) {
         setIsOpen(true);
         setAlertMessage(data.data.msg);
         setVerifyCode(data.data.data);
-        console.log(data.data.data);
         return data;
       }
     } catch (error) {
