@@ -21,38 +21,38 @@ const SimpleSlider = () => {
     slidesToScroll: 1,
   };
   return (
-    <div>
+    <>
       <Slider {...settings}>
-        <div>
+        <>
           <GuideText>도움말</GuideText>
           <Guide1 />
-        </div>
-        <div>
+        </>
+        <>
           <GuideText>도움말</GuideText>
           <Guide2 />
-        </div>
-        <div>
+        </>
+        <>
           <GuideText>도움말</GuideText>
           <Guide3 />
-        </div>
-        <div>
+        </>
+        <>
           <GuideText>도움말</GuideText>
           <Guide4 />
-        </div>
-        <div>
+        </>
+        <>
           <GuideText>도움말</GuideText>
           <Guide5 />
-        </div>
-        <div>
+        </>
+        <>
           <GuideText>도움말</GuideText>
           <Guide6 />
-        </div>
-        <div>
+        </>
+        <>
           <GuideText>도움말</GuideText>
           <Guide7 />
-        </div>
+        </>
       </Slider>
-    </div>
+    </>
   );
 };
 

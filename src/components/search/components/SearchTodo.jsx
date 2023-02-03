@@ -93,6 +93,7 @@ const SearchTodo = ({
         <TodoDateDiv>
           {search.todoYear}/{search.todoMonth}/{search.todoDay}
         </TodoDateDiv>
+
         {showTodoMemo ? (
           <TodoMemoDiv>
             {search.todoMemos.map((value) => (
@@ -138,8 +139,9 @@ const CardContainer = styled.div`
   border: none;
   background-color: ${({ backgroundColor }) =>
     backgroundColor || `var(--color-default)`};
-  padding: 6px;
+  padding-left: 8px;
   border-radius: 8px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
 `;
 const ModalContainer = styled.div`
   position: absolute;
@@ -190,34 +192,42 @@ const CancelButton = styled.div`
 const MainBulletTodo = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
+  background-color: var(--color-default);
   width: 100%;
+  height: 35px;
+  & > input {
+    width: 90%;
+  }
 `;
 const TodoBodyDiv = styled.div`
   display: flex;
   align-items: center;
-  width: 80%;
-  font-size: 12px;
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
   font-weight: bold;
-  gap: 3px;
+  gap: 8px;
+  background-color: var(--color-default);
 `;
 
 const TodoDateDiv = styled.div`
   display: flex;
-  align-items: center;
-  margin-left: 5px;
+  width: 100%;
+  height: 15px;
   font-size: 10px;
+  padding-left: 10px;
   font-weight: bold;
   color: var(--color-gray);
+  background-color: var(--color-default);
 `;
 
 const TodoMemoDiv = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 10px;
-  background-color: inherit;
-  padding: 4px 0;
+  background-color: var(--color-default);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
 `;
 const MemoContent = styled.div`
   display: flex;
@@ -236,6 +246,7 @@ const TodoMoreViewDiv = styled.div`
 const TodoMoreViewButton = styled.button`
   border: 0;
   background-color: inherit;
+  padding-right: 20px;
 `;
 const OptionSelectDiv = styled.div`
   position: relative;
@@ -297,6 +308,6 @@ const OnlyTitleIcon = styled(IoIosArrowUp)`
 `;
 
 const MemoBullet = styled(memoBullet)`
-  width: 20px;
-  height: 14px;
+  width: 24px;
+  height: 24px;
 `;
