@@ -3,13 +3,17 @@ import { useNavigate } from "react-router";
 import { instanceApiV1 } from "../core/api";
 import { setCookies } from "../core/cookieControler";
 
-const KakaoLoginPage = () => {
+const GoogleLoginPage = () => {
   const navigate = useNavigate();
-  const code = new URL(window.location.href).searchParams.get("code");
+  const params = new URLSearchParams(window.location.search);
+  const code = encodeURIComponent(params.get("code"));
+  // const code = new URL(window.location.href).searchParams.get("code");
 
   const kakao = async () => {
     try {
-      const data = await instanceApiV1.get(`/members/login/kakao?code=${code}`);
+      const data = await instanceApiV1.get(
+        `/members/login/google?code=${code}`
+      );
       setCookies("Authorization", data.headers.authorization, {
         path: "/",
         maxAge: 17500,
@@ -24,4 +28,4 @@ const KakaoLoginPage = () => {
   return <div></div>;
 };
 
-export default KakaoLoginPage;
+export default GoogleLoginPage;

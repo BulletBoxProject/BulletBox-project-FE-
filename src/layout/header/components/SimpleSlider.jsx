@@ -4,7 +4,13 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { ReactComponent as guide1 } from "../../../img/Guide/guide1.svg";
+import { ReactComponent as guide1 } from "../../../img/guide/guide1.svg";
+import { ReactComponent as guide2 } from "../../../img/guide/guide2.svg";
+import { ReactComponent as guide3 } from "../../../img/guide/guide3.svg";
+import { ReactComponent as guide4 } from "../../../img/guide/guide4.svg";
+import { ReactComponent as guide5 } from "../../../img/guide/guide5.svg";
+import { ReactComponent as guide6 } from "../../../img/guide/guide6.svg";
+import { ReactComponent as guide7 } from "../../../img/guide/guide7.svg";
 
 const SimpleSlider = () => {
   const settings = {
@@ -23,18 +29,27 @@ const SimpleSlider = () => {
         </div>
         <div>
           <GuideText>도움말</GuideText>
+          <Guide2 />
         </div>
         <div>
-          <h3>3</h3>
+          <GuideText>도움말</GuideText>
+          <Guide3 />
         </div>
         <div>
-          <h3>4</h3>
+          <GuideText>도움말</GuideText>
+          <Guide4 />
         </div>
         <div>
-          <h3>5</h3>
+          <GuideText>도움말</GuideText>
+          <Guide5 />
         </div>
         <div>
-          <h3>6</h3>
+          <GuideText>도움말</GuideText>
+          <Guide6 />
+        </div>
+        <div>
+          <GuideText>도움말</GuideText>
+          <Guide7 />
         </div>
       </Slider>
     </div>
@@ -56,6 +71,32 @@ const GuideText = styled.div`
 `;
 
 const Guide1 = styled(guide1)`
-  width: 293px;
-  height: 470px;
+  width: 290px;
+  height: 420px;
+`;
+
+const Guide2 = styled(guide2)`
+  width: 290px;
+  height: 420px;
+`;
+const Guide3 = styled(guide3)`
+  width: 290px;
+  height: 420px;
+`;
+
+const Guide4 = styled(guide4)`
+  width: 290px;
+  height: 420px;
+`;
+const Guide5 = styled(guide5)`
+  width: 290px;
+  height: 420px;
+`;
+const Guide6 = styled(guide6)`
+  width: 290px;
+  height: 420px;
+`;
+const Guide7 = styled(guide7)`
+  width: 290px;
+  height: 420px;
 `;

@@ -13,6 +13,7 @@ import Search from "../pages/Search";
 import Diary from "../pages/Diary";
 import EditDailyLog from "../pages/EditDailyLog";
 import KakaoLoginPage from "../pages/KakaoLoginPage";
+import GoogleLoginPage from "../pages/GoogleLoginPage";
 
 const Router = () => {
   return (
@@ -23,6 +24,7 @@ const Router = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/" element={<Start />} />
           <Route path="/kakao/login" element={<KakaoLoginPage />} />
+          <Route path="/google/login" element={<GoogleLoginPage />} />
         </Route>
 
         <Route element={<Layout />}>

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { baseURLApiV1 } from "../../../core/api";
 import { setCookies } from "../../../core/cookieControler";
 import { KAKAO_AUTH_URL } from "../../../core/kakaoLogin";
+import { GOOGLE_AUTH_URL } from "../../../core/googleLogin";
 
 import { ReactComponent as BulletBox } from "../../../img/login/logo-graphic copy.svg";
 import { ReactComponent as kakao } from "../../../img/login/kakao.svg";
@@ -47,6 +48,10 @@ const SocialLogin = () => {
     window.location.href = KAKAO_AUTH_URL;
   };
 
+  const GoogleLoginHandler = () => {
+    window.location.href = GOOGLE_AUTH_URL;
+  };
+
   return (
     <SocialContainer>
       <SocialBtnBox>
@@ -56,7 +61,7 @@ const SocialLogin = () => {
         <SocialKakaoBtn type="button" onClick={KakaoLoginHandler}>
           <Kakao />
         </SocialKakaoBtn>
-        <SocialGoogleBtn>
+        <SocialGoogleBtn type="button" onClick={GoogleLoginHandler}>
           <Google />
         </SocialGoogleBtn>
       </SocialBtnBox>
