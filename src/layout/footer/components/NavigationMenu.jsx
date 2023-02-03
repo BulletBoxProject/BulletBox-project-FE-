@@ -66,7 +66,8 @@ const Button = styled.button`
   height: 48px;
   border: 0;
   &:active,
-  &:hover {
+  &:hover,
+  &:focus {
     color: var(--color-main);
   }
 `;

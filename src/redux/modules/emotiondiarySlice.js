@@ -50,6 +50,7 @@ export const __postDiary = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await baseURLApiV1.post(`diaries`, payload);
+      console.log(data, "저장 후 받은값");
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -74,8 +75,16 @@ const emotionDiarySlice = createSlice({
         state.emotionDiary.emotions = action.payload.emotions;
       })
       .addCase(__postDiary.fulfilled, (state, action) => {
+        console.log(action.payload, "저장후 payload");
         state.emotionDiary.diary = action.payload.diary;
-        state.emotionDiary.emotions = action.payload.emotions;
+        const addEmotions = {
+          day: action.payload.diary.day,
+          emotion: action.payload.diary.emotion,
+        };
+        state.emotionDiary.emotions = [
+          ...state.emotionDiary.emotions,
+          addEmotions,
+        ];
       });
   },
 });
