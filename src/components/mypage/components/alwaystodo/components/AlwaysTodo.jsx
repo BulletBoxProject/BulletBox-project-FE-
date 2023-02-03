@@ -55,6 +55,7 @@ const AlwaysTodo = ({
   const updateButtonHandler = () => {
     setShowUpdateMoal(true);
   };
+  console.log(memo);
 
   return (
     <>
@@ -66,11 +67,13 @@ const AlwaysTodo = ({
               {content}
             </TodoContainer>
           </TodoBodyDiv>
-          <TodoMoreViewDiv>
-            <TodoMoreViewButton onClick={memoViewHandler}>
-              {showTodoMemo ? <OnlyTitleIcon /> : <MoreIcon />}
-            </TodoMoreViewButton>
-          </TodoMoreViewDiv>
+          {memo.length === 0 ? null : (
+            <TodoMoreViewDiv>
+              <TodoMoreViewButton onClick={memoViewHandler}>
+                {showTodoMemo ? <OnlyTitleIcon /> : <MoreIcon />}
+              </TodoMoreViewButton>
+            </TodoMoreViewDiv>
+          )}
 
           <OptionSelectDiv ref={selectRef}>
             <OptionButton onClick={SelectOptionHandler}>
@@ -147,7 +150,7 @@ const CardContainer = styled.div`
   flex-direction: column;
   width: 328px;
   border: none;
-  background-color: ${(props) => props.categoryColor};
+  background-color: ${(props) => props.categoryColor || "var(--color-default)"};
   border-radius: 8px;
   padding-left: 8px;
   margin-left: 8px;

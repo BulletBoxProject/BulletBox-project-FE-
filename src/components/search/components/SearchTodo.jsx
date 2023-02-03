@@ -19,7 +19,6 @@ const SearchTodo = ({
   search,
   // todoId,
   todoBullet,
-  // time,
 }) => {
   const [showSelectBox, setShowSelectBox] = useState(false);
   const [showTodoMemo, setShowTodoMemo] = useState(false);
@@ -63,11 +62,13 @@ const SearchTodo = ({
             </span>
             <span>{search.todoContent}</span>
           </TodoBodyDiv>
-          <TodoMoreViewDiv>
-            <TodoMoreViewButton onClick={memoViewHandler}>
-              {showTodoMemo ? <OnlyTitleIcon /> : <MoreIcon />}
-            </TodoMoreViewButton>
-          </TodoMoreViewDiv>
+          {search.todoMemos.length === 0 ? null : (
+            <TodoMoreViewDiv>
+              <TodoMoreViewButton onClick={memoViewHandler}>
+                {showTodoMemo ? <OnlyTitleIcon /> : <MoreIcon />}
+              </TodoMoreViewButton>
+            </TodoMoreViewDiv>
+          )}
 
           <OptionSelectDiv ref={selectRef}>
             <OptionButton onClick={SelectOptionHandler}>
@@ -133,7 +134,7 @@ const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 2%;
-  width: 94%;
+  width: 328px;
   border: none;
   background-color: ${({ backgroundColor }) =>
     backgroundColor || `var(--color-default)`};

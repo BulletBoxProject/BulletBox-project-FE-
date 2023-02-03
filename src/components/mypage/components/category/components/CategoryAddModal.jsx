@@ -10,7 +10,6 @@ const CategoryModal = ({ onClose }) => {
   const [categoryColor, setCategoryColor] = useState("");
 
   const [isName, setIsName] = useState(false);
-  const [isColor, setIsColor] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -25,7 +24,6 @@ const CategoryModal = ({ onClose }) => {
   };
   const CategoryColorHandler = (e) => {
     setCategoryColor(e.target.value);
-    setIsColor(true);
   };
 
   const AddCategoryHandler = () => {
@@ -70,6 +68,8 @@ const CategoryModal = ({ onClose }) => {
           <TitleLength>({categoryName.length}/8)</TitleLength>
           <SelectColorDiv>
             <SelectWhiteBtn
+              categoryColor={categoryColor}
+              value={"#FFFFFF"}
               onClick={(e) => {
                 CategoryColorHandler(e);
               }}
@@ -78,8 +78,8 @@ const CategoryModal = ({ onClose }) => {
               return (
                 <SelectBtn
                   key={val.key}
-                  backgroundColor={val.value}
                   value={val.value}
+                  categoryColor={categoryColor}
                   onClick={(e) => {
                     CategoryColorHandler(e);
                   }}
@@ -125,12 +125,10 @@ const SelectWhiteBtn = styled.button`
   margin-right: 0.8rem;
   border-radius: 4px;
   background-color: white;
-  border: 1px solid black;
-  &:active,
-  &:focus {
-    border: none;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
-  }
+  border: ${({ value, categoryColor }) =>
+    value === categoryColor ? "none" : "1px solid black"};
+  box-shadow: ${({ value, categoryColor }) =>
+    value === categoryColor ? "0px 0px 4px rgba(0, 0, 0, 0.3)" : "none"};
 `;
 
 const SelectBtn = styled.button`
@@ -138,13 +136,11 @@ const SelectBtn = styled.button`
   height: 2.13rem;
   border-radius: 4px;
   margin-right: 0.8rem;
-  border: none;
-  background-color: ${({ backgroundColor }) => backgroundColor};
-  &:active,
-  &:focus {
-    border: 5px solid white;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
-  }
+  border: ${({ value, categoryColor }) =>
+    value === categoryColor ? "5px solid white" : "none"};
+  background-color: ${({ value }) => value};
+  box-shadow: ${({ value, categoryColor }) =>
+    value === categoryColor ? "0px 0px 4px rgba(0, 0, 0, 0.3)" : "none"};
 `;
 
 const CategoryInput = styled.input.attrs({ maxLength: 8 })`
