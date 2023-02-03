@@ -102,7 +102,7 @@ const Container = styled.div`
 const AddMemoInputDiv = styled.div`
   display: flex;
   align-items: center;
-  width: 90%;
+  width: 95%;
   gap: 10px;
   padding-left: 20px;
 `;
