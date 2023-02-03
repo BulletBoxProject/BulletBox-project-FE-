@@ -15,9 +15,9 @@ const LogInInput = () => {
 
   const [message, setMessage] = useState("");
 
-  // const onBackHandler = () => {
-  //   navigate("/");
-  // };
+  const onBackHandler = () => {
+    navigate("/");
+  };
 
   const postLogin = async (post) => {
     try {
@@ -106,6 +106,7 @@ const LogInInput = () => {
       </StButtonBox>
       <UserInfoBox>
         <SignupDiv>
+          <SignUpSpan>아직 회원이 아니신가요?</SignUpSpan>
           <StSignupBtn
             type="button"
             onClick={() => {
@@ -201,14 +202,11 @@ const StLoginBtn = styled.button`
 `;
 
 // const BackBtn = styled.button`
-//   position: absolute;
-//   left: 0;
-//   top: 0;
-//   margin-left: 50px;
-//   margin-top: 170px;
+//   display: flex;
+
 //   border: none;
 //   background-color: transparent;
-//   width: 25px;
+//   width: 30px;
 //   height: 20px;
 // `;
 // const BackIcon = styled(IoIosArrowBack)`
@@ -228,7 +226,6 @@ const UserInfoBox = styled.div`
   font-weight: bold;
 `;
 
-
 const SignupDiv = styled.div`
   display: flex;
   align-items: center;
@@ -243,4 +240,10 @@ const StSignupBtn = styled.button`
   font-family: "NanumGothic";
   font-weight: bold;
   color: var(--color-main);
+`;
+
+const SignUpSpan = styled.span`
+  color: var(--color-gray);
+  font-size: 8px;
+  font-weight: bold;
 `;

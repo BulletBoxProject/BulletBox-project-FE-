@@ -19,7 +19,7 @@ const SearchTodoBullet = ({ bulletName }) => {
             <TodoBullet />
           </div>
         );
-      case "완료":
+      case "COMPLETE":
         return (
           <div>
             <CheckBullet />
@@ -37,19 +37,19 @@ const SearchTodoBullet = ({ bulletName }) => {
             <ImportantBullet />
           </div>
         );
-      case "자주":
+      case "루틴":
         return (
           <div>
             <FavoriteBullet />
           </div>
         );
-      case "미정":
+      case "TOBEDETERMINDED":
         return (
           <div>
             <UndefinedBullet />
           </div>
         );
-      case "강조":
+      case "EMPHASIS":
         return (
           <div>
             <HighLightBullet />
@@ -71,35 +71,43 @@ export default SearchTodoBullet;
 const TodoBullet = styled(todoBullet)`
   width: 24px;
   height: 24px;
+  padding-left: 10px;
 `;
 const CheckBullet = styled(checkBullet)`
   width: 24px;
   height: 24px;
+  padding-left: 10px;
 `;
 const PostphoneBullet = styled(postphoneBullet)`
   width: 24px;
   height: 24px;
+  padding-left: 10px;
 `;
 
 const ImportantBullet = styled(importantBullet)`
   width: 24px;
   height: 24px;
+  padding-left: 10px;
 `;
 const MemoBullet = styled(memoBullet)`
   width: 24px;
   height: 24px;
+  padding-left: 10px;
 `;
 
 const FavoriteBullet = styled(favoriteBullet)`
   width: 24px;
   height: 24px;
+  padding-left: 10px;
 `;
 
 const UndefinedBullet = styled(undefinedBullet)`
   width: 24px;
   height: 24px;
+  padding-left: 10px;
 `;
 const HighLightBullet = styled(highLightBullet)`
   width: 24px;
   height: 24px;
+  padding-left: 10px;
 `;

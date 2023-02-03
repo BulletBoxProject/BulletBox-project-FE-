@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
 import { instanceApiV1 } from "../../../core/api";
+import AlertModal from "../../common/modal/AlertModal";
 
 const SignUpInput = () => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const SignUpInput = () => {
   const [nickNameMessage, setNickNameMessage] = useState("");
   const [passwordMessage, setPasswordMessage] = useState("");
   const [passwordConfirmMessage, setPasswordConfirmMessage] = useState("");
+  const [alertMessage, setAlertMessage] = useState("");
 
   const [isEmail, setIsEmail] = useState(false);
   const [isNickName, setIsNickName] = useState(false);
@@ -23,6 +25,7 @@ const SignUpInput = () => {
   const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
   const [isConfirmEmail, setIsConfirmEamail] = useState(false);
   const [readonly, setReadOnly] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const onChangeEmail = useCallback((e) => {
     const emailRegex =
@@ -86,7 +89,8 @@ const SignUpInput = () => {
         alert(data.data.msg);
         return data;
       } else {
-        alert("회원가입에 실패했습니다.");
+        setIsOpen(true);
+        setAlertMessage("회원가입에 실패했습니다.");
       }
     } catch (error) {
       console.log(error);
@@ -115,18 +119,25 @@ const SignUpInput = () => {
         post
       );
       if (data.data.httpStatusCode === 200) {
-        alert(data.data.msg);
+        setIsOpen(true);
+        setAlertMessage(data.data.msg);
         setVerifyCode(data.data.data);
         setIsConfirmEamail(true);
         return data;
+      } else {
+        setIsOpen(true);
+        setAlertMessage("알수 없는 오류입니다.");
       }
     } catch (error) {
-      alert(error.response.data.msg);
+      setIsOpen(true);
+      setAlertMessage(error.response.data.msg);
     }
   };
 
   const confirmHendler = () => {
     setReadOnly(true);
+    setIsOpen(true);
+    setAlertMessage("인증번호를 보내는중입니다. 잠시만 기다려주세요.");
     postconfirm({
       email,
     }).then((res) => {
@@ -144,13 +155,11 @@ const SignUpInput = () => {
 
   const emailconfirm = async (post) => {
     try {
-      console.log(post);
       const data = await instanceApiV1.post(`/members/signup/verifycode`, post);
-
       if (data.data.httpStatusCode === 200) {
-        alert(data.data.msg);
+        setIsOpen(true);
+        setAlertMessage(data.data.msg);
         setVerifyCode(data.data.data);
-        console.log(data.data.data);
         return data;
       }
     } catch (error) {
@@ -164,7 +173,8 @@ const SignUpInput = () => {
       verifyCode,
     }).then((res) => {
       if (res === undefined) {
-        alert("인증실패 했습니다.");
+        setIsOpen(true);
+        setAlertMessage("인증 실패했습니다.");
       } else {
         setIsEmail(true);
         setIsConfirmEamail(false);
@@ -250,6 +260,16 @@ const SignUpInput = () => {
       >
         로그인 페이지로 돌아가기
       </CancelBtn>
+      {isOpen && (
+        <AlertModal
+          open={isOpen}
+          onClose={() => {
+            setIsOpen(false);
+          }}
+        >
+          {alertMessage}
+        </AlertModal>
+      )}
     </StForm>
   );
 };

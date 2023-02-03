@@ -18,8 +18,10 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.6.1",
     "react-scripts": "5.0.1",
+    "react-slick": "^0.29.0",
     "react-uuid": "^2.0.0",
     "redux": "^4.2.0",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.6",
     "web-vitals": "^2.1.0"
   },
@@ -28,7 +30,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "yarn run build && aws s3 sync build/ s3://2team-clone-code"
+    "deploy": "yarn run build && aws s3 sync build/ s3://bullet-box.com"
   },
   "eslintConfig": {
     "extends": [

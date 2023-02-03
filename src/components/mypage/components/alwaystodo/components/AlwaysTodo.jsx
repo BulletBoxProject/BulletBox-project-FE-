@@ -215,6 +215,7 @@ const CancelButton = styled.div`
 const MainBulletTodo = styled.div`
   display: flex;
   align-items: center;
+  background-color: var(--color-default);
   width: 100%;
   height: 40px;
   border-radius: 8px;

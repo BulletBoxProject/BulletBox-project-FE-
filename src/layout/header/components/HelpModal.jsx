@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Modal from "../../../components/common/modal/Modal";
+import SimpleSlider from "./SimpleSlider";
 
 import { ReactComponent as todo } from "../../../img/bullet/todo-1.svg";
 import { ReactComponent as check } from "../../../img/bullet/check-2.svg";
@@ -13,49 +14,11 @@ import { ReactComponent as close } from "../../../img/etc/close.svg";
 
 function HelpModal({ onClose }) {
   return (
-    <Modal onClose={onClose}>
+    <Modal onClose={onClose} height={"485px"}>
       <Button onClick={onClose}>
         <Close />
       </Button>
-      <TitleText>사용메뉴얼(도움말)</TitleText>
-      <HelpContainer>
-        <BulletBox>
-          <Todo /> <BulletName>할일</BulletName>
-          <Check />
-          <BulletName>완료</BulletName>
-          <Postpone /> <BulletName>미뤄진일</BulletName>
-          <Ex /> <BulletName>경험</BulletName>
-          <Asterisk />
-          <BulletName>중요한일</BulletName>
-          <Star /> <BulletName>자주하는할일</BulletName>
-          <Memo />
-          <BulletName>불렛메모</BulletName>
-        </BulletBox>
-        <Contents>
-          <Helptext>
-            불렛은 데일리 로그에 적는 여러가지 내용들을 분류해주기 위해
-            사용됩니다.
-          </Helptext>
-          <Helptext>
-            불렛을 통해 데일리 로그에 오늘 할일 뿐 아니라 다양한 내용들을 담을
-            수 있습니다.
-          </Helptext>
-        </Contents>
-      </HelpContainer>
-      <ExContainer>
-        <span>예시</span>
-        <ExTitle>
-          <Asterisk /> 저녁 장보러 가기
-        </ExTitle>
-        <ExText>
-          <Memo />
-          퇴근후 8시까지 마트가기
-        </ExText>
-        <ExText>
-          <Memo />
-          이마트 주차권(영수증) 챙기기
-        </ExText>
-      </ExContainer>
+      <SimpleSlider />
     </Modal>
   );
 }
@@ -101,6 +64,7 @@ const Button = styled.button`
   border: none;
   background-color: transparent;
   cursor: pointer;
+  z-index: 9999;
 `;
 
 const BulletBox = styled.div`
