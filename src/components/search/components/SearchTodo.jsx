@@ -134,7 +134,7 @@ const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 2%;
-  width: 94%;
+  width: 328px;
   border: none;
   background-color: ${({ backgroundColor }) =>
     backgroundColor || `var(--color-default)`};
