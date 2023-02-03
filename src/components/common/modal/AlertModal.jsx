@@ -19,7 +19,7 @@ const AlertModal = ({ onClose, children }) => {
             <CloseImg />
           </CloseBtn>
           <Contents>
-            <p>{children}</p>
+            <AlertPtag>{children}</AlertPtag>
           </Contents>
           <AlertBtn onClick={onClose}>확인</AlertBtn>
         </ModalWrap>
@@ -87,10 +87,14 @@ const CloseImg = styled(close)``;
 
 const CloseBtn = styled.button`
   position: absolute;
-  margin-left: 7%;
-  margin-top: 7%;
+  top: 7%;
+  right: 7%;
   width: 16px;
   height: 16px;
   background-color: white;
   border: none;
+`;
+
+const AlertPtag = styled.span`
+  width: 180px;
 `;
