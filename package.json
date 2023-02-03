@@ -30,7 +30,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "yarn run build && aws s3 sync build/ s3://2team-clone-code"
+    "deploy": "yarn run build && aws s3 sync build/ s3://bullet-box.com"
   },
   "eslintConfig": {
     "extends": [
