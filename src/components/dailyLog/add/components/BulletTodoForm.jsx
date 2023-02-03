@@ -98,7 +98,7 @@ export default BulletTodoForm;
 
 const Container = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-start;
 `;
 const BulletSelectDiv = styled.div`
@@ -108,7 +108,6 @@ const BulletSelectButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  width: 45px;
   background-color: inherit;
   border: 0;
   padding: 0;
@@ -173,18 +172,11 @@ const TodoInput = styled.textarea`
 const InputLimitDiv = styled.div`
   width: 12%;
   padding-top: 5px;
+  display: flex;
+  justify-content: flex-end;
   & > span {
     color: var(--color-gray);
   }
-`;
-const AddTodoButton = styled.button`
-  width: 10%;
-  background-color: inherit;
-  border: 0;
-`;
-const TodoAddEditIcon = styled(todoAddEditIcon)`
-  width: 16px;
-  height: 16px;
 `;
 const TodoBullet = styled(todoBullet)`
   width: 24px;

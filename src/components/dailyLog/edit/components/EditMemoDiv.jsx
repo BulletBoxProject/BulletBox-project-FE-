@@ -60,12 +60,19 @@ const EditMemoDiv = ({ todoList, AddTodoInput, setAddTodoInput, memos }) => {
             <MemoBullet>
               <MemoBulletIcon />
             </MemoBullet>
-            <AddMemoInput
-              id={memo.renderId}
-              type="text"
-              onChange={(e) => memoInputHandler(e, idx)}
-              placeholder={memo.todoMemoContent}
-            />
+            <InputDiv>
+              <AddMemoInput
+                id={memo.renderId}
+                type="text"
+                onChange={(e) => memoInputHandler(e, idx)}
+                placeholder={memo.todoMemoContent}
+                maxLength={27}
+              />
+              <InputLimitDiv>
+                <span>28자 이내</span>
+              </InputLimitDiv>
+            </InputDiv>
+
             <DeleteButton
               onClick={() =>
                 memoDeleteHanlder({
@@ -95,19 +102,24 @@ const Container = styled.div`
 const AddMemoInputDiv = styled.div`
   display: flex;
   align-items: center;
-  width: 80%;
+  width: 90%;
   gap: 10px;
   padding-left: 20px;
 `;
 const MemoBullet = styled.div``;
 
-const AddMemoInput = styled.input`
-  width: 80%;
+const AddMemoInput = styled.textarea`
+  width: 100%;
+  height: 27px;
   border: 0;
   font-size: 12px;
   background-color: inherit;
+  resize: none;
   &:focus {
     outline: none;
+  }
+  &::placeholder {
+    padding-top: 6px;
   }
 `;
 const AddTodoMemoButton = styled.button`
@@ -123,6 +135,18 @@ const AddMemoIcon = styled(BsFillPlusCircleFill)`
 const MemoBulletIcon = styled(memoBullet)`
   width: 24px;
   height: 18px;
+`;
+const InputDiv = styled.div`
+  display: flex;
+  align-items: center;
+  width: 85%;
+  gap: 5px;
+`;
+const InputLimitDiv = styled.div`
+  width: 15%;
+  & > span {
+    color: var(--color-gray);
+  }
 `;
 const DeleteButton = styled.button`
   width: 1.5rem;
