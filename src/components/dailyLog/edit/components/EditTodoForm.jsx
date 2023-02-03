@@ -22,6 +22,7 @@ const EditTodoForm = ({ todoList, AddTodoInput, setAddTodoInput }) => {
   const [todoBullet, setTodoBullet] = useState(
     todoList ? todoList.todoBulletName : ""
   );
+  const [inputLimit, setInputLimit] = useState("");
   const showBulletHandler = (e) => {
     setShowBullet(!showBullet);
   };
@@ -33,10 +34,10 @@ const EditTodoForm = ({ todoList, AddTodoInput, setAddTodoInput }) => {
   };
   const todoInputHandler = (e) => {
     setEditTodoInput(e.target.value);
+    setInputLimit(e.target.value);
     const editTodoInput = e.target.value;
     setAddTodoInput({ ...AddTodoInput, todoContent: editTodoInput });
   };
-
   return (
     <Container>
       <BulletSelectButton type="button" onClick={showBulletHandler}>
@@ -69,7 +70,13 @@ const EditTodoForm = ({ todoList, AddTodoInput, setAddTodoInput }) => {
         placeholder="할일을 입력해주세요"
         onChange={todoInputHandler}
         value={editTodoInput}
+        maxLength={31}
+        rows="2"
       />
+      <InputLimitDiv>
+        <span>{inputLimit.length}</span>
+        <span>/32</span>
+      </InputLimitDiv>
     </Container>
   );
 };
@@ -121,21 +128,29 @@ const BulletList = styled.div`
     }
   }
 `;
-const TodoInput = styled.input`
-  width: 85%;
+const TodoInput = styled.textarea`
+  width: 210px;
+  margin-top: 2px;
   border: 0;
+  word-break: break-all;
+  resize: none;
   background-color: inherit;
-  padding-left: 0;
-  :disabled {
+  /* :disabled {
     background-color: inherit;
     border: 0;
     color: black;
-  }
+  } */
   :focus {
     outline: none;
   }
 `;
-
+const InputLimitDiv = styled.div`
+  width: 12%;
+  padding-top: 5px;
+  & > span {
+    color: var(--color-gray);
+  }
+`;
 const AddTodoButton = styled.button`
   width: 10%;
   background-color: inherit;

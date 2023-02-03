@@ -104,12 +104,15 @@ export const __putDailyTodo = createAsyncThunk(
           }
         : memo
     );
+    const timeFix =
+      payload.time === "undefined:undefined" ? null : payload.time;
     console.log("페이로드", payload);
     console.log("수정된 메모", modifiedMemo);
     try {
       const { data } = await baseURLApiV1.put(`/dailys/todo`, {
         ...payload,
         memos: modifiedMemo,
+        time: timeFix,
       });
       return thunkAPI.fulfillWithValue({
         ...payload,
