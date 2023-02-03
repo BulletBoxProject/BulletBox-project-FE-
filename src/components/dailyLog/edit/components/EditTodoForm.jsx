@@ -116,7 +116,7 @@ const BulletList = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
-  left: 10px;
+  left: -2px;
   border: 1px solid gray;
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.85);
