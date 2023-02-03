@@ -286,10 +286,7 @@ const SelectBtn = styled.button`
     backgroundColor === categoryColor ? "5px solid white" : "none"};
   background-color: ${({ backgroundColor }) =>
     backgroundColor || "var(--color-default)"};
-  box-shadow: ${({ backgroundColor, categoryColor }) =>
-    backgroundColor === categoryColor
-      ? "0px 0px 4px rgba(0, 0, 0, 0.3)"
-      : "none"};
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
 `;
 
 const MemoBullet = styled(memoBullet)`
