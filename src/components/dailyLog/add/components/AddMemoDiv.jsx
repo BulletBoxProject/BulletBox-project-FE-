@@ -52,13 +52,12 @@ const AddMemoDiv = ({ AddTodoInput, setAddTodoInput, memos }) => {
               id={memo.memoId}
               type="text"
               placeholder="불렛메모를 추가하세요"
-              maxLength={43}
+              maxLength={27}
               onChange={(e) => memoInputHandler(e, idx)}
               value={memo.todoMemoContent}
             />
             <InputLimitDiv>
-              <span>{memoInput.length}</span>
-              <span>/43</span>
+              <span>{memoInput.length}/28</span>
             </InputLimitDiv>
           </InputDiv>
           <DeleteButton onClick={() => memoDeleteHanlder(memo.memoId)}>

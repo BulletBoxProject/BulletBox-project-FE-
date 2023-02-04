@@ -9,6 +9,7 @@ import { ReactComponent as closeIcon } from "../../../../img/dailyLog/close.svg"
 
 const EditMemoDiv = ({ todoList, AddTodoInput, setAddTodoInput, memos }) => {
   const [memoOrigin, setMemoOrigin] = useState(todoList.memos);
+  const [memoInput, setMemoInput] = useState("");
   console.log("오리진 메모", memoOrigin);
   const [renderMemo, setRenderMemo] = useState(
     todoList?.memos?.map((memo, idx) => ({ ...memo, renderId: idx }))
@@ -28,6 +29,7 @@ const EditMemoDiv = ({ todoList, AddTodoInput, setAddTodoInput, memos }) => {
     ]);
   };
   const memoInputHandler = (e, index) => {
+    setMemoInput(e.target.value);
     let copyRenderMemo = [];
     renderMemo.forEach((memo, index) => {
       copyRenderMemo[index] = { ...memo };
@@ -69,7 +71,7 @@ const EditMemoDiv = ({ todoList, AddTodoInput, setAddTodoInput, memos }) => {
                 maxLength={27}
               />
               <InputLimitDiv>
-                <span>28자 이내</span>
+                <span>{memoInput.length}/28</span>
               </InputLimitDiv>
             </InputDiv>
 
@@ -113,6 +115,7 @@ const AddMemoInput = styled.textarea`
   height: 27px;
   border: 0;
   font-size: 12px;
+  font-weight: bold;
   background-color: inherit;
   resize: none;
   &:focus {

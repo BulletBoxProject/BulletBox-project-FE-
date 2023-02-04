@@ -12,8 +12,9 @@ const DiaryContents = ({
   DiaryInfo,
   diaryContent,
   setDiaryContent,
-  setEmotin,
+  setEmotion,
   selectDate,
+  emotion,
 }) => {
   const dispatch = useDispatch();
   const [disabled, setDisabled] = useState(true);
@@ -36,7 +37,7 @@ const DiaryContents = ({
       <DateTitle>{selectDate}</DateTitle>
       <EmotionDiv>
         <EmotionBox>
-          <EmotionButton setEmotin={setEmotin} />
+          <EmotionButton emotion={emotion} setEmotin={setEmotion} />
         </EmotionBox>
         {disabled ? (
           <EditCheckDiv>
@@ -85,7 +86,7 @@ const TodoDiv = styled.div`
   flex-direction: column;
   width: 344px;
   height: 232px;
-  margin-top: 50px;
+  margin-top: 70px;
   margin-left: 1px;
   padding: 15px;
   border-radius: 16px;

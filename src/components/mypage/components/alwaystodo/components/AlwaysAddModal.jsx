@@ -276,11 +276,16 @@ const DeleteIcon = styled(closeIcon)`
 
 const AlwaysTodoInput = styled.input`
   border: none;
+  font-weight: bold;
 `;
 
 const AlwaysMemoInput = styled.input`
   border: none;
   width: 65%;
+  font-weight: bold;
+  ::placeholder {
+    font-weight: bold;
+  }
 `;
 
 const CategoryPtag = styled.span`

@@ -143,6 +143,7 @@ const TodoInput = styled.textarea`
   word-break: break-all;
   resize: none;
   background-color: inherit;
+  font-weight: bold;
   ::placeholder {
     transform: translate(0, 0);
   }

@@ -25,9 +25,7 @@ const AlwaysUpdateModal = ({
 
   const [favoriteMemos, setFavoriteMemos] = useState(memo);
   const [favoriteMemosCopy, setFavoriteMemosCopy] = useState(memo);
-  const [newFavoriteMemos, setNewFavoriteMemos] = useState([
-    { id: 0, favoriteMemoContent: "" },
-  ]);
+  const [newFavoriteMemos, setNewFavoriteMemos] = useState([]);
   const [plusId, setPlusId] = useState(1);
   const [isName, setIsName] = useState(true);
 
@@ -127,7 +125,7 @@ const AlwaysUpdateModal = ({
             </TodoTitle>
             <TodoMemoDiv>
               {favoriteMemosCopy.map((value, index) => (
-                <MemoContent key={index}>
+                <MemoContent key={value.favoriteMemoId}>
                   <MemoBullet />
                   <AlwaysMemoInput
                     type="text"
@@ -332,11 +330,16 @@ const DeleteIcon = styled(closeIcon)`
 
 const AlwaysTodoInput = styled.input`
   border: none;
+  font-weight: bold;
 `;
 
 const AlwaysMemoInput = styled.input`
   border: none;
   width: 65%;
+  font-weight: bold;
+  ::placeholder {
+    font-weight: bold;
+  }
 `;
 
 const CategoryPtag = styled.span`

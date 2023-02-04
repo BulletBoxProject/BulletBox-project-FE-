@@ -94,7 +94,7 @@ const Container = styled.div`
 `;
 const CalendarDiv = styled.div`
   position: relative;
-  height: 360px;
+  height: 320px;
   margin: 10px 0;
   justify-content: center;
   align-items: center;
