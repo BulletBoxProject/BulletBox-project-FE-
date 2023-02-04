@@ -58,10 +58,11 @@ const CategoryTitle = styled.div`
 `;
 const ButtonDiv = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   flex-wrap: wrap;
   gap: 20px;
   width: 100%;
+  margin-left: 38px;
 `;
 const CategoryButton = styled.button`
   background-color: ${(props) => props.backgroundColor};

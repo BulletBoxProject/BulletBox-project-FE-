@@ -9,10 +9,14 @@ import BulletTodoForm from "./BulletTodoForm";
 import AddMemoDiv from "./AddMemoDiv";
 import TimeSettingDiv from "./TimeSettingDiv";
 import CategorySelectDiv from "./CategorySelectDiv";
+import AlertModal from "../../../common/modal/AlertModal";
 
 const AddTodoInput = () => {
   const selectDate = useParams().date;
   const dateArray = selectDate.split("_");
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -43,17 +47,21 @@ const AddTodoInput = () => {
   };
   const submitTodoHandler = () => {
     console.log(AddTodoInput, { ...AddTodoInput, time: null });
-    if (
+    if (AddTodoInput.todoBulletName === "불렛") {
+      setIsOpen(true);
+      setAlertMessage(`불렛을 선택해주세요.`);
+    } else {
       AddTodoInput.time.split(":")[0] === "null"
         ? dispatch(__postDailyTodo({ ...AddTodoInput, time: null }))
-        : dispatch(__postDailyTodo(AddTodoInput))
-    );
-    alert(
-      `${AddTodoInput.year}년 ${AddTodoInput.month}월 ${AddTodoInput.day}일에 할 일이 추가되었습니다.`
-    );
-    setTimeout(() => {
-      navigate("/dailys");
-    }, 10);
+        : dispatch(__postDailyTodo(AddTodoInput));
+      setIsOpen(true);
+      setAlertMessage(
+        `${AddTodoInput.year}년 ${AddTodoInput.month}월 ${AddTodoInput.day}일에 할 일이 추가되었습니다.`
+      );
+      setTimeout(() => {
+        navigate("/dailys");
+      }, 600);
+    }
   };
   useEffect(() => {
     loadAddTodoPage();
@@ -61,6 +69,11 @@ const AddTodoInput = () => {
   const dailyLogTitle = `${dateArray[0].substr(2, 2)}/${
     dateArray[1] < 10 ? "0" + dateArray[1] : dateArray[1]
   }/${dateArray[2] < 10 ? "0" + dateArray[2] : dateArray[2]}/(${dateArray[3]})`;
+
+  // const AddConfirmHandler = () => {
+  //   navigate("/dailys");
+  // };
+
   return (
     <Container>
       <DateDiv>
@@ -95,6 +108,19 @@ const AddTodoInput = () => {
           취소
         </CancleButton>
       </AddInputButtonGroup>
+      {isOpen && (
+        <AlertModal
+          open={isOpen}
+          onClose={() => {
+            setIsOpen(false);
+          }}
+          // onClick={() => {
+          //   AddConfirmHandler();
+          // }}
+        >
+          {alertMessage}
+        </AlertModal>
+      )}
     </Container>
   );
 };

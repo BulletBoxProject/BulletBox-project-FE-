@@ -28,7 +28,7 @@ const DiaryContainer = () => {
 
   const [diaryContent, setDiaryContent] = useState("");
   const [diaryId, setDiaryId] = useState(null);
-  const [emotion, setEmotin] = useState("");
+  const [emotion, setEmotion] = useState("");
 
   const [selectDate, setSelectDate] = useState("");
   const [year, setYear] = useState(new Date().getFullYear());
@@ -66,7 +66,7 @@ const DiaryContainer = () => {
       setDiaryContent(diaryContents);
     }
     setDiaryId(diaryID);
-    setEmotin(diaryEmotion);
+    setEmotion(diaryEmotion);
   }, [diaryContents]);
 
   return (
@@ -87,7 +87,7 @@ const DiaryContainer = () => {
         diaryContent={diaryContent}
         setDiaryContent={setDiaryContent}
         emotion={emotion}
-        setEmotin={setEmotin}
+        setEmotin={setEmotion}
         selectDate={selectDate}
       ></DiaryContents>
     </Container>

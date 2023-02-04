@@ -12,8 +12,9 @@ const DiaryContents = ({
   DiaryInfo,
   diaryContent,
   setDiaryContent,
-  setEmotin,
+  setEmotion,
   selectDate,
+  emotion,
 }) => {
   const dispatch = useDispatch();
   const [disabled, setDisabled] = useState(true);
@@ -36,7 +37,7 @@ const DiaryContents = ({
       <DateTitle>{selectDate}</DateTitle>
       <EmotionDiv>
         <EmotionBox>
-          <EmotionButton setEmotin={setEmotin} />
+          <EmotionButton emotion={emotion} setEmotin={setEmotion} />
         </EmotionBox>
         {disabled ? (
           <EditCheckDiv>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import { ReactComponent as angry } from "../../../img/emotion/angry-1.svg";
@@ -7,9 +7,9 @@ import { ReactComponent as happy } from "../../../img/emotion/happy-1.svg";
 import { ReactComponent as sad } from "../../../img/emotion/sad-1.svg";
 import { ReactComponent as soso } from "../../../img/emotion/soso-1.svg";
 
-const EmotionButton = ({ setEmotin }) => {
+const EmotionButton = ({ setEmotion }) => {
   const onEmotionHandler = (e) => {
-    setEmotin(e.target.value);
+    setEmotion(e.target.value);
   };
   return (
     <>

@@ -53,6 +53,8 @@ const Container = styled.div``;
 const SelectButton = styled.button`
   position: relative;
   font-size: 12px;
+  font-weight: bold;
+  color: var(--color-gray);
   border: 0;
   background-color: white;
 `;
