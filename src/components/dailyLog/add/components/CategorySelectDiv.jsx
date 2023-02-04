@@ -26,7 +26,7 @@ const CategorySelectDiv = ({ categories, AddTodoInput, setAddTodoInput }) => {
       {categories.length === 0 ? (
         <NoticeDiv>
           <NoticeButton onClick={goToMypage}>
-            카테고리를 추가해주세요
+            카테고리를 추가해주세요.
           </NoticeButton>
         </NoticeDiv>
       ) : null}
