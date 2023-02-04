@@ -86,7 +86,8 @@ const SignUpInput = () => {
     try {
       const data = await instanceApiV1.post("/members/signup", post);
       if (data.data.httpStatusCode === 201) {
-        alert(data.data.msg);
+        setIsOpen(true);
+        setAlertMessage(data.data.msg);
         return data;
       } else {
         setIsOpen(true);
