@@ -83,13 +83,13 @@ const MainCalendar = ({
 export default MainCalendar;
 
 const DateTodoCount = styled.p`
-  font-size: 14px;
+  font-size: 12px;
 `;
 
 const Calendarcontainer = styled.div`
   .react-calendar {
     width: 100%;
-    height: 350px;
+    height: 310px;
     background: transparent;
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.125em;
@@ -158,7 +158,7 @@ const Calendarcontainer = styled.div`
       border: 0 !important;
     }
     & > abbr {
-      padding: 8px 7px;
+      padding: 2px 7px;
       font-size: 10px;
       text-align: center;
     }
@@ -245,10 +245,10 @@ const Calendarcontainer = styled.div`
   .react-calendar__year-view .react-calendar__tile,
   .react-calendar__decade-view .react-calendar__tile,
   .react-calendar__century-view .react-calendar__tile {
-    padding: 2em 0.5em;
+    padding: 1em 0.2em;
   }
   .react-calendar__tile {
-    height: 60px !important;
+    height: 50px !important;
     background: none;
     display: flex;
     align-items: center;
@@ -265,6 +265,9 @@ const Calendarcontainer = styled.div`
     /* color: white; */
     & > abbr {
       padding: 8px 7px !important;
+    }
+    & > p {
+      padding: 2px 2px;
     }
   }
 
