@@ -9,6 +9,7 @@ import BulletSwitchList from "../../dailyLog/components/BulletSwitchList";
 import MainTodoCard from "../components/MainTodoCard";
 
 import MainCalendar from "../../common/calendar/MainCalendar";
+import HelpModal from "../../../layout/header/components/HelpModal";
 
 const MainContainer = () => {
   const dispatch = useDispatch();
@@ -16,10 +17,13 @@ const MainContainer = () => {
   const [todoList, setTodoList] = useState([]);
   const [selectDateTitle, setSelectDateTitle] = useState("");
   console.log("선택된 날짜타이틀", selectDateTitle);
+
   const [nowMonthView, setNowMonthView] = useState({
     year: new Date().getFullYear(),
     month: new Date().getMonth() + 1,
   });
+
+  const [isOpen, setIsOpen] = useState(false);
 
   console.log("선택된 달력 날짜", nowMonthView);
   useSelector((state) => console.log(state?.mainTodo));
@@ -42,6 +46,7 @@ const MainContainer = () => {
   useEffect(() => {
     dispatch(__getMainTodo());
     getToday();
+    setIsOpen(true);
   }, [dispatch]);
 
   let num = 0;
@@ -81,6 +86,14 @@ const MainContainer = () => {
           </DailyTodoDiv>
         )}
       </TodoDiv>
+      {isOpen && (
+        <HelpModal
+          open={isOpen}
+          onClose={() => {
+            setIsOpen(false);
+          }}
+        />
+      )}
     </Container>
   );
 };

@@ -54,13 +54,9 @@ const AddTodoInput = () => {
       AddTodoInput.time.split(":")[0] === "null"
         ? dispatch(__postDailyTodo({ ...AddTodoInput, time: null }))
         : dispatch(__postDailyTodo(AddTodoInput));
-      setIsOpen(true);
-      setAlertMessage(
-        `${AddTodoInput.year}년 ${AddTodoInput.month}월 ${AddTodoInput.day}일에 할 일이 추가되었습니다.`
-      );
       setTimeout(() => {
         navigate("/dailys");
-      }, 600);
+      }, 20);
     }
   };
   useEffect(() => {

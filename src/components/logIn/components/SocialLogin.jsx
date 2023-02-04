@@ -38,7 +38,7 @@ const SocialLogin = () => {
         navigate(`/home`);
         setCookies("Authorization", res.headers.authorization, {
           path: "/",
-          maxAge: 17500,
+          maxAge: 21600,
         });
       }
     });

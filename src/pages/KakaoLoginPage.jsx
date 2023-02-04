@@ -12,7 +12,7 @@ const KakaoLoginPage = () => {
       const data = await instanceApiV1.get(`/members/login/kakao?code=${code}`);
       setCookies("Authorization", data.headers.authorization, {
         path: "/",
-        maxAge: 17500,
+        maxAge: 21600,
       });
       navigate("/home");
       return data;
