@@ -88,7 +88,7 @@ const SearchContainer = () => {
                   <SearchTodo
                     key={value.todoId}
                     search={value}
-                    todoBullet={value.todoBullet}
+                    todoBullet={value.todoBulletName}
                   />
                 );
               })

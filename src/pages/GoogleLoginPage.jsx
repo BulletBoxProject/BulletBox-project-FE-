@@ -16,7 +16,7 @@ const GoogleLoginPage = () => {
       );
       setCookies("Authorization", data.headers.authorization, {
         path: "/",
-        maxAge: 17500,
+        maxAge: 21600,
       });
       navigate("/home");
       return data;

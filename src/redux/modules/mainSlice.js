@@ -10,6 +10,7 @@ export const __getMainTodo = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await baseURLApiV1.get(`main`, payload);
+      console.log(data, "asdifj");
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

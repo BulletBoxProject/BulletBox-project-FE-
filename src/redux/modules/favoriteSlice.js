@@ -78,14 +78,15 @@ const favoriteSlice = createSlice({
         ];
       })
       .addCase(__putFavorite.fulfilled, (state, action) => {
+        const data = action.payload.data.data;
         state.favorite.favorites = state.favorite.favorites.map((value) => {
-          if (value.favoriteId === action.payload.favoriteId) {
+          if (value.favoriteId === data.favoriteId) {
             return {
               ...value,
-              favoriteContent: action.payload.favoriteContent,
-              favoriteMemos: action.payload.favoriteMemos,
-              categoryId: action.payload.categoryId,
-              categoryColor: action.payload.categoryColor,
+              favoriteContent: data.favoriteContent,
+              favoriteMemos: data.favoriteMemos,
+              categoryId: data.categoryId,
+              categoryColor: data.categoryColor,
             };
           }
           return value;

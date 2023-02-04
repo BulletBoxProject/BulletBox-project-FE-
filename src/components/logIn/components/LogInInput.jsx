@@ -15,9 +15,9 @@ const LogInInput = () => {
 
   const [message, setMessage] = useState("");
 
-  const onBackHandler = () => {
-    navigate("/");
-  };
+  // const onBackHandler = () => {
+  //   navigate("/");
+  // };
 
   const postLogin = async (post) => {
     try {
@@ -48,7 +48,7 @@ const LogInInput = () => {
         navigate(`/home`);
         setCookies("Authorization", res.headers.authorization, {
           path: "/",
-          maxAge: 17500,
+          maxAge: 21600,
         });
       }
     });
