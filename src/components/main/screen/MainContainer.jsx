@@ -26,8 +26,12 @@ const MainContainer = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   console.log("선택된 달력 날짜", nowMonthView);
-  useSelector((state) => console.log(state?.mainTodo));
+  useSelector((state) => console.log(state?.mainTodo, "이런이런"));
   const mainTodoList = useSelector((state) => state?.mainTodo?.mainTodo?.daily);
+  const firstLogin = useSelector(
+    (state) => state?.mainTodo?.mainTodo?.firstLogin
+  );
+  console.log(firstLogin, "포스트로그임");
   console.log("메인 셀럭터 값", mainTodoList);
 
   const getToday = () => {
@@ -46,8 +50,15 @@ const MainContainer = () => {
   useEffect(() => {
     dispatch(__getMainTodo());
     getToday();
-    setIsOpen(true);
   }, [dispatch]);
+
+  useEffect(() => {
+    if (firstLogin === true) {
+      setIsOpen(true);
+    } else {
+      setIsOpen(false);
+    }
+  }, [firstLogin]);
 
   let num = 0;
   return (
