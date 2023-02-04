@@ -19,7 +19,7 @@ const SearchTodoBullet = ({ bulletName }) => {
             <TodoBullet />
           </div>
         );
-      case "COMPLETE":
+      case "완료":
         return (
           <div>
             <CheckBullet />
@@ -43,13 +43,13 @@ const SearchTodoBullet = ({ bulletName }) => {
             <FavoriteBullet />
           </div>
         );
-      case "TOBEDETERMINDED":
+      case "미정":
         return (
           <div>
             <UndefinedBullet />
           </div>
         );
-      case "EMPHASIS":
+      case "강조":
         return (
           <div>
             <HighLightBullet />
