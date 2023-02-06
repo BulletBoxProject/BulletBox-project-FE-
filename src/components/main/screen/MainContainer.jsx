@@ -18,7 +18,6 @@ const MainContainer = () => {
   const [date, setDate] = useState(new Date());
   const [todoList, setTodoList] = useState([]);
   const [selectDateTitle, setSelectDateTitle] = useState("");
-  console.log("선택된 날짜타이틀", selectDateTitle);
 
   const [nowMonthView, setNowMonthView] = useState({
     year: new Date().getFullYear(),
@@ -27,8 +26,6 @@ const MainContainer = () => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log("선택된 달력 날짜", nowMonthView);
-  useSelector((state) => console.log(state?.mainTodo));
   const mainTodoList = useSelector((state) => state?.mainTodo?.mainTodo?.daily);
   const firstLogin = useSelector(
     (state) => state?.mainTodo?.mainTodo?.firstLogin
