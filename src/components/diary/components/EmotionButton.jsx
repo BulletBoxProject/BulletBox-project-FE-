@@ -35,8 +35,9 @@ const EmotionButton = ({ setEmotion }) => {
 
 export default EmotionButton;
 const EmotionBtn = styled.button`
-  width: 38px;
+  width: 30px;
   height: 28px;
+  padding: 0;
   border: none;
   background-color: transparent;
   fill: var(--color-gray);

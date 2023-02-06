@@ -143,18 +143,22 @@ const SocialTextBox = styled.div`
 const SocialText = styled.p`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   color: var(--color-gray);
   font-size: 10px;
   font-weight: bold;
-  width: 38px;
+  width: 46px;
   height: 24px;
 `;
 
 const SocialGoogleTextBox = styled.div`
-  margin-top: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 24px;
 `;
-const SocialGoogleText = styled.p`
+const SocialGoogleText = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -162,7 +166,7 @@ const SocialGoogleText = styled.p`
   font-size: 10px;
   font-weight: bold;
   width: 38px;
-  height: 3px;
+  height: 12px;
 `;
 
 const Bullet = styled(BulletBox)`
