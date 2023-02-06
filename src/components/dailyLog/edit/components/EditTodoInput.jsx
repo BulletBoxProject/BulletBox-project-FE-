@@ -40,7 +40,7 @@ const EditTodoInput = ({ todoList, categoryList }) => {
     dispatch(__putDailyTodo(AddTodoInput));
     setTimeout(() => {
       navigate("/dailys");
-    }, 20);
+    }, 50);
   };
   const day = ["일", "월", "화", "수", "목", "금", "토"];
   const today = {
