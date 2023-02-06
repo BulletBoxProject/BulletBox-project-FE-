@@ -21,7 +21,7 @@ const SimpleSlider = () => {
     slidesToScroll: 1,
   };
   return (
-    <>
+    <Container>
       <Slider {...settings}>
         <>
           <GuideText>도움말</GuideText>
@@ -52,7 +52,7 @@ const SimpleSlider = () => {
           <Guide7 />
         </>
       </Slider>
-    </>
+    </Container>
   );
 };
 
@@ -99,4 +99,17 @@ const Guide6 = styled(guide6)`
 const Guide7 = styled(guide7)`
   width: 290px;
   height: 420px;
+`;
+
+const Container = styled.div`
+  .slick-next {
+    right: -21px;
+  }
+  .slick-prev {
+    left: -28px;
+  }
+  .slick-prev:before,
+  .slick-next:before {
+    font-size: 28px;
+  }
 `;
