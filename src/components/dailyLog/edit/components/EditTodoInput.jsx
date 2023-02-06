@@ -18,7 +18,6 @@ import TimeSettingDiv from "./TimeSettingDiv";
 import CategorySelectDiv from "./CategorySelectDiv";
 
 const EditTodoInput = ({ todoList, categoryList }) => {
-  console.log("콘솔찍어보기", todoList);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [AddTodoInput, setAddTodoInput] = useState({
@@ -36,7 +35,6 @@ const EditTodoInput = ({ todoList, categoryList }) => {
   });
   const [showCalendar, setShowCalendar] = useState(false);
   const [showDate, setShowDate] = useState("");
-  console.log("수정된 할일", AddTodoInput);
 
   const submitTodoHandler = () => {
     if (AddTodoInput.time === null) {
