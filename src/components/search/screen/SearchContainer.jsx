@@ -45,7 +45,7 @@ const SearchContainer = () => {
         <InputSearch
           type="text"
           value={keyword}
-          placeholder="검색어를 입력하세요"
+          placeholder="할일 내용 키워드를 검색해보세요."
           onChange={(e) => {
             searchHandler(e);
           }}
@@ -137,12 +137,9 @@ const SearchImg = styled(HiSearch)`
   fill: var(--color-gray);
 `;
 
-const SearchBtn = styled.button`
+const SearchBtn = styled.div`
   background-color: var(--color-default);
   border: 1px;
-  :focus {
-    outline: none;
-  }
 `;
 const CancleImg = styled(cancle)`
   width: 20px;

@@ -7,24 +7,36 @@ import SelectMinutesList from "./SelectMinutesList";
 import { RxTriangleDown } from "react-icons/rx";
 
 const TimeSettingDiv = ({ AddTodoInput, setAddTodoInput }) => {
+  console.log("시간 설정 없을 때 콘솔", AddTodoInput.time);
   const [showTimeSet, setShowTimeSet] = useState(false);
   const [showSelectTime, setShowSelectTime] = useState({
     hour: false,
     minute: false,
   });
-  const [selectTime, setSelectTime] = useState(AddTodoInput.time);
-  console.log("입력된 시간", selectTime);
+  const [selectTime, setSelectTime] = useState({
+    hour: "",
+    minute: "",
+  });
+  // console.log("불러온 개별 시간", selectTime.hour, selectTime.minute);
 
   useEffect(() => {
-    setAddTodoInput({
-      ...AddTodoInput,
-      time: `${selectTime?.hour}:${selectTime?.minute}`,
-    });
-  }, [selectTime]);
+    AddTodoInput.time === null || AddTodoInput.time === undefined
+      ? setAddTodoInput({
+          ...AddTodoInput,
+          time: null,
+        })
+      : setAddTodoInput({
+          ...AddTodoInput,
+          time: {
+            hour: AddTodoInput?.time?.split(":")[0],
+            minute: AddTodoInput?.time.split(":")[1],
+          },
+        });
+  }, []);
 
   const showSetTimeHandler = () => {
     setShowTimeSet(!showTimeSet);
-    setSelectTime(null);
+    // setSelectTime(selectTime);
   };
   const showSelectHourHandler = () => {
     setShowSelectTime({
@@ -57,13 +69,17 @@ const TimeSettingDiv = ({ AddTodoInput, setAddTodoInput }) => {
                   type="button"
                   onClick={showSelectHourHandler}
                 >
-                  <span>
-                    {selectTime === null || selectTime.hour === undefined ? (
-                      <SelectDownIcon />
+                  {AddTodoInput &&
+                    (AddTodoInput.time === null ? (
+                      <span>
+                        <SelectDownIcon />
+                      </span>
                     ) : (
-                      selectTime.hour
-                    )}
-                  </span>
+                      <span>
+                        {AddTodoInput.time.hour}
+                        <SelectDownIcon />
+                      </span>
+                    ))}
                 </SelectHoursButton>
                 <span>시</span>
               </SelectButtonDiv>
@@ -71,8 +87,10 @@ const TimeSettingDiv = ({ AddTodoInput, setAddTodoInput }) => {
                 <SelectHoursList
                   showSelectTime={showSelectTime}
                   setShowSelectTime={setShowSelectTime}
-                  selectTime={selectTime}
-                  setSelectTime={setSelectTime}
+                  // selectTime={selectTime}
+                  // setSelectTime={setSelectTime}
+                  AddTodoInput={AddTodoInput}
+                  setAddTodoInput={setAddTodoInput}
                 />
               ) : null}
             </SelectHoursDiv>
@@ -83,13 +101,16 @@ const TimeSettingDiv = ({ AddTodoInput, setAddTodoInput }) => {
                   type="button"
                   onClick={showSelectMinuteHandler}
                 >
-                  <span>
-                    {selectTime === null || selectTime.minute === undefined ? (
+                  {AddTodoInput && AddTodoInput.time === null ? (
+                    <span>
                       <SelectDownIcon />
-                    ) : (
-                      selectTime.minute
-                    )}
-                  </span>
+                    </span>
+                  ) : (
+                    <span>
+                      {AddTodoInput.time.minute}
+                      <SelectDownIcon />
+                    </span>
+                  )}
                 </SelectMinutesButton>
                 <span>분</span>
               </SelectButtonDiv>
@@ -97,8 +118,10 @@ const TimeSettingDiv = ({ AddTodoInput, setAddTodoInput }) => {
                 <SelectMinutesList
                   showSelectTime={showSelectTime}
                   setShowSelectTime={setShowSelectTime}
-                  selectTime={selectTime}
-                  setSelectTime={setSelectTime}
+                  // selectTime={selectTime}
+                  // setSelectTime={setSelectTime}
+                  AddTodoInput={AddTodoInput}
+                  setAddTodoInput={setAddTodoInput}
                 />
               ) : null}
             </SelectMinutesDiv>
@@ -169,6 +192,8 @@ const SelectHoursButton = styled.button`
   border: 0;
   & > span {
     font-size: 14px;
+    display: flex;
+    align-items: center;
   }
 `;
 const SelectDownIcon = styled(RxTriangleDown)`
@@ -189,6 +214,8 @@ const SelectMinutesButton = styled.button`
   background-color: inherit;
   border: 0;
   & > span {
+    display: flex;
+    align-items: center;
     font-size: 14px;
   }
 `;

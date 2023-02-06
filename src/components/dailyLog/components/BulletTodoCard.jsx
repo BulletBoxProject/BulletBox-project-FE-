@@ -19,8 +19,6 @@ const BulletTodoCard = ({ dailyLog, dailyLogs, setDailyLogs }) => {
   const [showMemoBox, setShowMemoBox] = useState(false);
   const selectOptionRef = useRef(null);
 
-  // console.log("메모 확인", dailyLog.todoMemos.length === 0);
-
   const selectOptionClose = () => {
     setShowSelectBox(false);
   };

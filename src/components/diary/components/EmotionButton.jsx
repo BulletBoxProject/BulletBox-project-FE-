@@ -10,6 +10,7 @@ import { ReactComponent as soso } from "../../../img/emotion/soso-1.svg";
 const EmotionButton = ({ setEmotion }) => {
   const onEmotionHandler = (e) => {
     setEmotion(e.target.value);
+    console.log(e.target.value);
   };
   return (
     <>
@@ -36,6 +37,7 @@ export default EmotionButton;
 const EmotionBtn = styled.button`
   width: 30px;
   height: 28px;
+  padding: 0;
   border: none;
   background-color: transparent;
   fill: var(--color-gray);
