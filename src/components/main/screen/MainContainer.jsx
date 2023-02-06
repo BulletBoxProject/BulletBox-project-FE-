@@ -18,7 +18,6 @@ const MainContainer = () => {
   const [date, setDate] = useState(new Date());
   const [todoList, setTodoList] = useState([]);
   const [selectDateTitle, setSelectDateTitle] = useState("");
-  console.log("선택된 날짜타이틀", selectDateTitle);
 
   const [nowMonthView, setNowMonthView] = useState({
     year: new Date().getFullYear(),
@@ -27,8 +26,6 @@ const MainContainer = () => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log("선택된 달력 날짜", nowMonthView);
-  useSelector((state) => console.log(state?.mainTodo));
   const mainTodoList = useSelector((state) => state?.mainTodo?.mainTodo?.daily);
   const firstLogin = useSelector(
     (state) => state?.mainTodo?.mainTodo?.firstLogin
@@ -95,6 +92,9 @@ const MainContainer = () => {
                     time={todo.time}
                   />
                 ))}
+                <TodoNotice onClick={() => navigate("/dailys")}>
+                  할일을 더 추가해보세요.
+                </TodoNotice>
               </MainTodoDiv>
             )}
           </DailyTodoDiv>
@@ -170,5 +170,13 @@ const TodoTitle = styled.div`
   font-size: 14px;
   font-weight: bold;
   color: var(--color-gray);
+  cursor: pointer;
+`;
+const TodoNotice = styled.div`
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--color-light-gray);
+  text-align: center;
+  margin-top: 10px;
   cursor: pointer;
 `;

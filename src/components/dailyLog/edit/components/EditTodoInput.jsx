@@ -16,9 +16,9 @@ import EditTodoForm from "./EditTodoForm";
 import EditMemoDiv from "./EditMemoDiv";
 import TimeSettingDiv from "./TimeSettingDiv";
 import CategorySelectDiv from "./CategorySelectDiv";
+import AlertModal from "../../../common/modal/AlertModal";
 
 const EditTodoInput = ({ todoList, categoryList }) => {
-  console.log("콘솔찍어보기", todoList);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [AddTodoInput, setAddTodoInput] = useState({
@@ -26,7 +26,6 @@ const EditTodoInput = ({ todoList, categoryList }) => {
     todoContent: todoList?.todoContent,
     todoBulletName: todoList?.todoBulletName,
     time: todoList?.time,
-    // time: "1:40",
     categoryId: todoList?.categoryId,
     categoryColor: todoList?.categoryColor,
     year: todoList?.year,
@@ -36,7 +35,8 @@ const EditTodoInput = ({ todoList, categoryList }) => {
   });
   const [showCalendar, setShowCalendar] = useState(false);
   const [showDate, setShowDate] = useState("");
-  console.log("수정된 할일", AddTodoInput);
+  const [alertState, setAlertState] = useState([false, false]);
+  const validCheck = ["시간(시)을 선택해주세요.", "시간(분)을 선택해주세요."];
 
   const submitTodoHandler = () => {
     if (AddTodoInput.time === null) {
@@ -45,9 +45,9 @@ const EditTodoInput = ({ todoList, categoryList }) => {
         navigate("/dailys");
       }, 50);
     } else if (AddTodoInput.time.hour === undefined) {
-      alert("시간(시)을 선택해주세요!");
+      setAlertState([true, false]);
     } else if (AddTodoInput.time.minute === undefined) {
-      alert("시간(분)을 선택해주세요!");
+      setAlertState([false, true]);
     } else {
       dispatch(__putDailyTodo(AddTodoInput));
       setTimeout(() => {
@@ -74,8 +74,16 @@ const EditTodoInput = ({ todoList, categoryList }) => {
   }/${showDate.day < 10 ? "0" + showDate.day : showDate.day}/(${
     showDate.dayOfDate
   })`;
+  const modalCloseHandler = () => {
+    setAlertState([false, false]);
+  };
   return (
     <Container>
+      {alertState.map((item, idx) =>
+        item === true ? (
+          <AlertModal children={validCheck[idx]} onClose={modalCloseHandler} />
+        ) : null
+      )}
       <DateButtonDiv>
         <DateButton onClick={dateChangeHandler}>{dailyLogTitle}</DateButton>
         <SelectDateButton onClick={dateChangeHandler}>

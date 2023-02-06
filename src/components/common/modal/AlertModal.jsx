@@ -97,4 +97,5 @@ const CloseBtn = styled.button`
 
 const AlertPtag = styled.span`
   width: 180px;
+  text-align: center;
 `;
