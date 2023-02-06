@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-import { ReactComponent as angry } from "../../../img/emotion/angry-1.svg";
-import { ReactComponent as excited } from "../../../img/emotion/excited-1.svg";
-import { ReactComponent as happy } from "../../../img/emotion/happy-1.svg";
-import { ReactComponent as sad } from "../../../img/emotion/sad-1.svg";
-import { ReactComponent as soso } from "../../../img/emotion/soso-1.svg";
+import { ReactComponent as angry } from "../../../img/diary/angry.svg";
+import { ReactComponent as excited } from "../../../img/diary/excited.svg";
+import { ReactComponent as happy } from "../../../img/diary/happy.svg";
+import { ReactComponent as sad } from "../../../img/diary/sad.svg";
+import { ReactComponent as soso } from "../../../img/diary/soso.svg";
 
 const Emotions = ({ emotion }) => {
   const selectEmotion = () => {
