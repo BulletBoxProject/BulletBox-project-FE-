@@ -17,6 +17,12 @@ const AddTodoInput = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [alertState, setAlertState] = useState({
+    bullet: false,
+    todo: false,
+    hour: false,
+    minute: false,
+  });
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -31,8 +37,6 @@ const AddTodoInput = () => {
     memos: [],
   });
   const [categories, setCategories] = useState([]);
-  console.log("할일 추가 길이", AddTodoInput.todoContent.length);
-
   const loadAddTodoPage = async () => {
     try {
       const data = await baseURLApiV1.get(
@@ -46,7 +50,6 @@ const AddTodoInput = () => {
     }
   };
   const submitTodoHandler = () => {
-    console.log(AddTodoInput, { ...AddTodoInput, time: null });
     if (AddTodoInput.todoBulletName === "불렛") {
       setIsOpen(true);
       setAlertMessage(`불렛을 선택해주세요.`);
@@ -77,10 +80,6 @@ const AddTodoInput = () => {
   const dailyLogTitle = `${dateArray[0].substr(2, 2)}/${
     dateArray[1] < 10 ? "0" + dateArray[1] : dateArray[1]
   }/${dateArray[2] < 10 ? "0" + dateArray[2] : dateArray[2]}/(${dateArray[3]})`;
-
-  // const AddConfirmHandler = () => {
-  //   navigate("/dailys");
-  // };
 
   return (
     <Container>
