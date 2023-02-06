@@ -92,6 +92,9 @@ const MainContainer = () => {
                     time={todo.time}
                   />
                 ))}
+                <TodoNotice onClick={() => navigate("/dailys")}>
+                  할일을 더 추가해보세요.
+                </TodoNotice>
               </MainTodoDiv>
             )}
           </DailyTodoDiv>
@@ -167,5 +170,13 @@ const TodoTitle = styled.div`
   font-size: 14px;
   font-weight: bold;
   color: var(--color-gray);
+  cursor: pointer;
+`;
+const TodoNotice = styled.div`
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--color-light-gray);
+  text-align: center;
+  margin-top: 10px;
   cursor: pointer;
 `;
