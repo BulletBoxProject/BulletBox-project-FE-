@@ -87,7 +87,7 @@ const DiaryContainer = () => {
         diaryContent={diaryContent}
         setDiaryContent={setDiaryContent}
         emotion={emotion}
-        setEmotin={setEmotion}
+        setEmotion={setEmotion}
         selectDate={selectDate}
       ></DiaryContents>
     </Container>

@@ -4,29 +4,31 @@ import Modal from "../../../../common/modal/Modal";
 import { useDispatch } from "react-redux";
 import { __postCategory } from "../../../../../redux/modules/categorySlice";
 import { ReactComponent as close } from "../../../../../img/myPage/close.svg";
+import AlertModal from "../../../../common/modal/AlertModal";
 
 const CategoryModal = ({ onClose }) => {
   const [categoryName, setCategoryName] = useState("");
   const [categoryColor, setCategoryColor] = useState("");
 
-  const [isName, setIsName] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   const dispatch = useDispatch();
 
   const CategoryNameHandler = (e) => {
     const value = e.target.value;
     setCategoryName(value);
-    if (value.length !== 0) {
-      setIsName(true);
-    } else {
-      setIsName(false);
-    }
   };
   const CategoryColorHandler = (e) => {
     setCategoryColor(e.target.value);
   };
 
   const AddCategoryHandler = () => {
+    if (categoryName.length === 0) {
+      setIsOpen(true);
+      setAlertMessage("카테고리 이름을 입력해주세요.");
+      return;
+    }
     const categoryInfo = {
       categoryName: categoryName,
       categoryColor: categoryColor,
@@ -89,7 +91,6 @@ const CategoryModal = ({ onClose }) => {
           </SelectColorDiv>
           <BtnContainer>
             <AddModalBtn
-              disabled={!isName}
               onClick={() => {
                 AddCategoryHandler();
               }}
@@ -99,6 +100,16 @@ const CategoryModal = ({ onClose }) => {
             <CancleModalBtn onClick={onClose}>취소</CancleModalBtn>
           </BtnContainer>
         </Container>
+        {isOpen && (
+          <AlertModal
+            open={isOpen}
+            onClose={() => {
+              setIsOpen(false);
+            }}
+          >
+            {alertMessage}
+          </AlertModal>
+        )}
       </Modal>
     </>
   );
@@ -169,10 +180,6 @@ const AddModalBtn = styled.button`
   font-weight: bold;
   color: white;
   background-color: var(--color-main);
-  &:disabled {
-    color: black;
-    background-color: var(--color-default);
-  }
 `;
 
 const CancleModalBtn = styled.button`

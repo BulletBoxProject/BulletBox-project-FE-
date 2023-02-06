@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { baseURLApiV1 } from "../../../core/api";
 import { setCookies } from "../../../core/cookieControler";
-import { IoIosArrowBack } from "react-icons/io";
 
 const LogInInput = () => {
   const navigate = useNavigate();
@@ -14,10 +13,6 @@ const LogInInput = () => {
   const [isPassword, setIsPassword] = useState(false);
 
   const [message, setMessage] = useState("");
-
-  // const onBackHandler = () => {
-  //   navigate("/");
-  // };
 
   const postLogin = async (post) => {
     try {
@@ -56,9 +51,6 @@ const LogInInput = () => {
 
   return (
     <StForm>
-      {/* <BackBtn type="button" onClick={onBackHandler}>
-        <BackIcon />
-      </BackBtn> */}
       <StTitle>Login</StTitle>
       <StInput
         placeholder="이메일 주소"
@@ -200,20 +192,6 @@ const StLoginBtn = styled.button`
     background-color: var(--color-c1-gray);
   }
 `;
-
-// const BackBtn = styled.button`
-//   display: flex;
-
-//   border: none;
-//   background-color: transparent;
-//   width: 30px;
-//   height: 20px;
-// `;
-// const BackIcon = styled(IoIosArrowBack)`
-//   color: var(--color-gray);
-//   width: 20px;
-//   height: 18px;
-// `;
 
 const UserInfoBox = styled.div`
   display: flex;
