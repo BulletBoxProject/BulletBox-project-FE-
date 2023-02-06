@@ -17,12 +17,14 @@ const AddTodoInput = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-  const [alertState, setAlertState] = useState({
-    bullet: false,
-    todo: false,
-    hour: false,
-    minute: false,
-  });
+  const [alertState, setAlertState] = useState([false, false, false, false]);
+  console.log("모달상태 체크", alertState);
+  const validCheck = [
+    "불렛을 입력하세요.",
+    "할 일을 입력하세요.",
+    "시간(시)을 입력하세요.",
+    "시간(분)을 입력하세요.",
+  ];
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -51,10 +53,9 @@ const AddTodoInput = () => {
   };
   const submitTodoHandler = () => {
     if (AddTodoInput.todoBulletName === "불렛") {
-      setIsOpen(true);
-      setAlertMessage(`불렛을 선택해주세요.`);
+      setAlertState([true, false, false, false]);
     } else if (AddTodoInput.todoContent === "") {
-      alert("할 일을 입력해주세요.");
+      setAlertState([false, true, false, false]);
     } else if (
       AddTodoInput.time.split(":")[0] === "null" &&
       AddTodoInput.time.split(":")[1] === "null"
@@ -64,9 +65,9 @@ const AddTodoInput = () => {
         navigate("/dailys");
       }, 20);
     } else if (AddTodoInput.time.split(":")[0] === "null") {
-      alert("시간(시)을 선택해주세요.");
+      setAlertState([false, false, true, false]);
     } else if (AddTodoInput.time.split(":")[1] === "null") {
-      alert("시간(분)을 선택해주세요.");
+      setAlertState([false, false, false, true]);
     } else {
       dispatch(__postDailyTodo(AddTodoInput));
       setTimeout(() => {
@@ -80,9 +81,16 @@ const AddTodoInput = () => {
   const dailyLogTitle = `${dateArray[0].substr(2, 2)}/${
     dateArray[1] < 10 ? "0" + dateArray[1] : dateArray[1]
   }/${dateArray[2] < 10 ? "0" + dateArray[2] : dateArray[2]}/(${dateArray[3]})`;
-
+  const modalCloseHandler = () => {
+    setAlertState([false, false, false, false]);
+  };
   return (
     <Container>
+      {alertState.map((item, idx) =>
+        item === true ? (
+          <AlertModal children={validCheck[idx]} onClose={modalCloseHandler} />
+        ) : null
+      )}
       <DateDiv>
         <DateButton>{dailyLogTitle}</DateButton>
       </DateDiv>
@@ -90,6 +98,7 @@ const AddTodoInput = () => {
         <BulletTodoForm
           AddTodoInput={AddTodoInput}
           setAddTodoInput={setAddTodoInput}
+          setAlertState={setAlertState}
         />
         <AddMemoDiv
           AddTodoInput={AddTodoInput}
@@ -100,6 +109,7 @@ const AddTodoInput = () => {
       <TimeSettingDiv
         AddTodoInput={AddTodoInput}
         setAddTodoInput={setAddTodoInput}
+        setAlertState={setAlertState}
       />
       <CategorySelectDiv
         categories={categories}
@@ -121,9 +131,6 @@ const AddTodoInput = () => {
           onClose={() => {
             setIsOpen(false);
           }}
-          // onClick={() => {
-          //   AddConfirmHandler();
-          // }}
         >
           {alertMessage}
         </AlertModal>
