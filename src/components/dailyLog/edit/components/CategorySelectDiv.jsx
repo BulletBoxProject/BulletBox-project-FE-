@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const CategorySelectDiv = ({
@@ -7,6 +8,7 @@ const CategorySelectDiv = ({
   AddTodoInput,
   setAddTodoInput,
 }) => {
+  const navigate = useNavigate();
   const categorySelectHandler = (e) => {
     setAddTodoInput({
       ...AddTodoInput,
@@ -16,9 +18,19 @@ const CategorySelectDiv = ({
   };
   const categoryList = categories;
   let num = 0;
+  const goToMypage = () => {
+    navigate("/mypage");
+  };
   return (
     <Container>
       <CategoryTitle>카테고리</CategoryTitle>
+      {categories.length === 0 ? (
+        <NoticeDiv>
+          <NoticeButton onClick={goToMypage}>
+            카테고리를 추가해주세요.
+          </NoticeButton>
+        </NoticeDiv>
+      ) : null}
       <ButtonDiv>
         {categoryList.map((category) => (
           <CategoryButton
@@ -55,6 +67,12 @@ const CategoryTitle = styled.div`
   color: var(--color-gray);
   font-size: 14px;
 `;
+const NoticeDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0 20px;
+`;
 const ButtonDiv = styled.div`
   display: flex;
   justify-content: flex-start;
@@ -62,6 +80,12 @@ const ButtonDiv = styled.div`
   gap: 20px;
   width: 100%;
   margin-left: 38px;
+`;
+const NoticeButton = styled.button`
+  border: 0;
+  background-color: inherit;
+  font-size: 14px;
+  font-weight: bold;
 `;
 const CategoryButton = styled.button`
   background-color: ${(props) => props.backgroundColor};
