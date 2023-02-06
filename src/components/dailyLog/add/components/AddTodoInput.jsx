@@ -18,12 +18,11 @@ const AddTodoInput = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [alertState, setAlertState] = useState([false, false, false, false]);
-  console.log("모달상태 체크", alertState);
   const validCheck = [
     "불렛을 입력하세요.",
     "할 일을 입력하세요.",
-    "시간(시)을 입력하세요.",
-    "시간(분)을 입력하세요.",
+    "시간(시)을 선택해주세요.",
+    "시간(분)을 선택해주세요.",
   ];
 
   const navigate = useNavigate();
