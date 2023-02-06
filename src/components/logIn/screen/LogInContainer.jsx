@@ -33,7 +33,7 @@ const TopContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  width: 72px;
+  width: 73px;
   height: 88.85px;
 `;
 
