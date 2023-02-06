@@ -18,6 +18,7 @@ import TimeSettingDiv from "./TimeSettingDiv";
 import CategorySelectDiv from "./CategorySelectDiv";
 
 const EditTodoInput = ({ todoList, categoryList }) => {
+  console.log("콘솔찍어보기", todoList);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [AddTodoInput, setAddTodoInput] = useState({
@@ -25,6 +26,7 @@ const EditTodoInput = ({ todoList, categoryList }) => {
     todoContent: todoList?.todoContent,
     todoBulletName: todoList?.todoBulletName,
     time: todoList?.time,
+    // time: "1:40",
     categoryId: todoList?.categoryId,
     categoryColor: todoList?.categoryColor,
     year: todoList?.year,
@@ -37,10 +39,21 @@ const EditTodoInput = ({ todoList, categoryList }) => {
   console.log("수정된 할일", AddTodoInput);
 
   const submitTodoHandler = () => {
-    dispatch(__putDailyTodo(AddTodoInput));
-    setTimeout(() => {
-      navigate("/dailys");
-    }, 50);
+    if (AddTodoInput.time === null) {
+      dispatch(__putDailyTodo(AddTodoInput));
+      setTimeout(() => {
+        navigate("/dailys");
+      }, 50);
+    } else if (AddTodoInput.time.hour === undefined) {
+      alert("시간(시)을 선택해주세요!");
+    } else if (AddTodoInput.time.minute === undefined) {
+      alert("시간(분)을 선택해주세요!");
+    } else {
+      dispatch(__putDailyTodo(AddTodoInput));
+      setTimeout(() => {
+        navigate("/dailys");
+      }, 50);
+    }
   };
   const day = ["일", "월", "화", "수", "목", "금", "토"];
   const today = {
