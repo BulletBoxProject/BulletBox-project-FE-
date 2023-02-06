@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { __postFavoriteTodo } from "../../../redux/modules/dailysSlice";
@@ -11,6 +12,7 @@ const ModalFavoriteTodo = ({
   setShowFavoritesTodo,
   showDate,
 }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [addFavoriteTodo, setAddFavoriteTodo] = useState({});
   const postDate = { ...showDate };
@@ -24,12 +26,22 @@ const ModalFavoriteTodo = ({
     setShowFavoritesTodo(false);
   };
   let num = 0;
+  const goToMypage = () => {
+    navigate("/mypage");
+  };
   return (
     <Container>
       <FlexContainer>
         <ModalContainer>
           <ModalContents>
             <FavoritesTodo>
+              {favoritesTodoList.length === 0 ? (
+                <NoticeDiv>
+                  <NoticeButton onClick={goToMypage}>
+                    자주사용하는 루틴을 추가해주세요.
+                  </NoticeButton>
+                </NoticeDiv>
+              ) : null}
               {favoritesTodoList.map((todo) => (
                 <FavoriteTodoCard
                   key={num++}
@@ -98,6 +110,18 @@ const FavoritesTodo = styled.div`
   gap: 8px;
   height: 245px;
   overflow: auto;
+`;
+const NoticeDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0 20px;
+`;
+const NoticeButton = styled.button`
+  border: 0;
+  background-color: inherit;
+  font-size: 14px;
+  font-weight: bold;
 `;
 const ModalButtonGroup = styled.div`
   display: flex;

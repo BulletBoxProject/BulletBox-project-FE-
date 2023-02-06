@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { __getMainTodo } from "../../../redux/modules/mainSlice";
+import { useNavigate } from "react-router-dom";
 
 import SelectCategory from "../../common/SelectCategory";
 import BulletDiv from "../components/BulletDiv";
@@ -12,6 +13,7 @@ import MainCalendar from "../../common/calendar/MainCalendar";
 import HelpModal from "../../../layout/header/components/HelpModal";
 
 const MainContainer = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [date, setDate] = useState(new Date());
   const [todoList, setTodoList] = useState([]);
@@ -78,7 +80,9 @@ const MainContainer = () => {
           <DailyTodoDiv>
             {mainTodoList.length === 0 ? (
               <DailyTodoList>
-                <TodoTitle>할일을 추가해주세요.</TodoTitle>
+                <TodoTitle onClick={() => navigate("/dailys")}>
+                  할일을 추가해주세요.
+                </TodoTitle>
               </DailyTodoList>
             ) : (
               <MainTodoDiv>
@@ -166,4 +170,5 @@ const TodoTitle = styled.div`
   font-size: 14px;
   font-weight: bold;
   color: var(--color-gray);
+  cursor: pointer;
 `;
