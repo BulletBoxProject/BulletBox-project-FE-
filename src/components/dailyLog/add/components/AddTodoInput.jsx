@@ -50,10 +50,22 @@ const AddTodoInput = () => {
     if (AddTodoInput.todoBulletName === "불렛") {
       setIsOpen(true);
       setAlertMessage(`불렛을 선택해주세요.`);
+    } else if (AddTodoInput.todoContent === "") {
+      alert("할 일을 입력해주세요.");
+    } else if (
+      AddTodoInput.time.split(":")[0] === "null" &&
+      AddTodoInput.time.split(":")[1] === "null"
+    ) {
+      dispatch(__postDailyTodo({ ...AddTodoInput, time: null }));
+      setTimeout(() => {
+        navigate("/dailys");
+      }, 20);
+    } else if (AddTodoInput.time.split(":")[0] === "null") {
+      alert("시간(시)을 선택해주세요.");
+    } else if (AddTodoInput.time.split(":")[1] === "null") {
+      alert("시간(분)을 선택해주세요.");
     } else {
-      AddTodoInput.time.split(":")[0] === "null"
-        ? dispatch(__postDailyTodo({ ...AddTodoInput, time: null }))
-        : dispatch(__postDailyTodo(AddTodoInput));
+      dispatch(__postDailyTodo(AddTodoInput));
       setTimeout(() => {
         navigate("/dailys");
       }, 20);

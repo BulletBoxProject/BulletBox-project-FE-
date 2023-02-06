@@ -6,10 +6,16 @@ const SelectMinutesList = ({
   setShowSelectTime,
   selectTime,
   setSelectTime,
+  AddTodoInput,
+  setAddTodoInput,
 }) => {
   const minutes = ["00", "10", "20", "30", "40", "50"];
   const selectMinutesHandler = (e) => {
-    setSelectTime({ ...selectTime, minute: e.target.value });
+    // setSelectTime({ ...selectTime, minute: e.target.value });
+    setAddTodoInput({
+      ...AddTodoInput,
+      time: { ...AddTodoInput.time, minute: e.target.value },
+    });
     setShowSelectTime({ ...showSelectTime, minute: false });
   };
   let num = 0;
