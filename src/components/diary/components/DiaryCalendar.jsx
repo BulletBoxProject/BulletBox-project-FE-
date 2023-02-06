@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,7 +13,36 @@ const DiaryCalendar = ({ setYear, setMonth, setDate, setSelectDate }) => {
   const emotions = useSelector(
     (state) => state?.emotionDiary?.emotionDiary?.emotions
   );
-  console.log(emotions, "이모티콘");
+  const diaryEmotion = useSelector(
+    (state) => state?.emotionDiary?.emotionDiary?.diary
+  );
+  const diaryList = useSelector(
+    (state) => state?.emotionDiary?.emotionDiary?.diary
+  );
+
+  const [diaryEmotions, setDiaryEmotions] = useState([]);
+
+  console.log(emotions);
+  console.log(diaryEmotions);
+
+  useEffect(() => {
+    setDiaryEmotions(emotions);
+  }, [emotions]);
+
+  useEffect(() => {
+    setDiaryEmotions(
+      diaryEmotions?.map((value) => {
+        if (value.day === diaryList.day) {
+          return {
+            ...value,
+            emotion: diaryList.emotion,
+          };
+        }
+        return value;
+      })
+    );
+  }, []);
+
   const [nowMonthView, setNowMonthView] = useState({
     year: new Date().getFullYear(),
     month: new Date().getMonth() + 1,
@@ -69,7 +98,7 @@ const DiaryCalendar = ({ setYear, setMonth, setDate, setSelectDate }) => {
           }
           tileContent={({ date }) =>
             date.getMonth() + 1 === nowMonthView.month &&
-            emotions?.map((data) =>
+            diaryEmotions?.map((data) =>
               data.day === date.getDate() ? (
                 <Emotions key={data.day} emotion={data.emotion} />
               ) : null

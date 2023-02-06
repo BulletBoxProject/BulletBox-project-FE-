@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import { baseURLApiV1 } from "../../core/api";
 
 // 초기값 설정
@@ -85,6 +85,34 @@ const emotionDiarySlice = createSlice({
           ...state.emotionDiary.emotions,
           addEmotions,
         ];
+        // const DiaryEmotions = [...state.emotionDiary.emotions];
+        // state.emotionDiary.emotions = state.emotionDiary.emotions.map(
+        //   (value) => {
+        //     if (value === value) {
+        //       if (value.day === addEmotions.day) {
+        //         return {
+        //           ...value,
+        //           emotion: addEmotions.emotion,
+        //         };
+        //       }
+        //       return value;
+        //     } else {
+        //       state.emotionDiary.emotions = [
+        //         ...state.emotionDiary.emotions,
+        //         addEmotions,
+        //       ];
+        //     }
+        //   }
+        // );
+
+        // if (state.emotionDiary.emotions === DiaryEmotions) {
+        //   state.emotionDiary.emotions = [
+        //     ...state.emotionDiary.emotions,
+        //     addEmotions,
+        //   ];
+        // } else {
+        //   return state.emotionDiary.emotions;
+        // }
       });
   },
 });
