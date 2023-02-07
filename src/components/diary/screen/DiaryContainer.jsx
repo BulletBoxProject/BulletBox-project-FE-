@@ -8,7 +8,6 @@ import DiaryContents from "../components/DiaryContents";
 import { __getDiary } from "../../../redux/modules/emotionDiarySlice";
 
 const DiaryContainer = () => {
-
   const diaryContents = useSelector(
     (state) => state?.emotionDiary?.emotionDiary?.diary?.diaryContent
   );
@@ -67,8 +66,6 @@ const DiaryContainer = () => {
     }
     setDiaryId(diaryID);
     setEmotion(diaryEmotion);
-
-
   }, [diaryContents]);
 
   return (

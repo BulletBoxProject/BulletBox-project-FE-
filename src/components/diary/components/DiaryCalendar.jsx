@@ -13,35 +13,6 @@ const DiaryCalendar = ({ setYear, setMonth, setDate, setSelectDate }) => {
   const emotions = useSelector(
     (state) => state?.emotionDiary?.emotionDiary?.emotions
   );
-  const diaryEmotion = useSelector(
-    (state) => state?.emotionDiary?.emotionDiary?.diary
-  );
-  const diaryList = useSelector(
-    (state) => state?.emotionDiary?.emotionDiary?.diary
-  );
-
-  const [diaryEmotions, setDiaryEmotions] = useState([]);
-
-  console.log(emotions);
-  console.log(diaryEmotions);
-
-  useEffect(() => {
-    setDiaryEmotions(emotions);
-  }, [emotions]);
-
-  useEffect(() => {
-    setDiaryEmotions(
-      diaryEmotions?.map((value) => {
-        if (value.day === diaryList.day) {
-          return {
-            ...value,
-            emotion: diaryList.emotion,
-          };
-        }
-        return value;
-      })
-    );
-  }, []);
 
   const [nowMonthView, setNowMonthView] = useState({
     year: new Date().getFullYear(),
@@ -98,7 +69,7 @@ const DiaryCalendar = ({ setYear, setMonth, setDate, setSelectDate }) => {
           }
           tileContent={({ date }) =>
             date.getMonth() + 1 === nowMonthView.month &&
-            diaryEmotions?.map((data) =>
+            emotions?.map((data) =>
               data.day === date.getDate() ? (
                 <Emotions key={data.day} emotion={data.emotion} />
               ) : null
