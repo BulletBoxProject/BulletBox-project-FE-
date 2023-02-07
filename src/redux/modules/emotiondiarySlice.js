@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { baseURLApiV1 } from "../../core/api";
 
 // 초기값 설정
@@ -50,7 +50,6 @@ export const __postDiary = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await baseURLApiV1.post(`diaries`, payload);
-      console.log(data, "저장 후 받은값");
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
