@@ -40,9 +40,9 @@ const DiaryContents = ({
 
   const lengthHandler = (e, max) => {
     console.log(e, max);
-    // if (e.length > max) {
-    //   e = e.substr(0, max);
-    // }
+    if (e.length > max) {
+      e = e.substr(0, max);
+    }
   };
 
   return (
@@ -85,7 +85,7 @@ const DiaryContents = ({
           value={diaryContent}
           placeholder="일기를 작성해보세요."
           onChange={(e) => onDiaryHandler(e)}
-          oninput={(e) => lengthHandler(e, 200)}
+          oninput={lengthHandler(diaryContent, 200)}
         />
       )}
 

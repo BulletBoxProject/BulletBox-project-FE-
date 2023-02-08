@@ -5,6 +5,8 @@ const MypageInfoButton = ({ showInfo, setShowInfo }) => {
   return (
     <Container>
       <Button
+        id={1}
+        showInfo={showInfo}
         onClick={() => {
           setShowInfo(1);
         }}
@@ -12,6 +14,8 @@ const MypageInfoButton = ({ showInfo, setShowInfo }) => {
         내 카테고리
       </Button>
       <Button
+        id={2}
+        showInfo={showInfo}
         onClick={() => {
           setShowInfo(2);
         }}
@@ -36,10 +40,10 @@ const Button = styled.button`
   padding: 8px 0;
   background: none;
   border: none;
-  border-bottom: 1px solid var(--color-default);
+  border-bottom: ${({ showInfo, id }) =>
+    showInfo === id ? "4px solid var(--color-main)" : "4px solid white"};
   &:active,
-  &:hover,
-  &:focus {
+  &:hover {
     border: none;
     border-bottom: 4px solid var(--color-main);
     border-radius: 4px;
