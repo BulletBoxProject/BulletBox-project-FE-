@@ -71,7 +71,6 @@ const DiaryContainer = () => {
   return (
     <Container>
       <CalendarDiv>
-        <SelectDiv>Today</SelectDiv>
         <DiaryCalendar
           setYear={setYear}
           setMonth={setMonth}
@@ -106,12 +105,4 @@ const CalendarDiv = styled.div`
   height: 310px;
   justify-content: center;
   align-items: center;
-`;
-const SelectDiv = styled.div`
-  position: absolute;
-  top: 3.2%;
-  left: 88%;
-  align-items: center;
-  padding-top: 5px;
-  font-weight: bold;
 `;
