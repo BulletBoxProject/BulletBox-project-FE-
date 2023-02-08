@@ -30,6 +30,7 @@ url('/fonts/NanumGothic.woff') format('woff');}
 body{    
       margin: 0;
       height: 100vh;
+      color: black;
       display: flex;
       align-items: center !important;
       justify-content: center;
