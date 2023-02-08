@@ -7,28 +7,30 @@ import { ReactComponent as happy } from "../../../img/emotion/happy-1.svg";
 import { ReactComponent as sad } from "../../../img/emotion/sad-1.svg";
 import { ReactComponent as soso } from "../../../img/emotion/soso-1.svg";
 
-const EmotionButton = ({ setEmotion }) => {
+const EmotionButton = ({ emotion, setEmotion }) => {
   const onEmotionHandler = (e) => {
-    setEmotion(e.target.value);
-    console.log(e.target.value);
+    setEmotion(e.target.id);
   };
+
+  const buttons = [
+    <ExcitedEmotion key="excited" />,
+    <HappyEmotion key="happy" />,
+    <SosoEmotion key="soso" />,
+    <SadEmotion key="sad" />,
+    <AngryEmotion key="angry" />,
+  ];
   return (
     <>
-      <EmotionBtn value={"excited"} onClick={(e) => onEmotionHandler(e)}>
-        <ExcitedEmotion />
-      </EmotionBtn>
-      <EmotionBtn value={"happy"} onClick={(e) => onEmotionHandler(e)}>
-        <HappyEmotion />
-      </EmotionBtn>
-      <EmotionBtn value={"soso"} onClick={(e) => onEmotionHandler(e)}>
-        <SosoEmotion />
-      </EmotionBtn>
-      <EmotionBtn value={"sad"} onClick={(e) => onEmotionHandler(e)}>
-        <SadEmotion />
-      </EmotionBtn>
-      <EmotionBtn value={"angry"} onClick={(e) => onEmotionHandler(e)}>
-        <AngryEmotion />
-      </EmotionBtn>
+      {buttons.map((btn, idx) => (
+        <EmotionBtn
+          key={idx}
+          id={btn.key}
+          emotion={emotion}
+          onClick={(e) => onEmotionHandler(e)}
+        >
+          {btn}
+        </EmotionBtn>
+      ))}
     </>
   );
 };
@@ -40,10 +42,8 @@ const EmotionBtn = styled.button`
   padding: 0;
   border: none;
   background-color: transparent;
-  fill: var(--color-gray);
-  :focus {
-    fill: var(--color-main);
-  }
+  fill: ${({ id, emotion }) =>
+    id === emotion ? "var(--color-main)" : "var(--color-gray)"};
   & > svg {
     pointer-events: none;
   }

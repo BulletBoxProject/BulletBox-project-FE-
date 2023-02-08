@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Modal from "../components/HelpModal";
 import { ReactComponent as icon } from "../../../img/etc/help.svg";
-import { ReactComponent as logoIcon } from "../../../img/logo/logo-type-bold.svg";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -26,7 +25,7 @@ const Header = () => {
           onClickHandler();
         }}
       >
-        <Logo />
+        <LogoDiv>Bullet Box</LogoDiv>
       </HeaderBtn>
       <Button onClick={onClickButton}>
         <Question_Icon />
@@ -63,8 +62,11 @@ const HeaderBtn = styled.button`
   border: none;
   width: 108px;
 `;
-const Logo = styled(logoIcon)`
-  width: 100%;
+
+const LogoDiv = styled.div`
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "HeirofLightBold";
 `;
 
 const Question_Icon = styled(icon)`
