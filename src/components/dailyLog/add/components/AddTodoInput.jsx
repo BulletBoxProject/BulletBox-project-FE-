@@ -3,13 +3,13 @@ import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { __postDailyTodo } from "../../../../redux/modules/dailysSlice";
-import { baseURLApiV1 } from "../../../../core/api";
 
 import BulletTodoForm from "./BulletTodoForm";
 import AddMemoDiv from "./AddMemoDiv";
 import TimeSettingDiv from "./TimeSettingDiv";
 import CategorySelectDiv from "./CategorySelectDiv";
 import AlertModal from "../../../common/modal/AlertModal";
+import ConfirmModal from "../../../common/modal/AlertModal";
 
 const AddTodoInput = () => {
   const selectDate = useParams().date;
@@ -18,6 +18,7 @@ const AddTodoInput = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [alertState, setAlertState] = useState([false, false, false, false]);
+  const [confirmModalState, setComfirmModalState] = useState(false);
   const validCheck = [
     "불렛을 입력하세요.",
     "할 일을 입력하세요.",
@@ -38,18 +39,6 @@ const AddTodoInput = () => {
     memos: [],
   });
   const [categories, setCategories] = useState([]);
-  const loadAddTodoPage = async () => {
-    try {
-      const data = await baseURLApiV1.get(
-        "/dailys/todo?year=2023&month=1&day=21"
-      );
-      if (data.data.httpStatusCode === 200) {
-        return setCategories(data.data.data.categories);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
   const submitTodoHandler = () => {
     if (AddTodoInput.todoBulletName === "불렛") {
       setAlertState([true, false, false, false]);
@@ -60,23 +49,21 @@ const AddTodoInput = () => {
       AddTodoInput.time.split(":")[1] === "null"
     ) {
       dispatch(__postDailyTodo({ ...AddTodoInput, time: null }));
-      setTimeout(() => {
-        navigate("/dailys");
-      }, 20);
+      setComfirmModalState(true);
     } else if (AddTodoInput.time.split(":")[0] === "null") {
       setAlertState([false, false, true, false]);
     } else if (AddTodoInput.time.split(":")[1] === "null") {
       setAlertState([false, false, false, true]);
     } else {
       dispatch(__postDailyTodo(AddTodoInput));
-      setTimeout(() => {
-        navigate("/dailys");
-      }, 20);
+      setComfirmModalState(true);
     }
   };
-  useEffect(() => {
-    loadAddTodoPage();
-  }, []);
+  const submitComfirm = () => {
+    setTimeout(() => {
+      navigate("/dailys");
+    }, 50);
+  };
   const dailyLogTitle = `${dateArray[0].substr(2, 2)}/${
     dateArray[1] < 10 ? "0" + dateArray[1] : dateArray[1]
   }/${dateArray[2] < 10 ? "0" + dateArray[2] : dateArray[2]}/(${dateArray[3]})`;
@@ -85,6 +72,12 @@ const AddTodoInput = () => {
   };
   return (
     <Container>
+      {confirmModalState ? (
+        <ConfirmModal
+          children={"할 일을 추가했습니다."}
+          onClose={submitComfirm}
+        />
+      ) : null}
       {alertState.map((item, idx) =>
         item === true ? (
           <AlertModal children={validCheck[idx]} onClose={modalCloseHandler} />
