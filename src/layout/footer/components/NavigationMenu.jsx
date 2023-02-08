@@ -14,28 +14,28 @@ const NavigationMenu = () => {
 
   return (
     <Container>
-      <Button onClick={() => navigate("/diary")}>
+      <Button title="일기장 페이지" onClick={() => navigate("/diary")}>
         <span>
           <DiaryBtn />
         </span>
       </Button>
-      <Button onClick={() => navigate("/dailys")}>
+      <Button title="할일 페이지" onClick={() => navigate("/dailys")}>
         <span>
           <DailylogBtn />
         </span>
       </Button>
-      <Button onClick={() => navigate("/home")}>
+      <Button title="메인 페이지" onClick={() => navigate("/home")}>
         <span>
           <HomeMenuBtn />
         </span>
       </Button>
-      <Button onClick={() => navigate("/search")}>
+      <Button title="검색 페이지" onClick={() => navigate("/search")}>
         <span>
           <SearchBtn />
         </span>
       </Button>
 
-      <Button onClick={() => navigate("/mypage")}>
+      <Button title="마이 페이지" onClick={() => navigate("/mypage")}>
         <span>
           <MyPageBtn />
         </span>
