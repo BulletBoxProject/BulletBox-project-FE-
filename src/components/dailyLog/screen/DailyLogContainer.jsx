@@ -243,6 +243,7 @@ const NoneTodo = styled.div`
   display: flex;
   justify-content: center;
   font-size: 14px;
+  font-weight: bold;
   margin-top: 2em;
   color: var(--color-gray);
 `;
