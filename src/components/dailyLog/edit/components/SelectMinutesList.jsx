@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
+import useOutSideClick from "../../../../hooks/useOutSideClick";
 
 const SelectMinutesList = ({
   showSelectTime,
@@ -9,18 +10,21 @@ const SelectMinutesList = ({
   AddTodoInput,
   setAddTodoInput,
 }) => {
+  const selectMinute = useRef(null);
   const minutes = ["00", "10", "20", "30", "40", "50"];
   const selectMinutesHandler = (e) => {
-    // setSelectTime({ ...selectTime, minute: e.target.value });
     setAddTodoInput({
       ...AddTodoInput,
       time: { ...AddTodoInput.time, minute: e.target.value },
     });
     setShowSelectTime({ ...showSelectTime, minute: false });
   };
+  useOutSideClick(selectMinute, () => {
+    setShowSelectTime({ ...showSelectTime, minute: false });
+  });
   let num = 0;
   return (
-    <Container>
+    <Container ref={selectMinute}>
       {minutes.map((minute) => (
         <Minutebox key={num++} onClick={selectMinutesHandler} value={minute}>
           {minute}
@@ -43,9 +47,12 @@ const Container = styled.div`
   padding: 10px 0;
   background-color: rgba(255, 255, 255, 0.8);
   width: 100%;
-  height: 22vh;
   font-size: 13px;
 `;
-const Minutebox = styled.option`
-  padding: 2px 0;
+const Minutebox = styled.button`
+  width: 100%;
+  border: 0;
+  background-color: transparent;
+  padding: 3px 0;
+  font-size: 13px;
 `;

@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Calendar from "react-calendar";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { __getMainCalendar } from "../../../redux/modules/mainSlice";
+import moment from "moment";
 
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 
 const DailyLogCalendar = ({ selectedDate, setSelectedDate }) => {
+  const todayRef = useRef();
   const dayArray = ["일", "월", "화", "수", "목", "금", "토"];
   const dateChangeHandler = (e) => {
     setSelectedDate({
@@ -18,10 +20,16 @@ const DailyLogCalendar = ({ selectedDate, setSelectedDate }) => {
       dayOfDate: dayArray[e.getDay()],
     });
   };
-
+  const moveToStartDateHandler = () => {
+    const todayCalendar = todayRef.current;
+    const firstDayOfTodayMonth = moment().date(1).toDate();
+    todayCalendar.setActiveStartDate(firstDayOfTodayMonth);
+  };
   return (
     <Calendarcontainer>
+      <TodayButton onClick={moveToStartDateHandler}>Today</TodayButton>
       <Calendar
+        ref={todayRef}
         calendarType="US"
         onChange={dateChangeHandler}
         nextLabel={<NextIcon />}
@@ -41,6 +49,17 @@ const DailyLogCalendar = ({ selectedDate, setSelectedDate }) => {
 };
 
 export default DailyLogCalendar;
+
+const TodayButton = styled.button`
+  position: absolute;
+  left: 270px;
+  top: 18px;
+  border: 0;
+  width: 40px;
+  height: 20px;
+  background-color: inherit;
+  font-weight: bold;
+`;
 
 const Calendarcontainer = styled.div`
   .react-calendar {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Calendar from "react-calendar";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,12 +10,14 @@ import {
 } from "../../../redux/modules/mainSlice";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
+import moment from "moment";
 
 const MainCalendar = ({
   nowMonthView,
   setNowMonthView,
   setSelectDateTitle,
 }) => {
+  const todayRef = useRef();
   const dispatch = useDispatch();
 
   const calendarCountList = useSelector(
@@ -48,10 +50,17 @@ const MainCalendar = ({
 
     dispatch(__getMonthTodoCount(monthChangePayload));
   };
+  const moveToStartDateHandler = () => {
+    const todayCalendar = todayRef.current;
+    const firstDayOfTodayMonth = moment().date(1).toDate();
+    todayCalendar.setActiveStartDate(firstDayOfTodayMonth);
+  };
   return (
     <Calendarcontainer>
+      <TodayButton onClick={moveToStartDateHandler}>Today</TodayButton>
       {calendarCountList && (
         <Calendar
+          ref={todayRef}
           calendarType="US"
           onChange={dateChangeHandler}
           onActiveStartDateChange={monthChangeHandler}
@@ -82,11 +91,21 @@ const MainCalendar = ({
 
 export default MainCalendar;
 
+const TodayButton = styled.button`
+  position: absolute;
+  left: 288px;
+  border: 0;
+  width: 40px;
+  height: 20px;
+  background-color: white;
+`;
+
 const DateTodoCount = styled.p`
   font-size: 12px;
 `;
 
 const Calendarcontainer = styled.div`
+  position: relative;
   .react-calendar {
     width: 100%;
     height: 310px;

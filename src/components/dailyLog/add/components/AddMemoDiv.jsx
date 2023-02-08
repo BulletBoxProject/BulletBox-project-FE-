@@ -57,7 +57,7 @@ const AddMemoDiv = ({ AddTodoInput, setAddTodoInput, memos }) => {
               value={memo.todoMemoContent}
             />
             <InputLimitDiv>
-              <span>{memoInput.length}/28</span>
+              <span>28자이내</span>
             </InputLimitDiv>
           </InputDiv>
           <DeleteButton onClick={() => memoDeleteHanlder(memo.memoId)}>
