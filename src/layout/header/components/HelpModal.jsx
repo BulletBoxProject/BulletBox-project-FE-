@@ -7,7 +7,7 @@ import { ReactComponent as close } from "../../../img/etc/close.svg";
 
 function HelpModal({ onClose }) {
   return (
-    <Modal onClose={onClose} height={"485px"}>
+    <Modal onClose={onClose} height={"505px"}>
       <Button onClick={onClose}>
         <Close />
       </Button>

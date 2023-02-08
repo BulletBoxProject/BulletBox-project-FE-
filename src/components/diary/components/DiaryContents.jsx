@@ -38,6 +38,13 @@ const DiaryContents = ({
     setDiaryContent(e.target.value);
   };
 
+  const lengthHandler = (e, max) => {
+    console.log(e, max);
+    // if (e.length > max) {
+    //   e = e.substr(0, max);
+    // }
+  };
+
   return (
     <TodoDiv>
       <DateTitle>{selectDate}</DateTitle>
@@ -70,6 +77,7 @@ const DiaryContents = ({
           disabled={disabled}
           placeholder="일기를 작성해보세요."
           onChange={(e) => onDiaryHandler(e)}
+          oninput={(e) => lengthHandler(e, 200)}
         />
       ) : (
         <DiaryText
@@ -77,6 +85,7 @@ const DiaryContents = ({
           value={diaryContent}
           placeholder="일기를 작성해보세요."
           onChange={(e) => onDiaryHandler(e)}
+          oninput={(e) => lengthHandler(e, 200)}
         />
       )}
 
