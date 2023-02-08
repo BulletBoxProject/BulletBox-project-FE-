@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import { useNavigate } from "react-router-dom";
@@ -11,35 +11,30 @@ import { HiSearch } from "react-icons/hi";
 
 const NavigationMenu = () => {
   const navigate = useNavigate();
-
+  const [activeButton, setActiveButton] = useState();
+  const buttons = [
+    <DiaryBtn key="diary" />,
+    <DailylogBtn key="dailys" />,
+    <HomeMenuBtn key="home" />,
+    <SearchBtn key="search" />,
+    <MyPageBtn key="mypage" />,
+  ];
+  const navigationHandler = (e) => {
+    setActiveButton(e.target.id);
+    navigate(`/${e.target.id}`);
+  };
   return (
     <Container>
-      <Button onClick={() => navigate("/diary")}>
-        <span>
-          <DiaryBtn />
-        </span>
-      </Button>
-      <Button onClick={() => navigate("/dailys")}>
-        <span>
-          <DailylogBtn />
-        </span>
-      </Button>
-      <Button onClick={() => navigate("/home")}>
-        <span>
-          <HomeMenuBtn />
-        </span>
-      </Button>
-      <Button onClick={() => navigate("/search")}>
-        <span>
-          <SearchBtn />
-        </span>
-      </Button>
-
-      <Button onClick={() => navigate("/mypage")}>
-        <span>
-          <MyPageBtn />
-        </span>
-      </Button>
+      {buttons.map((btn, idx) => (
+        <Button
+          key={idx}
+          id={btn.key}
+          activeButton={activeButton}
+          onClick={navigationHandler}
+        >
+          <span>{btn}</span>
+        </Button>
+      ))}
     </Container>
   );
 };
@@ -60,11 +55,15 @@ const Button = styled.button`
   justify-content: center;
   align-items: center;
   background-color: white;
-  color: #7c7c7c;
+  color: ${({ id, activeButton }) =>
+    id === activeButton ? "var(--color-main)" : "var(--color-gray)"};
   padding: 3px 0;
   width: 25%;
   height: 48px;
   border: 0;
+  & > span {
+    pointer-events: none;
+  }
   &:active,
   &:hover,
   &:focus {
