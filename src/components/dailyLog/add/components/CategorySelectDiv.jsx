@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const CategorySelectDiv = ({ categories, AddTodoInput, setAddTodoInput }) => {
+const CategorySelectDiv = ({ AddTodoInput, setAddTodoInput }) => {
+  const categories = useSelector(
+    (state) => state?.dailyTodo?.dailyTodo?.categories
+  );
+  console.log(categories);
   const [selectCategoryId, setSelectCategoryId] = useState(null);
   const navigate = useNavigate();
-  console.log(categories.length === 0);
-  console.log("선택된 카테고리", selectCategoryId);
   const categorySelectHandler = (e) => {
     setAddTodoInput({
       ...AddTodoInput,

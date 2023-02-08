@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { __postDailyTodo } from "../../../../redux/modules/dailysSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  __getAddTodo,
+  __postDailyTodo,
+} from "../../../../redux/modules/dailysSlice";
 
 import BulletTodoForm from "./BulletTodoForm";
 import AddMemoDiv from "./AddMemoDiv";
@@ -70,6 +73,12 @@ const AddTodoInput = () => {
   const modalCloseHandler = () => {
     setAlertState([false, false, false, false]);
   };
+  const selectAddDate = `year=${Number(dateArray[0])}&month=${Number(
+    dateArray[1]
+  )}&day=${Number(dateArray[2])}`;
+  useEffect(() => {
+    dispatch(__getAddTodo(selectAddDate));
+  }, []);
   return (
     <Container>
       {confirmModalState ? (
