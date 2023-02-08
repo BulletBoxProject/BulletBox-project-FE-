@@ -10,6 +10,7 @@ const CategoryUpdateModal = ({ id, backgroundColor, name, onClose }) => {
   const [categoryOldName, setCategoryOldName] = useState(name);
   const [categoryName, setCategoryName] = useState(name);
   const [categoryColor, setCategoryColor] = useState(backgroundColor);
+  const [isName, setIsName] = useState(true);
 
   const dispatch = useDispatch();
   const onCloseHandler = onClose;
@@ -17,15 +18,16 @@ const CategoryUpdateModal = ({ id, backgroundColor, name, onClose }) => {
   const CategoryNameHandler = (e) => {
     const value = e.target.value;
     setCategoryName(value);
+    setIsName(true);
+    if (value.length === 0) {
+      setIsName(false);
+    }
   };
   const CategoryColorHandler = (e) => {
     setCategoryColor(e.target.value);
   };
 
   const UpdateCategoryHandler = () => {
-    if (categoryName.length === 0) {
-      return alert("카테고리 이름을 입력해주세요.");
-    }
     const categoryInfo = {
       id: id,
       categoryName: categoryName,
@@ -95,13 +97,6 @@ const CategoryUpdateModal = ({ id, backgroundColor, name, onClose }) => {
             })}
           </SelectColorDiv>
           <BtnContainer>
-            <UpdateModalBtn
-              onClick={() => {
-                UpdateCategoryHandler();
-              }}
-            >
-              수정하기
-            </UpdateModalBtn>
             <DeleteModalBtn
               onClick={() => {
                 deleteCategoryHandler(id);
@@ -109,6 +104,14 @@ const CategoryUpdateModal = ({ id, backgroundColor, name, onClose }) => {
             >
               삭제하기
             </DeleteModalBtn>
+            <UpdateModalBtn
+              disabled={!isName}
+              onClick={() => {
+                UpdateCategoryHandler();
+              }}
+            >
+              수정하기
+            </UpdateModalBtn>
           </BtnContainer>
         </Container>
       </Modal>
@@ -178,6 +181,10 @@ const UpdateModalBtn = styled.button`
   border: none;
   color: white;
   background-color: var(--color-main);
+  :disabled {
+    color: var(--color-black);
+    background-color: var(--color-default);
+  }
 `;
 
 const DeleteModalBtn = styled.button`

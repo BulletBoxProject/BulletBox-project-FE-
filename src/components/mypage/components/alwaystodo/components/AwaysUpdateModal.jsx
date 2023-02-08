@@ -339,6 +339,7 @@ const AlwaysMemoInput = styled.input`
   font-weight: bold;
   ::placeholder {
     font-weight: bold;
+    color: var(--color-black);
   }
 `;
 

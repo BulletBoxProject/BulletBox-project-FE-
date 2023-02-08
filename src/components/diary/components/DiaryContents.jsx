@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import { __postDiary } from "../../../redux/modules/emotionDiarySlice";
 import EmotionButton from "./EmotionButton";
+import AlertModal from "../../common/modal/AlertModal";
 
 import { ReactComponent as edit } from "../../../img/diary/edit.svg";
 import { ReactComponent as check } from "../../../img/diary/round-check.svg";
@@ -19,6 +20,9 @@ const DiaryContents = ({
   const dispatch = useDispatch();
   const [disabled, setDisabled] = useState(true);
 
+  const [alertMessage, setAlertMessage] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+
   const onEditHandler = () => {
     setDisabled(false);
   };
@@ -26,10 +30,19 @@ const DiaryContents = ({
   const onAddHandler = () => {
     dispatch(__postDiary(DiaryInfo));
     setDisabled(true);
+    setIsOpen(true);
+    setAlertMessage("일기내용이 저장되었습니다.");
   };
 
   const onDiaryHandler = (e) => {
     setDiaryContent(e.target.value);
+  };
+
+  const lengthHandler = (e, max) => {
+    console.log(e, max);
+    // if (e.length > max) {
+    //   e = e.substr(0, max);
+    // }
   };
 
   return (
@@ -64,6 +77,7 @@ const DiaryContents = ({
           disabled={disabled}
           placeholder="일기를 작성해보세요."
           onChange={(e) => onDiaryHandler(e)}
+          oninput={(e) => lengthHandler(e, 200)}
         />
       ) : (
         <DiaryText
@@ -71,10 +85,22 @@ const DiaryContents = ({
           value={diaryContent}
           placeholder="일기를 작성해보세요."
           onChange={(e) => onDiaryHandler(e)}
+          oninput={(e) => lengthHandler(e, 200)}
         />
       )}
 
       <DiaryLength>({diaryContent?.length}/200)</DiaryLength>
+
+      {isOpen && (
+        <AlertModal
+          open={isOpen}
+          onClose={() => {
+            setIsOpen(false);
+          }}
+        >
+          {alertMessage}
+        </AlertModal>
+      )}
     </TodoDiv>
   );
 };

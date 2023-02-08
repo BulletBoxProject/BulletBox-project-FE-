@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,7 +13,7 @@ const DiaryCalendar = ({ setYear, setMonth, setDate, setSelectDate }) => {
   const emotions = useSelector(
     (state) => state?.emotionDiary?.emotionDiary?.emotions
   );
-  console.log(emotions, "이모티콘");
+
   const [nowMonthView, setNowMonthView] = useState({
     year: new Date().getFullYear(),
     month: new Date().getMonth() + 1,

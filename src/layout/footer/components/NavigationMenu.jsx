@@ -13,11 +13,11 @@ const NavigationMenu = () => {
   const navigate = useNavigate();
   const [activeButton, setActiveButton] = useState();
   const buttons = [
-    <DiaryBtn key="diary" />,
-    <DailylogBtn key="dailys" />,
-    <HomeMenuBtn key="home" />,
-    <SearchBtn key="search" />,
-    <MyPageBtn key="mypage" />,
+    <DiaryBtn key="diary/일기장" />,
+    <DailylogBtn key="dailys/할일추가" />,
+    <HomeMenuBtn key="home/홈" />,
+    <SearchBtn key="search/검색" />,
+    <MyPageBtn key="mypage/마이페이지" />,
   ];
   const navigationHandler = (e) => {
     setActiveButton(e.target.id);
@@ -28,7 +28,8 @@ const NavigationMenu = () => {
       {buttons.map((btn, idx) => (
         <Button
           key={idx}
-          id={btn.key}
+          id={btn.key.split("/")[0]}
+          title={btn.key.split("/")[1]}
           activeButton={activeButton}
           onClick={navigationHandler}
         >

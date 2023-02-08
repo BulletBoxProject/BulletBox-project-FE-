@@ -8,9 +8,6 @@ import DiaryContents from "../components/DiaryContents";
 import { __getDiary } from "../../../redux/modules/emotionDiarySlice";
 
 const DiaryContainer = () => {
-  // const diaryList = useSelector(
-  //   (state) => state?.emotionDiary?.emotionDiary?.diary
-  // );
   const diaryContents = useSelector(
     (state) => state?.emotionDiary?.emotionDiary?.diary?.diaryContent
   );
@@ -20,15 +17,17 @@ const DiaryContainer = () => {
   const diaryEmotion = useSelector(
     (state) => state?.emotionDiary?.emotionDiary?.diary?.emotion
   );
-  useSelector((state) => {
-    console.log("전역상태값", state);
-  });
+
+  const Emotions = useSelector(
+    (state) => state?.emotionDiary?.emotionDiary?.emotions
+  );
 
   const dispatch = useDispatch();
 
   const [diaryContent, setDiaryContent] = useState("");
   const [diaryId, setDiaryId] = useState(null);
   const [emotion, setEmotion] = useState("");
+  const [isDiary, setIsDiary] = useState("");
 
   const [selectDate, setSelectDate] = useState("");
   const [year, setYear] = useState(new Date().getFullYear());

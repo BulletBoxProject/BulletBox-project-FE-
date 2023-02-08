@@ -45,7 +45,7 @@ const SearchContainer = () => {
         <InputSearch
           type="text"
           value={keyword}
-          placeholder="할일 내용 키워드를 검색해보세요."
+          placeholder="작성한 할일 키워드를 검색해보세요."
           onChange={(e) => {
             searchHandler(e);
           }}
