@@ -18,12 +18,6 @@ const EditCalendarModal = ({
     day: new Date().getDate(),
     dayOfDate: "",
   });
-  console.log("선택된 날짜", selectedDate);
-
-  const dipatch = useDispatch();
-  const focusTodayHandler = () => {
-    console.log("today Clicked");
-  };
   const cancelHandler = () => {
     setShowCalendar(false);
   };
@@ -35,16 +29,10 @@ const EditCalendarModal = ({
       month: selectedDate.month,
       day: selectedDate.day,
     });
-    // dipatch(
-    //   __getSelectDateTodo(
-    //     `${selectedDate.year}/${selectedDate.month}/${selectedDate.day}`
-    //   )
-    // );
     setShowCalendar(false);
   };
   return (
     <CalendarContents>
-      <TodayButton onClick={focusTodayHandler}>Today</TodayButton>
       <DailyLogCalendar
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}

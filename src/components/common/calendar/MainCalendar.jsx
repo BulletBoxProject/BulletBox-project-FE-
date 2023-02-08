@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Calendar from "react-calendar";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,7 +10,6 @@ import {
 } from "../../../redux/modules/mainSlice";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
-import { useRef } from "react";
 import moment from "moment";
 
 const MainCalendar = ({
@@ -95,7 +94,6 @@ export default MainCalendar;
 const TodayButton = styled.button`
   position: absolute;
   left: 288px;
-  /* padding: 2px 1px; */
   border: 0;
   width: 40px;
   height: 20px;

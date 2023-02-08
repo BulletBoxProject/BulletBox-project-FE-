@@ -35,7 +35,6 @@ const CalendarModal = ({ setShowCalendar, setShowDate }) => {
   };
   return (
     <CalendarContents>
-      <TodayButton onClick={focusTodayHandler}>Today</TodayButton>
       <DailyLogCalendar
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}

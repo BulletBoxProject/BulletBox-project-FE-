@@ -174,7 +174,7 @@ const CalendarDiv = styled.div`
   position: fixed;
   display: flex;
   justify-content: center;
-  top: 90px;
+  top: 200px;
   width: 360px;
   z-index: 999;
 `;

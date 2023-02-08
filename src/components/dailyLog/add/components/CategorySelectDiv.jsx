@@ -55,6 +55,15 @@ const CategorySelectDiv = ({ AddTodoInput, setAddTodoInput }) => {
 
 export default CategorySelectDiv;
 
+const TodayButton = styled.button`
+  position: absolute;
+  left: 288px;
+  border: 0;
+  width: 40px;
+  height: 20px;
+  background-color: white;
+`;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
