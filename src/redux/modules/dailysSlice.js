@@ -59,7 +59,10 @@ export const __postDailyTodo = createAsyncThunk(
     let memos = payload.memos;
     memos = memos.map((memo) =>
       delete memo.memoId === true
-        ? { ...memo, todoMemoContent: memo.todoMemoContent }
+        ? {
+            ...memo,
+            todoMemoContent: memo.todoMemoContent,
+          }
         : null
     );
     try {
@@ -96,6 +99,7 @@ export const __deleteDailyTodo = createAsyncThunk(
 export const __putDailyTodo = createAsyncThunk(
   "dailyLog/putDailyTodo",
   async (payload, thunkAPI) => {
+    const timeFix = `${payload.time.hour}:${payload.time.minute}`;
     const modifiedMemo = payload.memos.map((memo) =>
       delete memo.renderId === true
         ? {
@@ -104,10 +108,6 @@ export const __putDailyTodo = createAsyncThunk(
           }
         : memo
     );
-    const timeFix =
-      payload.time === "undefined:undefined" ? null : payload.time;
-    console.log("페이로드", payload);
-    console.log("수정된 메모", modifiedMemo);
     try {
       const { data } = await baseURLApiV1.put(`/dailys/todo`, {
         ...payload,

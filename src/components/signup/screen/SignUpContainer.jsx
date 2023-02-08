@@ -23,7 +23,7 @@ const ContainerBox = styled.div`
   justify-content: flex-start;
   flex-direction: column;
   width: 294px;
-  height: 525px;
+  height: 545px;
   margin-bottom: 60px;
 `;
 
@@ -32,13 +32,13 @@ const TopContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  width: 72px;
-  height: 68.85px;
+  width: 73px;
+  height: 88.85px;
 `;
 
 const BulletLogo = styled(Logo)`
   width: 39.27px;
-  height: 44.4px;
+  height: 64.4px;
   fill: var(--color-main);
 `;
 

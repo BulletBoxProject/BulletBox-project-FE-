@@ -16,6 +16,7 @@ import EditTodoForm from "./EditTodoForm";
 import EditMemoDiv from "./EditMemoDiv";
 import TimeSettingDiv from "./TimeSettingDiv";
 import CategorySelectDiv from "./CategorySelectDiv";
+import AlertModal from "../../../common/modal/AlertModal";
 
 const EditTodoInput = ({ todoList, categoryList }) => {
   const navigate = useNavigate();
@@ -34,13 +35,25 @@ const EditTodoInput = ({ todoList, categoryList }) => {
   });
   const [showCalendar, setShowCalendar] = useState(false);
   const [showDate, setShowDate] = useState("");
-  console.log("수정된 할일", AddTodoInput);
+  const [alertState, setAlertState] = useState([false, false]);
+  const validCheck = ["시간(시)을 선택해주세요.", "시간(분)을 선택해주세요."];
 
   const submitTodoHandler = () => {
-    dispatch(__putDailyTodo(AddTodoInput));
-    setTimeout(() => {
-      navigate("/dailys");
-    }, 20);
+    if (AddTodoInput.time === null) {
+      dispatch(__putDailyTodo(AddTodoInput));
+      setTimeout(() => {
+        navigate("/dailys");
+      }, 50);
+    } else if (AddTodoInput.time.hour === undefined) {
+      setAlertState([true, false]);
+    } else if (AddTodoInput.time.minute === undefined) {
+      setAlertState([false, true]);
+    } else {
+      dispatch(__putDailyTodo(AddTodoInput));
+      setTimeout(() => {
+        navigate("/dailys");
+      }, 50);
+    }
   };
   const day = ["일", "월", "화", "수", "목", "금", "토"];
   const today = {
@@ -61,8 +74,16 @@ const EditTodoInput = ({ todoList, categoryList }) => {
   }/${showDate.day < 10 ? "0" + showDate.day : showDate.day}/(${
     showDate.dayOfDate
   })`;
+  const modalCloseHandler = () => {
+    setAlertState([false, false]);
+  };
   return (
     <Container>
+      {alertState.map((item, idx) =>
+        item === true ? (
+          <AlertModal children={validCheck[idx]} onClose={modalCloseHandler} />
+        ) : null
+      )}
       <DateButtonDiv>
         <DateButton onClick={dateChangeHandler}>{dailyLogTitle}</DateButton>
         <SelectDateButton onClick={dateChangeHandler}>

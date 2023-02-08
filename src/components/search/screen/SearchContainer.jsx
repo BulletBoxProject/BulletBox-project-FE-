@@ -93,7 +93,13 @@ const SearchContainer = () => {
                 );
               })
             : [...searchList]?.reverse().map((value) => {
-                return <SearchTodo key={value.todoId} search={value} />;
+                return (
+                  <SearchTodo
+                    key={value.todoId}
+                    search={value}
+                    todoBullet={value.todoBulletName}
+                  />
+                );
               })}
         </SearchList>
       ) : null}
