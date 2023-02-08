@@ -16,7 +16,7 @@ const SelectCategoryTodoShow = ({
         {todoList &&
         todoList?.find((todo) => todo.categoryId === selectedCategoryId) ===
           undefined ? (
-          <div>선택된 카테고리에 할일이 없습니다.</div>
+          <div>카테고리에 추가된 할 일이 없습니다.</div>
         ) : null}
       </EmptyContents>
       {todoList &&

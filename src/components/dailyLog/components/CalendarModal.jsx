@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { __getSelectDateTodo } from "../../../redux/modules/dailysSlice";
@@ -7,6 +8,7 @@ import { __getSelectDateTodo } from "../../../redux/modules/dailysSlice";
 import DailyLogCalendar from "../../common/calendar/DailyLogCalendar";
 
 const CalendarModal = ({ setShowCalendar, setShowDate }) => {
+  const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState({
     year: new Date().getFullYear(),
     month: new Date().getMonth() + 1,
@@ -14,7 +16,7 @@ const CalendarModal = ({ setShowCalendar, setShowDate }) => {
     dayOfDate: "",
   });
 
-  const dipatch = useDispatch();
+  const dispatch = useDispatch();
   const focusTodayHandler = () => {
     console.log("today Clicked");
   };
@@ -23,11 +25,12 @@ const CalendarModal = ({ setShowCalendar, setShowDate }) => {
   };
   const selectDateHandler = () => {
     setShowDate(selectedDate);
-    dipatch(
+    dispatch(
       __getSelectDateTodo(
         `${selectedDate.year}/${selectedDate.month}/${selectedDate.day}`
       )
     );
+    navigate("/dailys");
     setShowCalendar(false);
   };
   return (

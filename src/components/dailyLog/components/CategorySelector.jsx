@@ -71,6 +71,8 @@ const CategoryList = styled.div`
   margin-top: 16px;
   width: 112px;
   padding: 16px 8px;
+  height: 530px;
+  overflow: auto;
 `;
 const ShowAllButton = styled.button`
   font-size: 14px;

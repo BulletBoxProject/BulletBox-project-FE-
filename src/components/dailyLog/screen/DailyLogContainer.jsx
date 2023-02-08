@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   __getDailyTodo,
   __getFavoritesTodo,
+  __getSelectDateTodo,
 } from "../../../redux/modules/dailysSlice";
 
 import useOutSideClick from "../../../hooks/useOutSideClick";
@@ -23,6 +24,9 @@ import { ReactComponent as oftenTodo } from "../../../img/dailyLog/often.svg";
 import { ReactComponent as newTodo } from "../../../img/dailyLog/new.svg";
 
 const DailyLogContainer = () => {
+  const parms = useParams();
+  console.log(parms.date);
+
   const addTodoRef = useRef(null);
   const dispatch = useDispatch();
   const [showSelectBox, setShowSelectBox] = useState(false);
@@ -32,6 +36,7 @@ const DailyLogContainer = () => {
   const [showFavoritesTodo, setShowFavoritesTodo] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const [showDate, setShowDate] = useState("");
+  const [sameDate, setSameDate] = useState(true);
   console.log("캘린더 선택 날짜", showDate);
 
   const navigate = useNavigate();
@@ -63,7 +68,13 @@ const DailyLogContainer = () => {
     setShowCalendar(!showCalendar);
   };
   useEffect(() => {
-    dispatch(__getDailyTodo());
+    if (parms.date === undefined) {
+      dispatch(__getDailyTodo());
+    } else {
+      const selectDateLog = parms.date.replaceAll("_", "/");
+      dispatch(__getSelectDateTodo(selectDateLog));
+    }
+
     dispatch(__getFavoritesTodo());
     setShowDate(today);
   }, [dispatch]);
@@ -84,7 +95,19 @@ const DailyLogContainer = () => {
       <DateAndSelectDiv>
         <div></div>
         <DateButtonDiv>
-          <DateButton onClick={dateChangeHandler}>{dailyLogTitle}</DateButton>
+          <DateButton onClick={dateChangeHandler}>
+            {parms.date === undefined
+              ? dailyLogTitle
+              : `${parms.date.split("_")[0].substring(2, 4)}/${
+                  parms.date.split("_")[1] < 10
+                    ? 0 + parms.date.split("_")[1]
+                    : parms.date.split("_")[1]
+                }/${
+                  parms.date.split("_")[2] < 10
+                    ? 0 + parms.date.split("_")[2]
+                    : parms.date.split("_")[2]
+                }(${day[new Date(parms.date.replaceAll("_", ",")).getDay()]})`}
+          </DateButton>
           <SelectDateButton onClick={dateChangeHandler}>
             {showCalendar ? <IoIosArrowUp /> : <IoIosArrowDown />}
           </SelectDateButton>

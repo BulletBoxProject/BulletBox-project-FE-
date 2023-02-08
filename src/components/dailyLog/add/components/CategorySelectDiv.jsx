@@ -26,7 +26,7 @@ const CategorySelectDiv = ({ AddTodoInput, setAddTodoInput }) => {
   return (
     <Container>
       <CategoryTitle>카테고리</CategoryTitle>
-      {categories.length === 0 ? (
+      {categories && categories.length === 0 ? (
         <NoticeDiv>
           <NoticeButton onClick={goToMypage}>
             카테고리를 추가해주세요.
@@ -34,19 +34,20 @@ const CategorySelectDiv = ({ AddTodoInput, setAddTodoInput }) => {
         </NoticeDiv>
       ) : null}
       <ButtonDiv>
-        {categoryList.map((category) => (
-          <CategoryButton
-            key={num++}
-            type="button"
-            id={category.categoryId}
-            selectCategoryId={selectCategoryId}
-            value={category.categoryColor}
-            backgroundColor={category.categoryColor}
-            onClick={categorySelectHandler}
-          >
-            {category.categoryName}
-          </CategoryButton>
-        ))}
+        {categories &&
+          categoryList?.map((category) => (
+            <CategoryButton
+              key={num++}
+              type="button"
+              id={category.categoryId}
+              selectCategoryId={selectCategoryId}
+              value={category.categoryColor}
+              backgroundColor={category.categoryColor}
+              onClick={categorySelectHandler}
+            >
+              {category.categoryName}
+            </CategoryButton>
+          ))}
       </ButtonDiv>
     </Container>
   );
