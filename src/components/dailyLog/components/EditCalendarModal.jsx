@@ -11,6 +11,7 @@ const EditCalendarModal = ({
   setAddTodoInput,
   setShowCalendar,
   setShowDate,
+  setIsChangeDate,
 }) => {
   const [selectedDate, setSelectedDate] = useState({
     year: new Date().getFullYear(),
@@ -34,6 +35,7 @@ const EditCalendarModal = ({
   return (
     <CalendarContents>
       <DailyLogCalendar
+        setIsChangeDate={setIsChangeDate}
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
       />

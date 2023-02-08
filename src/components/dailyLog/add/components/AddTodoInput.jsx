@@ -16,7 +16,6 @@ import ConfirmModal from "../../../common/modal/AlertModal";
 
 const AddTodoInput = () => {
   const selectDate = useParams().date;
-  console.log(selectDate);
   const dateArray = selectDate.split("_");
   const selectDateCopy = `${selectDate.split("_")[0]}_${
     selectDate.split("_")[1]
@@ -185,7 +184,7 @@ const AddInputButtonGroup = styled.div`
   justify-content: space-around;
   margin: 0 auto;
   width: 100%;
-  padding: 0 5vw;
+  padding: 0 36px;
   margin-top: 2vh;
 `;
 const SubmitButton = styled.button`
