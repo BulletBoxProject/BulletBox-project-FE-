@@ -63,21 +63,28 @@ const SearchContainer = () => {
         </SearchBtn>
       </SearchBox>
       {searchList && keyword.length !== 0 ? (
-        <SearchMiddleDiv>
-          <SearchResult>
-            `{keyword}` 검색결과 총 {searchCount}건
-          </SearchResult>
-          <div>
-            <DateReverseBtn
-              onClick={() => {
-                reverseHandler();
-              }}
-            >
-              {reverseDate === false ? "최신순" : "오래된순"}
-              <DownImg />
-            </DateReverseBtn>
-          </div>
-        </SearchMiddleDiv>
+        <>
+          <SearchMiddleDiv>
+            <SearchResult>
+              `{keyword}` 검색결과 총 {searchCount}건
+            </SearchResult>
+            <div>
+              <DateReverseBtn
+                onClick={() => {
+                  reverseHandler();
+                }}
+              >
+                {reverseDate === false ? "최신순" : "오래된순"}
+                <DownImg />
+              </DateReverseBtn>
+            </div>
+          </SearchMiddleDiv>
+          {searchCount === 0 ? (
+            <SearchResultDiv>
+              검색 결과 해당 키워드의 할일이 존재하지 않습니다.
+            </SearchResultDiv>
+          ) : null}
+        </>
       ) : null}
 
       {searchList && keyword.length !== 0 ? (
@@ -160,6 +167,16 @@ const SearchMiddleDiv = styled.div`
   height: 15px;
   font-weight: bold;
 `;
+const SearchResultDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  height: 50px;
+  color: var(--color-black);
+`;
+
 const SearchResult = styled.div`
   color: var(--color-main);
 `;

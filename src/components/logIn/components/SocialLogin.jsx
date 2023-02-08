@@ -72,8 +72,6 @@ const SocialLogin = () => {
           <SocialGoogleText>구글로</SocialGoogleText>
           <SocialGoogleText>시작하기</SocialGoogleText>
         </SocialGoogleTextBox>
-
-        {/* <SocialText></SocialText> */}
       </SocialTextBox>
     </SocialContainer>
   );
@@ -147,7 +145,7 @@ const SocialText = styled.p`
   color: var(--color-gray);
   font-size: 10px;
   font-weight: bold;
-  width: 46px;
+  width: 42px;
   height: 24px;
 `;
 

@@ -45,9 +45,11 @@ const BulletLogo = styled(Logo)`
 const BulletBold = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
   color: var(--color-main);
   font-size: 14px;
+  font-weight: bold;
   font-family: "HeirofLightBold";
   margin-top: 5px;
+  width: 80px;
+  height: 21px;
 `;

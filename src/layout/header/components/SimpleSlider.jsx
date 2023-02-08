@@ -15,6 +15,7 @@ import { ReactComponent as guide7 } from "../../../img/guide/guide7.svg";
 const SimpleSlider = () => {
   const settings = {
     dots: true,
+    arrows: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -102,7 +103,7 @@ const Guide7 = styled(guide7)`
 `;
 
 const Container = styled.div`
-  .slick-next {
+  /* .slick-next {
     right: -21px;
   }
   .slick-prev {
@@ -111,15 +112,17 @@ const Container = styled.div`
   .slick-prev:before,
   .slick-next:before {
     font-size: 28px;
-  }
+  } */
   .slick-dots {
     .slick-active {
       button::before {
         color: var(--color-main);
+        font-size: 14px;
       }
     }
     button::before {
       color: var(--color-gray);
+      font-size: 12px;
     }
   }
 `;
