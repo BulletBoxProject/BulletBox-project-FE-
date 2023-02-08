@@ -99,7 +99,13 @@ export const __deleteDailyTodo = createAsyncThunk(
 export const __putDailyTodo = createAsyncThunk(
   "dailyLog/putDailyTodo",
   async (payload, thunkAPI) => {
-    const timeFix = `${payload.time.hour}:${payload.time.minute}`;
+    console.log(payload);
+    let timeFix = "";
+    if (payload.time === null) {
+      timeFix = null;
+    } else {
+      timeFix = `${payload.time.hour}:${payload.time.minute}`;
+    }
     const modifiedMemo = payload.memos.map((memo) =>
       delete memo.renderId === true
         ? {

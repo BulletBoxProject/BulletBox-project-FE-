@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import { useNavigate } from "react-router-dom";
@@ -11,35 +11,31 @@ import { HiSearch } from "react-icons/hi";
 
 const NavigationMenu = () => {
   const navigate = useNavigate();
-
+  const [activeButton, setActiveButton] = useState();
+  const buttons = [
+    <DiaryBtn key="diary/일기장" />,
+    <DailylogBtn key="dailys/할일추가" />,
+    <HomeMenuBtn key="home/홈" />,
+    <SearchBtn key="search/검색" />,
+    <MyPageBtn key="mypage/마이페이지" />,
+  ];
+  const navigationHandler = (e) => {
+    setActiveButton(e.target.id);
+    navigate(`/${e.target.id}`);
+  };
   return (
     <Container>
-      <Button title="일기장 페이지" onClick={() => navigate("/diary")}>
-        <span>
-          <DiaryBtn />
-        </span>
-      </Button>
-      <Button title="할일 페이지" onClick={() => navigate("/dailys")}>
-        <span>
-          <DailylogBtn />
-        </span>
-      </Button>
-      <Button title="메인 페이지" onClick={() => navigate("/home")}>
-        <span>
-          <HomeMenuBtn />
-        </span>
-      </Button>
-      <Button title="검색 페이지" onClick={() => navigate("/search")}>
-        <span>
-          <SearchBtn />
-        </span>
-      </Button>
-
-      <Button title="마이 페이지" onClick={() => navigate("/mypage")}>
-        <span>
-          <MyPageBtn />
-        </span>
-      </Button>
+      {buttons.map((btn, idx) => (
+        <Button
+          key={idx}
+          id={btn.key.split("/")[0]}
+          title={btn.key.split("/")[1]}
+          activeButton={activeButton}
+          onClick={navigationHandler}
+        >
+          <span>{btn}</span>
+        </Button>
+      ))}
     </Container>
   );
 };
@@ -60,11 +56,15 @@ const Button = styled.button`
   justify-content: center;
   align-items: center;
   background-color: white;
-  color: #7c7c7c;
+  color: ${({ id, activeButton }) =>
+    id === activeButton ? "var(--color-main)" : "var(--color-gray)"};
   padding: 3px 0;
   width: 25%;
   height: 48px;
   border: 0;
+  & > span {
+    pointer-events: none;
+  }
   &:active,
   &:hover,
   &:focus {
