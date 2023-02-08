@@ -30,6 +30,7 @@ const Router = () => {
         <Route element={<Layout />}>
           <Route path="/home" element={<Main />} />
           <Route path="/dailys" element={<DailyLog />} />
+          <Route path="/dailys/:date" element={<DailyLog />} />
           <Route path="/dailys/add/:date" element={<AddDailyLog />} />
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/search" element={<Search />} />

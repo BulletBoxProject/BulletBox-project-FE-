@@ -16,7 +16,16 @@ import ConfirmModal from "../../../common/modal/AlertModal";
 
 const AddTodoInput = () => {
   const selectDate = useParams().date;
+  console.log(selectDate);
   const dateArray = selectDate.split("_");
+  const selectDateCopy = `${selectDate.split("_")[0]}_${
+    selectDate.split("_")[1]
+  }_${selectDate.split("_")[2]}`;
+  const today = `${new Date().getFullYear()}_${
+    new Date().getMonth() + 1
+  }_${new Date().getDate()}`;
+
+  console.log("선택된 날짜 비교", selectDateCopy === today);
 
   const [isOpen, setIsOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -63,9 +72,15 @@ const AddTodoInput = () => {
     }
   };
   const submitComfirm = () => {
-    setTimeout(() => {
-      navigate("/dailys");
-    }, 50);
+    if (selectDateCopy === today) {
+      setTimeout(() => {
+        navigate("/dailys");
+      }, 50);
+    } else {
+      setTimeout(() => {
+        navigate(`/dailys/${selectDateCopy}`);
+      }, 50);
+    }
   };
   const dailyLogTitle = `${dateArray[0].substr(2, 2)}/${
     dateArray[1] < 10 ? "0" + dateArray[1] : dateArray[1]
