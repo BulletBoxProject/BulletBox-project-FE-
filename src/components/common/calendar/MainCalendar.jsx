@@ -93,11 +93,13 @@ export default MainCalendar;
 
 const TodayButton = styled.button`
   position: absolute;
-  left: 288px;
+  top: -2px;
+  left: 290px;
   border: 0;
   width: 40px;
   height: 20px;
-  background-color: white;
+  background-color: inherit;
+  font-weight: bold;
 `;
 
 const DateTodoCount = styled.p`

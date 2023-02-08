@@ -53,16 +53,7 @@ const EditCalendarModal = ({
 
 export default EditCalendarModal;
 
-const CalendarContents = styled.div`
-  /* margin-right: 10px; */
-`;
-const TodayButton = styled.button`
-  position: absolute;
-  transform: translate(680%, 155%);
-  border: 0;
-  background-color: transparent;
-  font-weight: bolder;
-`;
+const CalendarContents = styled.div``;
 const CalendarButtonGroup = styled.div`
   position: absolute;
   display: flex;

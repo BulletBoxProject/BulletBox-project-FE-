@@ -52,8 +52,8 @@ export default DailyLogCalendar;
 
 const TodayButton = styled.button`
   position: absolute;
-  left: 270px;
-  top: 18px;
+  left: 268px;
+  top: 14px;
   border: 0;
   width: 40px;
   height: 20px;

@@ -62,7 +62,6 @@ const MainContainer = () => {
   return (
     <Container>
       <CalendarDiv>
-        <SelectTodayButton>Today</SelectTodayButton>
         <MainCalendar
           nowMonthView={nowMonthView.month}
           selectDateTitle={selectDateTitle}
