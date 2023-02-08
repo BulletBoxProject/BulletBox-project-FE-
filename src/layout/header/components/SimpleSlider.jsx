@@ -103,16 +103,6 @@ const Guide7 = styled(guide7)`
 `;
 
 const Container = styled.div`
-  /* .slick-next {
-    right: -21px;
-  }
-  .slick-prev {
-    left: -28px;
-  }
-  .slick-prev:before,
-  .slick-next:before {
-    font-size: 28px;
-  } */
   .slick-dots {
     .slick-active {
       button::before {
