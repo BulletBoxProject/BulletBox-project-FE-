@@ -37,12 +37,13 @@ export const __putFavorite = createAsyncThunk(
     try {
       const id = payload.favoriteId;
       delete payload.favoriteId;
+      console.log(payload, "수정 페이로드");
       const data = await baseURLApiV1.put(`favorites/${id}`, payload);
       // const data = { favoriteId: id, ...payload };
       console.log(data, "data수정");
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
-      alert("카테고리 수정 실패");
+      alert("루틴 수정 실패");
       return thunkAPI.rejectWithValue(error);
     }
   }

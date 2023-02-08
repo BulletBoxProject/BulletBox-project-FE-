@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import Calendar from "react-calendar";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { __getDiaryDate } from "../../../redux/modules/emotionDiarySlice";
 import { __getDiaryMonth } from "../../../redux/modules/emotionDiarySlice";
 import Emotions from "./Emotions";
+import moment from "moment/moment";
 
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
@@ -49,10 +50,19 @@ const DiaryCalendar = ({ setYear, setMonth, setDate, setSelectDate }) => {
     dispatch(__getDiaryMonth(monthChangePayload));
   };
 
+  const calendarRef = useRef();
+
+  const ClickTodayHandler = () => {
+    const calendar = calendarRef.current;
+    const firstDayOfTodaysMonth = moment().date(1).toDate();
+    calendar.setActiveStartDate(firstDayOfTodaysMonth);
+  };
+
   return (
     <Calendarcontainer>
       {emotions && (
         <Calendar
+          ref={calendarRef}
           calendarType="US"
           onChange={dateChangeHandler}
           onActiveStartDateChange={monthChangeHandler}
@@ -77,6 +87,7 @@ const DiaryCalendar = ({ setYear, setMonth, setDate, setSelectDate }) => {
           }
         />
       )}
+      <TodayBtn onClick={ClickTodayHandler}>Today</TodayBtn>
     </Calendarcontainer>
   );
 };
@@ -84,6 +95,7 @@ const DiaryCalendar = ({ setYear, setMonth, setDate, setSelectDate }) => {
 export default DiaryCalendar;
 
 const Calendarcontainer = styled.div`
+  position: relative;
   .react-calendar {
     width: 100%;
     height: 350px;
@@ -319,4 +331,15 @@ const PrevIcon = styled(IoIosArrowBack)`
   margin-left: 3vw;
   margin-right: 1vw;
   color: var(--color-main);
+`;
+
+const TodayBtn = styled.button`
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  background-color: white;
+  font-weight: bold;
+  margin-top: 4px;
+  margin-right: 9px;
 `;

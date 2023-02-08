@@ -264,6 +264,7 @@ const TodoMoreViewDiv = styled.div`
 const TodoMoreViewButton = styled.button`
   border: 0;
   background-color: inherit;
+  padding: 0;
 `;
 const OptionSelectDiv = styled.div`
   display: flex;

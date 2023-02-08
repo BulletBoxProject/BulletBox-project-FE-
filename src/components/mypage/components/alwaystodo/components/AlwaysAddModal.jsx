@@ -274,12 +274,12 @@ const DeleteIcon = styled(closeIcon)`
   height: 2.5vh;
 `;
 
-const AlwaysTodoInput = styled.input`
+const AlwaysTodoInput = styled.input.attrs({ maxLength: 32 })`
   border: none;
   font-weight: bold;
 `;
 
-const AlwaysMemoInput = styled.input`
+const AlwaysMemoInput = styled.input.attrs({ maxLength: 28 })`
   border: none;
   width: 65%;
   font-weight: bold;

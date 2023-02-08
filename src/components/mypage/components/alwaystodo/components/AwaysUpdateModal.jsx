@@ -15,6 +15,7 @@ const AlwaysUpdateModal = ({
   content,
   memo,
   backgroundColor,
+  categoryId,
 }) => {
   const dispatch = useDispatch();
   const categoryList = useSelector(
@@ -29,7 +30,7 @@ const AlwaysUpdateModal = ({
   const [plusId, setPlusId] = useState(1);
   const [isName, setIsName] = useState(true);
 
-  const [categoryId, setCategoryId] = useState(null);
+  const [cateId, setCategoryId] = useState(categoryId);
   const [categoryName, setCategoryName] = useState(null);
   const [categoryColor, setCategoryColor] = useState(backgroundColor);
 
@@ -53,6 +54,7 @@ const AlwaysUpdateModal = ({
         }
       })
     );
+    console.log(favoriteMemos);
   };
 
   const newDeleteHandler = (index) => {
@@ -101,7 +103,7 @@ const AlwaysUpdateModal = ({
       favoriteId,
       favoriteContent: favoriteContent,
       favoriteMemos: favoriteMemo,
-      categoryId: categoryId,
+      categoryId: cateId,
       categoryName: categoryName,
       categoryColor: categoryColor,
     };
