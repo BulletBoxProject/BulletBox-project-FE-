@@ -69,6 +69,8 @@
   <br />
     <div><b>• 기술을 선택한 이유 및 근거</b></div>
   <br />
+   <div>&nbsp &nbsp &nbsp프로젝트 규모에 비례해서 스코프가 커지면 컴포넌트의 구조도 복잡해지는 것은 불가피합니다. 이런 상황에서는 Props Drilling의 문제가 발생할 수 있기 때문에 전역 상태 관리를 통해서 문제를 해결할 수 있습니다.    
+전역 상태 관리를 통해서 부모 컴포넌트에 props에 의존에서 벗어날 수 있기 때문에 자료를 가공하고 통신하는 작업 과정에서 유용하게 사용할 수 있습니다. <br /><br />
   <div>&nbsp &nbsp &nbsp프론트엔드 기술을 선택할 때는 트렌드와 관련된 부분을 간과할 수 없다고 생각합니다. 다양한 전역 상태관리 라이브러리가 존재하지만 여전히 Redux가 가장 높은 점유율을 가지고 있습니다. <br /><br />
 &nbsp&nbsp&nbsp 이와 관련해서 Redux는 우선 검증된 신뢰성 있는 라이브러리이기 때문에 사용 시 안정성을 확보할 수 있습니다. 그리고 향후 주니어 개발자로서 업무를 진행하는 과정에서도 보편적으로 쓰이는 기술을 먼저 익혀서 프로젝트 참여에 도움이 될 것이라 생각합니다.<br /><br />
 &nbsp&nbsp&nbsp 단순히 개인 프로젝트, 소규모 프로젝트 만을 위한 선택이라면 상대적으로 보일러 플레이트 코드량이 적고 미들웨어 패키지가 내장되어 있는 장점을 가진 Recoil을 선택할 수도 있으나 널리 사용되는 기술을 익히는 것이 우선이라 생각했기 때문에 Redux를 선택하게 되었습니다. <br />
@@ -92,6 +94,17 @@
 &nbsp&nbsp&nbsp 클래스명을 따로 작성하지 않고 렌더링 시 자동으로 클래스 명이 생성되기 때문에 네이밍 충돌이 없습니다.<br /><br />
 &nbsp&nbsp&nbsp props를 전달할 수 있기 때문에 동적인 스타일링을 간단하게 적용할 수 있습니다. <br />
 </div>
+ 
+------
+### 설치 패키지
+ - yarn add react - v18.2.0
+- yarn add axios - v1.2.2
+- yarn add redux react-redux - v8.0.5
+- yarn add react-router-dom - v6.6.1
+- yarn add styled-components - v5.3.6
+- yarn add react-redux @reduxjs/toolkit - v1.9.1
+- yarn add react-calendar - v4.0.0
+- yarn add react-cookie - v4.1.1
 
 ## 팀원 소개
 
