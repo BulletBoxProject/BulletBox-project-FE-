@@ -13,9 +13,9 @@
 - 다양한 불렛(기호)을 사용한 의미부여 투두리스트
 - 자주 쓰는 할 일은 루틴으로, 할 일의 테마는 카테고리로 편리한 사용
 
-<img width="412" alt="불렛박스 소개이미지-1" src="https://user-images.githubusercontent.com/90745936/217719491-4833a378-57a2-45cb-836d-41ff91c99d92.png">  <img width="412" alt="불렛박스 소개이미지-2" src="https://user-images.githubusercontent.com/90745936/217719503-024b988e-42e3-4bfd-ab55-37174ed89c9a.png">
+<img width="49%" alt="불렛박스 소개이미지-1" src="https://user-images.githubusercontent.com/90745936/217719491-4833a378-57a2-45cb-836d-41ff91c99d92.png">  <img width="49%" alt="불렛박스 소개이미지-2" src="https://user-images.githubusercontent.com/90745936/217719503-024b988e-42e3-4bfd-ab55-37174ed89c9a.png">
 <br/>
-<img width="412" alt="불렛박스 소개이미지-3" src="https://user-images.githubusercontent.com/90745936/217719514-3112bb85-a103-47cc-828e-10190ef900e6.png">  <img width="412" alt="불렛박스 소개이미지-4" src="https://user-images.githubusercontent.com/90745936/217719518-a234cdf7-c2df-4796-bf5b-b5a60780f718.png">
+<img width="49%" alt="불렛박스 소개이미지-3" src="https://user-images.githubusercontent.com/90745936/217719514-3112bb85-a103-47cc-828e-10190ef900e6.png">  <img width="49%" alt="불렛박스 소개이미지-4" src="https://user-images.githubusercontent.com/90745936/217719518-a234cdf7-c2df-4796-bf5b-b5a60780f718.png">
 
 서비스 MVP 개발기간: 22.12.30. - 23.02.04.
 
