@@ -5,8 +5,16 @@
 
 ![불렛 투두 간판 이미지](https://user-images.githubusercontent.com/90745936/217715941-6613b5c7-9d3e-4e37-b26a-88f8614c7cef.png)
 
-### 📎 [Bullet Box 서비스 이용하기](https://bullet-box.com)
+📎 [Bullet Box 서비스 이용하기](https://bullet-box.com)
+------
 
+### 목차
+
+1. [Bullet Box 프로젝트 소개](#1-bullet-box-프로젝트-소개)
+2. [기술 스택](#2-기술-스택) <br />
+2-1. [Front-End](#-front-end) <br />
+2-2. [서비스 아키텍처](#서비스-아키텍처)
+3. [기술적 의사결정](#기술적-의사결정)
 
 ## 1. [Bullet Box] 프로젝트 소개
 - 불렛저널 방법을 적용한 일정관리 & 다이어리 서비스
@@ -46,8 +54,9 @@
 ### 서비스 아키텍처
 ![Service Architecture](https://user-images.githubusercontent.com/90745936/217726285-7bca8acc-9e4e-46df-8d58-545df395aeae.png)
 
+### 기술적 의사결정
 <details>
-<summary>기술적 의사결정</summary>
+<summary>상세내용 보기</summary>
 <div markdown="1">
  <br />
  <div><b > 📌 Redux</b></div>
@@ -87,3 +96,10 @@
 </div>
 </details>
 
+## 팀원 소개
+
+### Front-End
+
+#### 👤 [최선호](https://github.com/suno0140)
+
+#### 👤 [이철화](https://github.com/Pablaw)
