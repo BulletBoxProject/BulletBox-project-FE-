@@ -55,9 +55,7 @@
 ![Service Architecture](https://user-images.githubusercontent.com/90745936/217726285-7bca8acc-9e4e-46df-8d58-545df395aeae.png)
 
 ### 기술적 의사결정
-<details>
-<summary>상세내용 보기</summary>
-<div markdown="1">
+<div >
  <br />
  <div><b > 📌 Redux</b></div>
   <br />
@@ -94,7 +92,6 @@
 &nbsp&nbsp&nbsp 클래스명을 따로 작성하지 않고 렌더링 시 자동으로 클래스 명이 생성되기 때문에 네이밍 충돌이 없습니다.<br /><br />
 &nbsp&nbsp&nbsp props를 전달할 수 있기 때문에 동적인 스타일링을 간단하게 적용할 수 있습니다. <br />
 </div>
-</details>
 
 ## 팀원 소개
 
