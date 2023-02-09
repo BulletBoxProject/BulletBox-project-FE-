@@ -6,6 +6,13 @@
 ![불렛 투두 간판 이미지](https://user-images.githubusercontent.com/90745936/217715941-6613b5c7-9d3e-4e37-b26a-88f8614c7cef.png)
 
 📎 [Bullet Box 서비스 이용하기](https://bullet-box.com)
+
+<br />
+
+📎 [FrontEnd 노션 페이지](https://www.notion.so/1419ad4d03c54fb5937328ccbc6d7f66)
+
+<br />
+
 ------
 
 ### 목차
@@ -15,6 +22,8 @@
 2-1. [Front-End](#-front-end) <br />
 2-2. [서비스 아키텍처](#서비스-아키텍처)
 3. [기술적 의사결정](#기술적-의사결정)
+3. [코드 컨벤션](#코드-컨벤션)
+3. [설치 패키지](#설치-패키지)
 
 ## 1. [Bullet Box] 프로젝트 소개
 - 불렛저널 방법을 적용한 일정관리 & 다이어리 서비스
@@ -54,7 +63,7 @@
 ### 서비스 아키텍처
 ![Service Architecture](https://user-images.githubusercontent.com/90745936/217726285-7bca8acc-9e4e-46df-8d58-545df395aeae.png)
 
-### 기술적 의사결정
+## 기술적 의사결정
 <div >
  <br />
  <div><b > 📌 Redux</b></div>
@@ -94,9 +103,46 @@
 &nbsp&nbsp&nbsp 클래스명을 따로 작성하지 않고 렌더링 시 자동으로 클래스 명이 생성되기 때문에 네이밍 충돌이 없습니다.<br /><br />
 &nbsp&nbsp&nbsp props를 전달할 수 있기 때문에 동적인 스타일링을 간단하게 적용할 수 있습니다. <br />
 </div>
- 
-------
-### 설치 패키지
+
+<br /><br />
+
+## 코드 컨벤션
+ #### 1. **CSS**
+
+- styled components ( 맨 아래에 코드 작성 )
+
+#### 2. 폴더 이름규칙 ⇒ 소문자
+
+#### 3. yarn 사용
+
+#### 4. 파일명 이름규칙
+
+- 자바스크립트와 HTML을 동시에 작성된 파일은 `.jsx`로 한다.
+- 자바스크립트만 사용 → `.js`
+- `.js` 파일명은 카멜 케이스 , `.jsx` 파일은 파스칼 케이스
+
+#### 5.상태관리 ⇒ 리덕스, 리덕스 툴킷, 미들웨어 통신
+
+#### 6. 함수명
+
+- 카멜케이스
+- 화살표 함수 사용
+
+#### 7.  핸들러명 :
+
+- 이름은 `___Handler` : 이벤트가 발생되었을 때 실행되는 실제 function
+
+#### 8. Custom Hook
+
+- Custom Hook의 이름은 `use___`
+
+#### 폴더 경로 설정
+
+![image](https://user-images.githubusercontent.com/99157565/217842470-01dc2cd7-43a1-4e6d-aa23-99cb2d7722cd.png)
+
+<br/><br/>
+
+## 설치 패키지
  - yarn add react - v18.2.0
 - yarn add axios - v1.2.2
 - yarn add redux react-redux - v8.0.5
@@ -106,6 +152,7 @@
 - yarn add react-calendar - v4.0.0
 - yarn add react-cookie - v4.1.1
 
+<br/><br/>
 ## 팀원 소개
 
 ### Front-End
