@@ -10,7 +10,6 @@ const AlwaysTodoList = () => {
   const favoriteList = useSelector(
     (state) => state?.favorite?.favorite?.favorites
   );
-  console.log(favoriteList, "23");
 
   useEffect(() => {
     dispatch(__getFavorite());

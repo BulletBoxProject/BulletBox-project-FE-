@@ -7,7 +7,7 @@ const CategorySelectDiv = ({ AddTodoInput, setAddTodoInput }) => {
   const categories = useSelector(
     (state) => state?.dailyTodo?.dailyTodo?.categories
   );
-  console.log(categories);
+
   const [selectCategoryId, setSelectCategoryId] = useState(null);
   const navigate = useNavigate();
   const categorySelectHandler = (e) => {

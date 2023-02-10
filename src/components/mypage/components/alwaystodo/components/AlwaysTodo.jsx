@@ -55,7 +55,6 @@ const AlwaysTodo = ({
   const updateButtonHandler = () => {
     setShowUpdateMoal(true);
   };
-  console.log(memo);
 
   return (
     <>

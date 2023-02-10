@@ -13,7 +13,6 @@ const TimeSettingDiv = ({ AddTodoInput, setAddTodoInput }) => {
     minute: false,
   });
   const [selectTime, setSelectTime] = useState({ hour: null, minute: null });
-  console.log("입력된 시간", selectTime);
 
   useEffect(() => {
     setAddTodoInput({

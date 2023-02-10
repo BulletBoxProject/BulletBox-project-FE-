@@ -23,7 +23,7 @@ const MainCalendar = ({
   const calendarCountList = useSelector(
     (state) => state?.mainTodo?.mainTodo?.calendar
   );
-  console.log("셀럭터 값", calendarCountList);
+
   const dateChangeHandler = (e) => {
     const dateArr = ["일", "월", "화", "수", "목", "금", "토"];
     setSelectDateTitle(
@@ -41,7 +41,7 @@ const MainCalendar = ({
     dispatch(__getSelectDateTodo(selectDataPayload));
   };
   const monthChangeHandler = ({ action, activeStartDate, value, view }) => {
-    console.log("이동한 월", activeStartDate);
+
     const monthChangePayload = {
       year: activeStartDate.getFullYear(),
       month: activeStartDate.getMonth() + 1,

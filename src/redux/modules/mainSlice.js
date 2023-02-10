@@ -10,7 +10,6 @@ export const __getMainTodo = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await baseURLApiV1.get(`main`, payload);
-      console.log(data, "asdifj");
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -33,12 +32,10 @@ export const __getMonthTodoCount = createAsyncThunk(
 export const __getSelectDateTodo = createAsyncThunk(
   "main/getSelectDateTodo",
   async (payload, thunkAPI) => {
-    console.log(payload);
     try {
       const { data } = await baseURLApiV1.get(
         `/main/dailys?year=${payload.year}&month=${payload.month}&day=${payload.day}`
       );
-      console.log(data.data?.daily);
       return thunkAPI.fulfillWithValue(data?.data?.daily);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

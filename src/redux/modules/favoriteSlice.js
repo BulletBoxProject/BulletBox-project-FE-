@@ -22,7 +22,6 @@ export const __postFavorite = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await baseURLApiV1.post(`favorites`, payload);
-      console.log(data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       alert("루틴 추가를 실패했습니다.");
@@ -37,10 +36,9 @@ export const __putFavorite = createAsyncThunk(
     try {
       const id = payload.favoriteId;
       delete payload.favoriteId;
-      console.log(payload, "수정 페이로드");
+
       const data = await baseURLApiV1.put(`favorites/${id}`, payload);
-      // const data = { favoriteId: id, ...payload };
-      console.log(data, "data수정");
+
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       alert("루틴 수정 실패");

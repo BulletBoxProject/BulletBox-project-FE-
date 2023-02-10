@@ -37,7 +37,7 @@ const EditTodoInput = ({ todoList, categoryList }) => {
     day: todoList?.day,
     memos: todoList?.memos,
   });
-  console.log(AddTodoInput.year, AddTodoInput.month, AddTodoInput.day);
+
   const [showCalendar, setShowCalendar] = useState(false);
   const [showDate, setShowDate] = useState("");
   const [alertState, setAlertState] = useState([false, false]);

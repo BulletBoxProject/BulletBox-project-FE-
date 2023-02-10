@@ -24,8 +24,6 @@ const AddTodoInput = () => {
     new Date().getMonth() + 1
   }_${new Date().getDate()}`;
 
-  console.log("선택된 날짜 비교", selectDateCopy === today);
-
   const [isOpen, setIsOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [alertState, setAlertState] = useState([false, false, false, false]);

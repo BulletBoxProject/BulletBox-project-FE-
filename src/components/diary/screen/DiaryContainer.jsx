@@ -43,7 +43,6 @@ const DiaryContainer = () => {
     emotion: emotion,
   };
 
-  // console.log(diaryList, "list");
 
   const onDateHandler = () => {
     const day = ["일", "월", "화", "수", "목", "금", "토"];

@@ -25,7 +25,6 @@ import { ReactComponent as newTodo } from "../../../img/dailyLog/new.svg";
 
 const DailyLogContainer = () => {
   const parms = useParams();
-  console.log(parms.date);
 
   const addTodoRef = useRef(null);
   const dispatch = useDispatch();
@@ -37,7 +36,7 @@ const DailyLogContainer = () => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [showDate, setShowDate] = useState("");
   const [sameDate, setSameDate] = useState(true);
-  console.log("캘린더 선택 날짜", showDate);
+
 
   const navigate = useNavigate();
   const day = ["일", "월", "화", "수", "목", "금", "토"];
@@ -51,7 +50,7 @@ const DailyLogContainer = () => {
     setShowSelectBox(!showSelectBox);
   };
   const state = useSelector((state) => state);
-  console.log("전역 상태값", state);
+
   const todoList = useSelector((state) => state?.dailyTodo?.dailyTodo?.daily);
   const categoryList = useSelector(
     (state) => state?.dailyTodo?.dailyTodo?.categories
@@ -60,7 +59,7 @@ const DailyLogContainer = () => {
     (state) => state?.dailyTodo?.favorite?.favorites
   );
   const favoritesTodoHandler = () => {
-    console.log("자주쓰는 할일 추가 핸들러", favoritesTodoList);
+
     setShowSelectBox(false);
     setShowFavoritesTodo(true);
   };

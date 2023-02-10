@@ -18,7 +18,6 @@ const CalendarModal = ({ setShowCalendar, setShowDate }) => {
 
   const dispatch = useDispatch();
   const focusTodayHandler = () => {
-    console.log("today Clicked");
   };
   const cancelHandler = () => {
     setShowCalendar(false);

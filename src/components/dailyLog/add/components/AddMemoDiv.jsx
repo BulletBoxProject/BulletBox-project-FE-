@@ -10,7 +10,6 @@ import { ReactComponent as closeIcon } from "../../../../img/dailyLog/close.svg"
 const AddMemoDiv = ({ AddTodoInput, setAddTodoInput, memos }) => {
   const [showMemo, setShowMemo] = useState(false);
   const [memoInput, setMemoInput] = useState("");
-  console.log("할일 메모 길이", memoInput.length);
   const [memoList, setMemoList] = useState([]);
 
   const addMemoHanlder = () => {

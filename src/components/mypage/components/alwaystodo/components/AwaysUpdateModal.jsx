@@ -54,7 +54,6 @@ const AlwaysUpdateModal = ({
         }
       })
     );
-    console.log(favoriteMemos);
   };
 
   const newDeleteHandler = (index) => {
