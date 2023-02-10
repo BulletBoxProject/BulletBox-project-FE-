@@ -1,9 +1,113 @@
-# ![image](https://user-images.githubusercontent.com/99157565/213341943-0b61a0f7-dc4c-4798-b336-c4d465fc1475.png) Bullet Box (불렛 박스)
+# <img width="50" alt="불렛박스 타이틀 이미지" src="https://user-images.githubusercontent.com/90745936/217717087-f38660df-ebd7-41de-bdf3-86079b522b77.png"> Bullet Box (불렛 박스)
 
-## 노션 팀 문서 https://www.notion.so/c453f0e24a254c46b0dfc43e40e5cdbc
+### 내가 직접 의미를 부여하는 나만의 투두 리스트 
 
-## ⭐Convention
-#### 1. **CSS**
+
+![불렛 투두 간판 이미지](https://user-images.githubusercontent.com/90745936/217715941-6613b5c7-9d3e-4e37-b26a-88f8614c7cef.png)
+
+📎 [Bullet Box 서비스 이용하기](https://bullet-box.com)
+
+<br />
+
+📎 [FrontEnd 노션 페이지](https://www.notion.so/1419ad4d03c54fb5937328ccbc6d7f66)
+
+<br />
+
+------
+
+### 목차
+
+1. [Bullet Box 프로젝트 소개](#1-bullet-box-프로젝트-소개)
+2. [기술 스택](#2-기술-스택) <br />
+2-1. [Front-End](#-front-end) <br />
+2-2. [서비스 아키텍처](#서비스-아키텍처)
+3. [기술적 의사결정](#기술적-의사결정)
+3. [코드 컨벤션](#코드-컨벤션)
+3. [설치 패키지](#설치-패키지)
+
+## 1. [Bullet Box] 프로젝트 소개
+- 불렛저널 방법을 적용한 일정관리 & 다이어리 서비스
+- 다양한 불렛(기호)을 사용한 의미부여 투두리스트
+- 자주 쓰는 할 일은 루틴으로, 할 일의 테마는 카테고리로 편리한 사용
+
+<img width="49%" alt="불렛박스 소개이미지-1" src="https://user-images.githubusercontent.com/90745936/217719491-4833a378-57a2-45cb-836d-41ff91c99d92.png">  <img width="49%" alt="불렛박스 소개이미지-2" src="https://user-images.githubusercontent.com/90745936/217719503-024b988e-42e3-4bfd-ab55-37174ed89c9a.png">
+<br/>
+<img width="49%" alt="불렛박스 소개이미지-3" src="https://user-images.githubusercontent.com/90745936/217719514-3112bb85-a103-47cc-828e-10190ef900e6.png">  <img width="49%" alt="불렛박스 소개이미지-4" src="https://user-images.githubusercontent.com/90745936/217719518-a234cdf7-c2df-4796-bf5b-b5a60780f718.png">
+
+서비스 MVP 개발기간: 22.12.30. - 23.02.04.
+
+## 2. 기술 스택
+### ✨ Front-End
+<img src="https://img.shields.io/badge/JAVASCRIPT-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white"> <img src="https://img.shields.io/badge/REACT-61DAFB?style=for-the-badge&logo=React&logoColor=white">
+<img src="https://img.shields.io/badge/REACT ROUTER-CA4245?style=for-the-badge&logo=React Router&logoColor=white">
+<img src="https://img.shields.io/badge/REDUX-764ABC?style=for-the-badge&logo=Redux&logoColor=white">
+<img src="https://img.shields.io/badge/REDUX TOOLKIT-764ABC?style=for-the-badge&logo=Redux&logoColor=white">
+<img src="https://img.shields.io/badge/STYLED COMPONENTS-DB7093?style=for-the-badge&logo=styled-components&logoColor=white">
+<img src="https://img.shields.io/badge/YARN-2C8EBB?style=for-the-badge&logo=Yarn&logoColor=white">
+<img src="https://img.shields.io/badge/AXIOS-5A29E4?style=for-the-badge&logo=Axios&logoColor=white">
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white">
+<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white">
+<img src="https://img.shields.io/badge/AWS S3-569A31?style=for-the-badge&logo=Amazon S3&logoColor=white">
+
+### 📏 Tool
+<img src="https://img.shields.io/badge/GITHUB-181717?style=for-the-badge&logo=GitHub&logoColor=white"><img src="https://img.shields.io/badge/GIT-F05032?style=for-the-badge&logo=Git&logoColor=white">
+<img src="https://img.shields.io/badge/SLACK-4A154B?style=for-the-badge&logo=Slack&logoColor=white">
+<img src="https://img.shields.io/badge/NOTION-000000?style=for-the-badge&logo=Notion&logoColor=white">
+<img src="https://img.shields.io/badge/FIGMA-F24E1E?style=for-the-badge&logo=figma&logoColor=white">
+<img src="https://img.shields.io/badge/DIAGRAM IO-F08705?style=for-the-badge&logo=diagrams.net&logoColor=white">
+
+<br />
+<br />
+<br />
+
+### 서비스 아키텍처
+![Service Architecture](https://user-images.githubusercontent.com/90745936/217726285-7bca8acc-9e4e-46df-8d58-545df395aeae.png)
+
+## 기술적 의사결정
+<div >
+ <br />
+ <div><b > 📌 Redux</b></div>
+  <br />
+  <div><b>• 요구사항</b></div>
+  <br />
+  <div>&nbsp&nbsp- 컴포넌트의 양이 많아짐에 따라서 전역 상태관리를 위해 필요</div>
+  <br />
+    <div><b>• 선택지</b></div>
+  <br />
+  <div>&nbsp&nbsp- Redux, Recoil</div>
+  <br />
+    <div><b>• 기술을 선택한 이유 및 근거</b></div>
+  <br />
+   <div>&nbsp &nbsp &nbsp프로젝트 규모에 비례해서 스코프가 커지면 컴포넌트의 구조도 복잡해지는 것은 불가피합니다. 이런 상황에서는 Props Drilling의 문제가 발생할 수 있기 때문에 전역 상태 관리를 통해서 문제를 해결할 수 있습니다.    
+전역 상태 관리를 통해서 부모 컴포넌트에 props에 의존에서 벗어날 수 있기 때문에 자료를 가공하고 통신하는 작업 과정에서 유용하게 사용할 수 있습니다. <br /><br />
+  <div>&nbsp &nbsp &nbsp프론트엔드 기술을 선택할 때는 트렌드와 관련된 부분을 간과할 수 없다고 생각합니다. 다양한 전역 상태관리 라이브러리가 존재하지만 여전히 Redux가 가장 높은 점유율을 가지고 있습니다. <br /><br />
+&nbsp&nbsp&nbsp 이와 관련해서 Redux는 우선 검증된 신뢰성 있는 라이브러리이기 때문에 사용 시 안정성을 확보할 수 있습니다. 그리고 향후 주니어 개발자로서 업무를 진행하는 과정에서도 보편적으로 쓰이는 기술을 먼저 익혀서 프로젝트 참여에 도움이 될 것이라 생각합니다.<br /><br />
+&nbsp&nbsp&nbsp 단순히 개인 프로젝트, 소규모 프로젝트 만을 위한 선택이라면 상대적으로 보일러 플레이트 코드량이 적고 미들웨어 패키지가 내장되어 있는 장점을 가진 Recoil을 선택할 수도 있으나 널리 사용되는 기술을 익히는 것이 우선이라 생각했기 때문에 Redux를 선택하게 되었습니다. <br />
+  
+  </div>
+ </div>
+  <br />
+ <div><b > 📌 Styled-Components</b></div>
+  <br />
+  <div><b>• 요구사항</b></div>
+  <br />
+  <div>&nbsp&nbsp- 리액트 개발환경에서 CSS를 스타일링을 사용하기 위한 기술적 선택 필요</div>
+  <br />
+    <div><b>• 선택지</b></div>
+  <br />
+  <div>&nbsp&nbsp- Styled-Components, CSS Module</div>
+  <br />
+    <div><b>• 기술을 선택한 이유 및 근거</b></div>
+  <br />
+  <div>&nbsp &nbsp &nbsp컴포넌트 내에서 클래스명 선언없이 jsx태그를 만들면서 바로 사용할 수 있기 때문에 코드 가독성을 높이며 컴포넌트화 하여 재사용을 높일 수 있습니다. <br /><br />
+&nbsp&nbsp&nbsp 클래스명을 따로 작성하지 않고 렌더링 시 자동으로 클래스 명이 생성되기 때문에 네이밍 충돌이 없습니다.<br /><br />
+&nbsp&nbsp&nbsp props를 전달할 수 있기 때문에 동적인 스타일링을 간단하게 적용할 수 있습니다. <br />
+</div>
+
+<br /><br />
+
+## 코드 컨벤션
+ #### 1. **CSS**
 
 - styled components ( 맨 아래에 코드 작성 )
 
@@ -19,98 +123,40 @@
 
 #### 5.상태관리 ⇒ 리덕스, 리덕스 툴킷, 미들웨어 통신
 
-#### 6. 단위: 크기 단위 사용
-
-- 디자이너님께서 px로 주시면 → rem 변환
-- 일반적인 상황에서는 % 나 vw, vh로 사용
-- max-width/height, min-width/height 사용
-
-#### 7. 함수명
+#### 6. 함수명
 
 - 카멜케이스
 - 화살표 함수 사용
 
-#### 8.  핸들러명 :
+#### 7.  핸들러명 :
 
 - 이름은 `___Handler` : 이벤트가 발생되었을 때 실행되는 실제 function
 
-#### 9. Custom Hook
+#### 8. Custom Hook
 
 - Custom Hook의 이름은 `use___`
 
+#### 폴더 경로 설정
 
-## Git 관련
+![image](https://user-images.githubusercontent.com/99157565/217842470-01dc2cd7-43a1-4e6d-aa23-99cb2d7722cd.png)
 
-### ✅ Commit Convention
+<br/><br/>
 
-커밋 메시지 앞에 Tag Name을 작성한다.
+## 설치 패키지
+ - yarn add react - v18.2.0
+- yarn add axios - v1.2.2
+- yarn add redux react-redux - v8.0.5
+- yarn add react-router-dom - v6.6.1
+- yarn add styled-components - v5.3.6
+- yarn add react-redux @reduxjs/toolkit - v1.9.1
+- yarn add react-calendar - v4.0.0
+- yarn add react-cookie - v4.1.1
 
-- `ex) feat: 로그인 API 기능 추가`
-- `ex) refactor: posting service 내 인증 로직 필터로 분리`
- ![image](https://user-images.githubusercontent.com/99157565/213339743-2bbb9759-fcce-48ee-b4c1-05fc24b4e9e3.png)
+<br/><br/>
+## 팀원 소개
 
+### Front-End
 
-## ✅ Issue Convention
+#### 👤 [최선호](https://github.com/suno0140)
 
-- API 별로 이슈 작성
-- 코딩 시작 전 이슈를 만들고 코딩 시작할 것
-    - 예시
-
- ![image](https://user-images.githubusercontent.com/99157565/213340121-9aa6713a-e39c-43a0-a1a1-d420caf4f452.png)
-
-
-    
-- 이슈 템플릿을 활용해 형식에 맞는 이슈 생성
-    - 예시
-    
- ![image](https://user-images.githubusercontent.com/99157565/213340079-12c77247-0abf-41fa-af9c-1868f54d3c35.png)
-    
-
-## ✅ PR Convention
-
-- 기능별로 PR을 보내자 (레포 → 서비스 → 컨트롤러를 아우르는 한 사이클)
-- PR 제목 : [feat/refactor/docs/…] 이슈 이름
-
-
-    
-- PR 템플릿 형식에 맞게 작성
-
- ![image](https://user-images.githubusercontent.com/99157565/213340887-e27ca5a2-9f49-4541-bd0e-2aa3cdabe494.png)
-
-
-
-
-## ✅ 브랜치 전략
-
-- feature/#[이슈번호] → main
-    - 예시 `feature/#1`
-    - feature 브랜치에서 기능을 완성을 한 후 main 브랜치로 PR
-- main에서 바로 배포
-- git stash, git stash pop (개인 브랜치로 작성을 잊은 경우)
-
-📌 **git flow 축약 방식**  **참고 : [https://cchloe0927.tistory.com/52](https://cchloe0927.tistory.com/52)
-
-- main branch : 최종 배포 단계
-- dev branch: 개발 브랜치
-- feature/해당 이슈번호 : 개인 개발 단계
-
-## ✅ PR 코드 리뷰
-
-- PR 보낸 후 슬랙에 코드 리뷰 요청 (일단 시도)
-- 리뷰어 지정은 PR 보낸 사람이 알아서 지정 (PR 시 지정 가능)
-- PR 머지는 보낸 사람이 머지 
- <br>
-
- 
-## 👉Redux와 Redux-toolkit의 사용 이유
-    - 기능적인 측면
-        - 실습 프로젝트에 비해서 컴포넌트가 많아지고 페이지별 기능이 복잡해짐에 따라서 전역 상태관리가 필요하기 때문에 가장 널리 쓰이는 라이브러리 중 하나를 선택해서 사용.
-        - Redux-toolkit 은 리덕스의 액션과 리듀서를 효율적으로 사용할 수 있기 때문에 선택.
-        - Thunk 함수를 통해 미들웨어로 통신관련 코드 작성 및 관리 시 한번에 보고 효율적인 작업이 가능.
-    - 학습적인 측면
-        - 엔트리 레벨에서 새로운 기술을 학습하고 적용해서 프로젝트를 진행하는 것이 의미가 있다고 생각.
-        - 로컬 상태관리와 전역 상태관리의 차이점을 비교하고 필요성을 경험하는 측면에서 의미가 있음.
-        
-## 👉Styled Components의 사용 이유.
-    - CSS 코드를 작성하는 방법은 개발자마다 취향이 존재한다고 생각하지만 개인적으로는 CSS in JS에 적합한 패키지라고 생각하기 때문에 사용.
-    - 컴포넌트 파일 안에서 JSX 태그와 스타일을 한번에 편집할 수 있다는 것이 장점이라고 생각.
+#### 👤 [이철화](https://github.com/Pablaw)
