@@ -5,13 +5,13 @@
 
 ![불렛 투두 간판 이미지](https://user-images.githubusercontent.com/90745936/217715941-6613b5c7-9d3e-4e37-b26a-88f8614c7cef.png)
 
-📎 [Bullet Box 서비스 이용하기](https://bullet-box.com)
-
 <br />
 
-📎 [FrontEnd 노션 페이지](https://www.notion.so/1419ad4d03c54fb5937328ccbc6d7f66)
+### 📎 [Bullet Box 서비스 이용하기](https://bullet-box.com)
 
-<br />
+### 📎 [FrontEnd 노션 페이지](https://www.notion.so/1419ad4d03c54fb5937328ccbc6d7f66)
+
+
 
 ------
 
