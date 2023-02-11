@@ -4,6 +4,8 @@ import { baseURLApiV1 } from "../../core/api";
 // 초기값 설정
 const initialState = {
   category: [],
+  isLoading: false,
+  error: null,
 };
 
 // thunk
@@ -72,17 +74,34 @@ const categorySlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(__getCategory.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(__getCategory.fulfilled, (state, action) => {
         state.category = action.payload.data;
       })
+      .addCase(__getCategory.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
 
+      .addCase(__postCategory.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(__postCategory.fulfilled, (state, action) => {
         state.category.categories = [
           ...state.category.categories,
           action.payload.data,
         ];
       })
+      .addCase(__postCategory.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
 
+      .addCase(__putCategory.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(__putCategory.fulfilled, (state, action) => {
         state.category.categories = state.category.categories.map((value) => {
           if (value.categoryId === action.payload.id) {
@@ -96,12 +115,19 @@ const categorySlice = createSlice({
         });
       })
 
+      .addCase(__deleteCategory.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(__deleteCategory.fulfilled, (state, action) => {
         state.category.categories = state.category.categories.filter(
           (value) => {
             return value.categoryId !== action.payload.data.categoryId;
           }
         );
+      })
+      .addCase(__deleteCategory.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
       });
   },
 });
