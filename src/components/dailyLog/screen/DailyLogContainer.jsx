@@ -131,7 +131,6 @@ const DailyLogContainer = () => {
           ) : null}
         </CalendarDiv>
       </DateAndCalendarDiv>
-
       <TodoBulletDiv>
         {todoList && todoList?.length === 0 ? (
           <NoneTodo>할일을 추가해주세요.</NoneTodo>
@@ -198,7 +197,10 @@ export default DailyLogContainer;
 const Container = styled.div`
   font-family: cursive;
 `;
-const DateAndCalendarDiv = styled.div``;
+const DateAndCalendarDiv = styled.div`
+  width: 60%;
+  margin: 0 auto;
+`;
 const DateAndSelectDiv = styled.div`
   display: flex;
   width: 100%;
