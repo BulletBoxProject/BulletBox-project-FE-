@@ -60,7 +60,7 @@ const ModalWrap = styled.div`
 `;
 
 const Contents = styled.div`
-  margin: 53% 1.9rem;
+  margin-top: 59%;
 `;
 
 const ConfirmBtn = styled.button`
