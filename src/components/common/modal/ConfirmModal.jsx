@@ -77,6 +77,11 @@ const ConfirmBtn = styled.button`
   color: var(--color-dark-gray);
   font-weight: bold;
   cursor: pointer;
+  :hover,
+  :focus {
+    background-color: var(--color-main);
+    color: var(--color-default);
+  }
 `;
 
 const CancleBtn = styled.button`
@@ -93,6 +98,11 @@ const CancleBtn = styled.button`
   color: var(--color-dark-gray);
   font-weight: bold;
   cursor: pointer;
+  :hover,
+  :focus {
+    background-color: var(--color-main);
+    color: var(--color-default);
+  }
 `;
 
 const CloseImg = styled(close)``;
