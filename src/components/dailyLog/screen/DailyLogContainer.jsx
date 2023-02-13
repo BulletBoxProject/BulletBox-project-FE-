@@ -24,9 +24,10 @@ import { ReactComponent as oftenTodo } from "../../../img/dailyLog/often.svg";
 import { ReactComponent as newTodo } from "../../../img/dailyLog/new.svg";
 
 const DailyLogContainer = () => {
-  const parms = useParams();
+  const params = useParams();
 
   const addTodoRef = useRef(null);
+  const modalRef = useRef(null);
   const dispatch = useDispatch();
   const [showSelectBox, setShowSelectBox] = useState(false);
   const [dailyLogs, setDailyLogs] = useState([]);
@@ -36,7 +37,6 @@ const DailyLogContainer = () => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [showDate, setShowDate] = useState("");
   const [sameDate, setSameDate] = useState(true);
-
 
   const navigate = useNavigate();
   const day = ["일", "월", "화", "수", "목", "금", "토"];
@@ -59,18 +59,18 @@ const DailyLogContainer = () => {
     (state) => state?.dailyTodo?.favorite?.favorites
   );
   const favoritesTodoHandler = () => {
-
     setShowSelectBox(false);
     setShowFavoritesTodo(true);
   };
+
   const dateChangeHandler = () => {
     setShowCalendar(!showCalendar);
   };
   useEffect(() => {
-    if (parms.date === undefined) {
+    if (params.date === undefined) {
       dispatch(__getDailyTodo());
     } else {
-      const selectDateLog = parms.date.replaceAll("_", "/");
+      const selectDateLog = params.date.replaceAll("_", "/");
       dispatch(__getSelectDateTodo(selectDateLog));
     }
 
@@ -87,44 +87,50 @@ const DailyLogContainer = () => {
   useOutSideClick(addTodoRef, () => {
     setShowSelectBox(false);
   });
+  useOutSideClick(modalRef, () => {
+    setShowCalendar(false);
+  });
 
-  let num = 0;
   return (
     <Container>
-      <DateAndSelectDiv>
-        <div></div>
-        <DateButtonDiv>
-          <DateButton onClick={dateChangeHandler}>
-            {parms.date === undefined
-              ? dailyLogTitle
-              : `${parms.date.split("_")[0].substring(2, 4)}/${
-                  parms.date.split("_")[1] < 10
-                    ? 0 + parms.date.split("_")[1]
-                    : parms.date.split("_")[1]
-                }/${
-                  parms.date.split("_")[2] < 10
-                    ? 0 + parms.date.split("_")[2]
-                    : parms.date.split("_")[2]
-                }(${day[new Date(parms.date.replaceAll("_", ",")).getDay()]})`}
-          </DateButton>
-          <SelectDateButton onClick={dateChangeHandler}>
-            {showCalendar ? <IoIosArrowUp /> : <IoIosArrowDown />}
-          </SelectDateButton>
-        </DateButtonDiv>
-        <CategorySelector
-          categoryList={categoryList}
-          isSetSelectedCategory={isSetSelectedCategory}
-          setSlectedCategoryId={setSlectedCategoryId}
-        />
-      </DateAndSelectDiv>
-      <CalendarDiv>
-        {showCalendar ? (
-          <CalendarModal
-            setShowDate={setShowDate}
-            setShowCalendar={setShowCalendar}
+      <DateAndCalendarDiv ref={modalRef}>
+        <DateAndSelectDiv>
+          <div></div>
+          <DateButtonDiv>
+            <DateButton onClick={dateChangeHandler}>
+              {params.date === undefined
+                ? dailyLogTitle
+                : `${params.date.split("_")[0].substring(2, 4)}/${
+                    params.date.split("_")[1] < 10
+                      ? 0 + params.date.split("_")[1]
+                      : params.date.split("_")[1]
+                  }/${
+                    params.date.split("_")[2] < 10
+                      ? 0 + params.date.split("_")[2]
+                      : params.date.split("_")[2]
+                  }(${
+                    day[new Date(params.date.replaceAll("_", ",")).getDay()]
+                  })`}
+            </DateButton>
+            <SelectDateButton onClick={dateChangeHandler}>
+              {showCalendar ? <IoIosArrowUp /> : <IoIosArrowDown />}
+            </SelectDateButton>
+          </DateButtonDiv>
+          <CategorySelector
+            categoryList={categoryList}
+            isSetSelectedCategory={isSetSelectedCategory}
+            setSlectedCategoryId={setSlectedCategoryId}
           />
-        ) : null}
-      </CalendarDiv>
+        </DateAndSelectDiv>
+        <CalendarDiv>
+          {showCalendar ? (
+            <CalendarModal
+              setShowDate={setShowDate}
+              setShowCalendar={setShowCalendar}
+            />
+          ) : null}
+        </CalendarDiv>
+      </DateAndCalendarDiv>
       <TodoBulletDiv>
         {todoList && todoList?.length === 0 ? (
           <NoneTodo>할일을 추가해주세요.</NoneTodo>
@@ -190,6 +196,10 @@ export default DailyLogContainer;
 
 const Container = styled.div`
   font-family: cursive;
+`;
+const DateAndCalendarDiv = styled.div`
+  width: 60%;
+  margin: 0 auto;
 `;
 const DateAndSelectDiv = styled.div`
   display: flex;
