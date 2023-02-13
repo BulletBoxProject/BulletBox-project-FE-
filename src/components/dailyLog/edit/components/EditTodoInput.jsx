@@ -77,7 +77,7 @@ const EditTodoInput = ({ todoList, categoryList }) => {
     AddTodoInput.day
   ).getDay();
   const dateChangeHandler = () => {
-    setShowCalendar(true);
+    setShowCalendar(!showCalendar);
   };
   const dailyLogTitle = `${String(AddTodoInput.year).substring(2, 4)}/${
     AddTodoInput.month < 10 ? "0" + AddTodoInput.month : AddTodoInput.month
@@ -118,12 +118,12 @@ const EditTodoInput = ({ todoList, categoryList }) => {
           <AlertModal children={validCheck[idx]} onClose={modalCloseHandler} />
         ) : null
       )}
-      <DateButtonDiv>
+      <DateButtonDiv ref={calendaerModalRef}>
         <DateButton onClick={dateChangeHandler}>{dailyLogTitle}</DateButton>
         <SelectDateButton onClick={dateChangeHandler}>
           {showCalendar ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </SelectDateButton>
-        <CalendarDiv ref={calendaerModalRef}>
+        <CalendarDiv>
           {showCalendar ? (
             <EditCalendarModal
               setShowDate={setShowDate}
@@ -178,7 +178,8 @@ export default EditTodoInput;
 
 const Container = styled.div``;
 const DateButtonDiv = styled.div`
-  width: 100%;
+  width: 50%;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
