@@ -38,7 +38,6 @@ export const __putCategory = createAsyncThunk(
   "category/putCategory",
   async (payload, thunkAPI) => {
     try {
-      console.log(payload);
       const categoryInfo = {
         categoryName: payload.categoryName,
         categoryColor: payload.categoryColor,

@@ -9,11 +9,9 @@ export const __getSearch = createAsyncThunk(
   "search/getSearch",
   async (payload, thunkAPI) => {
     try {
-      console.log(payload);
       const { data } = await baseURLApiV1.get(
         `todos/search?todoContent=${payload}`
       );
-      console.log(data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -40,12 +38,10 @@ const searchSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(__getSearch.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.isLoading = false;
         state.search = action.payload.data;
       })
       .addCase(__deleteSearch.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.search.searches = state.search.searches.filter((value) => {
           return value.todoId !== action.payload;
         });

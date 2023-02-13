@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useRef } from "react";
 
 import {
   __getEditTodo,
@@ -11,14 +12,21 @@ import {
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
 
+import useOutSideClick from "../../../../hooks/useOutSideClick";
+
 import EditCalendarModal from "../../components/EditCalendarModal";
 import EditTodoForm from "./EditTodoForm";
 import EditMemoDiv from "./EditMemoDiv";
 import TimeSettingDiv from "./TimeSettingDiv";
 import CategorySelectDiv from "./CategorySelectDiv";
 import AlertModal from "../../../common/modal/AlertModal";
+import ConfirmModal from "../../../common/modal/AlertModal";
 
 const EditTodoInput = ({ todoList, categoryList }) => {
+  const calendaerModalRef = useRef(null);
+  const selectedTodo = useSelector(
+    (state) => state?.dailyTodo?.dailyTodo?.todo
+  );
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [AddTodoInput, setAddTodoInput] = useState({
@@ -33,26 +41,24 @@ const EditTodoInput = ({ todoList, categoryList }) => {
     day: todoList?.day,
     memos: todoList?.memos,
   });
+
   const [showCalendar, setShowCalendar] = useState(false);
   const [showDate, setShowDate] = useState("");
   const [alertState, setAlertState] = useState([false, false]);
   const validCheck = ["시간(시)을 선택해주세요.", "시간(분)을 선택해주세요."];
+  const [confirmModalState, setComfirmModalState] = useState(false);
 
   const submitTodoHandler = () => {
     if (AddTodoInput.time === null) {
       dispatch(__putDailyTodo(AddTodoInput));
-      setTimeout(() => {
-        navigate("/dailys");
-      }, 50);
+      setComfirmModalState(true);
     } else if (AddTodoInput.time.hour === undefined) {
       setAlertState([true, false]);
     } else if (AddTodoInput.time.minute === undefined) {
       setAlertState([false, true]);
     } else {
       dispatch(__putDailyTodo(AddTodoInput));
-      setTimeout(() => {
-        navigate("/dailys");
-      }, 50);
+      setComfirmModalState(true);
     }
   };
   const day = ["일", "월", "화", "수", "목", "금", "토"];
@@ -65,26 +71,54 @@ const EditTodoInput = ({ todoList, categoryList }) => {
   useEffect(() => {
     setShowDate(today);
   }, []);
-
+  const dayOfDate = new Date(
+    AddTodoInput.year,
+    AddTodoInput.month - 1,
+    AddTodoInput.day
+  ).getDay();
   const dateChangeHandler = () => {
     setShowCalendar(!showCalendar);
   };
-  const dailyLogTitle = `${String(showDate.year).substr(2, 2)}/${
-    showDate.month < 10 ? "0" + showDate.month : showDate.month
-  }/${showDate.day < 10 ? "0" + showDate.day : showDate.day}/(${
-    showDate.dayOfDate
+  const dailyLogTitle = `${String(AddTodoInput.year).substring(2, 4)}/${
+    AddTodoInput.month < 10 ? "0" + AddTodoInput.month : AddTodoInput.month
+  }/${AddTodoInput.day < 10 ? "0" + AddTodoInput.day : AddTodoInput.day}/(${
+    day[dayOfDate]
   })`;
   const modalCloseHandler = () => {
     setAlertState([false, false]);
   };
+  const selectedDate = `${AddTodoInput.year}_${AddTodoInput.month}_${AddTodoInput.day}`;
+  const todayCompare = `${new Date().getFullYear()}_${
+    new Date().getMonth() + 1
+  }_${new Date().getDate()}`;
+  const submitComfirm = () => {
+    if (selectedDate === todayCompare) {
+      setTimeout(() => {
+        navigate("/dailys");
+      }, 50);
+    } else {
+      setTimeout(() => {
+        navigate(`/dailys/${selectedDate}`);
+      }, 50);
+    }
+  };
+  useOutSideClick(calendaerModalRef, () => {
+    setShowCalendar(false);
+  });
   return (
     <Container>
+      {confirmModalState ? (
+        <ConfirmModal
+          children={"할 일을 수정했습니다."}
+          onClose={submitComfirm}
+        />
+      ) : null}
       {alertState.map((item, idx) =>
         item === true ? (
           <AlertModal children={validCheck[idx]} onClose={modalCloseHandler} />
         ) : null
       )}
-      <DateButtonDiv>
+      <DateButtonDiv ref={calendaerModalRef}>
         <DateButton onClick={dateChangeHandler}>{dailyLogTitle}</DateButton>
         <SelectDateButton onClick={dateChangeHandler}>
           {showCalendar ? <IoIosArrowUp /> : <IoIosArrowDown />}
@@ -144,7 +178,8 @@ export default EditTodoInput;
 
 const Container = styled.div``;
 const DateButtonDiv = styled.div`
-  width: 100%;
+  width: 50%;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;

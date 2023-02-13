@@ -14,7 +14,6 @@ const EditDailyLogContainer = () => {
   const categoryList = useSelector(
     (state) => state?.dailyTodo?.dailyTodo?.categories
   );
-  console.log("edit콘솔", todoList);
   useEffect(() => {
     dispatch(__getEditTodo(editTodoId));
   }, []);

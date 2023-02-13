@@ -7,7 +7,7 @@ const CategorySelectDiv = ({ AddTodoInput, setAddTodoInput }) => {
   const categories = useSelector(
     (state) => state?.dailyTodo?.dailyTodo?.categories
   );
-  console.log(categories);
+
   const [selectCategoryId, setSelectCategoryId] = useState(null);
   const navigate = useNavigate();
   const categorySelectHandler = (e) => {
@@ -54,6 +54,15 @@ const CategorySelectDiv = ({ AddTodoInput, setAddTodoInput }) => {
 };
 
 export default CategorySelectDiv;
+
+const TodayButton = styled.button`
+  position: absolute;
+  left: 288px;
+  border: 0;
+  width: 40px;
+  height: 20px;
+  background-color: white;
+`;
 
 const Container = styled.div`
   display: flex;

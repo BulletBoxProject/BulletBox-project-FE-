@@ -10,11 +10,9 @@ import { ReactComponent as closeIcon } from "../../../../img/dailyLog/close.svg"
 const EditMemoDiv = ({ todoList, AddTodoInput, setAddTodoInput, memos }) => {
   const [memoOrigin, setMemoOrigin] = useState(todoList.memos);
   const [memoInput, setMemoInput] = useState("");
-  console.log("오리진 메모", memoOrigin);
   const [renderMemo, setRenderMemo] = useState(
     todoList?.memos?.map((memo, idx) => ({ ...memo, renderId: idx }))
   );
-  console.log("렌더링 객체", renderMemo);
   const addMemoHanlder = () => {
     setRenderMemo([
       ...renderMemo,
@@ -42,7 +40,6 @@ const EditMemoDiv = ({ todoList, AddTodoInput, setAddTodoInput, memos }) => {
   const memoDeleteHanlder = ({ renderId, todoId }) => {
     let renderMemoCopy = [...renderMemo];
     setRenderMemo(renderMemoCopy.filter((memo) => memo.renderId !== renderId));
-    console.log(renderMemo);
     setAddTodoInput({
       ...AddTodoInput,
       memos: AddTodoInput.memos.map((memo) => {
@@ -71,7 +68,7 @@ const EditMemoDiv = ({ todoList, AddTodoInput, setAddTodoInput, memos }) => {
                 maxLength={27}
               />
               <InputLimitDiv>
-                <span>{memoInput.length}/28</span>
+                <span>28자 이내</span>
               </InputLimitDiv>
             </InputDiv>
 

@@ -10,7 +10,6 @@ import { ReactComponent as closeIcon } from "../../../../img/dailyLog/close.svg"
 const AddMemoDiv = ({ AddTodoInput, setAddTodoInput, memos }) => {
   const [showMemo, setShowMemo] = useState(false);
   const [memoInput, setMemoInput] = useState("");
-  console.log("할일 메모 길이", memoInput.length);
   const [memoList, setMemoList] = useState([]);
 
   const addMemoHanlder = () => {
@@ -57,7 +56,7 @@ const AddMemoDiv = ({ AddTodoInput, setAddTodoInput, memos }) => {
               value={memo.todoMemoContent}
             />
             <InputLimitDiv>
-              <span>{memoInput.length}/28</span>
+              <span>28자이내</span>
             </InputLimitDiv>
           </InputDiv>
           <DeleteButton onClick={() => memoDeleteHanlder(memo.memoId)}>

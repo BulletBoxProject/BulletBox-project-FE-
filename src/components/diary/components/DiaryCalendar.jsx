@@ -335,11 +335,11 @@ const PrevIcon = styled(IoIosArrowBack)`
 
 const TodayBtn = styled.button`
   position: absolute;
-  top: 0;
-  right: 0;
-  border: none;
-  background-color: white;
+  left: 295px;
+  top: -3px;
+  border: 0;
+  width: 40px;
+  height: 20px;
+  background-color: inherit;
   font-weight: bold;
-  margin-top: 4px;
-  margin-right: 9px;
 `;

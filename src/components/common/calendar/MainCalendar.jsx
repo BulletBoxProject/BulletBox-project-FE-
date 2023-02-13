@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Calendar from "react-calendar";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,18 +10,20 @@ import {
 } from "../../../redux/modules/mainSlice";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
+import moment from "moment";
 
 const MainCalendar = ({
   nowMonthView,
   setNowMonthView,
   setSelectDateTitle,
 }) => {
+  const todayRef = useRef();
   const dispatch = useDispatch();
 
   const calendarCountList = useSelector(
     (state) => state?.mainTodo?.mainTodo?.calendar
   );
-  console.log("셀럭터 값", calendarCountList);
+
   const dateChangeHandler = (e) => {
     const dateArr = ["일", "월", "화", "수", "목", "금", "토"];
     setSelectDateTitle(
@@ -39,7 +41,7 @@ const MainCalendar = ({
     dispatch(__getSelectDateTodo(selectDataPayload));
   };
   const monthChangeHandler = ({ action, activeStartDate, value, view }) => {
-    console.log("이동한 월", activeStartDate);
+
     const monthChangePayload = {
       year: activeStartDate.getFullYear(),
       month: activeStartDate.getMonth() + 1,
@@ -48,10 +50,17 @@ const MainCalendar = ({
 
     dispatch(__getMonthTodoCount(monthChangePayload));
   };
+  const moveToStartDateHandler = () => {
+    const todayCalendar = todayRef.current;
+    const firstDayOfTodayMonth = moment().date(1).toDate();
+    todayCalendar.setActiveStartDate(firstDayOfTodayMonth);
+  };
   return (
     <Calendarcontainer>
+      <TodayButton onClick={moveToStartDateHandler}>Today</TodayButton>
       {calendarCountList && (
         <Calendar
+          ref={todayRef}
           calendarType="US"
           onChange={dateChangeHandler}
           onActiveStartDateChange={monthChangeHandler}
@@ -82,11 +91,23 @@ const MainCalendar = ({
 
 export default MainCalendar;
 
+const TodayButton = styled.button`
+  position: absolute;
+  top: -2px;
+  left: 290px;
+  border: 0;
+  width: 40px;
+  height: 20px;
+  background-color: inherit;
+  font-weight: bold;
+`;
+
 const DateTodoCount = styled.p`
   font-size: 12px;
 `;
 
 const Calendarcontainer = styled.div`
+  position: relative;
   .react-calendar {
     width: 100%;
     height: 310px;

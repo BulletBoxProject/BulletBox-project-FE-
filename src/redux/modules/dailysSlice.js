@@ -10,7 +10,6 @@ export const __getDailyTodo = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await baseURLApiV1.get(`dailys`, payload);
-      console.log(data.data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -36,7 +35,6 @@ export const __getAddTodo = createAsyncThunk(
         `dailys/todo?${payload}`,
         payload
       );
-      console.log(data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -91,7 +89,6 @@ export const __postDailyTodo = createAsyncThunk(
 export const __postFavoriteTodo = createAsyncThunk(
   "dailyLog/postFavoriteTodo",
   async (payload, thunkAPI) => {
-    console.log(payload);
     try {
       const { data } = await baseURLApiV1.post(`/dailys/favorites`, payload);
       return thunkAPI.fulfillWithValue(data);
@@ -114,7 +111,6 @@ export const __deleteDailyTodo = createAsyncThunk(
 export const __putDailyTodo = createAsyncThunk(
   "dailyLog/putDailyTodo",
   async (payload, thunkAPI) => {
-    console.log(payload);
     let timeFix = "";
     if (payload.time === null) {
       timeFix = null;

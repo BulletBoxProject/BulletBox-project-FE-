@@ -7,7 +7,7 @@ import SelectMinutesList from "./SelectMinutesList";
 import { RxTriangleDown } from "react-icons/rx";
 
 const TimeSettingDiv = ({ AddTodoInput, setAddTodoInput }) => {
-  console.log("시간 설정 없을 때 콘솔", AddTodoInput.time);
+
   const [showTimeSet, setShowTimeSet] = useState(false);
   const [showSelectTime, setShowSelectTime] = useState({
     hour: false,
@@ -17,7 +17,7 @@ const TimeSettingDiv = ({ AddTodoInput, setAddTodoInput }) => {
     hour: "",
     minute: "",
   });
-  // console.log("불러온 개별 시간", selectTime.hour, selectTime.minute);
+
 
   useEffect(() => {
     AddTodoInput.time === null || AddTodoInput.time === undefined
@@ -36,7 +36,7 @@ const TimeSettingDiv = ({ AddTodoInput, setAddTodoInput }) => {
 
   const showSetTimeHandler = () => {
     setShowTimeSet(!showTimeSet);
-    // setSelectTime(selectTime);
+
   };
   const showSelectHourHandler = () => {
     setShowSelectTime({
@@ -118,8 +118,6 @@ const TimeSettingDiv = ({ AddTodoInput, setAddTodoInput }) => {
                 <SelectMinutesList
                   showSelectTime={showSelectTime}
                   setShowSelectTime={setShowSelectTime}
-                  // selectTime={selectTime}
-                  // setSelectTime={setSelectTime}
                   AddTodoInput={AddTodoInput}
                   setAddTodoInput={setAddTodoInput}
                 />

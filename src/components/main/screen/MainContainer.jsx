@@ -30,7 +30,6 @@ const MainContainer = () => {
   const firstLogin = useSelector(
     (state) => state?.mainTodo?.mainTodo?.firstLogin
   );
-  console.log("메인 셀럭터 값", mainTodoList);
 
   const getToday = () => {
     const day = ["일", "월", "화", "수", "목", "금", "토"];
@@ -62,7 +61,6 @@ const MainContainer = () => {
   return (
     <Container>
       <CalendarDiv>
-        <SelectTodayButton>Today</SelectTodayButton>
         <MainCalendar
           nowMonthView={nowMonthView.month}
           selectDateTitle={selectDateTitle}
