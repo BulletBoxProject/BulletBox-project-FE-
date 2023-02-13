@@ -77,7 +77,7 @@ const EditTodoInput = ({ todoList, categoryList }) => {
     AddTodoInput.day
   ).getDay();
   const dateChangeHandler = () => {
-    setShowCalendar(!showCalendar);
+    setShowCalendar(true);
   };
   const dailyLogTitle = `${String(AddTodoInput.year).substring(2, 4)}/${
     AddTodoInput.month < 10 ? "0" + AddTodoInput.month : AddTodoInput.month

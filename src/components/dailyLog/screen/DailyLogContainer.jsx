@@ -93,40 +93,45 @@ const DailyLogContainer = () => {
 
   return (
     <Container>
-      <DateAndSelectDiv>
-        <div></div>
-        <DateButtonDiv>
-          <DateButton onClick={dateChangeHandler}>
-            {params.date === undefined
-              ? dailyLogTitle
-              : `${params.date.split("_")[0].substring(2, 4)}/${
-                  params.date.split("_")[1] < 10
-                    ? 0 + params.date.split("_")[1]
-                    : params.date.split("_")[1]
-                }/${
-                  params.date.split("_")[2] < 10
-                    ? 0 + params.date.split("_")[2]
-                    : params.date.split("_")[2]
-                }(${day[new Date(params.date.replaceAll("_", ",")).getDay()]})`}
-          </DateButton>
-          <SelectDateButton onClick={dateChangeHandler}>
-            {showCalendar ? <IoIosArrowUp /> : <IoIosArrowDown />}
-          </SelectDateButton>
-        </DateButtonDiv>
-        <CategorySelector
-          categoryList={categoryList}
-          isSetSelectedCategory={isSetSelectedCategory}
-          setSlectedCategoryId={setSlectedCategoryId}
-        />
-      </DateAndSelectDiv>
-      <CalendarDiv ref={modalRef}>
-        {showCalendar ? (
-          <CalendarModal
-            setShowDate={setShowDate}
-            setShowCalendar={setShowCalendar}
+      <DateAndCalendarDiv ref={modalRef}>
+        <DateAndSelectDiv>
+          <div></div>
+          <DateButtonDiv>
+            <DateButton onClick={dateChangeHandler}>
+              {params.date === undefined
+                ? dailyLogTitle
+                : `${params.date.split("_")[0].substring(2, 4)}/${
+                    params.date.split("_")[1] < 10
+                      ? 0 + params.date.split("_")[1]
+                      : params.date.split("_")[1]
+                  }/${
+                    params.date.split("_")[2] < 10
+                      ? 0 + params.date.split("_")[2]
+                      : params.date.split("_")[2]
+                  }(${
+                    day[new Date(params.date.replaceAll("_", ",")).getDay()]
+                  })`}
+            </DateButton>
+            <SelectDateButton onClick={dateChangeHandler}>
+              {showCalendar ? <IoIosArrowUp /> : <IoIosArrowDown />}
+            </SelectDateButton>
+          </DateButtonDiv>
+          <CategorySelector
+            categoryList={categoryList}
+            isSetSelectedCategory={isSetSelectedCategory}
+            setSlectedCategoryId={setSlectedCategoryId}
           />
-        ) : null}
-      </CalendarDiv>
+        </DateAndSelectDiv>
+        <CalendarDiv>
+          {showCalendar ? (
+            <CalendarModal
+              setShowDate={setShowDate}
+              setShowCalendar={setShowCalendar}
+            />
+          ) : null}
+        </CalendarDiv>
+      </DateAndCalendarDiv>
+
       <TodoBulletDiv>
         {todoList && todoList?.length === 0 ? (
           <NoneTodo>할일을 추가해주세요.</NoneTodo>
@@ -193,6 +198,7 @@ export default DailyLogContainer;
 const Container = styled.div`
   font-family: cursive;
 `;
+const DateAndCalendarDiv = styled.div``;
 const DateAndSelectDiv = styled.div`
   display: flex;
   width: 100%;
