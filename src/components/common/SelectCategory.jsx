@@ -28,9 +28,7 @@ const SelectCategory = () => {
 
 export default SelectCategory;
 
-const SelectCategoryDiv = styled.div`
-  /* position: relative; */
-`;
+const SelectCategoryDiv = styled.div``;
 const CategoryButton = styled.button`
   display: flex;
   justify-content: space-around;
