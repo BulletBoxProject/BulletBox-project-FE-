@@ -107,6 +107,7 @@ const Calendarcontainer = styled.div`
   .react-calendar__navigation {
     display: flex;
     width: 45%;
+    height: 22px;
     margin: 0 auto !important;
     margin-bottom: 10px !important;
     background-color: transparent !important;
@@ -120,6 +121,7 @@ const Calendarcontainer = styled.div`
     justify-content: center;
     flex-direction: column;
     width: 100% !important;
+    height: 100%;
     font-size: 14px;
     font-weight: 700;
     color: var(--color-main);
@@ -128,6 +130,7 @@ const Calendarcontainer = styled.div`
   .navigation__next-button {
     margin: 0 !important;
     padding: 0 !important;
+    height: 22px;
     & > svg {
       margin: 0 !important;
     }
@@ -161,7 +164,7 @@ const Calendarcontainer = styled.div`
     justify-content: flex-start !important;
     height: 48px !important;
     padding-top: 10px;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: bold;
     & :active {
       color: black;
@@ -169,7 +172,7 @@ const Calendarcontainer = styled.div`
     }
     & > abbr {
       padding: 8px 7px;
-      font-size: 10px;
+      font-size: 12px;
       text-align: center;
     }
     & > p {
@@ -320,14 +323,14 @@ const Calendarcontainer = styled.div`
 
 const NextIcon = styled(IoIosArrowForward)`
   width: 2rem;
-  height: 2.5vh;
+  height: 22px;
   margin-right: 28vw;
   margin-left: 1vw;
   color: var(--color-main);
 `;
 const PrevIcon = styled(IoIosArrowBack)`
   width: 2rem;
-  height: 2.5vh;
+  height: 22px;
   margin-left: 3vw;
   margin-right: 1vw;
   color: var(--color-main);

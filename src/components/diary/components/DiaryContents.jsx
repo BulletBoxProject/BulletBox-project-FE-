@@ -48,7 +48,7 @@ const DiaryContents = ({
         {disabled ? (
           <EditCheckDiv>
             <EditCheckBox>
-              <EditBtn onClick={() => onEditHandler()}>
+              <EditBtn aria-label="EditBtn" onClick={() => onEditHandler()}>
                 <EditImg />
               </EditBtn>
               작성
@@ -57,7 +57,7 @@ const DiaryContents = ({
         ) : (
           <EditCheckDiv>
             <EditCheckBox>
-              <EditBtn onClick={() => onAddHandler()}>
+              <EditBtn aria-label="AddBtn" onClick={() => onAddHandler()}>
                 <CheckImg />
               </EditBtn>
               저장

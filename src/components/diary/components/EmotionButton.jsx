@@ -23,6 +23,7 @@ const EmotionButton = ({ emotion, setEmotion }) => {
     <>
       {buttons.map((btn, idx) => (
         <EmotionBtn
+          aria-label="EmotionBtn"
           key={idx}
           id={btn.key}
           emotion={emotion}
@@ -37,9 +38,10 @@ const EmotionButton = ({ emotion, setEmotion }) => {
 
 export default EmotionButton;
 const EmotionBtn = styled.button`
-  width: 30px;
+  width: 28px;
   height: 28px;
   padding: 0;
+  margin: 0 3px;
   border: none;
   background-color: transparent;
   fill: ${({ id, emotion }) =>
