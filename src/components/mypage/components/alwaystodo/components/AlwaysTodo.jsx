@@ -13,6 +13,7 @@ import { ReactComponent as star } from "../../../../../img/myPage/round-star-out
 import AlwaysUpdateModal from "./AwaysUpdateModal";
 import useOutSideClick from "../../../../../hooks/useOutSideClick";
 import { __deleteFavorite } from "../../../../../redux/modules/favoriteSlice";
+import ConfirmModal from "../../../../common/modal/ConfirmModal";
 
 const AlwaysTodo = ({
   favoriteId,
@@ -23,8 +24,8 @@ const AlwaysTodo = ({
 }) => {
   const [showSelectBox, setShowSelectBox] = useState(false);
   const [showTodoMemo, setShowTodoMemo] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showUpdateMoal, setShowUpdateMoal] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const dispatch = useDispatch();
   const selectRef = useRef(null);
@@ -40,20 +41,17 @@ const AlwaysTodo = ({
   const SelectOptionHandler = () => {
     setShowSelectBox(!showSelectBox);
   };
-  const selectDeleteHandler = () => {
-    setShowSelectBox(!showSelectBox);
-    setShowDeleteModal(!showDeleteModal);
-  };
+
   const deleteButtonHandler = () => {
-    setShowDeleteModal(!showDeleteModal);
     dispatch(__deleteFavorite(favoriteId));
-  };
-  const cancelButtonHandler = () => {
-    setShowDeleteModal(!showDeleteModal);
   };
 
   const updateButtonHandler = () => {
     setShowUpdateMoal(true);
+  };
+
+  const onClickButton = () => {
+    setIsOpen(true);
   };
 
   return (
@@ -87,7 +85,7 @@ const AlwaysTodo = ({
                 >
                   수정하기 <EditIcon />
                 </UpdateDiv>
-                <div value="deleteTodo" onClick={selectDeleteHandler}>
+                <div value="deleteTodo" onClick={onClickButton}>
                   삭제하기
                   <DeleteIcon />
                 </div>
@@ -120,23 +118,17 @@ const AlwaysTodo = ({
         />
       )}
 
-      {showDeleteModal ? (
-        <ModalContainer>
-          <ModalContent>
-            <DeleteMsg>
-              <span>
-                <DeleteIcon />
-              </span>
-              <span>삭제하시겠습니까?</span>
-            </DeleteMsg>
-            <SelectLine></SelectLine>
-            <ModalButtonGroup>
-              <DeleteButton onClick={deleteButtonHandler}>삭제</DeleteButton>
-              <CancelButton onClick={cancelButtonHandler}>취소</CancelButton>
-            </ModalButtonGroup>
-          </ModalContent>
-        </ModalContainer>
-      ) : null}
+      {isOpen && (
+        <ConfirmModal
+          open={isOpen}
+          onClose={() => {
+            setIsOpen(false);
+          }}
+          onClick={deleteButtonHandler}
+        >
+          루틴을 삭제하시겠습니까?
+        </ConfirmModal>
+      )}
     </>
   );
 };
@@ -164,53 +156,6 @@ const TodoContainer = styled.div`
   gap: 5px;
 `;
 
-const ModalContainer = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 999;
-`;
-const ModalContent = styled.div`
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 1em 0;
-  width: 200px;
-  height: 100px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: var(--color-default);
-  border-radius: 8px;
-  font-size: 14px;
-`;
-const DeleteMsg = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 14px;
-  color: var(--color-gray);
-  gap: 10px;
-`;
-const ModalButtonGroup = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  & > div {
-    cursor: pointer;
-  }
-`;
-const DeleteButton = styled.div`
-  font-size: 14px;
-  color: var(--color-main);
-`;
-const CancelButton = styled.div`
-  font-size: 14px;
-`;
 const MainBulletTodo = styled.div`
   display: flex;
   align-items: center;

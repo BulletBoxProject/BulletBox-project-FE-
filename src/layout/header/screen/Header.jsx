@@ -27,7 +27,7 @@ const Header = () => {
       >
         <LogoDiv>Bullet Box</LogoDiv>
       </HeaderBtn>
-      <Button onClick={onClickButton}>
+      <Button aria-label="Question" onClick={onClickButton}>
         <Question_Icon />
       </Button>
       {isOpen && (

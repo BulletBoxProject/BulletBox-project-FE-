@@ -60,7 +60,7 @@ const ModalWrap = styled.div`
 `;
 
 const Contents = styled.div`
-  margin: 53% 1.9rem;
+  margin-top: 59%;
 `;
 
 const ConfirmBtn = styled.button`
@@ -77,6 +77,11 @@ const ConfirmBtn = styled.button`
   color: var(--color-dark-gray);
   font-weight: bold;
   cursor: pointer;
+  :hover,
+  :focus {
+    background-color: var(--color-main);
+    color: var(--color-default);
+  }
 `;
 
 const CancleBtn = styled.button`
@@ -93,6 +98,11 @@ const CancleBtn = styled.button`
   color: var(--color-dark-gray);
   font-weight: bold;
   cursor: pointer;
+  :hover,
+  :focus {
+    background-color: var(--color-main);
+    color: var(--color-default);
+  }
 `;
 
 const CloseImg = styled(close)``;

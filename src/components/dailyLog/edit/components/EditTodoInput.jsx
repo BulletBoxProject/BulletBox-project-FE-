@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useRef } from "react";
 
 import {
   __getEditTodo,
@@ -10,6 +11,8 @@ import {
 
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
+
+import useOutSideClick from "../../../../hooks/useOutSideClick";
 
 import EditCalendarModal from "../../components/EditCalendarModal";
 import EditTodoForm from "./EditTodoForm";
@@ -20,6 +23,7 @@ import AlertModal from "../../../common/modal/AlertModal";
 import ConfirmModal from "../../../common/modal/AlertModal";
 
 const EditTodoInput = ({ todoList, categoryList }) => {
+  const calendaerModalRef = useRef(null);
   const selectedTodo = useSelector(
     (state) => state?.dailyTodo?.dailyTodo?.todo
   );
@@ -98,6 +102,9 @@ const EditTodoInput = ({ todoList, categoryList }) => {
       }, 50);
     }
   };
+  useOutSideClick(calendaerModalRef, () => {
+    setShowCalendar(false);
+  });
   return (
     <Container>
       {confirmModalState ? (
@@ -111,7 +118,7 @@ const EditTodoInput = ({ todoList, categoryList }) => {
           <AlertModal children={validCheck[idx]} onClose={modalCloseHandler} />
         ) : null
       )}
-      <DateButtonDiv>
+      <DateButtonDiv ref={calendaerModalRef}>
         <DateButton onClick={dateChangeHandler}>{dailyLogTitle}</DateButton>
         <SelectDateButton onClick={dateChangeHandler}>
           {showCalendar ? <IoIosArrowUp /> : <IoIosArrowDown />}
@@ -171,7 +178,8 @@ export default EditTodoInput;
 
 const Container = styled.div``;
 const DateButtonDiv = styled.div`
-  width: 100%;
+  width: 50%;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
