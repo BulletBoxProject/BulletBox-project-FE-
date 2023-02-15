@@ -49,7 +49,6 @@ const DailyLogContainer = () => {
   const showAddTodoSelect = () => {
     setShowSelectBox(!showSelectBox);
   };
-  const state = useSelector((state) => state);
 
   const todoList = useSelector((state) => state?.dailyTodo?.dailyTodo?.daily);
   const categoryList = useSelector(
@@ -256,9 +255,7 @@ const NoneTodo = styled.div`
   margin-top: 2em;
   color: var(--color-gray);
 `;
-const AddTodoDiv = styled.div`
-  /* position: absolute; */
-`;
+const AddTodoDiv = styled.div``;
 const AddTodoButton = styled.button`
   display: flex;
   align-items: center;
@@ -336,13 +333,4 @@ const NewTodo = styled(newTodo)`
 const OftenTodo = styled(oftenTodo)`
   width: 20px;
   height: 20px;
-`;
-
-const BulletMemo = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  & > input {
-    width: 80%;
-    margin-right: 9%;
-  }
 `;
