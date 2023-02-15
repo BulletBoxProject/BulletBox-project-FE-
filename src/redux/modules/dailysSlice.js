@@ -12,6 +12,7 @@ export const __getDailyTodo = createAsyncThunk(
       const { data } = await baseURLApiV1.get(`dailys`, payload);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
+      console.log(error);
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -148,8 +149,17 @@ const dailysSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(__getDailyTodo.pending, (state, action) => {
+        state.isLoading = true;
+      })
       .addCase(__getDailyTodo.fulfilled, (state, action) => {
-        state.dailyTodo = action.payload;
+        state.isLoading = false;
+        state.todoList = action.payload.daily;
+        state.categoryList = action.payload.categories;
+      })
+      .addCase(__getDailyTodo.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
       })
       .addCase(__getSelectDateTodo.fulfilled, (state, action) => {
         state.dailyTodo = action.payload.data;

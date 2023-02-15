@@ -36,7 +36,6 @@ const DailyLogContainer = () => {
   const [showFavoritesTodo, setShowFavoritesTodo] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const [showDate, setShowDate] = useState("");
-  const [sameDate, setSameDate] = useState(true);
 
   const navigate = useNavigate();
   const day = ["일", "월", "화", "수", "목", "금", "토"];
@@ -49,11 +48,13 @@ const DailyLogContainer = () => {
   const showAddTodoSelect = () => {
     setShowSelectBox(!showSelectBox);
   };
-
-  const todoList = useSelector((state) => state?.dailyTodo?.dailyTodo?.daily);
-  const categoryList = useSelector(
-    (state) => state?.dailyTodo?.dailyTodo?.categories
+  const { isLoading, error, todoList, categoryList } = useSelector(
+    (state) => state?.dailyTodo
   );
+  console.log(error);
+  if (error) {
+    alert(error.message, error.code);
+  }
   const favoritesTodoList = useSelector(
     (state) => state?.dailyTodo?.favorite?.favorites
   );
