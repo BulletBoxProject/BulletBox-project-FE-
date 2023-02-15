@@ -36,7 +36,6 @@ const DailyLogContainer = () => {
   const [showFavoritesTodo, setShowFavoritesTodo] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const [showDate, setShowDate] = useState("");
-  const [sameDate, setSameDate] = useState(true);
 
   const navigate = useNavigate();
   const day = ["일", "월", "화", "수", "목", "금", "토"];
@@ -49,12 +48,13 @@ const DailyLogContainer = () => {
   const showAddTodoSelect = () => {
     setShowSelectBox(!showSelectBox);
   };
-  const state = useSelector((state) => state);
-
-  const todoList = useSelector((state) => state?.dailyTodo?.dailyTodo?.daily);
-  const categoryList = useSelector(
-    (state) => state?.dailyTodo?.dailyTodo?.categories
+  const { isLoading, error, todoList, categoryList } = useSelector(
+    (state) => state?.dailyTodo
   );
+  console.log(error);
+  if (error) {
+    alert(error.message, error.code);
+  }
   const favoritesTodoList = useSelector(
     (state) => state?.dailyTodo?.favorite?.favorites
   );
@@ -256,9 +256,7 @@ const NoneTodo = styled.div`
   margin-top: 2em;
   color: var(--color-gray);
 `;
-const AddTodoDiv = styled.div`
-  /* position: absolute; */
-`;
+const AddTodoDiv = styled.div``;
 const AddTodoButton = styled.button`
   display: flex;
   align-items: center;
@@ -336,13 +334,4 @@ const NewTodo = styled(newTodo)`
 const OftenTodo = styled(oftenTodo)`
   width: 20px;
   height: 20px;
-`;
-
-const BulletMemo = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  & > input {
-    width: 80%;
-    margin-right: 9%;
-  }
 `;

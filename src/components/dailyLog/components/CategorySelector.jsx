@@ -26,23 +26,25 @@ const CategorySelector = ({
   let num = 0;
   return (
     <Container ref={categorySelectRef}>
-      <SelectButton onClick={showCategoryHandler}>전체</SelectButton>
-      {showCategory ? (
-        <CategoryList>
-          <ShowAllButton onClick={showAllCategoryHandler}>전체</ShowAllButton>
-          {categoryList &&
-            categoryList.map((category) => (
-              <CategoryButton
-                key={num++}
-                category={category}
-                categoryColor={category.categoryColor}
-                setShowCategory={setShowCategory}
-                isSetSelectedCategory={isSetSelectedCategory}
-                setSlectedCategoryId={setSlectedCategoryId}
-              />
-            ))}
-        </CategoryList>
-      ) : null}
+      <CategoryDiv>
+        <SelectButton onClick={showCategoryHandler}>전체</SelectButton>
+        {showCategory ? (
+          <CategoryList>
+            <ShowAllButton onClick={showAllCategoryHandler}>전체</ShowAllButton>
+            {categoryList &&
+              categoryList.map((category) => (
+                <CategoryButton
+                  key={num++}
+                  category={category}
+                  categoryColor={category.categoryColor}
+                  setShowCategory={setShowCategory}
+                  isSetSelectedCategory={isSetSelectedCategory}
+                  setSlectedCategoryId={setSlectedCategoryId}
+                />
+              ))}
+          </CategoryList>
+        ) : null}
+      </CategoryDiv>
     </Container>
   );
 };
@@ -50,8 +52,11 @@ const CategorySelector = ({
 export default CategorySelector;
 
 const Container = styled.div``;
-const SelectButton = styled.button`
+const CategoryDiv = styled.div`
   position: relative;
+  left: 60px;
+`;
+const SelectButton = styled.button`
   font-size: 12px;
   font-weight: bold;
   color: var(--color-gray);
@@ -60,6 +65,7 @@ const SelectButton = styled.button`
 `;
 const CategoryList = styled.div`
   position: absolute;
+  left: 8px;
   display: flex;
   flex-direction: column;
   z-index: 999;
