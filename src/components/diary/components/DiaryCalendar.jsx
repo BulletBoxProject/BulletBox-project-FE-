@@ -29,8 +29,10 @@ const DiaryCalendar = ({ setYear, setMonth, setDate, setSelectDate }) => {
     setDate(e.getDate());
     setSelectDate(
       `${String(e.getFullYear()).substr(2, 2)}/${
-        e.getMonth() + 1 < 9 ? `0${e.getMonth() + 1}` : e.getMonth() + 1
-      }/${e.getDate()}(${dateArr[e.getDay()]})`
+        e.getMonth() + 1 < 10 ? `0${e.getMonth() + 1}` : e.getMonth() + 1
+      }/${e.getDate() < 10 ? `0${e.getDate()}` : e.getDate()}(${
+        dateArr[e.getDay()]
+      })`
     );
     const DateInfo = {
       year: e.getFullYear(),
