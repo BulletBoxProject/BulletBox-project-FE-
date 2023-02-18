@@ -2,8 +2,8 @@ import React, { useRef, useState } from "react";
 import Calendar from "react-calendar";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { __getDiaryDate } from "../../../redux/modules/emotionDiarySlice";
-import { __getDiaryMonth } from "../../../redux/modules/emotionDiarySlice";
+import { __getDiaryDate } from "../../../redux/modules/emotiondiarySlice";
+import { __getDiaryMonth } from "../../../redux/modules/emotiondiarySlice";
 import Emotions from "./Emotions";
 import moment from "moment/moment";
 

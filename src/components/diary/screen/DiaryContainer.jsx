@@ -5,7 +5,7 @@ import styled from "styled-components";
 import DiaryCalendar from "../components/DiaryCalendar";
 import DiaryContents from "../components/DiaryContents";
 
-import { __getDiary } from "../../../redux/modules/emotionDiarySlice";
+import { __getDiary } from "../../../redux/modules/emotiondiarySlice";
 
 const DiaryContainer = () => {
   const diaryContents = useSelector(
