@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import StartLayout from "../layout/StartLayout";
 import Layout from "../layout/Layout";
-import LogIn from "../pages/LogIn";
+import Login from "../pages/Login";
 import Main from "../pages/Main";
 import SignUp from "../pages/SignUp";
 import DailyLog from "../pages/DailyLog";
@@ -20,7 +20,7 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route element={<StartLayout />}>
-          <Route path="/login" element={<LogIn />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/" element={<Start />} />
           <Route path="/kakao/login" element={<KakaoLoginPage />} />
