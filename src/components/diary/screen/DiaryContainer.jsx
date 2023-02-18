@@ -5,7 +5,7 @@ import styled from "styled-components";
 import DiaryCalendar from "../components/DiaryCalendar";
 import DiaryContents from "../components/DiaryContents";
 
-import { __getDiary } from "../../../redux/modules/emotionDiarySlice";
+import { __getDiary } from "../../../redux/modules/emotiondiarySlice";
 
 const DiaryContainer = () => {
   const diaryContents = useSelector(
@@ -18,16 +18,11 @@ const DiaryContainer = () => {
     (state) => state?.emotionDiary?.emotionDiary?.diary?.emotion
   );
 
-  const Emotions = useSelector(
-    (state) => state?.emotionDiary?.emotionDiary?.emotions
-  );
-
   const dispatch = useDispatch();
 
   const [diaryContent, setDiaryContent] = useState("");
   const [diaryId, setDiaryId] = useState(null);
   const [emotion, setEmotion] = useState("");
-  const [isDiary, setIsDiary] = useState("");
 
   const [selectDate, setSelectDate] = useState("");
   const [year, setYear] = useState(new Date().getFullYear());
@@ -42,7 +37,6 @@ const DiaryContainer = () => {
     day: date,
     emotion: emotion,
   };
-
 
   const onDateHandler = () => {
     const day = ["일", "월", "화", "수", "목", "금", "토"];

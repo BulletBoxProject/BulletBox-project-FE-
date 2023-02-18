@@ -52,9 +52,6 @@ const DailyLogContainer = () => {
     (state) => state?.dailyTodo
   );
   console.log(error);
-  if (error) {
-    alert(error.message, error.code);
-  }
   const favoritesTodoList = useSelector(
     (state) => state?.dailyTodo?.favorite?.favorites
   );
@@ -73,7 +70,6 @@ const DailyLogContainer = () => {
       const selectDateLog = params.date.replaceAll("_", "/");
       dispatch(__getSelectDateTodo(selectDateLog));
     }
-
     dispatch(__getFavoritesTodo());
     setShowDate(today);
   }, [dispatch]);
@@ -93,6 +89,15 @@ const DailyLogContainer = () => {
 
   return (
     <Container>
+      {error ? (
+        <ErrorMessageDiv>
+          <ErrorMessage>
+            {error.message},<br />
+            {error.code}
+          </ErrorMessage>
+        </ErrorMessageDiv>
+      ) : null}
+
       <DateAndCalendarDiv ref={modalRef}>
         <DateAndSelectDiv>
           <div></div>
@@ -196,6 +201,17 @@ export default DailyLogContainer;
 
 const Container = styled.div`
   font-family: cursive;
+`;
+const ErrorMessageDiv = styled.div`
+  position: fixed;
+  width: 360px;
+  height: 616px;
+  transform: translate(-7px, 0);
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 999;
+`;
+const ErrorMessage = styled.h1`
+  color: var(--color-light-gray);
 `;
 const DateAndCalendarDiv = styled.div`
   width: 60%;

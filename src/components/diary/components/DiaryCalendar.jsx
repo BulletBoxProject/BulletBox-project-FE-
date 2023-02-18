@@ -2,8 +2,8 @@ import React, { useRef, useState } from "react";
 import Calendar from "react-calendar";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { __getDiaryDate } from "../../../redux/modules/emotionDiarySlice";
-import { __getDiaryMonth } from "../../../redux/modules/emotionDiarySlice";
+import { __getDiaryDate } from "../../../redux/modules/emotiondiarySlice";
+import { __getDiaryMonth } from "../../../redux/modules/emotiondiarySlice";
 import Emotions from "./Emotions";
 import moment from "moment/moment";
 
@@ -29,8 +29,10 @@ const DiaryCalendar = ({ setYear, setMonth, setDate, setSelectDate }) => {
     setDate(e.getDate());
     setSelectDate(
       `${String(e.getFullYear()).substr(2, 2)}/${
-        e.getMonth() + 1 < 9 ? `0${e.getMonth() + 1}` : e.getMonth() + 1
-      }/${e.getDate()}(${dateArr[e.getDay()]})`
+        e.getMonth() + 1 < 10 ? `0${e.getMonth() + 1}` : e.getMonth() + 1
+      }/${e.getDate() < 10 ? `0${e.getDate()}` : e.getDate()}(${
+        dateArr[e.getDay()]
+      })`
     );
     const DateInfo = {
       year: e.getFullYear(),
