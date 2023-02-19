@@ -9,9 +9,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [16.x]
@@ -24,6 +22,23 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'yarn'
+
+      # Github Repository Secrets를 통해 환경 변수 파일을 생성합니다.
+    - name: Generate Environment Variables File
+      run: |
+        echo "REACT_APP_BACKAPI=$REACT_APP_BACKAPI" >> .env
+        echo "REACT_APP_CLIENT_ID=$REACT_APP_CLIENT_ID" >> .env
+        echo "REACT_APP_REDIRECT_URI=$REACT_APP_REDIRECT_URI" >> .env
+        echo "REACT_APP_CLIENT_ID=$REACT_APP_CLIENT_ID_G" >> .env
+        echo "REACT_APP_REDIRECT_URI=$REACT_APP_REDIRECT_URI_G" >> .env
+
+      env:
+        REACT_APP_BACKAPI: ${{ secrets.REACT_APP_BACKAPI }}
+        REACT_APP_CLIENT_ID: ${{ secrets.REACT_APP_CLIENT_ID }}
+        REACT_APP_REDIRECT_URI: ${{ secrets.REACT_APP_REDIRECT_URI }}
+        REACT_APP_CLIENT_ID_G: ${{ secrets.REACT_APP_CLIENT_ID_G }}
+        REACT_APP_REDIRECT_URI_G: ${{ secrets.REACT_APP_REDIRECT_URI_G }}
+
         
     - name: yarn install 
       run: yarn install
