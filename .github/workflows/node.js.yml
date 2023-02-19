@@ -29,8 +29,8 @@ jobs:
         echo "REACT_APP_BACKAPI=$REACT_APP_BACKAPI" >> .env
         echo "REACT_APP_CLIENT_ID=$REACT_APP_CLIENT_ID" >> .env
         echo "REACT_APP_REDIRECT_URI=$REACT_APP_REDIRECT_URI" >> .env
-        echo "REACT_APP_CLIENT_ID=$REACT_APP_CLIENT_ID_G" >> .env
-        echo "REACT_APP_REDIRECT_URI=$REACT_APP_REDIRECT_URI_G" >> .env
+        echo "REACT_APP_CLIENT_ID_G=$REACT_APP_CLIENT_ID_G" >> .env
+        echo "REACT_APP_REDIRECT_URI_G=$REACT_APP_REDIRECT_URI_G" >> .env
 
       env:
         REACT_APP_BACKAPI: ${{ secrets.REACT_APP_BACKAPI }}
