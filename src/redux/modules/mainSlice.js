@@ -50,8 +50,16 @@ const mainSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(__getMainTodo.pending, (state, action) => {
+        state.isLoading = true;
+      })
       .addCase(__getMainTodo.fulfilled, (state, action) => {
+        state.isLoading = false;
         state.mainTodo = action.payload;
+      })
+      .addCase(__getMainTodo.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
       })
       .addCase(__getMonthTodoCount.fulfilled, (state, action) => {
         state.mainTodo.calendar = action.payload;

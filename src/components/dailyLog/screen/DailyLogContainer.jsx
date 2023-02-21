@@ -51,7 +51,6 @@ const DailyLogContainer = () => {
   const { isLoading, error, todoList, categoryList } = useSelector(
     (state) => state?.dailyTodo
   );
-  console.log(error);
   const favoritesTodoList = useSelector(
     (state) => state?.dailyTodo?.favorite?.favorites
   );
@@ -97,7 +96,6 @@ const DailyLogContainer = () => {
           </ErrorMessage>
         </ErrorMessageDiv>
       ) : null}
-
       <DateAndCalendarDiv ref={modalRef}>
         <DateAndSelectDiv>
           <div></div>
@@ -204,13 +202,16 @@ const Container = styled.div`
 `;
 const ErrorMessageDiv = styled.div`
   position: fixed;
+  display: flex;
+  align-items: center;
   width: 360px;
-  height: 616px;
-  transform: translate(-7px, 0);
+  height: 741px;
+  transform: translate(-7px, -73px);
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 999;
 `;
 const ErrorMessage = styled.h1`
+  margin-bottom: 380px;
   color: var(--color-light-gray);
 `;
 const DateAndCalendarDiv = styled.div`

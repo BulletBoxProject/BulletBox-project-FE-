@@ -12,7 +12,6 @@ export const __getDailyTodo = createAsyncThunk(
       const { data } = await baseURLApiV1.get(`dailys`, payload);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
-      console.log(error);
       return thunkAPI.rejectWithValue(error);
     }
   }
