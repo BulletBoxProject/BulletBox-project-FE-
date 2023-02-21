@@ -4,13 +4,13 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { ReactComponent as guide1 } from "../../../img/Guide/guide1.svg";
-import { ReactComponent as guide2 } from "../../../img/Guide/guide2.svg";
-import { ReactComponent as guide3 } from "../../../img/Guide/guide3.svg";
-import { ReactComponent as guide4 } from "../../../img/Guide/guide4.svg";
-import { ReactComponent as guide5 } from "../../../img/Guide/guide5.svg";
-import { ReactComponent as guide6 } from "../../../img/Guide/guide6.svg";
-import { ReactComponent as guide7 } from "../../../img/Guide/guide7.svg";
+import { ReactComponent as guide1 } from "../../../img/guide/guide1.svg";
+import { ReactComponent as guide2 } from "../../../img/guide/guide2.svg";
+import { ReactComponent as guide3 } from "../../../img/guide/guide3.svg";
+import { ReactComponent as guide4 } from "../../../img/guide/guide4.svg";
+import { ReactComponent as guide5 } from "../../../img/guide/guide5.svg";
+import { ReactComponent as guide6 } from "../../../img/guide/guide6.svg";
+import { ReactComponent as guide7 } from "../../../img/guide/guide7.svg";
 
 const SimpleSlider = () => {
   const settings = {

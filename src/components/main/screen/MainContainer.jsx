@@ -15,16 +15,15 @@ import HelpModal from "../../../layout/header/components/HelpModal";
 const MainContainer = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [date, setDate] = useState(new Date());
   const [todoList, setTodoList] = useState([]);
   const [selectDateTitle, setSelectDateTitle] = useState("");
-
   const [nowMonthView, setNowMonthView] = useState({
     year: new Date().getFullYear(),
     month: new Date().getMonth() + 1,
   });
-
   const [isOpen, setIsOpen] = useState(false);
+
+  const { isLoading, error } = useSelector((state) => state?.mainTodo);
 
   const mainTodoList = useSelector((state) => state?.mainTodo?.mainTodo?.daily);
   const firstLogin = useSelector(
@@ -56,10 +55,16 @@ const MainContainer = () => {
       setIsOpen(false);
     }
   }, [firstLogin]);
-
-  let num = 0;
   return (
     <Container>
+      {error ? (
+        <ErrorMessageDiv>
+          <ErrorMessage>
+            {error.message},<br />
+            {error.code}
+          </ErrorMessage>
+        </ErrorMessageDiv>
+      ) : null}
       <CalendarDiv>
         <MainCalendar
           nowMonthView={nowMonthView.month}
@@ -117,22 +122,26 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
 `;
+const ErrorMessageDiv = styled.div`
+  position: fixed;
+  display: flex;
+  align-items: center;
+  width: 360px;
+  height: 741px;
+  transform: translate(-7px, -73px);
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 999;
+`;
+const ErrorMessage = styled.h1`
+  margin-bottom: 380px;
+  color: var(--color-light-gray);
+`;
 const CalendarDiv = styled.div`
   position: relative;
   height: 320px;
   margin: 10px 0;
   justify-content: center;
   align-items: center;
-`;
-const SelectTodayButton = styled.button`
-  position: absolute;
-  border: 0;
-  background-color: transparent;
-  font-weight: 700;
-  left: 88%;
-  align-items: center;
-  padding: 5px 0;
-  font-weight: bold;
 `;
 const TodoDiv = styled.div`
   display: flex;
