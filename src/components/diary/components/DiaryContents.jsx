@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
-import { __postDiary } from "../../../redux/modules/emotiondiarySlice";
+import { __postDiary } from "../../../redux/modules/emotionDiarySlice";
 import EmotionButton from "./EmotionButton";
 import AlertModal from "../../common/modal/AlertModal";
 
