@@ -13,7 +13,7 @@
 
 ------
 
-### 목차
+### 목차 
 
 1. [Bullet Box 프로젝트 소개](#1-bullet-box-프로젝트-소개)
 2. [기술 스택](#2-기술-스택) <br />
@@ -34,7 +34,7 @@
 
 서비스 MVP 개발기간: 22.12.30. - 23.02.04.
 
-## 2. 기술 스택 
+## 2. 기술 스택
 ### ✨ Front-End
 <img src="https://img.shields.io/badge/JAVASCRIPT-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white"> <img src="https://img.shields.io/badge/REACT-61DAFB?style=for-the-badge&logo=React&logoColor=white">
 <img src="https://img.shields.io/badge/REACT ROUTER-CA4245?style=for-the-badge&logo=React Router&logoColor=white">
