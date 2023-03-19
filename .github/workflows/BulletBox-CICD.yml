@@ -1,4 +1,4 @@
-name: BulletBox-CI CD
+name: BulletBox-CICD
 
 on:
   push:
