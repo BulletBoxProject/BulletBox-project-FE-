@@ -8,7 +8,7 @@
 
 ### 📎 [Bullet Box 서비스 이용하기](https://bullet-box.com)
 
-### 📎 [FrontEnd 노션 페이지](https://www.notion.so/1419ad4d03c54fb5937328ccbc6d7f66)
+### 📎 [FrontEnd 노션 페이지](https://www.notion.so/1419ad4d03c54fb5937328ccbc6d7f66) 
 
 
 ------
